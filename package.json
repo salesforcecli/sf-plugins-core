@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/plugin-project-utils",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Utils for writing project plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
@@ -47,7 +47,7 @@
   },
   "devDependencies": {
     "@salesforce/dev-config": "^2.0.0",
-    "@salesforce/dev-scripts": "^0.6.2",
+    "@salesforce/dev-scripts": "^0.9.15",
     "@salesforce/prettier-config": "^0.0.1",
     "@salesforce/ts-sinon": "^1.2.3",
     "@types/inquirer": "^7.3.2",
