@@ -14,14 +14,23 @@ export interface Preferences {
 }
 
 export interface Options {
-  deployers: Set<Deployer>;
   username: string;
+}
+
+export abstract class Deployable {
+  abstract getAppName(): string;
+  abstract getAppType(): string;
+  abstract getAppPath(): string;
+  abstract getEnvType(): Nullable<string>;
+  abstract getParent(): Deployer;
 }
 
 /**
  * Deploy a piece of a project.
  */
 export abstract class Deployer extends EventEmitter {
+  public deployables: Deployable[] = [];
+
   // Standard methods implemented in the base class methods
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   public progress(current: number, total: number, message: string): void {}
@@ -30,12 +39,9 @@ export abstract class Deployer extends EventEmitter {
     cli.log(msg, ...args);
   }
 
-  abstract getAppName(): string;
-  abstract getAppType(): string;
-  abstract getAppPath(): string;
-  abstract getEnvType(): Nullable<string>;
-
-  // These methods are only called if the CLI user decides to deploy that piece of the project.
+  public selectDeployables(deployables: Deployable[]): void {
+    this.deployables = Object.assign([], deployables);
+  }
 
   /**
    * Perform any initialization or setup. This is the time to prompt the
