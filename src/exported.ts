@@ -6,4 +6,4 @@
  */
 
 export { generateTableChoices } from './util';
-export { Deployer, Options, Preferences } from './deployer';
+export { Deployable, Deployer, Options, Preferences } from './deployer';
