@@ -13,9 +13,7 @@ export interface Preferences {
   interactive: boolean;
 }
 
-export interface Options {
-  username: string;
-}
+export type Options = Dictionary<string>;
 
 export abstract class Deployable {
   abstract getAppName(): string;
