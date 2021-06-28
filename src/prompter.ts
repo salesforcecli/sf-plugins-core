@@ -8,6 +8,9 @@
 import { prompt, QuestionCollection } from 'inquirer';
 
 export class Prompter {
+  /**
+   * Prompt user for information. See https://www.npmjs.com/package/inquirer for more.
+   */
   public async prompt<T = Prompter.Answers>(questions: QuestionCollection<T>, initialAnswers?: Partial<T>): Promise<T> {
     const answers = await prompt<T>(questions, initialAnswers);
     return answers;

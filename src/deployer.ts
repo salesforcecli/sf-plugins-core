@@ -26,24 +26,41 @@ export abstract class Deployable {
 }
 
 /**
- * Deploy a piece of a project.
+ * Interface for deploying a piece of a Salesforce project.
  */
 export abstract class Deployer extends EventEmitter {
+  /**
+   * Deployables are individual pieces that can be deployed on their own. For example,
+   * each pacakge in a salesforce project is considered a deployable that can be deployed
+   * on its own.
+   */
   public deployables: Deployable[] = [];
   private prompter = new Prompter();
 
+  /**
+   * Method for displaying deploy progress to the user
+   */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   public progress(current: number, total: number, message: string): void {}
 
+  /**
+   * Log messages to the console
+   */
   public log(msg: string | undefined, ...args: string[]): void {
     cli.log(msg, ...args);
   }
 
+  /**
+   * Prompt user for additional information
+   */
   public async prompt<T>(questions: QuestionCollection<T>, initialAnswers?: Partial<T>): Promise<T> {
     const answers = await this.prompter.prompt<T>(questions, initialAnswers);
     return answers;
   }
 
+  /**
+   * Overwrite the deployables property on the class.
+   */
   public selectDeployables(deployables: Deployable[]): void {
     this.deployables = Object.assign([], deployables);
   }
