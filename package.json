@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/plugin-project-utils",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Utils for writing project plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
