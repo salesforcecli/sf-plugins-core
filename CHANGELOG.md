@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/salesforcecli/plugin-project-utils/compare/v0.0.4...v0.0.5) (2021-06-28)
+
+
+### Features
+
+* add Prompter class ([7f7861f](https://github.com/salesforcecli/plugin-project-utils/commit/7f7861f68dc74d815a1bf2d668edd719496524ff))
+
 ### [0.0.4](https://github.com/salesforcecli/plugin-project-utils/compare/v0.0.3...v0.0.4) (2021-06-28)
 
 
