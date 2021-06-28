@@ -8,6 +8,8 @@
 import { EventEmitter } from 'events';
 import { Dictionary, Nullable } from '@salesforce/ts-types';
 import cli from 'cli-ux';
+import { QuestionCollection } from 'inquirer';
+import { Prompter } from './prompter';
 
 export interface Preferences {
   interactive: boolean;
@@ -28,13 +30,18 @@ export abstract class Deployable {
  */
 export abstract class Deployer extends EventEmitter {
   public deployables: Deployable[] = [];
+  private prompter = new Prompter();
 
-  // Standard methods implemented in the base class methods
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   public progress(current: number, total: number, message: string): void {}
 
   public log(msg: string | undefined, ...args: string[]): void {
     cli.log(msg, ...args);
+  }
+
+  public async prompt<T>(questions: QuestionCollection<T>, initialAnswers?: Partial<T>): Promise<T> {
+    const answers = await this.prompter.prompt<T>(questions, initialAnswers);
+    return answers;
   }
 
   public selectDeployables(deployables: Deployable[]): void {
