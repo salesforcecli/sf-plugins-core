@@ -46,7 +46,7 @@ export abstract class Deployer extends EventEmitter {
   /**
    * Log messages to the console
    */
-  public log(msg: string | undefined, ...args: string[]): void {
+  public log(msg?: string | undefined, ...args: string[]): void {
     cli.log(msg, ...args);
   }
 
