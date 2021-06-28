@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/salesforcecli/plugin-project-utils/compare/v0.0.5...v0.0.6) (2021-06-28)
+
+
+### Bug Fixes
+
+* allow empty log message ([1272215](https://github.com/salesforcecli/plugin-project-utils/commit/1272215b62a35e89072df2f02c1bab6c2999e056))
+
 ### [0.0.5](https://github.com/salesforcecli/plugin-project-utils/compare/v0.0.4...v0.0.5) (2021-06-28)
 
 
