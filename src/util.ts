@@ -8,6 +8,15 @@
 import { Separator, ChoiceOptions, ChoiceBase } from 'inquirer';
 import { Dictionary, Nullable, ensureString } from '@salesforce/ts-types';
 
+/**
+ * Generate a formatted table for list and checkbox prompts
+ *
+ * Each option should contain the same keys as specified in columns.
+ * For example,
+ * const columns = { name: 'Name', type: 'Type', path: 'Path' };
+ * const options = [{ name: 'foo', type: 'org', path: '/path/to/foo/' }];
+ * generateTableChoices(columns, options);
+ */
 export function generateTableChoices<T>(
   columns: Dictionary<string>,
   choices: Array<Dictionary<Nullable<string> | T>>,
