@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/salesforcecli/plugin-project-utils/compare/v0.0.6...v0.0.7) (2021-07-01)
+
+
+### Features
+
+* support deploy file ([99b4a81](https://github.com/salesforcecli/plugin-project-utils/commit/99b4a81b1a844714233a30679ae267c6866ba4a2))
+
 ### [0.0.6](https://github.com/salesforcecli/plugin-project-utils/compare/v0.0.5...v0.0.6) (2021-06-28)
 
 
