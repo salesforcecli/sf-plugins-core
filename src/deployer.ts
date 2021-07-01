@@ -6,7 +6,7 @@
  */
 
 import { EventEmitter } from 'events';
-import { Dictionary, Nullable } from '@salesforce/ts-types';
+import { JsonMap, Nullable } from '@salesforce/ts-types';
 import cli from 'cli-ux';
 import { QuestionCollection } from 'inquirer';
 import { Prompter } from './prompter';
@@ -15,7 +15,21 @@ export interface Preferences {
   interactive: boolean;
 }
 
-export type Options = Dictionary<string>;
+export type DeployerOptions = JsonMap;
+
+/**
+ * This interface represents the aggregation of all deployer options, e.g.
+ * {
+ *   'Salesforce Apps': {
+ *      testLevel: 'RunLocalTests',
+ *      apps: ['force-app'],
+ *    },
+ *   'Salesforce Functions': { username: 'user@salesforce.com' },
+ * }
+ */
+export interface ProjectDeployOptions<T extends DeployerOptions = DeployerOptions> {
+  [key: string]: T;
+}
 
 export abstract class Deployable {
   abstract getAppName(): string;
@@ -66,6 +80,11 @@ export abstract class Deployer extends EventEmitter {
   }
 
   /**
+   * The human readable name of the deployer
+   */
+  public abstract getName(): string;
+
+  /**
    * Perform any initialization or setup. This is the time to prompt the
    * user for any needed information. It should do so by respecting the user's
    * preferences when possible (i.e. interactive mode or wait times).
@@ -74,7 +93,7 @@ export abstract class Deployer extends EventEmitter {
    *
    * Uses the returned dictionary as the information to store in the project-deploy-options.json file.
    */
-  public abstract setup(preferences: Preferences, options?: Dictionary<string>): Promise<Dictionary<string>>;
+  public abstract setup(preferences: Preferences, options: DeployerOptions): Promise<DeployerOptions>;
 
   /**
    * Deploy the app.
