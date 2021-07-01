@@ -6,5 +6,5 @@
  */
 
 export { generateTableChoices } from './util';
-export { Deployable, Deployer, Options, Preferences } from './deployer';
+export { Deployable, Deployer, ProjectDeployOptions, DeployerOptions, Preferences } from './deployer';
 export { Prompter } from './prompter';
