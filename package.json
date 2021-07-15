@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/plugin-deploy-retrieve-utils",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Utils for writing deploy and retrieve plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
