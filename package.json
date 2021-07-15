@@ -1,7 +1,7 @@
 {
-  "name": "@salesforce/plugin-project-utils",
-  "version": "0.0.7",
-  "description": "Utils for writing project plugins",
+  "name": "@salesforce/plugin-deploy-retrieve-utils",
+  "version": "0.0.8",
+  "description": "Utils for writing deploy and retrieve plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
   "license": "BSD-3-Clause",
@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/salesforcecli/plugin-project-utils.git"
+    "url": "git+https://github.com/salesforcecli/plugin-deploy-retrieve-utils.git"
   },
   "bugs": {
-    "url": "https://github.com/salesforcecli/plugin-project-utils/issues"
+    "url": "https://github.com/salesforcecli/plugin-deploy-retrieve-utils/issues"
   },
-  "homepage": "https://github.com/salesforcecli/plugin-project-utils#readme",
+  "homepage": "https://github.com/salesforcecli/plugin-deploy-retrieve-utils#readme",
   "files": [
     "lib",
     "!lib/**/*.map"
