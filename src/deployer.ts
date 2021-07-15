@@ -27,7 +27,7 @@ export type DeployerOptions = JsonMap;
  *   'Salesforce Functions': { username: 'user@salesforce.com' },
  * }
  */
-export interface ProjectDeployOptions<T extends DeployerOptions = DeployerOptions> {
+export interface DeployOptions<T extends DeployerOptions = DeployerOptions> {
   [key: string]: T;
 }
 
