@@ -40,7 +40,7 @@ export abstract class Deployable {
 }
 
 /**
- * Interface for deploying a piece of a Salesforce project.
+ * Interface for deploying Salesforce Org metadata.
  */
 export abstract class Deployer extends EventEmitter {
   /**
@@ -91,7 +91,7 @@ export abstract class Deployer extends EventEmitter {
    *
    * If options are passed it, it should use those instead of prompting the for the passed in information
    *
-   * Uses the returned dictionary as the information to store in the project-deploy-options.json file.
+   * Uses the returned dictionary as the information to store in the deploy-options.json file.
    */
   public abstract setup(preferences: Preferences, options: DeployerOptions): Promise<DeployerOptions>;
 

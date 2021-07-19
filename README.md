@@ -2,4 +2,4 @@
 
 # Description
 
-Utilities for writing project related plugins
+Utilities for writing plugins that deploy or retrieve metadata from Salesforce Orgs
