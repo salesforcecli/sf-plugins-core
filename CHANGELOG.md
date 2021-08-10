@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.10](https://github.com/salesforcecli/plugin-deploy-retrieve-utils/compare/v0.0.9...v0.0.10) (2021-08-10)
+
+
+### Bug Fixes
+
+* correct header to data column alignment ([a6d1baf](https://github.com/salesforcecli/plugin-deploy-retrieve-utils/commit/a6d1bafd098443dcb4381f03fd7283594d263c8d))
+
 ### [0.0.9](https://github.com/salesforcecli/plugin-deploy-retrieve-utils/compare/v0.0.8...v0.0.9) (2021-07-15)
 
 
