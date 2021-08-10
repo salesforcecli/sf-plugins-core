@@ -20,7 +20,6 @@ import { Dictionary, Nullable, ensureString } from '@salesforce/ts-types';
 export function generateTableChoices<T>(
   columns: Dictionary<string>,
   choices: Array<Dictionary<Nullable<string> | T>>,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   padForCheckbox = true
 ): ChoiceBase[] {
   const columnEntries = Object.entries(columns);
