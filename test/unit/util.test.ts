@@ -7,6 +7,7 @@
 
 import { expect } from 'chai';
 import { Separator } from 'inquirer';
+import stripAnsi = require('strip-ansi');
 import { generateTableChoices } from '../../src/util';
 
 describe('generateTableChoices', () => {
@@ -24,7 +25,7 @@ describe('generateTableChoices', () => {
     },
     {
       name: 'my-app',
-      type: 'org',
+      type: 'a-long-org',
       path: 'my-app',
       value: 'my-app',
     },
@@ -32,14 +33,18 @@ describe('generateTableChoices', () => {
   it('should generate a formatted table of choices', () => {
     const tableChoices = generateTableChoices(columns, choices);
     expect(tableChoices[0]).to.be.instanceof(Separator);
-    expect(tableChoices[1]).to.have.property('name').and.equal('force-app        org    force-app   ');
-    expect(tableChoices[2]).to.have.property('name').and.equal('my-app           org    my-app      ');
+    const separator = tableChoices[0] as typeof Separator;
+    expect(stripAnsi(separator.toString())).to.be.equal('  APP OR PACKAGE TYPE       PATH      ');
+    expect(tableChoices[1]).to.have.property('name').and.equal('force-app      org        force-app ');
+    expect(tableChoices[2]).to.have.property('name').and.equal('my-app         a-long-org my-app    ');
   });
 
   it('should generate a formatted table of choices without checkbox padding', () => {
     const tableChoices = generateTableChoices(columns, choices, false);
     expect(tableChoices[0]).to.be.instanceof(Separator);
-    expect(tableChoices[1]).to.have.property('name').and.equal('force-app     org force-app');
-    expect(tableChoices[2]).to.have.property('name').and.equal('my-app        org my-app   ');
+    const separator = tableChoices[0] as typeof Separator;
+    expect(stripAnsi(separator.toString())).to.be.equal('APP OR PACKAGE TYPE       PATH      ');
+    expect(tableChoices[1]).to.have.property('name').and.equal('force-app      org        force-app ');
+    expect(tableChoices[2]).to.have.property('name').and.equal('my-app         a-long-org my-app    ');
   });
 });
