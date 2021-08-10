@@ -20,6 +20,7 @@ import { Dictionary, Nullable, ensureString } from '@salesforce/ts-types';
 export function generateTableChoices<T>(
   columns: Dictionary<string>,
   choices: Array<Dictionary<Nullable<string> | T>>,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   padForCheckbox = true
 ): ChoiceBase[] {
   const columnEntries = Object.entries(columns);
@@ -32,12 +33,15 @@ export function generateTableChoices<T>(
             ensureString(option[key], `Type ${typeof option[key]} for ${key} in ${Object.keys(option).join(', ')}`)
               .length
         )
-      ) + (padForCheckbox ? 3 : 0)
+      ) + 1
   );
 
   const choicesOptions: ChoiceBase[] = [
-    // Pad an extra 2 to account for checkbox
-    new Separator(columnEntries.map(([, value], index) => value?.padEnd(columnLengths[index] + 2, ' ')).join('')),
+    new Separator(
+      `${padForCheckbox ? ' '.repeat(2) : ''}${columnEntries
+        .map(([, value], index) => value?.padEnd(columnLengths[index], ' '))
+        .join('')}`
+    ),
   ];
 
   for (const meta of choices) {
