@@ -1,5 +1,5 @@
 {
-  "name": "@salesforce/plugin-deploy-retrieve-utils",
+  "name": "@salesforce/sf-plugins-core",
   "version": "0.0.10",
   "description": "Utils for writing deploy and retrieve plugins",
   "main": "lib/exported",
@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/salesforcecli/plugin-deploy-retrieve-utils.git"
+    "url": "git+https://github.com/salesforcecli/sf-plugins-core.git"
   },
   "bugs": {
-    "url": "https://github.com/salesforcecli/plugin-deploy-retrieve-utils/issues"
+    "url": "https://github.com/salesforcecli/sf-plugins-core/issues"
   },
-  "homepage": "https://github.com/salesforcecli/plugin-deploy-retrieve-utils#readme",
+  "homepage": "https://github.com/salesforcecli/sf-plugins-core#readme",
   "files": [
     "lib",
     "!lib/**/*.map"
@@ -40,6 +40,7 @@
     }
   },
   "dependencies": {
+    "@oclif/core": "^0.5.33",
     "@salesforce/kit": "^1.5.8",
     "@salesforce/ts-types": "^1.5.13",
     "cli-ux": "^5.6.2",

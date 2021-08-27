@@ -6,36 +6,15 @@
  */
 
 import { EventEmitter } from 'events';
-import { JsonMap, Nullable } from '@salesforce/ts-types';
+import { AnyJson, JsonMap } from '@salesforce/ts-types';
 import cli from 'cli-ux';
 import { QuestionCollection } from 'inquirer';
 import { Prompter } from './prompter';
 
-export interface Preferences {
-  interactive: boolean;
-}
-
-export type DeployerOptions = JsonMap;
-
-/**
- * This interface represents the aggregation of all deployer options, e.g.
- * {
- *   'Salesforce Apps': {
- *      testLevel: 'RunLocalTests',
- *      apps: ['force-app'],
- *    },
- *   'Salesforce Functions': { username: 'user@salesforce.com' },
- * }
- */
-export interface DeployOptions<T extends DeployerOptions = DeployerOptions> {
-  [key: string]: T;
-}
-
 export abstract class Deployable {
-  abstract getAppName(): string;
-  abstract getAppType(): string;
-  abstract getAppPath(): string;
-  abstract getEnvType(): Nullable<string>;
+  abstract getName(): string;
+  abstract getType(): string;
+  abstract getPath(): string;
   abstract getParent(): Deployer;
 }
 
@@ -86,17 +65,36 @@ export abstract class Deployer extends EventEmitter {
 
   /**
    * Perform any initialization or setup. This is the time to prompt the
-   * user for any needed information. It should do so by respecting the user's
-   * preferences when possible (i.e. interactive mode or wait times).
+   * user for any needed information.
    *
    * If options are passed it, it should use those instead of prompting the for the passed in information
    *
    * Uses the returned dictionary as the information to store in the deploy-options.json file.
    */
-  public abstract setup(preferences: Preferences, options: DeployerOptions): Promise<DeployerOptions>;
+  public abstract setup(flags: Deployer.Flags, options: Deployer.Options): Promise<Deployer.Options>;
 
   /**
    * Deploy the app.
    */
   public abstract deploy(): Promise<void>;
+}
+
+export namespace Deployer {
+  export type Flags = {
+    interactive: boolean;
+  };
+
+  /**
+   * This interface represents the aggregation of all deployer options, e.g.
+   * {
+   *   'Salesforce Apps': {
+   *      testLevel: 'RunLocalTests',
+   *      apps: ['force-app'],
+   *    },
+   *   'Salesforce Functions': { username: 'user@salesforce.com' },
+   * }
+   */
+  export type Options<T = AnyJson> = JsonMap & {
+    [key: string]: T;
+  };
 }

@@ -1,5 +1,5 @@
-[![NPM](https://img.shields.io/npm/v/@salesforce/plugin-deploy-retrieve-utils.svg)](https://www.npmjs.com/package/@salesforce/plugin-deploy-retrieve-utils)
+[![NPM](https://img.shields.io/npm/v/@salesforce/sf-plugins-core.svg)](https://www.npmjs.com/package/@salesforce/sf-plugins-core)
 
 # Description
 
-Utilities for writing plugins that deploy or retrieve metadata from Salesforce Orgs
+Utilities for writing [sf](https://github.com/salesforcecli/cli) plugins.
