@@ -6,5 +6,6 @@
  */
 
 export { generateTableChoices } from './util';
-export { Deployable, Deployer, DeployOptions, DeployerOptions, Preferences } from './deployer';
+export { Deployable, Deployer } from './deployer';
 export { Prompter } from './prompter';
+export { runHook, SfHook } from './hooks';
