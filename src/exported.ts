@@ -8,5 +8,5 @@
 export { generateTableChoices } from './util';
 export { Deployable, Deployer } from './deployer';
 export { Prompter } from './prompter';
-export { runHook, SfHook } from './hooks';
-export { JsonObject, TableObject } from './types';
+export { SfHook } from './hooks';
+export * from './types';
