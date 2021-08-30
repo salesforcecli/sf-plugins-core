@@ -7,19 +7,27 @@
 
 import { Deployer } from '../deployer';
 
-export type DataObject = {
-  [key: string]: string | boolean;
+export type JsonObject = {
+  [key: string]: string | string[] | number | number[] | boolean | boolean[] | null | undefined;
+};
+
+/**
+ * Describes an object that is intended to be rendered in a table, which requires
+ * that no value is an array.
+ */
+export type TableObject = {
+  [key: string]: string | number | boolean | null | undefined;
 };
 
 export namespace EnvDisplay {
-  export type HookMeta<T extends DataObject> = {
-    options: {};
+  export type HookMeta<T extends JsonObject> = {
+    options: { targetEnv: string };
     return: T;
   };
 }
 
 export namespace EnvList {
-  type Table<T extends DataObject> = {
+  type Table<T extends TableObject> = {
     data: T[];
     columns: Array<keyof T>;
     title: string;
@@ -29,7 +37,7 @@ export namespace EnvList {
     all: boolean;
   };
 
-  export type HookMeta<T extends DataObject> = {
+  export type HookMeta<T extends TableObject> = {
     options: Options;
     return: Array<Table<T>>;
   };

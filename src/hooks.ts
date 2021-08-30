@@ -10,11 +10,11 @@ import { Hook, Hooks } from '@oclif/core/lib/interfaces/hooks';
 import { cli } from 'cli-ux';
 import { Duration, env } from '@salesforce/kit';
 import { Deployer } from './deployer';
-import { EnvList, EnvDisplay, DataObject, Deploy, Login } from './types';
+import { EnvList, EnvDisplay, JsonObject, Deploy, Login, TableObject } from './types';
 
 interface SfHooks<T = unknown> extends Hooks {
-  'sf:env:list': EnvList.HookMeta<T & DataObject>;
-  'sf:env:display': EnvDisplay.HookMeta<T & DataObject>;
+  'sf:env:list': EnvList.HookMeta<T & TableObject>;
+  'sf:env:display': EnvDisplay.HookMeta<T & JsonObject>;
   'sf:deploy': Deploy.HookMeta<T & Deployer>;
   'sf:login': Login.HookMeta;
 }
