@@ -12,24 +12,57 @@ export type JsonObject = {
 };
 
 /**
- * Describes an object that is intended to be rendered in a table, which requires
- * that no value is an array.
+ * By default `sf env display` will display every key/value returned by the hook.
+ * It will also Title Case every key for readability. To overwrite this behavior,
+ * you can specify how a key should be displayed to the user.
+ *
+ * Example:
+ * `{ data: { theURL: 'https://example.com' } }
+ * Renders as:
+ * Key     Value
+ * The URL https://example.com
+ *
+ * Example:
+ * `{ keys: { theURL: 'Url' }, data: { theURL: 'https://example.com' } }
+ * Renders as:
+ * Key Value
+ * Url https://example.com
  */
-export type TableObject = {
-  [key: string]: string | number | boolean | null | undefined;
-};
-
 export namespace EnvDisplay {
+  type Keys<T> = Record<keyof T, string>;
+
   export type HookMeta<T extends JsonObject> = {
     options: { targetEnv: string };
-    return: T;
+    return: { data: T; keys?: Keys<T> };
   };
 }
 
+/**
+ * By default `sf env list` will render a table with all the data provided by the hook.
+ * The columns of the table are derived from the keys of the provided data. These column
+ * headers are Title Cased for readability. To overwrite a column name specifiy it the `keys`
+ * property.
+ *
+ * Example:
+ * `{ title: 'My Envs', data: { username: 'foo', theURL: 'https://example.com' } }
+ * Renders as:
+ * My Envs
+ * ================================
+ * | Username | The URL
+ * | foo      | https://example.com
+ *
+ * Example:
+ * `{ keys: { theURL: 'Url', username: 'Name' }, data: { username: 'foo', theURL: 'https://example.com' } }
+ * Renders as:
+ * My Envs
+ * ============================
+ * | Name | Url
+ * | foo  | https://example.com
+ */
 export namespace EnvList {
-  type Table<T extends TableObject> = {
+  type Table<T extends JsonObject> = {
     data: T[];
-    columns: Array<keyof T>;
+    keys?: Record<keyof T, string>;
     title: string;
   };
 
@@ -37,7 +70,7 @@ export namespace EnvList {
     all: boolean;
   };
 
-  export type HookMeta<T extends TableObject> = {
+  export type HookMeta<T extends JsonObject> = {
     options: Options;
     return: Array<Table<T>>;
   };
