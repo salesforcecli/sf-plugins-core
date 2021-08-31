@@ -51,7 +51,7 @@ export namespace EnvDisplay {
  * @example
  * {
  *   title: 'My Envs',
- *   data: { username: 'foo', theURL: 'https://example.com' }
+ *   data: [{ username: 'foo', theURL: 'https://example.com' }]
  * }
  * // Renders as:
  * My Envs
@@ -61,7 +61,7 @@ export namespace EnvDisplay {
  *
  * @example
  * {
- *   data: { username: 'foo', theURL: 'https://example.com' }
+ *   data: [{ username: 'foo', theURL: 'https://example.com' }]
  *   keys: { theURL: 'Url', username: 'Name' },
  * }
  *
