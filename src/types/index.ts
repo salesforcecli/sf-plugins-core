@@ -16,16 +16,21 @@ export type JsonObject = {
  * It will also Title Case every key for readability. To overwrite this behavior,
  * you can specify how a key should be displayed to the user.
  *
- * Example:
- * `{ data: { theURL: 'https://example.com' } }
- * Renders as:
+ * @example
+ * { data: { theURL: 'https://example.com' } }
+ * // Renders as:
  * Key     Value
+ * ------- -------------------
  * The URL https://example.com
  *
- * Example:
- * `{ keys: { theURL: 'Url' }, data: { theURL: 'https://example.com' } }
- * Renders as:
+ * @example
+ * {
+ *   data: { theURL: 'https://example.com' }
+ *   keys: { theURL: 'Url' },
+ * }
+ * // Renders as:
  * Key Value
+ * --- -------------------
  * Url https://example.com
  */
 export namespace EnvDisplay {
@@ -43,17 +48,24 @@ export namespace EnvDisplay {
  * headers are Title Cased for readability. To overwrite a column name specifiy it the `keys`
  * property.
  *
- * Example:
- * `{ title: 'My Envs', data: { username: 'foo', theURL: 'https://example.com' } }
- * Renders as:
+ * @example
+ * {
+ *   title: 'My Envs',
+ *   data: { username: 'foo', theURL: 'https://example.com' }
+ * }
+ * // Renders as:
  * My Envs
  * ================================
  * | Username | The URL
  * | foo      | https://example.com
  *
- * Example:
- * `{ keys: { theURL: 'Url', username: 'Name' }, data: { username: 'foo', theURL: 'https://example.com' } }
- * Renders as:
+ * @example
+ * {
+ *   data: { username: 'foo', theURL: 'https://example.com' }
+ *   keys: { theURL: 'Url', username: 'Name' },
+ * }
+ *
+ * // Renders as:
  * My Envs
  * ============================
  * | Name | Url
