@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-export { generateTableChoices } from './util';
+export { generateTableChoices, toHelpSection } from './util';
 export { Deployable, Deployer } from './deployer';
 export { Prompter } from './prompter';
 export { SfHook } from './hooks';
