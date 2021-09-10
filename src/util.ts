@@ -7,6 +7,10 @@
 
 import { Separator, ChoiceOptions, ChoiceBase } from 'inquirer';
 import { Dictionary, Nullable, ensureString } from '@salesforce/ts-types';
+import { HelpSection } from '@oclif/core';
+import { ORG_CONFIG_ALLOWED_PROPERTIES, OrgConfigProperties } from '@salesforce/core';
+import { SFDX_ALLOWED_PROPERTIES, SfdxPropertyKeys } from '@salesforce/core';
+import { EnvironmentVariable, SUPPORTED_ENV_VARS } from '@salesforce/core';
 
 /**
  * Generate a formatted table for list and checkbox prompts
@@ -53,4 +57,41 @@ export function generateTableChoices<T>(
   }
 
   return choicesOptions;
+}
+
+/**
+ * Function to build a help section for command help.
+ * Takes a string to be used as section header text and an array of enums
+ * that identify the variable or property to be included in the help
+ * body.
+ *
+ * @param header
+ * @param vars
+ */
+export function toHelpSection(
+  header: string,
+  ...vars: Array<OrgConfigProperties | SfdxPropertyKeys | EnvironmentVariable>
+): HelpSection {
+  const body = vars
+    .map((v) => {
+      const orgConfig = ORG_CONFIG_ALLOWED_PROPERTIES.find(({ key }) => {
+        return key === v;
+      });
+      if (orgConfig) {
+        return { name: orgConfig.key, description: orgConfig.description };
+      }
+      const sfdxProperty = SFDX_ALLOWED_PROPERTIES.find(({ key }) => key === v);
+      if (sfdxProperty) {
+        return { name: sfdxProperty.key.valueOf(), description: sfdxProperty.description };
+      }
+      const envVar = Object.entries(SUPPORTED_ENV_VARS).find(([k]) => k === v);
+
+      if (envVar) {
+        const [eKey, data] = envVar;
+        return { name: eKey, description: data.description };
+      }
+      return undefined;
+    })
+    .filter((b) => b);
+  return { header, body } as HelpSection;
 }
