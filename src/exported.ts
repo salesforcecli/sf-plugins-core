@@ -7,6 +7,7 @@
 
 export { generateTableChoices } from './util';
 export { Deployable, Deployer } from './deployer';
+export { Deauthorizer } from './deauthorizer';
 export { Prompter } from './prompter';
 export { SfHook } from './hooks';
 export * from './types';
