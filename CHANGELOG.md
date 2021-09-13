@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.19](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.18...v0.0.19) (2021-09-13)
+
+
+### Features
+
+* add logout hook ([4a4d79b](https://github.com/salesforcecli/sf-plugins-core/commit/4a4d79bcd9f2017e70f75967bb0661ae3eb4aa4a))
+
 ### [0.0.18](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.17...v0.0.18) (2021-09-10)
 
 
