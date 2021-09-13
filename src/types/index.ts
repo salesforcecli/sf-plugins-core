@@ -5,6 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+import { Deauthorizer } from '../deauthorizer';
 import { Deployer } from '../deployer';
 
 export type JsonObject = {
@@ -99,5 +100,12 @@ export namespace Login {
   export type HookMeta = {
     options: {};
     return: void;
+  };
+}
+
+export namespace Logout {
+  export type HookMeta<T extends Deauthorizer> = {
+    options: {};
+    return: T;
   };
 }
