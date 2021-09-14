@@ -40,16 +40,16 @@
     }
   },
   "dependencies": {
-    "@oclif/core": "^0.5.35",
-    "@salesforce/core": "^3.6.0",
-    "@salesforce/kit": "^1.5.8",
-    "@salesforce/ts-types": "^1.5.13",
-    "cli-ux": "^5.6.2",
+    "@oclif/core": "^0.5.36",
+    "@salesforce/core": "^3.6.1",
+    "@salesforce/kit": "^1.5.17",
+    "@salesforce/ts-types": "^1.5.20",
+    "cli-ux": "^5.6.3",
     "inquirer": "^8.1.1"
   },
   "devDependencies": {
     "@salesforce/dev-config": "^2.0.0",
-    "@salesforce/dev-scripts": "^0.9.15",
+    "@salesforce/dev-scripts": "^0.9.18",
     "@salesforce/prettier-config": "^0.0.1",
     "@salesforce/ts-sinon": "^1.2.3",
     "@types/inquirer": "^7.3.2",
