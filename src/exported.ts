@@ -11,3 +11,5 @@ export { Deauthorizer } from './deauthorizer';
 export { Prompter } from './prompter';
 export { SfHook } from './hooks';
 export * from './types';
+export { SfCommand, SfCommandInterface } from './sfCommand';
+export { Flags } from '@oclif/core';
