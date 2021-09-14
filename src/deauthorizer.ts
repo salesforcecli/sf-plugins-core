@@ -26,7 +26,14 @@ export abstract class Deauthorizer<T = JsonMap> {
     return result;
   }
 
+  /**
+   * This method should return a list of all the environments a deauthorizer could deauthorize.
+   */
   public abstract find(): Promise<Record<string, T>>;
+
+  /**
+   * This method should deauthorize an environment.
+   */
   public abstract remove(id: string): Promise<boolean>;
 }
 
