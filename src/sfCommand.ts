@@ -22,6 +22,7 @@ export interface SfCommandInterface extends Interfaces.Command {
  */
 
 export abstract class SfCommand<T> extends Command {
+  public static enableJsonFlag = true;
   public static configurationVariablesSection?: HelpSection;
   public static envVariablesSection?: HelpSection;
   public static errorCodes?: HelpSection;
