@@ -20,10 +20,7 @@
     "pretest": "sf-compile-test",
     "test": "sf-test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/salesforcecli/sf-plugins-core.git"
-  },
+  "repository": "salesforcecli/sf-plugins-core",
   "bugs": {
     "url": "https://github.com/salesforcecli/sf-plugins-core/issues"
   },
