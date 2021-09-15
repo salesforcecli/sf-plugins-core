@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.23](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.22...v0.0.23) (2021-09-15)
+
+
+### Bug Fixes
+
+* update to latest oclif/core and enable json flag ([b486ef1](https://github.com/salesforcecli/sf-plugins-core/commit/b486ef173b27ba465cc8fddf53e3a53d339f8734))
+
 ### [0.0.22](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.21...v0.0.22) (2021-09-15)
 
 
