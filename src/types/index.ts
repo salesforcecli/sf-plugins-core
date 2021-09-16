@@ -33,13 +33,18 @@ export type JsonObject = {
  * Key Value
  * --- -------------------
  * Url https://example.com
+ *
+ * If no environment matches the provided targetEnv, then return null in the data field.
+ *
+ * @example
+ * { data: null }
  */
 export namespace EnvDisplay {
   type Keys<T> = Record<keyof T, string>;
 
   export type HookMeta<T extends JsonObject> = {
     options: { targetEnv: string };
-    return: { data: T; keys?: Keys<T> };
+    return: { data: T | null; keys?: Keys<T> };
   };
 }
 
