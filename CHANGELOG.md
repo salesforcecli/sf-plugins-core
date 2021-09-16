@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.24](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.23...v0.0.24) (2021-09-16)
+
+
+### Bug Fixes
+
+* allow null for EnvDisplay ([0868d3f](https://github.com/salesforcecli/sf-plugins-core/commit/0868d3f0ed23e28c53ce11cb447e41b9b0144ac1))
+
 ### [0.0.23](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.22...v0.0.23) (2021-09-15)
 
 
