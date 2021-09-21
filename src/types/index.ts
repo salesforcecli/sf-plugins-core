@@ -78,7 +78,14 @@ export namespace EnvDisplay {
  * | foo  | https://example.com
  */
 export namespace EnvList {
+  export enum EnvType {
+    'salesforceOrg' = 'salesforceOrg',
+    'scratchOrg' = 'scratchOrg',
+    'computeEnv' = 'computeEnv',
+  }
+
   type Table<T extends JsonObject> = {
+    type: EnvType;
     data: T[];
     keys?: Record<keyof T, string>;
     title: string;
