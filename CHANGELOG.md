@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.25](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.24...v0.0.25) (2021-09-21)
+
+
+### Bug Fixes
+
+* add envirnment type to env list ([8f020df](https://github.com/salesforcecli/sf-plugins-core/commit/8f020dfc8695be19a7fd1f4b811b8c2b8c321418))
+
 ### [0.0.24](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.23...v0.0.24) (2021-09-16)
 
 
