@@ -30,7 +30,6 @@ export abstract class SfCommand<T> extends Command {
   public static configurationVariablesSection?: HelpSection;
   public static envVariablesSection?: HelpSection;
   public static errorCodes?: HelpSection;
-  public static exposesSensitiveInfo?: boolean;
 
   private warnings: SfCommand.Warning[] = [];
 
