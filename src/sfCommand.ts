@@ -47,7 +47,7 @@ export abstract class SfCommand<T> extends Command {
    * Warn user about sensitive information (access tokens, etc...) before
    * logging to the console.
    */
-  public logSensitive(msg: string): void {
+  public logSensitive(msg?: string): void {
     this.warn(messages.getMessage('warning.security'));
     this.log(msg);
   }
