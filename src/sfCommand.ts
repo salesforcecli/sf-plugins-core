@@ -5,6 +5,10 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Command, HelpSection, Interfaces } from '@oclif/core';
+import { Messages } from '@salesforce/core';
+
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 export interface SfCommandInterface extends Interfaces.Command {
   configurationVariablesSection?: HelpSection;
@@ -26,20 +30,50 @@ export abstract class SfCommand<T> extends Command {
   public static configurationVariablesSection?: HelpSection;
   public static envVariablesSection?: HelpSection;
   public static errorCodes?: HelpSection;
+  public static exposesSensitiveInfo?: boolean;
 
+  private warnings: SfCommand.Warning[] = [];
+
+  /**
+   * Log warning to users. If --json is enabled, then the warning
+   * will be added to the json output under the warnings property.
+   */
+  public warn(input: SfCommand.Warning): SfCommand.Warning {
+    const warning = super.warn(input) as SfCommand.Warning;
+    this.warnings.push(warning);
+    return input;
+  }
+
+  /**
+   * Warn user about sensitive information (access tokens, etc...) before
+   * logging to the console.
+   */
+  public logSensitive(msg: string): void {
+    this.warn(messages.getMessage('warning.security'));
+    this.log(msg);
+  }
+
+  /**
+   * Wrap the command result into the standardized JSON structure.
+   */
   protected toSuccessJson(result: T): SfCommand.Json<T> {
     return {
       status: process.exitCode ?? 0,
       result,
+      warnings: this.warnings,
     };
   }
 
+  /**
+   * Wrap the command error into the standardized JSON structure.
+   */
   protected toErrorJson(error: Error): SfCommand.Error {
     return {
       status: process.exitCode ?? 1,
       stack: error.stack,
       name: error.name,
       message: error.message,
+      warnings: this.warnings,
     };
   }
 
@@ -47,10 +81,12 @@ export abstract class SfCommand<T> extends Command {
 }
 
 export namespace SfCommand {
+  export type Warning = string | Error;
+
   export interface Json<T> {
     status: number;
     result: T;
-    warnings?: string[];
+    warnings?: Warning[];
   }
 
   export interface Error {
@@ -58,6 +94,6 @@ export namespace SfCommand {
     name: string;
     message: string;
     stack: string | undefined;
-    warnings?: string[];
+    warnings?: Warning[];
   }
 }
