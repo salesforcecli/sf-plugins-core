@@ -27,7 +27,8 @@
   "homepage": "https://github.com/salesforcecli/sf-plugins-core#readme",
   "files": [
     "lib",
-    "!lib/**/*.map"
+    "!lib/**/*.map",
+    "/messages"
   ],
   "husky": {
     "hooks": {
