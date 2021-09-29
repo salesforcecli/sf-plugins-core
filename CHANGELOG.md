@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.26](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.25...v0.0.26) (2021-09-29)
+
+
+### Features
+
+* logSensitive, capture warnings ([a8b3e76](https://github.com/salesforcecli/sf-plugins-core/commit/a8b3e76ff20806b136ee606797b84a70c8f5a528))
+
 ### [0.0.25](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.24...v0.0.25) (2021-09-21)
 
 
