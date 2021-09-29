@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.27](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.26...v0.0.27) (2021-09-29)
+
+
+### Bug Fixes
+
+* publish messages ([91a6aa6](https://github.com/salesforcecli/sf-plugins-core/commit/91a6aa6c396f9b33049407820d0b8bd9caaa30f4))
+
 ### [0.0.26](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.25...v0.0.26) (2021-09-29)
 
 
