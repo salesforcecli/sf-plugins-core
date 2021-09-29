@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.28](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.27...v0.0.28) (2021-09-29)
+
+
+### Bug Fixes
+
+* allow empty message in logSensitive ([5b8edf5](https://github.com/salesforcecli/sf-plugins-core/commit/5b8edf509647887500d9e71b506939b3cc6945d9))
+
 ### [0.0.27](https://github.com/salesforcecli/sf-plugins-core/compare/v0.0.26...v0.0.27) (2021-09-29)
 
 
