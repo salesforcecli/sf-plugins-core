@@ -430,10 +430,10 @@
     is-wsl "^2.1.1"
     tslib "^2.0.0"
 
-"@oclif/core@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/@oclif/core/-/core-1.0.0.tgz#d9234f27368c058d9fb835dc9f57f3278af57777"
-  integrity sha512-YBpjahcSMtIsw+rgNkKLlqULc7Ste7EfhJj7d/elukhB3lj+sO0z34byPVGEGSb5zDO3Sk2GxBZw6BM0vjWqMw==
+"@oclif/core@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.0.1.tgz#e97fc5c234db1a745fb4468eb79cabeea5f84af9"
+  integrity sha512-ai9XwnEZ+P34VUtV+fX/6HmRbo5CXGdZjX3iK3PsY6O+KYeJBKVAkPCKLz0qtAHxx0HX4+Yj2wnmy+hTCx6HYQ==
   dependencies:
     "@oclif/linewrap" "^1.0.0"
     chalk "^4.1.0"
@@ -531,10 +531,10 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/core@^3.6.5":
-  version "3.6.5"
-  resolved "https://registry.npmjs.org/@salesforce/core/-/core-3.6.5.tgz#4c3afa392eb61cd34e2683033c04fbfa4d546850"
-  integrity sha512-EqMZS4Awn/WctCqVWecXOIJKzLUleWw2fvViNP0lVJgt56ZAinZRBetXJFITyKVyslW/WIAhX92NHW7t3AG7Hg==
+"@salesforce/core@^3.6.6":
+  version "3.6.6"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.6.6.tgz#31e231080f42e20d66bc834b6e80e141f1aabd1f"
+  integrity sha512-ubf8dbFAdMcoK4sHXtJD/IrA8WXj8H2df7a8b7wGFBMegqziQDzL7yqwmE7qbAEtD7MxLm1FhQQP+WONPCdoWA==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
     "@salesforce/kit" "^1.5.8"
