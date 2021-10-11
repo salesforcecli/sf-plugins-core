@@ -38,8 +38,8 @@
     }
   },
   "dependencies": {
-    "@oclif/core": "^1.0.0",
-    "@salesforce/core": "^3.6.5",
+    "@oclif/core": "^1.0.1",
+    "@salesforce/core": "^3.6.6",
     "@salesforce/kit": "^1.5.17",
     "@salesforce/ts-types": "^1.5.20",
     "cli-ux": "^5.6.3",
