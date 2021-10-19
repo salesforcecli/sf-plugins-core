@@ -21,8 +21,8 @@ export interface SfCommandInterface extends Interfaces.Command {
  * output formatting. Extend this command and set specific properties
  * to add help sections to the command's help output.
  *
- * @extends @oclif/command
- * @see https://github.com/oclif/command
+ * @extends @oclif/core/command
+ * @see https://github.com/oclif/core/blob/main/src/command.ts
  */
 
 export abstract class SfCommand<T> extends Command {
