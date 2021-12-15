@@ -103,21 +103,21 @@ export namespace EnvList {
 
 export namespace Deploy {
   export type HookMeta<T extends Deployer> = {
-    options: {};
+    options: Record<string, unknown>;
     return: T[];
   };
 }
 
 export namespace Login {
   export type HookMeta = {
-    options: {};
+    options: Record<string, unknown>;
     return: void;
   };
 }
 
 export namespace Logout {
   export type HookMeta<T extends Deauthorizer> = {
-    options: {};
+    options: Record<string, unknown>;
     return: T;
   };
 }
