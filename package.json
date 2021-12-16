@@ -9,7 +9,7 @@
     "build": "sf-build",
     "ci-docs": "yarn sf-ci-docs",
     "clean": "sf-clean",
-    "clean-all": "sf clean-all",
+    "clean-all": "sf-clean all",
     "compile": "sf-compile",
     "docs": "sf-docs",
     "format": "sf-format",
@@ -17,6 +17,7 @@
     "lint-fix": "yarn sf-lint --fix",
     "postcompile": "tsc -p test",
     "prepack": "sf-prepack",
+    "prepare": "sf-install",
     "pretest": "sf-compile-test",
     "test": "sf-test"
   },
