@@ -22,14 +22,21 @@ export class Spinner {
   }
 
   /**
-   * Stop a spinner on the console.
+   * Stop the spinner on the console.
    */
   public stop(msg?: string): void {
     if (!this.jsonEnabled) cli.action.stop(msg);
   }
 
   /**
-   * Pause a spinner on the console.
+   * Set the status of the current spinner.
+   */
+  public status(status: string): void {
+    if (!this.jsonEnabled) cli.action.status = status;
+  }
+
+  /**
+   * Pause the spinner on the console.
    */
   public pause(fn: () => unknown, icon?: string): void {
     if (!this.jsonEnabled) cli.action.pause(fn, icon);
