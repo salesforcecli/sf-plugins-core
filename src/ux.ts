@@ -31,8 +31,15 @@ export class Spinner {
   /**
    * Set the status of the current spinner.
    */
-  public status(status: string): void {
+  public set status(status: string | undefined) {
     if (!this.jsonEnabled) cli.action.status = status;
+  }
+
+  /**
+   * Get the status of the current spinner.
+   */
+  public get status(): string | undefined {
+    return cli.action.status;
   }
 
   /**
