@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.0.5...v1.1.0) (2022-01-03)
+
+### Features
+
+- add spinner methods ([f209f8f](https://github.com/salesforcecli/sf-plugins-core/commit/f209f8f4e6736b9de91e37f865d66b5356e5abec))
+
+### Bug Fixes
+
+- add status method ([9cf2069](https://github.com/salesforcecli/sf-plugins-core/commit/9cf20694d76e2509785b7c8faa4bd63ab190707e))
+- make status a getter/setter ([441c55a](https://github.com/salesforcecli/sf-plugins-core/commit/441c55acd3d811664213e9801a8bcc270e3aca7b))
+
 ### [1.0.5](https://github.com/salesforcecli/sf-plugins-core/compare/v1.0.4...v1.0.5) (2021-12-16)
 
 ### Bug Fixes
