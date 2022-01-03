@@ -13,6 +13,9 @@ import { Deployer } from './deployer';
 import { EnvList, EnvDisplay, JsonObject, Deploy, Login, Logout } from './types';
 import { Deauthorizer } from './deauthorizer';
 
+/**
+ * Interface that defines the well known Unified CLI command hooks.
+ */
 interface SfHooks<T = unknown> extends Hooks {
   'sf:env:list': EnvList.HookMeta<T & JsonObject>;
   'sf:env:display': EnvDisplay.HookMeta<T & JsonObject>;
@@ -23,6 +26,9 @@ interface SfHooks<T = unknown> extends Hooks {
 
 type GenericHook<T extends keyof SfHooks, P> = Hook<T, SfHooks<P>>;
 
+/**
+ * Class that provides a static method to run a well known hook.
+ */
 export class SfHook {
   public static async run<T extends keyof SfHooks>(
     config: Config,
