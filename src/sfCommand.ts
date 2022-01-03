@@ -1,11 +1,12 @@
 /*
- * Copyright (c) 2020, salesforce.com, inc.
+ * Copyright (c) 2021, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { Command, HelpSection, Interfaces } from '@oclif/core';
+import { Command, Config, HelpSection, Interfaces } from '@oclif/core';
 import { Messages } from '@salesforce/core';
+import { Spinner } from './ux';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -31,7 +32,14 @@ export abstract class SfCommand<T> extends Command {
   public static envVariablesSection?: HelpSection;
   public static errorCodes?: HelpSection;
 
+  public spinner: Spinner;
+
   private warnings: SfCommand.Warning[] = [];
+
+  public constructor(argv: string[], config: Config) {
+    super(argv, config);
+    this.spinner = new Spinner(this.jsonEnabled());
+  }
 
   /**
    * Log warning to users. If --json is enabled, then the warning
