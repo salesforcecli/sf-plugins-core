@@ -13,3 +13,4 @@ export { SfHook } from './hooks';
 export * from './types';
 export { SfCommand, SfCommandInterface } from './sfCommand';
 export { Flags } from '@oclif/core';
+export { Spinner } from './ux';
