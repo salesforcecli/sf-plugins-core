@@ -6,22 +6,27 @@ The @salesforce/sf-pluins-core provides utilities for writing [sf](https://githu
 
 ## SfCommand Abstract Class
 
-The SfCommand abstract class extends @oclif/command class and adds useful extensions to ease the development of commands for use in the Salesforce Unified CLI.
+The SfCommand abstract class extends [@oclif/command](https://github.com/oclif/core/blob/main/src/command.ts) for examples of how to build a definition.
+) class and adds useful extensions to ease the development of commands for use in the Salesforce Unified CLI.
 
 - SfCommand takes a generic type that defines the success JSON result
 - Enable the json flag support by default
 - Provides functions that help place success messages, warnings and errors into the correct location in JSON results
 - Enables additional help sections to the standard oclif command help output
+- Provides access to the [cli-ux cli actions](https://github.com/oclif/cli-ux#cliaction) via the public property `spinner` in SfCommand. This avoids having to import that interface from cli-ux.
 
-## Sf Hooks Utilities
+## Sf Hooks
 
-### SfHooks Interface
+Interface that defines the well known Unified CLI command hooks.
+SfHooks takes advantage of the [oclif hooks framework](https://oclif.io/docs/hooks), which provides a set of predefined events and the provides ability to define your own.
 
-Interface that defines the well known Unified CLI command hooks. See [@salesforce/plugin-deploy-retrieve-metadataA#src/hooks/deploy.ts](https://github.com/salesforcecli/plugin-deploy-retrieve-metadata/blob/main/src/hooks/deploy.ts) as an example implementation.
+A hook has a name, say `sf:deploy` and to participate in the hook's run call, one creates a hook consumer, that registers itself using the name `sf:deploy`.
+There can be more than one hook registered with the same name and when the hook is "run", oclif hook will run each registered hook consumer, collect all results and return those results to the caller.
 
-### SfHook Class
-
-Class that provides a static method to run a well known hook.
+- See [oclif hooks API docs](https://oclif.io/docs/hooks.ts) for a general description of hooks.
+- See [SfHooks](src/hooks.ts) for current hook definitions available in Unified CLI.
+- See Command [Deploy](https://github.com/salesforcecli/plugin-deploy-retrieve/blob/main/src/commands/deploy.ts) for and example of how to run a hook (search for [SfHook](https://github.com/salesforcecli/plugin-deploy-retrieve/blob/main/src/commands/deploy.ts).run in linked file).
+- See [@salesforce/plugin-deploy-retrieve-metadataA#src/hooks/deploy.ts](https://github.com/salesforcecli/plugin-deploy-retrieve-metadata/blob/main/src/hooks/deploy.ts) as an example implementation of a hook consumer.
 
 ## Deployer Interface
 
@@ -30,10 +35,6 @@ Interface for deploying Deployables. See [@salesforce/plugin-deploy-retrieve-met
 ## Deauthorizer Abstract Class
 
 The Deauthorizer is an abstract class that is used to implement a concrete implementations of deauthorizing an environment.
-
-## Spinner Class
-
-This class is a light wrapper around cli.action that allows us to automatically suppress any actions if `--json` flag is present.
 
 ## Prompter Class
 
