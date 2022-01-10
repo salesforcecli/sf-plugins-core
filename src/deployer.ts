@@ -19,12 +19,12 @@ export abstract class Deployable {
 }
 
 /**
- * Interface for deploying Salesforce Org metadata.
+ * Interface for deploying Deployables.
  */
 export abstract class Deployer extends EventEmitter {
   /**
    * Deployables are individual pieces that can be deployed on their own. For example,
-   * each pacakge in a salesforce project is considered a deployable that can be deployed
+   * each package in a salesforce project is considered a deployable that can be deployed
    * on its own.
    */
   public deployables: Deployable[] = [];

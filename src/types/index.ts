@@ -51,8 +51,8 @@ export namespace EnvDisplay {
 /**
  * By default `sf env list` will render a table with all the data provided by the hook.
  * The columns of the table are derived from the keys of the provided data. These column
- * headers are Title Cased for readability. To overwrite a column name specifiy it the `keys`
- * property.
+ * headers are Title Cased for readability. To overwrite a column name specify it with
+ * the `keys` property.
  *
  * @example
  * {
