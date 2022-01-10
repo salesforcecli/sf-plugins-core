@@ -6,7 +6,7 @@ The @salesforce/sf-pluins-core provides utilities for writing [sf](https://githu
 
 ## SfCommand Abstract Class
 
-The SfCommand abstract class extends [@oclif/command](https://github.com/oclif/core/blob/main/src/command.ts) for examples of how to build a definition.
+The SfCommand abstract class extends [@oclif/core's Command class](https://github.com/oclif/core/blob/main/src/command.ts) for examples of how to build a definition.
 ) class and adds useful extensions to ease the development of commands for use in the Salesforce Unified CLI.
 
 - SfCommand takes a generic type that defines the success JSON result
