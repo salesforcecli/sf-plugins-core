@@ -5,8 +5,12 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-export { UxBase } from './base';
-export { Ux } from './ux';
-export { Progress } from './progress';
-export { Prompter, generateTableChoices } from './prompter';
-export { Spinner } from './spinner';
+import { AnyFunction } from '@salesforce/ts-types';
+
+export class UxBase {
+  public constructor(protected outputEnabled: boolean) {}
+
+  protected maybeNoop(fn: AnyFunction<unknown>): void {
+    if (this.outputEnabled) fn();
+  }
+}

@@ -8,12 +8,12 @@
 import * as util from 'util';
 import { ux } from 'cli-ux';
 import { once } from '@salesforce/kit';
-import { Ux } from '.';
+import { UxBase } from '.';
 
 /**
  * Class for display a progress bar to the console. Will automatically be suppressed if the --json flag is present.
  */
-export class Progress extends Ux {
+export class Progress extends UxBase {
   private static DEFAULT_OPTIONS = {
     title: 'PROGRESS',
     format: '%s | {bar} | {value}/{total} Components',
@@ -109,8 +109,6 @@ export namespace Progress {
     barCompleteChar: string;
     barIncompleteChar: string;
     linewrap: boolean;
-    /** output stream to use (default: process.stderr) */
-    stream?: NodeJS.WritableStream | undefined;
   };
 
   export type Payload = Record<string, unknown>;

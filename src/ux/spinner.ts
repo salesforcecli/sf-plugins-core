@@ -6,13 +6,13 @@
  */
 
 import { ux } from 'cli-ux';
-import { Ux } from '.';
+import { UxBase } from '.';
 
 /**
  * This class is a light wrapper around CliUx.ux.action that allows us to
  * automatically suppress any actions if `--json` flag is present.
  */
-export class Spinner extends Ux {
+export class Spinner extends UxBase {
   public constructor(outputEnabled: boolean) {
     super(outputEnabled);
   }

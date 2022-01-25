@@ -6,10 +6,13 @@
  */
 
 import { ux, Table as UxTable } from 'cli-ux';
-import { AnyFunction, AnyJson } from '@salesforce/ts-types';
+import { AnyJson } from '@salesforce/ts-types';
+import { UxBase } from './base';
 
-export class Ux {
-  public constructor(protected outputEnabled: boolean) {}
+export class Ux extends UxBase {
+  public constructor(outputEnabled: boolean) {
+    super(outputEnabled);
+  }
 
   public table<T extends Ux.Table.Data>(data: T[], columns: Ux.Table.Columns<T>, options?: Ux.Table.Options): void {
     this.maybeNoop(() => ux.table(data, columns, options));
@@ -25,10 +28,6 @@ export class Ux {
 
   public styledObject(obj: AnyJson): void {
     this.maybeNoop(() => ux.styledObject(obj));
-  }
-
-  protected maybeNoop(fn: AnyFunction<unknown>): void {
-    if (this.outputEnabled) fn();
   }
 }
 
