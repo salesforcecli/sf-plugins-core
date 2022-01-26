@@ -7,7 +7,7 @@
 
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { ux as cliUx } from 'cli-ux';
+import { CliUx } from '@oclif/core';
 import { Ux } from '../../../src/ux';
 
 describe('Ux', () => {
@@ -16,7 +16,7 @@ describe('Ux', () => {
 
   beforeEach(() => {
     sandbox = sinon.createSandbox();
-    infoStub = sandbox.stub(cliUx, 'info').callsFake(() => {});
+    infoStub = sandbox.stub(CliUx.ux, 'info').callsFake(() => {});
   });
 
   afterEach(() => {
@@ -26,7 +26,7 @@ describe('Ux', () => {
   describe('table', () => {
     it('should log a table', () => {
       const ux = new Ux(true);
-      ux.table([{ key: 'foo', value: 'bar' }], { key: {}, value: {} }, { printLine: cliUx.info });
+      ux.table([{ key: 'foo', value: 'bar' }], { key: {}, value: {} }, { printLine: CliUx.ux.info });
       expect(infoStub.args).to.deep.equal([
         ['\u001b[1m Key Value \u001b[22m'],
         ['\u001b[1m ─── ───── \u001b[22m'],

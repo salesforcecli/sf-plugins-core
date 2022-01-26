@@ -4,8 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { Command, Config, HelpSection, Interfaces } from '@oclif/core';
-import { ux } from 'cli-ux';
+import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
 import { Messages } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { Progress, Prompter, Spinner, Ux } from './ux';
@@ -33,7 +32,7 @@ export abstract class SfCommand<T> extends Command {
   public static configurationVariablesSection?: HelpSection;
   public static envVariablesSection?: HelpSection;
   public static errorCodes?: HelpSection;
-  public static tableFlags = ux.table.flags;
+  public static tableFlags = CliUx.ux.table.flags;
 
   public spinner: Spinner;
   public progress: Progress;
@@ -71,7 +70,7 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
-   * Log a table to the console. Will automatically be suppressed when --json flag is present.
+   * Display a table on the console. Will automatically be suppressed when --json flag is present.
    */
   public table<R extends Ux.Table.Data>(data: R[], columns: Ux.Table.Columns<R>, options?: Ux.Table.Options): void {
     this.ux.table(data, columns, options);

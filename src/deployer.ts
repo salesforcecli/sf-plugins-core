@@ -7,8 +7,8 @@
 
 import { EventEmitter } from 'events';
 import { AnyJson, JsonMap } from '@salesforce/ts-types';
-import { ux } from 'cli-ux';
 import { QuestionCollection } from 'inquirer';
+import { CliUx } from '@oclif/core';
 import { Prompter } from './ux';
 
 export abstract class Deployable {
@@ -40,7 +40,7 @@ export abstract class Deployer extends EventEmitter {
    * Log messages to the console
    */
   public log(msg?: string | undefined, ...args: string[]): void {
-    ux.log(msg, ...args);
+    CliUx.ux.log(msg, ...args);
   }
 
   /**

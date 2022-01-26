@@ -6,7 +6,7 @@
  */
 
 import * as util from 'util';
-import { ux } from 'cli-ux';
+import { CliUx } from '@oclif/core';
 import { once } from '@salesforce/kit';
 import { UxBase } from '.';
 
@@ -47,7 +47,7 @@ export class Progress extends UxBase {
   ): void {
     const opts = Object.assign(Progress.DEFAULT_OPTIONS, options);
     opts.format = util.format(opts.format, opts.title);
-    this.bar = ux.progress({
+    this.bar = CliUx.ux.progress({
       format: opts.format,
       barCompleteChar: opts.barCompleteChar,
       barIncompleteChar: opts.barIncompleteChar,

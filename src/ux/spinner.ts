@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { ux } from 'cli-ux';
+import { CliUx } from '@oclif/core';
 import { UxBase } from '.';
 
 /**
@@ -21,34 +21,34 @@ export class Spinner extends UxBase {
    * Start a spinner on the console.
    */
   public start(action: string, status?: string, opts?: { stdout?: boolean }): void {
-    this.maybeNoop(() => ux.action.start(action, status, opts));
+    this.maybeNoop(() => CliUx.ux.action.start(action, status, opts));
   }
 
   /**
    * Stop the spinner on the console.
    */
   public stop(msg?: string): void {
-    this.maybeNoop(() => ux.action.stop(msg));
+    this.maybeNoop(() => CliUx.ux.action.stop(msg));
   }
 
   /**
    * Set the status of the current spinner.
    */
   public set status(status: string | undefined) {
-    ux.action.status = status;
+    CliUx.ux.action.status = status;
   }
 
   /**
    * Get the status of the current spinner.
    */
   public get status(): string | undefined {
-    return ux.action.status;
+    return CliUx.ux.action.status;
   }
 
   /**
    * Pause the spinner on the console.
    */
   public pause(fn: () => unknown, icon?: string): void {
-    this.maybeNoop(() => ux.action.pause(fn, icon));
+    this.maybeNoop(() => CliUx.ux.action.pause(fn, icon));
   }
 }

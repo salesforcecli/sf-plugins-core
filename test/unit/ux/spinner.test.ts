@@ -6,7 +6,7 @@
  */
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { ux as cliUx } from 'cli-ux';
+import { CliUx } from '@oclif/core';
 import { Spinner } from '../../../src/ux';
 
 describe('Spinner', () => {
@@ -16,7 +16,7 @@ describe('Spinner', () => {
   beforeEach(() => {
     sandbox = sinon.createSandbox();
     // @ts-expect-error because _write is a protected member
-    writeStub = sandbox.stub(cliUx.action, '_write');
+    writeStub = sandbox.stub(CliUx.ux.action, '_write');
   });
 
   afterEach(() => {
