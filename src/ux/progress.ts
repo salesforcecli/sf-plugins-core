@@ -34,7 +34,7 @@ export class Progress extends UxBase {
    */
   public setTotal(total: number): void {
     this.total = total;
-    this.bar.setTotal(total);
+    if (this.bar) this.bar.setTotal(total);
   }
 
   /**
@@ -55,7 +55,7 @@ export class Progress extends UxBase {
     }) as Progress.Bar;
 
     this.bar.setTotal(total);
-    // this.maybeNoop(() => startProgressBar(this.bar, total, payload));
+
     this.maybeNoop(() => {
       this._start(total, payload);
     });
@@ -65,22 +65,24 @@ export class Progress extends UxBase {
    * Update the progress bar.
    */
   public update(num: number, payload = {}): void {
-    this.bar.update(num, payload);
+    if (this.bar) this.bar.update(num, payload);
   }
 
   /**
    * Update the progress bar with the final number and stop it.
    */
   public finish(payload = {}): void {
-    this.bar.update(this.total, payload);
-    this.bar.stop();
+    if (this.bar) {
+      this.bar.update(this.total, payload);
+      this.bar.stop();
+    }
   }
 
   /**
    * Stop the progress bar.
    */
   public stop(): void {
-    this.bar.stop();
+    if (this.bar) this.bar.stop();
   }
 
   private _start(total: number, payload: Progress.Payload = {}): void {
