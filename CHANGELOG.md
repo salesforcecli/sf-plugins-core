@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.1.0...v1.2.0) (2022-01-27)
+
+### Features
+
+- expose ux methods in SfCommand ([8e58a93](https://github.com/salesforcecli/sf-plugins-core/commit/8e58a93a942d5a0305a77a82e938f778c59fcd16))
+
 ## [1.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.0.5...v1.1.0) (2022-01-03)
 
 ### Features
