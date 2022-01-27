@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021, salesforce.com, inc.
+ * Copyright (c) 2022, salesforce.com, inc.
  * All rights reserved.
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
@@ -7,9 +7,9 @@
 
 import { EventEmitter } from 'events';
 import { AnyJson, JsonMap } from '@salesforce/ts-types';
-import cli from 'cli-ux';
 import { QuestionCollection } from 'inquirer';
-import { Prompter } from './prompter';
+import { CliUx } from '@oclif/core';
+import { Prompter } from './ux';
 
 export abstract class Deployable {
   abstract getName(): string;
@@ -40,7 +40,7 @@ export abstract class Deployer extends EventEmitter {
    * Log messages to the console
    */
   public log(msg?: string | undefined, ...args: string[]): void {
-    cli.log(msg, ...args);
+    CliUx.ux.log(msg, ...args);
   }
 
   /**
