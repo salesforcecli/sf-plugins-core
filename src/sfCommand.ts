@@ -5,8 +5,10 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
-import { Messages } from '@salesforce/core';
+import { Messages, Mode } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
+import chalk from 'chalk';
+import { envVars } from '@salesforce/core';
 import { Progress, Prompter, Spinner, Ux } from './ux';
 
 Messages.importMessagesDirectory(__dirname);
@@ -28,6 +30,7 @@ export interface SfCommandInterface extends Interfaces.Command {
  */
 
 export abstract class SfCommand<T> extends Command {
+  public static SFDX_ENV = 'SFDX_ENV';
   public static enableJsonFlag = true;
   public static configurationVariablesSection?: HelpSection;
   public static envVariablesSection?: HelpSection;
@@ -136,6 +139,44 @@ export abstract class SfCommand<T> extends Command {
       message: error.message,
       warnings: this.warnings,
     };
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  protected async catch(err: Error & { exitCode?: number }): Promise<any> {
+    process.exitCode = process.exitCode ?? err.exitCode ?? 1;
+    this.log(this.formatError(err));
+    if (this.jsonEnabled()) {
+      CliUx.ux.styledJSON(this.toErrorJson(err));
+    }
+    return err;
+  }
+
+  /**
+   * Format errors and actions for human consumption. Adds 'ERROR running <command name>',
+   * and outputs all errors in red.  When there are actions, we add 'Try this:' in blue
+   * followed by each action in red on its own line.
+   *
+   * @returns {string} Returns decorated messages.
+   */
+  protected formatError(error: Error & { actions?: string[]; code?: unknown }): string {
+    const colorizedArgs: string[] = [];
+    colorizedArgs.push(`${chalk.bold.red('Error:')} ${error.message}`);
+
+    // Format any actions.
+    if (Reflect.get(error, 'actions.length')) {
+      colorizedArgs.push(`\n\n${chalk.blue(chalk.bold('Try this:'))}`);
+      if (error.actions) {
+        error.actions.forEach((action) => {
+          colorizedArgs.push(`\n${chalk.red(action)}`);
+        });
+      }
+    }
+    if (error.stack && envVars.getString(SfCommand.SFDX_ENV) === Mode.DEVELOPMENT) {
+      colorizedArgs.push(chalk.red(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
+    }
+    colorizedArgs.push(chalk.bold(`\n(${error.code})`));
+
+    return colorizedArgs.join('\n');
   }
 
   public abstract run(): Promise<T>;
