@@ -4,6 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
+import * as os from 'os';
 import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
 import { Messages, Mode } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
@@ -58,9 +59,28 @@ export abstract class SfCommand<T> extends Command {
    * will be added to the json output under the warnings property.
    */
   public warn(input: SfCommand.Warning): SfCommand.Warning {
-    const warning = super.warn(input) as SfCommand.Warning;
-    this.warnings.push(warning);
+    const colorizedArgs: string[] = [];
+    this.warnings.push(input);
+    const message = typeof input === 'string' ? input : input.message;
+
+    colorizedArgs.push(`${chalk.bold.yellow(messages.getMessage('warning.warning'))} ${message}`);
+    colorizedArgs.push(...this.formatActions(input as Error, { actionColor: chalk.reset }));
+
+    this.log(colorizedArgs.join(os.EOL));
     return input;
+  }
+
+  /**
+   * Log info message to users.
+   */
+  public info(input: SfCommand.Info): void {
+    const colorizedArgs: string[] = [];
+    const message = typeof input === 'string' ? input : input.message;
+
+    colorizedArgs.push(`${chalk.bold(messages.getMessage('info.info'))} ${message}`);
+    colorizedArgs.push(...this.formatActions(input as Error, { actionColor: chalk.reset }));
+
+    this.log(colorizedArgs.join(os.EOL));
   }
 
   /**
@@ -152,37 +172,54 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
-   * Format errors and actions for human consumption. Adds 'ERROR running <command name>',
-   * and outputs all errors in red.  When there are actions, we add 'Try this:' in blue
+   * Format errors and actions for human consumption. Adds 'Error:',
+   * When there are actions, we add 'Try this:' in blue
    * followed by each action in red on its own line.
+   * If Error.code is present it is output last in parentheses
    *
    * @returns {string} Returns decorated messages.
    */
   protected formatError(error: Error & { actions?: string[]; code?: unknown }): string {
     const colorizedArgs: string[] = [];
-    colorizedArgs.push(`${chalk.bold.red('Error:')} ${error.message}`);
-
-    // Format any actions.
-    if (Reflect.get(error, 'actions.length')) {
-      colorizedArgs.push(`\n\n${chalk.blue(chalk.bold('Try this:'))}`);
-      if (error.actions) {
-        error.actions.forEach((action) => {
-          colorizedArgs.push(`\n${chalk.red(action)}`);
-        });
-      }
-    }
+    colorizedArgs.push(`${chalk.bold.red(messages.getMessage('error.error'))} ${error.message}`);
+    colorizedArgs.push(...this.formatActions(error));
     if (error.stack && envVars.getString(SfCommand.SFDX_ENV) === Mode.DEVELOPMENT) {
       colorizedArgs.push(chalk.red(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
     }
-    colorizedArgs.push(chalk.bold(`\n(${error.code})`));
+    if (error.code) {
+      colorizedArgs.push(chalk.bold(`\n(${error.code})`));
+    }
 
     return colorizedArgs.join('\n');
+  }
+
+  /**
+   * Utility function to format actions lines
+   *
+   * @param error
+   * @param options
+   * @private
+   */
+  private formatActions(
+    error: (Error & { actions?: string[]; code?: unknown }) | string,
+    options: { actionColor: typeof chalk } = { actionColor: chalk.red }
+  ): string[] {
+    const colorizedArgs: string[] = [];
+    // Format any actions.
+    if (typeof error !== 'string' && error.actions?.length) {
+      colorizedArgs.push(`\n${chalk.blue.bold(messages.getMessage('actions.tryThis'))}\n`);
+      error.actions.forEach((action) => {
+        colorizedArgs.push(`${options.actionColor(action)}`);
+      });
+    }
+    return colorizedArgs;
   }
 
   public abstract run(): Promise<T>;
 }
 
 export namespace SfCommand {
+  export type Info = string | Error;
   export type Warning = string | Error;
 
   export interface Json<T> {
