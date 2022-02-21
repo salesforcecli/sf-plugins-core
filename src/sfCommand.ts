@@ -31,7 +31,7 @@ export interface SfCommandInterface extends Interfaces.Command {
  */
 
 export abstract class SfCommand<T> extends Command {
-  public static SFDX_ENV = 'SFDX_ENV';
+  public static SF_ENV = 'SF_ENV';
   public static enableJsonFlag = true;
   public static configurationVariablesSection?: HelpSection;
   public static envVariablesSection?: HelpSection;
@@ -161,8 +161,7 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected async catch(err: Error & { exitCode?: number }): Promise<any> {
+  protected async catch(err: Error & { exitCode?: number }): Promise<Error & { exitCode?: number }> {
     process.exitCode = process.exitCode ?? err.exitCode ?? 1;
     this.log(this.formatError(err));
     if (this.jsonEnabled()) {
@@ -183,7 +182,7 @@ export abstract class SfCommand<T> extends Command {
     const colorizedArgs: string[] = [];
     colorizedArgs.push(`${chalk.bold.red(messages.getMessage('error.error'))} ${error.message}`);
     colorizedArgs.push(...this.formatActions(error));
-    if (error.stack && envVars.getString(SfCommand.SFDX_ENV) === Mode.DEVELOPMENT) {
+    if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
       colorizedArgs.push(chalk.red(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
     }
     if (error.code) {
