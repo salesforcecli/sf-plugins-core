@@ -63,7 +63,7 @@ export abstract class SfCommand<T> extends Command {
     this.warnings.push(input);
     const message = typeof input === 'string' ? input : input.message;
 
-    colorizedArgs.push(`${chalk.bold.yellow(messages.getMessage('warning.warning'))} ${message}`);
+    colorizedArgs.push(`${chalk.bold.yellow(messages.getMessage('warning.prefix'))} ${message}`);
     colorizedArgs.push(...this.formatActions(input as Error, { actionColor: chalk.reset }));
 
     this.log(colorizedArgs.join(os.EOL));
@@ -77,7 +77,7 @@ export abstract class SfCommand<T> extends Command {
     const colorizedArgs: string[] = [];
     const message = typeof input === 'string' ? input : input.message;
 
-    colorizedArgs.push(`${chalk.bold(messages.getMessage('info.info'))} ${message}`);
+    colorizedArgs.push(`${chalk.bold(messages.getMessage('info.prefix'))} ${message}`);
     colorizedArgs.push(...this.formatActions(input as Error, { actionColor: chalk.reset }));
 
     this.log(colorizedArgs.join(os.EOL));
@@ -180,7 +180,7 @@ export abstract class SfCommand<T> extends Command {
    */
   protected formatError(error: Error & { actions?: string[]; code?: unknown }): string {
     const colorizedArgs: string[] = [];
-    colorizedArgs.push(`${chalk.bold.red(messages.getMessage('error.error'))} ${error.message}`);
+    colorizedArgs.push(`${chalk.bold.red(messages.getMessage('error.prefix'))} ${error.message}`);
     colorizedArgs.push(...this.formatActions(error));
     if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
       colorizedArgs.push(chalk.red(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
