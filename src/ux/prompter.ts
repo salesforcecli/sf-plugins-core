@@ -7,6 +7,7 @@
 
 import { prompt, QuestionCollection, Separator, ChoiceOptions, ChoiceBase } from 'inquirer';
 import { Dictionary, Nullable, ensureString } from '@salesforce/ts-types';
+import { CliUx } from '@oclif/core';
 
 export class Prompter {
   /**
@@ -15,6 +16,35 @@ export class Prompter {
   public async prompt<T = Prompter.Answers>(questions: Prompter.Questions<T>, initialAnswers?: Partial<T>): Promise<T> {
     const answers = await prompt<T>(questions, initialAnswers);
     return answers;
+  }
+
+  /**
+   * Prompt user for information with a timeout (in milliseconds). See https://www.npmjs.com/package/inquirer for more.
+   */
+  public async timedPrompt<T = Prompter.Answers>(
+    questions: Prompter.Questions<T>,
+    ms = 10000,
+    initialAnswers?: Partial<T>
+  ): Promise<T> {
+    let id: NodeJS.Timeout;
+    const thePrompt = prompt(questions, initialAnswers);
+    const timeout = new Promise((_, reject) => {
+      id = setTimeout(() => {
+        // eslint-disable-next-line no-console
+        // console.log(thePrompt.ui['activePrompt']);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+        thePrompt.ui['activePrompt'].done();
+        CliUx.ux.log();
+        reject(new Error(`Timed out after ${ms} ms.`));
+      }, ms).unref();
+    });
+
+    return Promise.race([timeout, thePrompt]).then((result) => {
+      clearTimeout(id);
+      return result as T;
+    });
   }
 }
 
