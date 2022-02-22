@@ -64,7 +64,9 @@ export abstract class SfCommand<T> extends Command {
     const message = typeof input === 'string' ? input : input.message;
 
     colorizedArgs.push(`${chalk.bold.yellow(messages.getMessage('warning.prefix'))} ${message}`);
-    colorizedArgs.push(...this.formatActions(input as Error, { actionColor: chalk.reset }));
+    colorizedArgs.push(
+      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: chalk.reset })
+    );
 
     this.log(colorizedArgs.join(os.EOL));
     return input;
@@ -78,7 +80,9 @@ export abstract class SfCommand<T> extends Command {
     const message = typeof input === 'string' ? input : input.message;
 
     colorizedArgs.push(`${chalk.bold(messages.getMessage('info.prefix'))} ${message}`);
-    colorizedArgs.push(...this.formatActions(input as Error, { actionColor: chalk.reset }));
+    colorizedArgs.push(
+      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: chalk.reset })
+    );
 
     this.log(colorizedArgs.join(os.EOL));
   }
@@ -161,13 +165,13 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
-  protected async catch(err: Error & { exitCode?: number }): Promise<Error & { exitCode?: number }> {
-    process.exitCode = process.exitCode ?? err.exitCode ?? 1;
-    this.log(this.formatError(err));
+  protected async catch(error: SfCommand.Error): Promise<SfCommand.Error> {
+    process.exitCode = process.exitCode ?? error.exitCode ?? 1;
+    this.log(this.formatError(error));
     if (this.jsonEnabled()) {
-      CliUx.ux.styledJSON(this.toErrorJson(err));
+      CliUx.ux.styledJSON(this.toErrorJson(error));
     }
-    return err;
+    return error;
   }
 
   /**
@@ -178,10 +182,10 @@ export abstract class SfCommand<T> extends Command {
    *
    * @returns {string} Returns decorated messages.
    */
-  protected formatError(error: Error & { actions?: string[]; code?: unknown }): string {
+  protected formatError(error: SfCommand.Error): string {
     const colorizedArgs: string[] = [];
     colorizedArgs.push(`${chalk.bold.red(messages.getMessage('error.prefix'))} ${error.message}`);
-    colorizedArgs.push(...this.formatActions(error));
+    colorizedArgs.push(...this.formatActions(error.actions || []));
     if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
       colorizedArgs.push(chalk.red(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
     }
@@ -195,19 +199,19 @@ export abstract class SfCommand<T> extends Command {
   /**
    * Utility function to format actions lines
    *
-   * @param error
+   * @param actions
    * @param options
    * @private
    */
   private formatActions(
-    error: (Error & { actions?: string[]; code?: unknown }) | string,
+    actions: string[],
     options: { actionColor: typeof chalk } = { actionColor: chalk.red }
   ): string[] {
     const colorizedArgs: string[] = [];
     // Format any actions.
-    if (typeof error !== 'string' && error.actions?.length) {
+    if (actions?.length) {
       colorizedArgs.push(`\n${chalk.blue.bold(messages.getMessage('actions.tryThis'))}\n`);
-      error.actions.forEach((action) => {
+      actions.forEach((action) => {
         colorizedArgs.push(`${options.actionColor(action)}`);
       });
     }
@@ -218,8 +222,8 @@ export abstract class SfCommand<T> extends Command {
 }
 
 export namespace SfCommand {
-  export type Info = string | Error;
-  export type Warning = string | Error;
+  export type Info = SfCommand.Error | string;
+  export type Warning = SfCommand.Error | string;
 
   export interface Json<T> {
     status: number;
@@ -233,5 +237,8 @@ export namespace SfCommand {
     message: string;
     stack: string | undefined;
     warnings?: Warning[];
+    actions?: string[];
+    code?: unknown;
+    exitCode?: number;
   }
 }
