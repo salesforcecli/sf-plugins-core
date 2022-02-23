@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.2.1...v1.3.0) (2022-02-23)
+
+### Features
+
+- add requiresProject property ([5ff0cf3](https://github.com/salesforcecli/sf-plugins-core/commit/5ff0cf34fffe896e1ed312585705ff13436e58cf))
+
 ### [1.2.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.2.0...v1.2.1) (2022-01-27)
 
 ### Bug Fixes
