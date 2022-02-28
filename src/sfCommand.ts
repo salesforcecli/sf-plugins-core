@@ -6,10 +6,9 @@
  */
 import * as os from 'os';
 import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
-import { Messages, Mode } from '@salesforce/core';
+import { envVars, Messages, SfdxProject, Mode } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
-import { envVars } from '@salesforce/core';
 import { Progress, Prompter, Spinner, Ux } from './ux';
 
 Messages.importMessagesDirectory(__dirname);
@@ -37,13 +36,19 @@ export abstract class SfCommand<T> extends Command {
   public static envVariablesSection?: HelpSection;
   public static errorCodes?: HelpSection;
   public static tableFlags = CliUx.ux.table.flags;
+  public static requiresProject: boolean;
 
   public spinner: Spinner;
   public progress: Progress;
+  public project!: SfdxProject;
 
   private warnings: SfCommand.Warning[] = [];
   private ux: Ux;
   private prompter: Prompter;
+
+  protected get statics(): typeof SfCommand {
+    return this.constructor as typeof SfCommand;
+  }
 
   public constructor(argv: string[], config: Config) {
     super(argv, config);
@@ -141,6 +146,13 @@ export abstract class SfCommand<T> extends Command {
     return this.prompter.prompt(questions, initialAnswers);
   }
 
+  public async _run<R>(): Promise<R | undefined> {
+    if (this.statics.requiresProject) {
+      this.project = await this.assignProject();
+    }
+    return super._run<R>();
+  }
+
   /**
    * Wrap the command result into the standardized JSON structure.
    */
@@ -163,6 +175,17 @@ export abstract class SfCommand<T> extends Command {
       message: error.message,
       warnings: this.warnings,
     };
+  }
+
+  protected async assignProject(): Promise<SfdxProject> {
+    try {
+      return await SfdxProject.resolve();
+    } catch (err) {
+      if (err instanceof Error && err.name === 'InvalidProjectWorkspaceError') {
+        throw messages.createError('errors.RequiresProject');
+      }
+      throw err;
+    }
   }
 
   protected async catch(error: SfCommand.Error): Promise<SfCommand.Error> {
