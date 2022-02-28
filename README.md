@@ -61,7 +61,7 @@ These flags can be imported into a command and used like any other flag. See cod
   - accepts a username or alias
   - aware of configuration defaults
   - throws if org or default doesn't exist or can't be found
-    [optionalOrgFlag](src/flags/orgFlags.ts)
+- [optionalOrgFlag](src/flags/orgFlags.ts)
   - accepts a username or alias
   - aware of configuration defaults
   - might be undefined if an org isn't found
