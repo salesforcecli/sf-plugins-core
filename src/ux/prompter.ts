@@ -30,8 +30,6 @@ export class Prompter {
     const thePrompt = prompt(questions, initialAnswers);
     const timeout = new Promise((_, reject) => {
       id = setTimeout(() => {
-        // eslint-disable-next-line no-console
-        // console.log(thePrompt.ui['activePrompt']);
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
