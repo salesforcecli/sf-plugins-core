@@ -19,3 +19,4 @@ export { requiredOrgFlag, requiredHubFlag } from './flags/orgFlags';
 export { buildIdFlag } from './flags/salesforceId';
 export { apiVersionFlag } from './flags/apiVersion';
 export { existingDirectory, existingFile } from './flags/fsFlags';
+export { buildDurationFlag, DurationFlagConfig } from './flags/duration';

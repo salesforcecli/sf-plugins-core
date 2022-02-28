@@ -65,3 +65,11 @@ No file found: %s.
 # flags.existingFile.errors.NotAFile
 
 No file found: %s.
+
+# flags.duration.errors.InvalidInput
+
+The value must be an integer.
+
+# flags.duration.errors.DurationBounds
+
+The value must be between %s and %s (inclusive).
