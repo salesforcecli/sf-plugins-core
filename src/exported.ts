@@ -13,3 +13,9 @@ export { SfHook } from './hooks';
 export * from './types';
 export { SfCommand, SfCommandInterface } from './sfCommand';
 export { Flags } from '@oclif/core';
+
+// custom flags
+export { requiredOrgFlag, requiredHubFlag } from './flags/orgFlags';
+export { buildIdFlag } from './flags/salesforceId';
+export { apiVersionFlag } from './flags/apiVersion';
+export { existingDirectory, existingFile } from './flags/fsFlags';

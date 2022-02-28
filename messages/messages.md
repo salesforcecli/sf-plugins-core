@@ -1,7 +1,67 @@
 # warning.security
 
-This command will expose sensitive information that allows for subsequent activity using your current authenticated session. Sharing this information is equivalent to logging someone in under the current credential, resulting in unintended access and escalation of privilege. For additional information, please review the authorization section of the https://developer.salesforce.com/docs/atlas.en-us.234.0.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm
+This command will expose sensitive information that allows for subsequent activity using your current authenticated session. Sharing this information is equivalent to logging someone in under the current credential, resulting in unintended access and escalation of privilege. For additional information, please review the authorization section of the <https://developer.salesforce.com/docs/atlas.en-us.234.0.sfdx_dev.meta/sfdx_dev/sfdx_dev_auth_web_flow.htm>
 
 # errors.RequiresProject
 
 This command is required to run from within a Salesforce project directory.
+
+# errors.InvalidIdLength
+
+The id must be %s characters.
+
+# errors.InvalidId
+
+The id is invalid.
+
+# errors.InvalidPrefix
+
+The id must begin with %s.
+
+# errors.NoDefaultEnv
+
+No default environment found. Use -e or --target-org to specify an environment.
+
+# errors.NoDefaultDevHub
+
+No default dev hub found. Use -v or --target-dev-hub to specify an environment.
+
+# errors.NotADevHub
+
+The specified org %s is not a Dev Hub.
+
+# flags.apiVersion.description
+
+Override the api version used for api requests made by this command
+
+# flags.apiVersion.overrideWarning
+
+apiVersion configuration overridden at %s
+
+# flags.apiVersion.warning.deprecated
+
+API versions up to %s are deprecated. See %s for more information.
+
+# flags.apiVersion.errors.InvalidApiVersion
+
+%s is not a valid API version.
+
+# flags.apiVersion.errors.RetiredApiVersion
+
+The API version must be greater than %s.
+
+# flags.existingDirectory.errors.MissingDirectory
+
+No directory found: %s.
+
+# flags.existingDirectory.errors.NotADirectory
+
+No directory found: %s.
+
+# flags.existingFile.errors.MissingFile
+
+No file found: %s.
+
+# flags.existingFile.errors.NotAFile
+
+No file found: %s.
