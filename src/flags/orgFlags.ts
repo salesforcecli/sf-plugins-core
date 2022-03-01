@@ -56,7 +56,7 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
 export const optionalOrgFlag = Flags.build<Org | undefined>({
   char: 'e',
   parse: async (input: string | undefined) => await maybeGetOrg(input),
-  default: async () => await maybeGetOrg(undefined),
+  default: async () => await maybeGetOrg(),
 });
 
 /**
