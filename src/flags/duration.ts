@@ -5,7 +5,6 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags, Interfaces } from '@oclif/core';
-import { OptionFlagProps } from '@oclif/core/lib/interfaces/parser';
 import { Messages } from '@salesforce/core';
 import { Duration } from '@salesforce/kit';
 
@@ -14,7 +13,7 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
 
 type DurationUnit = Lowercase<keyof typeof Duration.Unit>;
 
-export interface DurationFlagConfig extends Partial<OptionFlagProps> {
+export interface DurationFlagConfig extends Partial<Interfaces.OptionFlagProps> {
   unit: Required<DurationUnit>;
   defaultValue?: number;
   min?: number;

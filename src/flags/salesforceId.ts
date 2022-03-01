@@ -5,13 +5,12 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags, Interfaces } from '@oclif/core';
-import { OptionFlagProps } from '@oclif/core/lib/interfaces/parser';
 import { Messages, sfdc } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
-interface IdFlagConfig extends Partial<OptionFlagProps> {
+interface IdFlagConfig extends Partial<Interfaces.OptionFlagProps> {
   /**
    * Can specify if the version must be 15 or 18 characters long.  Leave blank to allow either 15 or 18.
    */
