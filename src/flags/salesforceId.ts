@@ -5,13 +5,14 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
-import { Definition } from '@oclif/core/lib/interfaces';
+import { OptionFlag } from '@oclif/core/lib/interfaces';
+import { OptionFlagProps } from '@oclif/core/lib/interfaces/parser';
 import { Messages, sfdc } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
-interface IdFlagConfig {
+interface IdFlagConfig extends Partial<OptionFlagProps> {
   /**
    * Can specify if the version must be 15 or 18 characters long.  Leave blank to allow either 15 or 18.
    */
@@ -26,26 +27,28 @@ interface IdFlagConfig {
  * Id flag with built-in validation.  Short character is `i`
  *
  * @example
- * import { SfCommand, buildIdFlag } from '@salesforce/sf-plugins-core';
+ * import { SfCommand, salesforceIdFlag } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // set length or prefix
- *    'flag-name': buildIdFlag({ length: 15, startsWith: '00D' })(),
+ *    'flag-name': salesforceIdFlag({ length: 15, startsWith: '00D' }),
  *    // add flag properties
- *    'flag2': buildIdFlag()({
+ *    'flag2': salesforceIdFlag({
  *        required: true,
  *        description: 'flag2 description',
  *     }),
  *    // override the character i
- *    'flag3': buildIdFlag()({
+ *    'flag3': salesforceIdFlag({
  *        char: 'j',
  *     }),
  * }
  */
-export const buildIdFlag = ({ length, startsWith }: IdFlagConfig): Definition<string> => {
+export const salesforceIdFlag = (inputs: IdFlagConfig = {}): OptionFlag<string | undefined> => {
+  const { length, startsWith, ...baseProps } = inputs;
   return Flags.build<string>({
     char: 'i',
+    ...baseProps,
     parse: async (input: string) => validate(input, { length, startsWith }),
-  });
+  })();
 };
 
 const validate = (input: string, config?: IdFlagConfig): string => {

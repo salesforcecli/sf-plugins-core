@@ -71,7 +71,7 @@ export const optionalOrgFlag = Flags.build<Org | undefined>({
  *     // setting length or prefix
  *    'target-org': requiredOrgFlag(),
  *    // adding properties
- *    'flag2': requiredOrgFlag()({
+ *    'flag2': requiredOrgFlag({
  *        required: true,
  *        description: 'flag2 description',
  *        char: 'o'
@@ -96,7 +96,7 @@ export const requiredOrgFlag = Flags.build<Org>({
  *     // setting length or prefix
  *    'target-org': requiredHubFlag(),
  *    // adding properties
- *    'flag2': requiredHubFlag()({
+ *    'flag2': requiredHubFlag({
  *        required: true,
  *        description: 'flag2 description',
  *        char: 'h'

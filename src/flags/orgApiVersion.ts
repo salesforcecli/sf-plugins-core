@@ -4,8 +4,8 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { Flags, CliUx } from '@oclif/core';
-import { Messages, sfdc } from '@salesforce/core';
+import { Flags } from '@oclif/core';
+import { Messages, sfdc, Lifecycle } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -31,12 +31,14 @@ export const orgApiVersionFlag = Flags.build<string>({
 });
 
 const getDefaultFromConfig = async (): Promise<string | undefined> => {
-  // (perf) only import ConfigAggregator and cliUX if necessary
+  // (perf) only import ConfigAggregator if necessary
   const { ConfigAggregator } = await import('@salesforce/core');
   const config = await ConfigAggregator.create();
   const apiVersionFromConfig = config.getInfo('apiVersion')?.value as string;
   if (apiVersionFromConfig) {
-    CliUx.ux.warn(messages.getMessage('flags.apiVersion.overrideWarning', [apiVersionFromConfig]));
+    await Lifecycle.getInstance().emitWarning(
+      messages.getMessage('flags.apiVersion.overrideWarning', [apiVersionFromConfig])
+    );
     return validate(apiVersionFromConfig);
   }
 };
@@ -51,8 +53,9 @@ const validate = async (input: string): Promise<string> => {
     throw messages.createError('flags.apiVersion.errors.RetiredApiVersion', [minValidApiVersion]);
   }
   if (requestedVersion <= maxDeprecated) {
-    CliUx.ux.warn(messages.getMessage('flags.apiVersion.warning.deprecated', [maxDeprecated, maxDeprecatedUrl]));
+    await Lifecycle.getInstance().emitWarning(
+      messages.getMessage('flags.apiVersion.warning.deprecated', [maxDeprecated, maxDeprecatedUrl])
+    );
   }
-
   return input;
 };

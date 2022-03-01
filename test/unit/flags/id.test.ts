@@ -7,7 +7,7 @@
 import { expect } from 'chai';
 import { Parser } from '@oclif/core';
 import { Messages } from '@salesforce/core';
-import { buildIdFlag } from '../../../src/flags/salesforceId';
+import { salesforceIdFlag } from '../../../src/flags/salesforceId';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -19,7 +19,7 @@ describe('id flag', () => {
 
   it('allows 15 or 18 when no length specified', async () => {
     const out = await Parser.parse([`--id=${id15}`], {
-      flags: { id: buildIdFlag({})() },
+      flags: { id: salesforceIdFlag() },
     });
     expect(out.flags).to.deep.include({ id: id15 });
   });
@@ -27,7 +27,7 @@ describe('id flag', () => {
   it('throws on invalid length id', async () => {
     try {
       const out = await Parser.parse([`--id=${id16}`], {
-        flags: { id: buildIdFlag({})() },
+        flags: { id: salesforceIdFlag() },
       });
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
@@ -39,7 +39,7 @@ describe('id flag', () => {
   it('throws on invalid characters in id', async () => {
     try {
       const out = await Parser.parse(['--id=???????????????'], {
-        flags: { id: buildIdFlag({})() },
+        flags: { id: salesforceIdFlag() },
       });
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
@@ -49,14 +49,14 @@ describe('id flag', () => {
   });
   it('good 15', async () => {
     const out = await Parser.parse([`--id=${id15}`], {
-      flags: { id: buildIdFlag({ length: 15 })() },
+      flags: { id: salesforceIdFlag({ length: 15 }) },
     });
     expect(out.flags).to.deep.include({ id: id15 });
   });
   it('bad 15', async () => {
     try {
       const out = await Parser.parse([`--id=${id18}`], {
-        flags: { id: buildIdFlag({ length: 15 })() },
+        flags: { id: salesforceIdFlag({ length: 15 }) },
       });
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
@@ -66,14 +66,14 @@ describe('id flag', () => {
   });
   it('good 18', async () => {
     const out = await Parser.parse([`--id=${id18}`], {
-      flags: { id: buildIdFlag({ length: 18 })() },
+      flags: { id: salesforceIdFlag({ length: 18 }) },
     });
     expect(out.flags).to.deep.include({ id: id18 });
   });
   it('bad 18', async () => {
     try {
       const out = await Parser.parse([`--id=${id15}`], {
-        flags: { id: buildIdFlag({ length: 18 })() },
+        flags: { id: salesforceIdFlag({ length: 18 }) },
       });
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
@@ -83,14 +83,14 @@ describe('id flag', () => {
   });
   it('good startsWith', async () => {
     const out = await Parser.parse([`--id=${id18}`], {
-      flags: { id: buildIdFlag({ startsWith: '123' })() },
+      flags: { id: salesforceIdFlag({ startsWith: '123' }) },
     });
     expect(out.flags).to.deep.include({ id: id18 });
   });
   it('bad startsWith', async () => {
     try {
       const out = await Parser.parse([`--id=${id15}`], {
-        flags: { id: buildIdFlag({ startsWith: '000' })() },
+        flags: { id: salesforceIdFlag({ startsWith: '000' }) },
       });
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {

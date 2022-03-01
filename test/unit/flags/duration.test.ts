@@ -9,7 +9,7 @@ import { Parser } from '@oclif/core';
 import { Messages } from '@salesforce/core';
 import { expect } from 'chai';
 import { Duration } from '@salesforce/kit';
-import { buildDurationFlag } from '../../../src/flags/duration';
+import { durationFlag } from '../../../src/flags/duration';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -18,9 +18,11 @@ describe('duration flag', () => {
   describe('no default, hours', () => {
     const buildProps = {
       flags: {
-        wait: buildDurationFlag({
+        wait: durationFlag({
           unit: 'hours',
-        })({ description: 'test', char: 'w' }),
+          description: 'test',
+          char: 'w',
+        }),
       },
     };
     it('passes', async () => {
@@ -38,10 +40,12 @@ describe('duration flag', () => {
     const defaultValue = 33;
     const buildProps = {
       flags: {
-        wait: buildDurationFlag({
+        wait: durationFlag({
           unit: 'weeks',
           defaultValue,
-        })({ description: 'test', char: 'w' }),
+          description: 'test',
+          char: 'w',
+        }),
       },
     };
     it('passes', async () => {
@@ -61,12 +65,14 @@ describe('duration flag', () => {
     const defaultValue = 33;
     const buildProps = {
       flags: {
-        wait: buildDurationFlag({
+        wait: durationFlag({
           defaultValue,
           min,
           max,
           unit: 'minutes',
-        })({ description: 'test', char: 'w' }),
+          description: 'test',
+          char: 'w',
+        }),
       },
     };
     it('passes', async () => {

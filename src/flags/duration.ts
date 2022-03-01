@@ -6,7 +6,7 @@
  */
 import { Flags } from '@oclif/core';
 import { OptionFlagProps } from '@oclif/core/lib/interfaces/parser';
-import { Definition } from '@oclif/core/lib/interfaces';
+import { OptionFlag } from '@oclif/core/lib/interfaces';
 import { Messages } from '@salesforce/core';
 import { Duration } from '@salesforce/kit';
 
@@ -15,7 +15,7 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
 
 type DurationUnit = Lowercase<keyof typeof Duration.Unit>;
 
-export interface DurationFlagConfig extends OptionFlagProps {
+export interface DurationFlagConfig extends Partial<OptionFlagProps> {
   unit: Required<DurationUnit>;
   defaultValue?: number;
   min?: number;
@@ -30,19 +30,22 @@ export interface DurationFlagConfig extends OptionFlagProps {
  * @example
  * import { SfCommand, buildDurationFlag } from '@salesforce/sf-plugins-core';
  * public static flags = {
- *    'wait': buildDurationFlag({ min: 1, unit: , defaultValue: 33 })({
+ *    'wait': durationFlag({
+ *       min: 1,
+ *       unit: 'minutes'
+ *       defaultValue: 33,
  *       char: 'w',
  *       description: 'Wait time in minutes'
  *    }),
  * }
  */
-export const buildDurationFlag = (durationConfig: DurationFlagConfig): Definition<Duration> => {
+export const durationFlag = (durationConfig: DurationFlagConfig): OptionFlag<Duration | undefined> => {
   const { defaultValue, min, max, unit, ...baseProps } = durationConfig;
   return Flags.build<Duration>({
     ...baseProps,
-    parse: async (input: string) => validate(input, durationConfig),
+    parse: async (input: string) => validate(input, { min, max, unit }),
     default: defaultValue ? async () => toDuration(defaultValue, unit) : undefined,
-  });
+  })();
 };
 
 const validate = (input: string, config: DurationFlagConfig): Duration => {

@@ -5,20 +5,26 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { expect } from 'chai';
-import { CliUx, Parser } from '@oclif/core';
-import { Messages } from '@salesforce/core';
+import { Parser } from '@oclif/core';
+import { Lifecycle, Messages } from '@salesforce/core';
 import * as sinon from 'sinon';
-import { orgApiVersionFlag, minValidApiVersion, maxDeprecated, maxDeprecatedUrl } from '../../../src/flags/apiVersion';
+import {
+  orgApiVersionFlag,
+  minValidApiVersion,
+  maxDeprecated,
+  maxDeprecatedUrl,
+} from '../../../src/flags/orgApiVersion';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 describe('fs flags', () => {
   const sandbox = sinon.createSandbox();
-  let uxStub: sinon.SinonStub;
+  sandbox.stub(Lifecycle, 'getInstance').returns(Lifecycle.prototype);
+  let warnStub: sinon.SinonStub;
 
   beforeEach(() => {
-    uxStub = sandbox.stub(CliUx.ux, 'warn');
+    warnStub = sandbox.stub(Lifecycle.prototype, 'emitWarning');
   });
 
   afterEach(() => {
@@ -32,7 +38,7 @@ describe('fs flags', () => {
     });
     expect(out.flags).to.deep.include({ 'api-version': versionToTest });
     // no deprecation warning
-    expect(uxStub.callCount).to.equal(0);
+    expect(warnStub.callCount).to.equal(0);
   });
 
   it('passes with minimum valid apiVersion', async () => {
@@ -42,7 +48,7 @@ describe('fs flags', () => {
     });
     expect(out.flags).to.deep.include({ 'api-version': versionToTest });
     // no deprecation warning
-    expect(uxStub.callCount).to.equal(0);
+    expect(warnStub.callCount).to.equal(0);
   });
 
   it('throws on invalid version', async () => {
@@ -79,8 +85,8 @@ describe('fs flags', () => {
       flags: { 'api-version': orgApiVersionFlag() },
     });
     expect(out.flags).to.deep.include({ 'api-version': versionToTest });
-    expect(uxStub.callCount).to.equal(1);
-    expect(uxStub.firstCall.args[0]).to.include(maxDeprecatedUrl);
+    expect(warnStub.callCount).to.equal(1);
+    expect(warnStub.firstCall.args[0]).to.include(maxDeprecatedUrl);
   });
 
   it('warns on lowest deprecated version', async () => {
@@ -89,7 +95,7 @@ describe('fs flags', () => {
       flags: { 'api-version': orgApiVersionFlag() },
     });
     expect(out.flags).to.deep.include({ 'api-version': versionToTest });
-    expect(uxStub.callCount).to.equal(1);
-    expect(uxStub.firstCall.args[0]).to.include(maxDeprecatedUrl);
+    expect(warnStub.callCount).to.equal(1);
+    expect(warnStub.firstCall.args[0]).to.include(maxDeprecatedUrl);
   });
 });
