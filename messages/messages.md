@@ -50,22 +50,6 @@ API versions up to %s are deprecated. See %s for more information.
 
 The API version must be greater than %s.
 
-# flags.existingDirectory.errors.MissingDirectory
-
-No directory found: %s.
-
-# flags.existingDirectory.errors.NotADirectory
-
-No directory found: %s.
-
-# flags.existingFile.errors.MissingFile
-
-No file found: %s.
-
-# flags.existingFile.errors.NotAFile
-
-No file found: %s.
-
 # flags.duration.errors.InvalidInput
 
 The value must be an integer.
