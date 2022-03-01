@@ -7,7 +7,11 @@
 import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
 import { Messages, SfdxProject } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
+import { Command as NSCommand } from '@oclif/core/lib/interfaces';
 import { Progress, Prompter, Spinner, Ux } from './ux';
+import { MappedArgsAndFlags } from './types';
+import { InquireScript } from './InquirerScript';
+import { interactiveFlag } from './flags/interactive';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -34,6 +38,10 @@ export abstract class SfCommand<T> extends Command {
   public static errorCodes?: HelpSection;
   public static tableFlags = CliUx.ux.table.flags;
   public static requiresProject: boolean;
+
+  private static specialFlags = {
+    interactive: interactiveFlag,
+  };
 
   public spinner: Spinner;
   public progress: Progress;
@@ -124,9 +132,23 @@ export abstract class SfCommand<T> extends Command {
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();
     }
+    await this.handleInteractiveMode();
     return super._run<R>();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public static get flags(): Interfaces.FlagInput<any> {
+    // @ts-expect-error because private member
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return this._flags as Interfaces.FlagInput<any>;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public static set flags(flags: Interfaces.FlagInput<any>) {
+    // @ts-expect-error because private member
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this._flags = Object.assign({}, super.globalFlags, SfCommand.specialFlags, flags) as Interfaces.FlagInput<any>;
+  }
   /**
    * Wrap the command result into the standardized JSON structure.
    */
@@ -160,6 +182,82 @@ export abstract class SfCommand<T> extends Command {
       }
       throw err;
     }
+  }
+
+  protected async handleInteractiveMode(): Promise<void> {
+    if (this.argv.includes('--interactive')) {
+      const mappedArgsAndFlags = this.mapArgvToCommandArgsAndFlags(this.argv);
+      const inquireScript = new InquireScript(this, mappedArgsAndFlags);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const answers = await inquireScript.run();
+      // app answers to args and flags in argv
+      this.argv = Object.entries(answers)
+        .filter(([name]) => name)
+        .map(([name, answer]) => {
+          if (name && name.startsWith('arg')) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+            return [answer];
+          } else if (name) {
+            const flagName = name.replace('flag-', '');
+            const command = this.config.findCommand(this.id!, { must: true });
+            const flagDefinition = command.flags[flagName] as NSCommand.Flag.Boolean | NSCommand.Flag.Option;
+            if (flagDefinition.type === 'boolean') {
+              if (answer) {
+                return [`--${flagName}`];
+              }
+              if (!answer && flagDefinition.allowNo) {
+                return [`--no-${flagName}`];
+              }
+              return [];
+            }
+            if (answer && (answer as string).length > 0) {
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+              return [`--${flagName}`, answer];
+            }
+            return [];
+          }
+        })
+        .flat() as string[];
+    }
+  }
+
+  private mapArgvToCommandArgsAndFlags(argv: string[]): MappedArgsAndFlags[] {
+    const args = [...argv];
+    const command = this.config.findCommand(this.id!, { must: true });
+    const mapped: MappedArgsAndFlags[] = [];
+    const cmdArgs = [...command.args];
+    while (args.length > 0) {
+      let v = args.shift() as string;
+      if (v === '--interactive') continue;
+      if (v.startsWith('-')) {
+        // this is a flag
+        const findFlagResult = Object.entries(command.flags).find(([n, f]) => {
+          const regexp = new RegExp(`--(no-)?${n}`);
+          return regexp.test(v) || f.char === v;
+        });
+        if (findFlagResult) {
+          const [name, flag]: [string, NSCommand.Flag] = findFlagResult;
+          // boolean - only consider the flag
+          if (flag.type === 'boolean') {
+            mapped.push({ argType: 'flag', name, definition: flag, value: !v.startsWith('--no-') });
+          } else {
+            v = args.shift() as string;
+            // not expecting another - put it back
+            if (v.startsWith('-')) {
+              args.unshift(v);
+            }
+            mapped.push({ argType: 'flag', name, definition: flag, value: v });
+          }
+        }
+      } else {
+        // must be an arg
+        if (cmdArgs.length > 0) {
+          mapped.push({ argType: 'arg', name: cmdArgs[0].name, definition: cmdArgs[0], value: v });
+          cmdArgs.shift();
+        }
+      }
+    }
+    return mapped;
   }
 
   public abstract run(): Promise<T>;

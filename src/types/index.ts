@@ -5,8 +5,10 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+import { Command, Definition } from '@oclif/core/lib/interfaces';
 import { Deauthorizer } from '../deauthorizer';
 import { Deployer } from '../deployer';
+import Arg = Command.Arg;
 
 export type JsonObject = {
   [key: string]: string | string[] | number | number[] | boolean | boolean[] | null | undefined;
@@ -121,3 +123,10 @@ export namespace Logout {
     return: T;
   };
 }
+
+export type MappedArgsAndFlags = {
+  argType: 'arg' | 'flag';
+  name: string;
+  definition: Arg | Definition<string>;
+  value: unknown;
+};
