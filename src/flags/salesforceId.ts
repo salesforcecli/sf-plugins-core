@@ -4,8 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { Flags } from '@oclif/core';
-import { OptionFlag } from '@oclif/core/lib/interfaces';
+import { Flags, Interfaces } from '@oclif/core';
 import { OptionFlagProps } from '@oclif/core/lib/interfaces/parser';
 import { Messages, sfdc } from '@salesforce/core';
 
@@ -42,7 +41,7 @@ interface IdFlagConfig extends Partial<OptionFlagProps> {
  *     }),
  * }
  */
-export const salesforceIdFlag = (inputs: IdFlagConfig = {}): OptionFlag<string | undefined> => {
+export const salesforceIdFlag = (inputs: IdFlagConfig = {}): Interfaces.OptionFlag<string | undefined> => {
   const { length, startsWith, ...baseProps } = inputs;
   return Flags.build<string>({
     char: 'i',

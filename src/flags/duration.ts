@@ -4,9 +4,8 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { Flags } from '@oclif/core';
+import { Flags, Interfaces } from '@oclif/core';
 import { OptionFlagProps } from '@oclif/core/lib/interfaces/parser';
-import { OptionFlag } from '@oclif/core/lib/interfaces';
 import { Messages } from '@salesforce/core';
 import { Duration } from '@salesforce/kit';
 
@@ -39,7 +38,7 @@ export interface DurationFlagConfig extends Partial<OptionFlagProps> {
  *    }),
  * }
  */
-export const durationFlag = (durationConfig: DurationFlagConfig): OptionFlag<Duration | undefined> => {
+export const durationFlag = (durationConfig: DurationFlagConfig): Interfaces.OptionFlag<Duration | undefined> => {
   const { defaultValue, min, max, unit, ...baseProps } = durationConfig;
   return Flags.build<Duration>({
     ...baseProps,
