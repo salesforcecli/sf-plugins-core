@@ -17,5 +17,5 @@ export { Flags } from '@oclif/core';
 // custom flags
 export { requiredOrgFlag, requiredHubFlag } from './flags/orgFlags';
 export { buildIdFlag } from './flags/salesforceId';
-export { apiVersionFlag } from './flags/apiVersion';
+export { orgApiVersionFlag as apiVersionFlag } from './flags/apiVersion';
 export { buildDurationFlag, DurationFlagConfig } from './flags/duration';

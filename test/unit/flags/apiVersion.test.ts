@@ -8,7 +8,7 @@ import { expect } from 'chai';
 import { CliUx, Parser } from '@oclif/core';
 import { Messages } from '@salesforce/core';
 import * as sinon from 'sinon';
-import { apiVersionFlag, minValidApiVersion, maxDeprecated, maxDeprecatedUrl } from '../../../src/flags/apiVersion';
+import { orgApiVersionFlag, minValidApiVersion, maxDeprecated, maxDeprecatedUrl } from '../../../src/flags/apiVersion';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -28,7 +28,7 @@ describe('fs flags', () => {
   it('passes with a valid apiVersion', async () => {
     const versionToTest = `${maxDeprecated + 10}.0`;
     const out = await Parser.parse([`--api-version=${versionToTest}`], {
-      flags: { 'api-version': apiVersionFlag() },
+      flags: { 'api-version': orgApiVersionFlag() },
     });
     expect(out.flags).to.deep.include({ 'api-version': versionToTest });
     // no deprecation warning
@@ -38,7 +38,7 @@ describe('fs flags', () => {
   it('passes with minimum valid apiVersion', async () => {
     const versionToTest = `${maxDeprecated + 1}.0`;
     const out = await Parser.parse([`--api-version=${versionToTest}`], {
-      flags: { 'api-version': apiVersionFlag() },
+      flags: { 'api-version': orgApiVersionFlag() },
     });
     expect(out.flags).to.deep.include({ 'api-version': versionToTest });
     // no deprecation warning
@@ -48,7 +48,7 @@ describe('fs flags', () => {
   it('throws on invalid version', async () => {
     try {
       const out = await Parser.parse(['--api-version=foo'], {
-        flags: { 'api-version': apiVersionFlag() },
+        flags: { 'api-version': orgApiVersionFlag() },
       });
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
@@ -62,7 +62,7 @@ describe('fs flags', () => {
 
     try {
       const out = await Parser.parse([`--api-version=${versionToTest}`], {
-        flags: { 'api-version': apiVersionFlag() },
+        flags: { 'api-version': orgApiVersionFlag() },
       });
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
@@ -76,7 +76,7 @@ describe('fs flags', () => {
   it('warns on highest deprecated version', async () => {
     const versionToTest = `${maxDeprecated}.0`;
     const out = await Parser.parse([`--api-version=${versionToTest}`], {
-      flags: { 'api-version': apiVersionFlag() },
+      flags: { 'api-version': orgApiVersionFlag() },
     });
     expect(out.flags).to.deep.include({ 'api-version': versionToTest });
     expect(uxStub.callCount).to.equal(1);
@@ -86,7 +86,7 @@ describe('fs flags', () => {
   it('warns on lowest deprecated version', async () => {
     const versionToTest = `${minValidApiVersion}.0`;
     const out = await Parser.parse([`--api-version=${versionToTest}`], {
-      flags: { 'api-version': apiVersionFlag() },
+      flags: { 'api-version': orgApiVersionFlag() },
     });
     expect(out.flags).to.deep.include({ 'api-version': versionToTest });
     expect(uxStub.callCount).to.equal(1);

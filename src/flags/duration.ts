@@ -5,6 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
+import { OptionFlagProps } from '@oclif/core/lib/interfaces/parser';
 import { Definition } from '@oclif/core/lib/interfaces';
 import { Messages } from '@salesforce/core';
 import { Duration } from '@salesforce/kit';
@@ -14,7 +15,7 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
 
 type DurationUnit = Lowercase<keyof typeof Duration.Unit>;
 
-export interface DurationFlagConfig {
+export interface DurationFlagConfig extends OptionFlagProps {
   unit: Required<DurationUnit>;
   defaultValue?: number;
   min?: number;
@@ -36,11 +37,11 @@ export interface DurationFlagConfig {
  * }
  */
 export const buildDurationFlag = (durationConfig: DurationFlagConfig): Definition<Duration> => {
+  const { defaultValue, min, max, unit, ...baseProps } = durationConfig;
   return Flags.build<Duration>({
+    ...baseProps,
     parse: async (input: string) => validate(input, durationConfig),
-    default: durationConfig.defaultValue
-      ? async () => toDuration(durationConfig.defaultValue as number, durationConfig.unit)
-      : undefined,
+    default: defaultValue ? async () => toDuration(defaultValue, unit) : undefined,
   });
 };
 
