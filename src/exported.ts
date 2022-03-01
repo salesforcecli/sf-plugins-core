@@ -15,7 +15,7 @@ export { SfCommand, SfCommandInterface } from './sfCommand';
 export { Flags } from '@oclif/core';
 
 // custom flags
-export { requiredOrgFlag, requiredHubFlag } from './flags/orgFlags';
+export { requiredOrgFlag, requiredHubFlag, optionalOrgFlag } from './flags/orgFlags';
 export { salesforceIdFlag } from './flags/salesforceId';
 export { orgApiVersionFlag } from './flags/orgApiVersion';
 export { durationFlag, DurationFlagConfig } from './flags/duration';

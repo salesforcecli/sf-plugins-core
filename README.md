@@ -48,15 +48,11 @@ Flags is a convenience reference to [@oclif/core#Flags](https://github.com/oclif
 
 These flags can be imported into a command and used like any other flag. See code examples in the links
 
-- [apiVersion](src/flags/apiVersion.ts)
+- [orgApiVersionFlag](src/flags/apiVersion.ts)
   - specifies a Salesforce API version.
   - reads from Config (if available)
   - validates version is still active
   - warns if version if deprecated
-- [dirExsts](src/flags/fsFlags.ts)
-  - validates that directory specified exists and is a directory
-- [fileExsts](src/flags/fsFlags.ts)
-  - validates that file specified exists and is a file
 - [requiredOrgFlag](src/flags/orgFlags.ts)
   - accepts a username or alias
   - aware of configuration defaults
@@ -70,19 +66,12 @@ These flags can be imported into a command and used like any other flag. See cod
   - aware of configuration defaults
   - throws if org or default doesn't exist or can't be found
   - throws if an org is found but is not a dev hub
-
-### Flag Builders
-
-These functions accept parameters and return a flag with configured behavior. See code examples in the link
-
-- [buildDurationFlag](src/flags/duration.ts)
-
+- [durationFlag](src/flags/duration.ts)
   - specify a unit
   - optionally specify a min, max, and defaultValue
   - returns a [Duration](https://github.com/forcedotcom/kit/blob/main/src/duration.ts)
   - can be undefined if you don't set the default
-
-- [buildIdFlag](src/flags/salesforceId.ts)
+- [salesforceIdFlag](src/flags/salesforceId.ts)
   - validates that IDs are valid salesforce ID
   - optionally restrict to 15/18 char
   - optionally require it to be begin with a certain prefix
