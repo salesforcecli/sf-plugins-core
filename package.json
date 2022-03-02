@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "@oclif/core": "^1.5.0",
-    "@salesforce/core": "^3.7.6",
+    "@salesforce/core": "^3.7.7",
     "@salesforce/kit": "^1.5.17",
     "@salesforce/ts-types": "^1.5.20",
     "inquirer": "^8.2.0"
