@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
-import { Messages, SfdxProject } from '@salesforce/core';
+import { Messages, SfdxProject, Lifecycle } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { Progress, Prompter, Spinner, Ux } from './ux';
 
@@ -42,6 +42,7 @@ export abstract class SfCommand<T> extends Command {
   private warnings: SfCommand.Warning[] = [];
   private ux: Ux;
   private prompter: Prompter;
+  private lifecycle: Lifecycle;
 
   protected get statics(): typeof SfCommand {
     return this.constructor as typeof SfCommand;
@@ -54,6 +55,7 @@ export abstract class SfCommand<T> extends Command {
     this.progress = new Progress(outputEnabled);
     this.ux = new Ux(outputEnabled);
     this.prompter = new Prompter();
+    this.lifecycle = Lifecycle.getInstance();
   }
 
   /**
@@ -124,6 +126,9 @@ export abstract class SfCommand<T> extends Command {
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();
     }
+    this.lifecycle.onWarning(async (warning: string) => {
+      this.warn(warning);
+    });
     return super._run<R>();
   }
 
