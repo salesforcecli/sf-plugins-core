@@ -25,17 +25,17 @@ export interface IdFlagConfig extends Partial<Interfaces.OptionFlagProps> {
  * Id flag with built-in validation.  Short character is `i`
  *
  * @example
- * import { SfCommand, salesforceIdFlag } from '@salesforce/sf-plugins-core';
+ * import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // set length or prefix
- *    'flag-name': salesforceIdFlag({ length: 15, startsWith: '00D' }),
+ *    'flag-name': salesforceId({ length: 15, startsWith: '00D' }),
  *    // add flag properties
- *    'flag2': salesforceIdFlag({
+ *    'flag2': salesforceId({
  *        required: true,
  *        description: 'flag2 description',
  *     }),
  *    // override the character i
- *    'flag3': salesforceIdFlag({
+ *    'flag3': salesforceId({
  *        char: 'j',
  *     }),
  * }

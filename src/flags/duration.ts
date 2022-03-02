@@ -26,9 +26,9 @@ export interface DurationFlagConfig extends Partial<Interfaces.OptionFlagProps> 
  * Defaults to undefined if you don't specify a default
  *
  * @example
- * import { SfCommand, buildDurationFlag } from '@salesforce/sf-plugins-core';
+ * import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
- *    'wait': durationFlag({
+ *    'wait': duration({
  *       min: 1,
  *       unit: 'minutes'
  *       defaultValue: 33,
