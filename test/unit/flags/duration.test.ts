@@ -99,7 +99,7 @@ describe('duration flag', () => {
           throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
         } catch (err) {
           const error = err as Error;
-          expect(error.message).to.equal(messages.getMessage('flags.duration.errors.DurationBounds', [1, 60]));
+          expect(error.message).to.equal(messages.getMessage('errors.DurationBounds', [1, 60]));
         }
       });
       it('above max fails', async () => {
@@ -108,7 +108,7 @@ describe('duration flag', () => {
           throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
         } catch (err) {
           const error = err as Error;
-          expect(error.message).to.equal(messages.getMessage('flags.duration.errors.DurationBounds', [1, 60]));
+          expect(error.message).to.equal(messages.getMessage('errors.DurationBounds', [1, 60]));
         }
       });
       it('invalid input', async () => {
@@ -117,7 +117,7 @@ describe('duration flag', () => {
           throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
         } catch (err) {
           const error = err as Error;
-          expect(error.message).to.equal(messages.getMessage('flags.duration.errors.InvalidInput'));
+          expect(error.message).to.equal(messages.getMessage('errors.InvalidInput'));
         }
       });
     });

@@ -42,18 +42,18 @@ apiVersion configuration overridden at %s
 
 API versions up to %s are deprecated. See %s for more information.
 
-# flags.apiVersion.errors.InvalidApiVersion
+# errors.InvalidApiVersion
 
 %s is not a valid API version.
 
-# flags.apiVersion.errors.RetiredApiVersion
+# errors.RetiredApiVersion
 
 The API version must be greater than %s.
 
-# flags.duration.errors.InvalidInput
+# errors.InvalidDuration
 
 The value must be an integer.
 
-# flags.duration.errors.DurationBounds
+# errors.DurationBounds
 
 The value must be between %s and %s (inclusive).

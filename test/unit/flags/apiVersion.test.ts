@@ -59,7 +59,7 @@ describe('fs flags', () => {
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
       const error = err as Error;
-      expect(error.message).to.equal(messages.getMessage('flags.apiVersion.errors.InvalidApiVersion', ['foo']));
+      expect(error.message).to.equal(messages.getMessage('errors.InvalidApiVersion', ['foo']));
     }
   });
 
@@ -73,9 +73,7 @@ describe('fs flags', () => {
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
       const error = err as Error;
-      expect(error.message).to.equal(
-        messages.getMessage('flags.apiVersion.errors.RetiredApiVersion', [minValidApiVersion])
-      );
+      expect(error.message).to.equal(messages.getMessage('errors.RetiredApiVersion', [minValidApiVersion]));
     }
   });
 

@@ -23,7 +23,8 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
   if (!aliasOrUsername) {
     // check config for a default
     const config = await ConfigAggregator.create();
-    aliasOrUsername = config.getInfo('defaultdevhubusername')?.value as string;
+    aliasOrUsername =
+      (config.getInfo('target-dev-hub')?.value as string) ?? (config.getInfo('defaultdevhubusername')?.value as string);
     if (!aliasOrUsername) {
       throw messages.createError('errors.NoDefaultDevHub');
     }

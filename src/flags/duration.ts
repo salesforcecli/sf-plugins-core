@@ -53,17 +53,17 @@ const validate = (input: string, config: DurationFlagConfig): Duration => {
   try {
     parsedInput = parseInt(input, 10);
     if (typeof parsedInput !== 'number' || isNaN(parsedInput)) {
-      throw messages.createError('flags.duration.errors.InvalidInput');
+      throw messages.createError('errors.InvalidDuration');
     }
   } catch (e) {
-    throw messages.createError('flags.duration.errors.InvalidInput');
+    throw messages.createError('errors.InvalidDuration');
   }
 
   if (min && parsedInput < min) {
-    throw messages.createError('flags.duration.errors.DurationBounds', [min, max]);
+    throw messages.createError('errors.DurationBounds', [min, max]);
   }
   if (max && parsedInput > max) {
-    throw messages.createError('flags.duration.errors.DurationBounds', [min, max]);
+    throw messages.createError('errors.DurationBounds', [min, max]);
   }
   return toDuration(parsedInput, unit);
 };

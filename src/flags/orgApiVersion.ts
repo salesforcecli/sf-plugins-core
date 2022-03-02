@@ -46,11 +46,11 @@ const getDefaultFromConfig = async (): Promise<string | undefined> => {
 const validate = async (input: string): Promise<string> => {
   // basic format check
   if (!sfdc.validateApiVersion(input)) {
-    throw messages.createError('flags.apiVersion.errors.InvalidApiVersion', [input]);
+    throw messages.createError('errors.InvalidApiVersion', [input]);
   }
   const requestedVersion = parseInt(input, 10);
   if (requestedVersion < minValidApiVersion) {
-    throw messages.createError('flags.apiVersion.errors.RetiredApiVersion', [minValidApiVersion]);
+    throw messages.createError('errors.RetiredApiVersion', [minValidApiVersion]);
   }
   if (requestedVersion <= maxDeprecated) {
     await Lifecycle.getInstance().emitWarning(
