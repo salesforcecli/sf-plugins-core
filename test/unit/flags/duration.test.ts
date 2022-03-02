@@ -117,7 +117,7 @@ describe('duration flag', () => {
           throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
         } catch (err) {
           const error = err as Error;
-          expect(error.message).to.equal(messages.getMessage('errors.InvalidInput'));
+          expect(error.message).to.equal(messages.getMessage('errors.InvalidDuration'));
         }
       });
     });
