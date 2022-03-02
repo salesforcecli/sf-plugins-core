@@ -46,9 +46,9 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
  * import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // setting length or prefix
- *    'target-org': optionalOrg(),
+ *    'target-org': Flags.optionalOrg(),
  *    // adding properties
- *    'flag2': optionalOrg()({
+ *    'flag2': Flags.optionalOrg({
  *        required: true,
  *        description: 'flag2 description',
  *     }),
@@ -70,9 +70,9 @@ export const optionalOrgFlag = Flags.build<Org | undefined>({
  * import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // setting length or prefix
- *    'target-org': requiredOrg(),
+ *    'target-org': Flags.requiredOrg(),
  *    // adding properties
- *    'flag2': requiredOrg({
+ *    'flag2': Flags.requiredOrg({
  *        required: true,
  *        description: 'flag2 description',
  *        char: 'o'
