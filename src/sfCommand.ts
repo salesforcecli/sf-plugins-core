@@ -6,7 +6,7 @@
  */
 import * as os from 'os';
 import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
-import { envVars, Messages, SfdxProject, Lifecycle, Mode } from '@salesforce/core';
+import { envVars, Messages, SfProject, StructuredMessage, Lifecycle, Mode } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
 import { Progress, Prompter, Spinner, Ux } from './ux';
@@ -40,7 +40,7 @@ export abstract class SfCommand<T> extends Command {
 
   public spinner: Spinner;
   public progress: Progress;
-  public project!: SfdxProject;
+  public project!: SfProject;
 
   private warnings: SfCommand.Warning[] = [];
   private ux: Ux;
@@ -182,9 +182,9 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
-  protected async assignProject(): Promise<SfdxProject> {
+  protected async assignProject(): Promise<SfProject> {
     try {
-      return await SfdxProject.resolve();
+      return await SfProject.resolve();
     } catch (err) {
       if (err instanceof Error && err.name === 'InvalidProjectWorkspaceError') {
         throw messages.createError('errors.RequiresProject');
@@ -250,8 +250,8 @@ export abstract class SfCommand<T> extends Command {
 }
 
 export namespace SfCommand {
-  export type Info = SfCommand.Error | string;
-  export type Warning = SfCommand.Error | string;
+  export type Info = StructuredMessage | string;
+  export type Warning = StructuredMessage | string;
 
   export interface Json<T> {
     status: number;
