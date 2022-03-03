@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.4.1...v1.5.0) (2022-03-03)
+
+### Features
+
+- friendly default help for org flags ([f4d55b3](https://github.com/salesforcecli/sf-plugins-core/commit/f4d55b30c08e988c0231b97acce8ba2bc9733a06))
+
+### [1.4.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.4.0...v1.4.1) (2022-03-02)
+
+### Bug Fixes
+
+- make toHelpSection types more friendly ([add364b](https://github.com/salesforcecli/sf-plugins-core/commit/add364b6be532dae6fb49f62164dad486b186347))
+
+## [1.4.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.3.0...v1.4.0) (2022-03-02)
+
+### Features
+
+- common salesforce flags ([00ab4fc](https://github.com/salesforcecli/sf-plugins-core/commit/00ab4fc94d268b44dccb6a2de02fe4f720ff0fc0))
+- debugging ([cc3fd1e](https://github.com/salesforcecli/sf-plugins-core/commit/cc3fd1e46134c08a4d76e79c74605e90e09abbb3))
+- duration flag ([b11eaab](https://github.com/salesforcecli/sf-plugins-core/commit/b11eaabb0050961094f412d85c2bbbf4b183cd40))
+
+### Bug Fixes
+
+- error keys support createError ([f094c49](https://github.com/salesforcecli/sf-plugins-core/commit/f094c49f1ec1063fb05cdc74e1aab88e7ceb7f13))
+- error message doesn't take params ([5d917bf](https://github.com/salesforcecli/sf-plugins-core/commit/5d917bf100d41077d2eaabcd89c41fa049ef6f21))
+- wrong error name ([1b3bbbe](https://github.com/salesforcecli/sf-plugins-core/commit/1b3bbbeae9f3e888faf438fe8d1f4bfd6bdac2c9))
+
 ## [1.3.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.2.1...v1.3.0) (2022-02-23)
 
 ### Features

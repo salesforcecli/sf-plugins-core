@@ -5,15 +5,19 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { HelpSection } from '@oclif/core';
 import {
-  ORG_CONFIG_ALLOWED_PROPERTIES,
-  OrgConfigProperties,
-  SFDX_ALLOWED_PROPERTIES,
-  SfdxPropertyKeys,
   EnvironmentVariable,
+  OrgConfigProperties,
+  ORG_CONFIG_ALLOWED_PROPERTIES,
+  SfdxPropertyKeys,
+  SFDX_ALLOWED_PROPERTIES,
   SUPPORTED_ENV_VARS,
 } from '@salesforce/core';
+
+export type HelpSection = {
+  header: string;
+  body: Array<{ name: string; description: string } | undefined>;
+};
 
 /**
  * Function to build a help section for command help.
@@ -26,7 +30,7 @@ import {
  */
 export function toHelpSection(
   header: string,
-  ...vars: Array<OrgConfigProperties | SfdxPropertyKeys | EnvironmentVariable>
+  ...vars: Array<OrgConfigProperties | SfdxPropertyKeys | EnvironmentVariable | string>
 ): HelpSection {
   const body = vars
     .map((v) => {
@@ -49,5 +53,5 @@ export function toHelpSection(
       return undefined;
     })
     .filter((b) => b);
-  return { header, body } as HelpSection;
+  return { header, body };
 }

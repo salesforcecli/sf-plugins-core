@@ -5,6 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+import { Flags as OclifFlags } from '@oclif/core';
+
 export { toHelpSection } from './util';
 export { Deployable, Deployer } from './deployer';
 export { Deauthorizer } from './deauthorizer';
@@ -12,4 +14,24 @@ export { Progress, Prompter, generateTableChoices } from './ux';
 export { SfHook } from './hooks';
 export * from './types';
 export { SfCommand, SfCommandInterface } from './sfCommand';
-export { Flags } from '@oclif/core';
+
+// custom flags
+import { requiredOrgFlag, requiredHubFlag, optionalOrgFlag } from './flags/orgFlags';
+import { salesforceIdFlag } from './flags/salesforceId';
+import { orgApiVersionFlag } from './flags/orgApiVersion';
+import { durationFlag } from './flags/duration';
+
+export const Flags = {
+  boolean: OclifFlags.boolean,
+  directory: OclifFlags.directory,
+  file: OclifFlags.file,
+  integer: OclifFlags.integer,
+  string: OclifFlags.string,
+  url: OclifFlags.url,
+  duration: durationFlag,
+  salesforceId: salesforceIdFlag,
+  orgApiVersion: orgApiVersionFlag,
+  requiredOrg: requiredOrgFlag,
+  requiredHub: requiredHubFlag,
+  optionalOrg: optionalOrgFlag,
+};
