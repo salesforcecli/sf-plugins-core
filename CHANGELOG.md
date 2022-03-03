@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.4.1...v1.5.0) (2022-03-03)
+
+### Features
+
+- friendly default help for org flags ([f4d55b3](https://github.com/salesforcecli/sf-plugins-core/commit/f4d55b30c08e988c0231b97acce8ba2bc9733a06))
+
 ### [1.4.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.4.0...v1.4.1) (2022-03-02)
 
 ### Bug Fixes
