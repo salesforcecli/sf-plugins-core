@@ -84,4 +84,18 @@ describe('Ux', () => {
       expect(infoStub.callCount).to.equal(0);
     });
   });
+
+  describe('styledHeader', () => {
+    it('should log stylized header', () => {
+      const ux = new Ux(true);
+      ux.styledHeader('A Stylized Header');
+      expect(infoStub.firstCall.args).to.deep.equal(['\u001b[2m=== \u001b[22m\u001b[1mA Stylized Header\u001b[22m\n']);
+    });
+
+    it('should not log anything if output is not enabled', () => {
+      const ux = new Ux(false);
+      ux.styledHeader('A Stylized Header');
+      expect(infoStub.callCount).to.equal(0);
+    });
+  });
 });
