@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Utils for writing deploy and retrieve plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
@@ -36,9 +36,11 @@
     "@salesforce/core": "^3.7.9",
     "@salesforce/kit": "^1.5.34",
     "@salesforce/ts-types": "^1.5.20",
+    "chalk": "^2.4.2",
     "inquirer": "^8.2.0"
   },
   "devDependencies": {
+    "@oclif/test": "^2.1.0",
     "@salesforce/dev-config": "^2.1.3",
     "@salesforce/dev-scripts": "^1.0.4",
     "@salesforce/prettier-config": "^0.0.2",
