@@ -199,7 +199,7 @@ export abstract class SfCommand<T> extends Command {
     if (this.jsonEnabled()) {
       CliUx.ux.styledJSON(this.toErrorJson(error));
     }
-    return error;
+    throw error;
   }
 
   /**
