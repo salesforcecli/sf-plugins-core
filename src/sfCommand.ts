@@ -4,9 +4,11 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
+import * as os from 'os';
 import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
-import { Messages, SfdxProject, Lifecycle } from '@salesforce/core';
+import { envVars, Messages, SfProject, StructuredMessage, Lifecycle, Mode } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
+import chalk from 'chalk';
 import { Progress, Prompter, Spinner, Ux } from './ux';
 
 Messages.importMessagesDirectory(__dirname);
@@ -28,6 +30,7 @@ export interface SfCommandInterface extends Interfaces.Command {
  */
 
 export abstract class SfCommand<T> extends Command {
+  public static SF_ENV = 'SF_ENV';
   public static enableJsonFlag = true;
   public static configurationVariablesSection?: HelpSection;
   public static envVariablesSection?: HelpSection;
@@ -37,7 +40,7 @@ export abstract class SfCommand<T> extends Command {
 
   public spinner: Spinner;
   public progress: Progress;
-  public project!: SfdxProject;
+  public project!: SfProject;
 
   private warnings: SfCommand.Warning[] = [];
   private ux: Ux;
@@ -63,9 +66,32 @@ export abstract class SfCommand<T> extends Command {
    * will be added to the json output under the warnings property.
    */
   public warn(input: SfCommand.Warning): SfCommand.Warning {
-    const warning = super.warn(input) as SfCommand.Warning;
-    this.warnings.push(warning);
+    const colorizedArgs: string[] = [];
+    this.warnings.push(input);
+    const message = typeof input === 'string' ? input : input.message;
+
+    colorizedArgs.push(`${chalk.bold.yellow(messages.getMessage('warning.prefix'))} ${message}`);
+    colorizedArgs.push(
+      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: chalk.reset })
+    );
+
+    this.log(colorizedArgs.join(os.EOL));
     return input;
+  }
+
+  /**
+   * Log info message to users.
+   */
+  public info(input: SfCommand.Info): void {
+    const colorizedArgs: string[] = [];
+    const message = typeof input === 'string' ? input : input.message;
+
+    colorizedArgs.push(`${chalk.bold(messages.getMessage('info.prefix'))} ${message}`);
+    colorizedArgs.push(
+      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: chalk.reset })
+    );
+
+    this.log(colorizedArgs.join(os.EOL));
   }
 
   /**
@@ -156,9 +182,9 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
-  protected async assignProject(): Promise<SfdxProject> {
+  protected async assignProject(): Promise<SfProject> {
     try {
-      return await SfdxProject.resolve();
+      return await SfProject.resolve();
     } catch (err) {
       if (err instanceof Error && err.name === 'InvalidProjectWorkspaceError') {
         throw messages.createError('errors.RequiresProject');
@@ -167,11 +193,65 @@ export abstract class SfCommand<T> extends Command {
     }
   }
 
+  protected async catch(error: SfCommand.Error): Promise<SfCommand.Error> {
+    process.exitCode = process.exitCode ?? error.exitCode ?? 1;
+    this.log(this.formatError(error));
+    if (this.jsonEnabled()) {
+      CliUx.ux.styledJSON(this.toErrorJson(error));
+    }
+    return error;
+  }
+
+  /**
+   * Format errors and actions for human consumption. Adds 'Error:',
+   * When there are actions, we add 'Try this:' in blue
+   * followed by each action in red on its own line.
+   * If Error.code is present it is output last in parentheses
+   *
+   * @returns {string} Returns decorated messages.
+   */
+  protected formatError(error: SfCommand.Error): string {
+    const colorizedArgs: string[] = [];
+    colorizedArgs.push(`${chalk.bold.red(messages.getMessage('error.prefix'))} ${error.message}`);
+    colorizedArgs.push(...this.formatActions(error.actions || []));
+    if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
+      colorizedArgs.push(chalk.red(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
+    }
+    if (error.code) {
+      colorizedArgs.push(chalk.bold(`\n(${error.code})`));
+    }
+
+    return colorizedArgs.join('\n');
+  }
+
+  /**
+   * Utility function to format actions lines
+   *
+   * @param actions
+   * @param options
+   * @private
+   */
+  private formatActions(
+    actions: string[],
+    options: { actionColor: typeof chalk } = { actionColor: chalk.red }
+  ): string[] {
+    const colorizedArgs: string[] = [];
+    // Format any actions.
+    if (actions?.length) {
+      colorizedArgs.push(`\n${chalk.blue.bold(messages.getMessage('actions.tryThis'))}\n`);
+      actions.forEach((action) => {
+        colorizedArgs.push(`${options.actionColor(action)}`);
+      });
+    }
+    return colorizedArgs;
+  }
+
   public abstract run(): Promise<T>;
 }
 
 export namespace SfCommand {
-  export type Warning = string | Error;
+  export type Info = StructuredMessage | string;
+  export type Warning = StructuredMessage | string;
 
   export interface Json<T> {
     status: number;
@@ -185,5 +265,8 @@ export namespace SfCommand {
     message: string;
     stack: string | undefined;
     warnings?: Warning[];
+    actions?: string[];
+    code?: unknown;
+    exitCode?: number;
   }
 }
