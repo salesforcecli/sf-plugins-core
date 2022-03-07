@@ -29,6 +29,10 @@ export class Ux extends UxBase {
   public styledObject(obj: AnyJson): void {
     this.maybeNoop(() => CliUx.ux.styledObject(obj));
   }
+
+  public styledHeader(text: string): void {
+    this.maybeNoop(() => CliUx.ux.styledHeader(text));
+  }
 }
 
 export namespace Ux {
