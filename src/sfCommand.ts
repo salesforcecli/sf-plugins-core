@@ -132,6 +132,13 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
+   * Log stylized header to the console. Will automatically be suppressed when --json flag is present.
+   */
+  public styledHeader(text: string): void {
+    this.ux.styledHeader(text);
+  }
+
+  /**
    * Prompt user for information. See https://www.npmjs.com/package/inquirer for more.
    *
    * This will NOT be automatically suppressed when the --json flag is present since we assume
