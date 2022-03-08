@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.3](https://github.com/salesforcecli/sf-plugins-core/compare/v1.5.2...v1.5.3) (2022-03-08)
+
+### Bug Fixes
+
+- expose styledHeader as func in sf command ([fd2dc48](https://github.com/salesforcecli/sf-plugins-core/commit/fd2dc48444be224a884c3b56d5604f4b854f1c0e))
+
 ### [1.5.2](https://github.com/salesforcecli/sf-plugins-core/compare/v1.5.1...v1.5.2) (2022-03-07)
 
 ### Bug Fixes
