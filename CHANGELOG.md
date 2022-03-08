@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.5.3...v1.6.0) (2022-03-08)
+
+### Features
+
+- add timedPrompt method ([ea9e98c](https://github.com/salesforcecli/sf-plugins-core/commit/ea9e98c5bffdfc1e917d61006a91f4dba1f808f3))
+
 ### [1.5.3](https://github.com/salesforcecli/sf-plugins-core/compare/v1.5.2...v1.5.3) (2022-03-08)
 
 ### Bug Fixes
