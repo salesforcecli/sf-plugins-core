@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.6.0...v1.6.1) (2022-03-09)
+
+### Bug Fixes
+
+- erturn error - dont throw ([0ea70bc](https://github.com/salesforcecli/sf-plugins-core/commit/0ea70bc12cecd380a907323eba84ddb9d5a44e08))
+
 ## [1.6.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.5.3...v1.6.0) (2022-03-08)
 
 ### Features
