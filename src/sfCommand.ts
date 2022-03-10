@@ -6,7 +6,15 @@
  */
 import * as os from 'os';
 import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
-import { envVars, Messages, SfProject, StructuredMessage, Lifecycle, Mode } from '@salesforce/core';
+import {
+  envVars,
+  Messages,
+  SfProject,
+  StructuredMessage,
+  Lifecycle,
+  Mode,
+  EnvironmentVariable,
+} from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import chalk from 'chalk';
 import { Progress, Prompter, Spinner, Ux } from './ux';
@@ -55,7 +63,7 @@ export abstract class SfCommand<T> extends Command {
     super(argv, config);
     const outputEnabled = !this.jsonEnabled();
     this.spinner = new Spinner(outputEnabled);
-    this.progress = new Progress(outputEnabled);
+    this.progress = new Progress(outputEnabled && envVars.getBoolean(EnvironmentVariable.SF_USE_PROGRESS_BAR, true));
     this.ux = new Ux(outputEnabled);
     this.prompter = new Prompter();
     this.lifecycle = Lifecycle.getInstance();
