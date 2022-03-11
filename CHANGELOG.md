@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.7.0...v1.7.1) (2022-03-11)
+
+### Bug Fixes
+
+- add oclif enum to exports ([71ee6ac](https://github.com/salesforcecli/sf-plugins-core/commit/71ee6ac7942790ffc519512ade67330614ada51b))
+- expose timed prompt in command class ([3b056c6](https://github.com/salesforcecli/sf-plugins-core/commit/3b056c668d3379ada6f85e2e5b5f6da76c1a3223))
+
 ## [1.7.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.6.1...v1.7.0) (2022-03-11)
 
 ### Features
