@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.6.1...v1.7.0) (2022-03-11)
+
+### Features
+
+- suppress progress bar output with env vars ([d2e8a84](https://github.com/salesforcecli/sf-plugins-core/commit/d2e8a849d7ca93b3dba538a26ce5f9ab7f858984))
+
 ### [1.6.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.6.0...v1.6.1) (2022-03-09)
 
 ### Bug Fixes
