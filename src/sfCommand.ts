@@ -163,6 +163,16 @@ export abstract class SfCommand<T> extends Command {
     return this.prompter.prompt(questions, initialAnswers);
   }
 
+  /**
+   * Prompt user for information with a timeout (in milliseconds). See https://www.npmjs.com/package/inquirer for more.
+   */
+  public async timedPrompt<R = Prompter.Answers>(
+    questions: Prompter.Questions<R>,
+    ms = 10_000,
+    initialAnswers?: Partial<R>
+  ): Promise<R> {
+    return this.prompter.timedPrompt(questions, 10_000, initialAnswers);
+  }
   public async _run<R>(): Promise<R | undefined> {
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();

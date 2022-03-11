@@ -24,6 +24,7 @@ import { durationFlag } from './flags/duration';
 export const Flags = {
   boolean: OclifFlags.boolean,
   directory: OclifFlags.directory,
+  enum: OclifFlags.enum,
   file: OclifFlags.file,
   integer: OclifFlags.integer,
   string: OclifFlags.string,
