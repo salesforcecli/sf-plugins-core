@@ -171,7 +171,7 @@ export abstract class SfCommand<T> extends Command {
     ms = 10_000,
     initialAnswers?: Partial<R>
   ): Promise<R> {
-    return this.prompter.timedPrompt(questions, 10_000, initialAnswers);
+    return this.prompter.timedPrompt(questions, ms, initialAnswers);
   }
   public async _run<R>(): Promise<R | undefined> {
     if (this.statics.requiresProject) {
