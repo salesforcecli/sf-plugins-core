@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.2](https://github.com/salesforcecli/sf-plugins-core/compare/v1.7.1...v1.7.2) (2022-03-15)
+
+### Bug Fixes
+
+- need to pass ms to timedPrompt function ([f285e07](https://github.com/salesforcecli/sf-plugins-core/commit/f285e07525937798d0251da69c86c05cc683edfd))
+
 ### [1.7.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.7.0...v1.7.1) (2022-03-11)
 
 ### Bug Fixes
