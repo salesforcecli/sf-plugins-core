@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.7.3](https://github.com/salesforcecli/sf-plugins-core/compare/v1.7.2...v1.7.3) (2022-03-17)
+
+### Bug Fixes
+
+- use OptionFlag interface so that exactlyOne can be used ([0e65453](https://github.com/salesforcecli/sf-plugins-core/commit/0e65453dacb68a90f4af2387e571edbd4077ba1b))
+
 ### [1.7.2](https://github.com/salesforcecli/sf-plugins-core/compare/v1.7.1...v1.7.2) (2022-03-15)
 
 ### Bug Fixes
