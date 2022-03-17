@@ -13,7 +13,7 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
 
 type DurationUnit = Lowercase<keyof typeof Duration.Unit>;
 
-export interface DurationFlagConfig extends Partial<Interfaces.OptionFlagProps> {
+export interface DurationFlagConfig extends Partial<Interfaces.OptionFlag<Duration>> {
   unit: Required<DurationUnit>;
   defaultValue?: number;
   min?: number;

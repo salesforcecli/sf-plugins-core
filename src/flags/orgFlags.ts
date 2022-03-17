@@ -58,7 +58,7 @@ export const optionalOrgFlag = Flags.build<Org | undefined>({
   char: 'e',
   parse: async (input: string | undefined) => await maybeGetOrg(input),
   default: async () => await maybeGetOrg(),
-  defaultHelp: async () => (await maybeGetOrg(undefined))?.getUsername(),
+  defaultHelp: async () => (await maybeGetOrg())?.getUsername(),
 });
 
 /**
@@ -83,8 +83,8 @@ export const optionalOrgFlag = Flags.build<Org | undefined>({
 export const requiredOrgFlag = Flags.build<Org>({
   char: 'e',
   parse: async (input: string | undefined) => await getOrgOrThrow(input),
-  default: async () => await getOrgOrThrow(undefined),
-  defaultHelp: async () => (await getOrgOrThrow(undefined))?.getUsername(),
+  default: async () => await getOrgOrThrow(),
+  defaultHelp: async () => (await getOrgOrThrow())?.getUsername(),
 });
 
 /**
@@ -109,6 +109,6 @@ export const requiredOrgFlag = Flags.build<Org>({
 export const requiredHubFlag = Flags.build<Org>({
   char: 'v',
   parse: async (input: string | undefined) => await getHubOrThrow(input),
-  default: async () => await getHubOrThrow(undefined),
-  defaultHelp: async () => (await getHubOrThrow(undefined))?.getUsername(),
+  default: async () => await getHubOrThrow(),
+  defaultHelp: async () => (await getHubOrThrow())?.getUsername(),
 });
