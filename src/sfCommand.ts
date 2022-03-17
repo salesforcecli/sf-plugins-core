@@ -164,6 +164,27 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
+   * Simplified prompt for single-question confirmation.  Times out and throws after 10s
+   *
+   * @param message text to display.  Do not include a question mark.
+   * @param ms milliseconds to wait for user input.  Defaults to 10s.
+   * @return true if the user confirms, false if they do not.
+   */
+  public async confirm(message: string, ms = 10000): Promise<boolean> {
+    const { confirmed } = await this.timedPrompt<{ confirmed: boolean }>(
+      [
+        {
+          name: 'confirmed',
+          message,
+          type: 'confirm',
+        },
+      ],
+      ms
+    );
+    return confirmed;
+  }
+
+  /**
    * Prompt user for information with a timeout (in milliseconds). See https://www.npmjs.com/package/inquirer for more.
    */
   public async timedPrompt<R = Prompter.Answers>(

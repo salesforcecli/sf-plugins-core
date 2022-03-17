@@ -30,11 +30,10 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
     }
   }
   const org = await Org.create({ aliasOrUsername });
-  // check the synchronous, cached version and only use "determine" if we didn't get a positive result
-  if (!org.isDevHubOrg() || !(await org.determineIfDevHubOrg())) {
-    throw messages.createError('errors.NotADevHub', [aliasOrUsername]);
+  if (await org.determineIfDevHubOrg()) {
+    return org;
   }
-  return org;
+  throw messages.createError('errors.NotADevHub', [aliasOrUsername]);
 };
 
 /**
