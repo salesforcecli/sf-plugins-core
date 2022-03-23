@@ -241,9 +241,11 @@ export abstract class SfCommand<T> extends Command {
 
   protected async catch(error: SfCommand.Error): Promise<SfCommand.Error> {
     process.exitCode = process.exitCode ?? error.exitCode ?? 1;
-    this.log(this.formatError(error));
     if (this.jsonEnabled()) {
       CliUx.ux.styledJSON(this.toErrorJson(error));
+    } else {
+      // eslint-disable-next-line no-console
+      console.error(this.formatError(error));
     }
     return error;
   }
