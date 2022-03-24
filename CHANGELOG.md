@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.8.1...v1.9.0) (2022-03-24)
+
+### Features
+
+- explain what a valid api version looks like ([4c5669a](https://github.com/salesforcecli/sf-plugins-core/commit/4c5669a969ef79eae1d4aec76f6cb20df92aae5e))
+
 ### [1.8.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.8.0...v1.8.1) (2022-03-24)
 
 ### Bug Fixes
