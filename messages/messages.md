@@ -48,7 +48,7 @@ API versions up to %s are deprecated. See %s for more information.
 
 # errors.InvalidApiVersion
 
-%s is not a valid API version.
+%s is not a valid API version. It should end in '.0' like '54.0'.
 
 # errors.RetiredApiVersion
 
