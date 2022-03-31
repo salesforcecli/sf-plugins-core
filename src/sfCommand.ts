@@ -194,9 +194,13 @@ export abstract class SfCommand<T> extends Command {
   ): Promise<R> {
     return this.prompter.timedPrompt(questions, ms, initialAnswers);
   }
+
   public async _run<R>(): Promise<R | undefined> {
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();
+    }
+    if (this.statics.state === 'beta') {
+      this.warn(messages.getMessage('warning.CommandInBeta'));
     }
     this.lifecycle.onWarning(async (warning: string) => {
       this.warn(warning);

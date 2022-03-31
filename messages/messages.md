@@ -73,3 +73,7 @@ Info:
 # actions.tryThis
 
 Try this:
+
+# warning.CommandInBeta
+
+This command is currently in beta. Any aspect of this command can change without advanced notice. Don't use beta commands in your scripts.
