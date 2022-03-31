@@ -26,6 +26,7 @@ describe('toHelpSection', () => {
       description: SUPPORTED_ENV_VARS[EnvironmentVariable.SFDX_ACCESS_TOKEN].description,
     });
   });
+
   it('should produce help section for org config vars', () => {
     const orgConfigSection = toHelpSection('ORG CONFIG VAR SECTION', OrgConfigProperties.TARGET_ORG);
     expect(orgConfigSection).to.have.property('header', 'ORG CONFIG VAR SECTION');
@@ -36,6 +37,7 @@ describe('toHelpSection', () => {
       description: orgConfig.description,
     });
   });
+
   it('should produce help section for sfdx config vars', () => {
     const sfdxConfigSection = toHelpSection('SFDX CONFIG VAR SECTION', SfdxPropertyKeys.INSTANCE_URL);
     expect(sfdxConfigSection).to.have.property('header', 'SFDX CONFIG VAR SECTION');
@@ -46,6 +48,7 @@ describe('toHelpSection', () => {
       description: sfdxConfig.description,
     });
   });
+
   it('should produce help section for mixed config vars', () => {
     const mixedSection = toHelpSection(
       'MIXED VAR SECTION',
@@ -71,5 +74,15 @@ describe('toHelpSection', () => {
         description: sfdxConfig.description,
       },
     ]);
+  });
+
+  it('should produce help section for arbitrary data', () => {
+    const envVarSection = toHelpSection('ARBITRARY SECTION', { 'foo bar': 'hello world' });
+    expect(envVarSection).to.have.property('header', 'ARBITRARY SECTION');
+    expect(envVarSection).to.have.property('body').to.have.property('length', 1);
+    expect(envVarSection.body[0]).to.deep.equal({
+      name: 'foo bar',
+      description: 'hello world',
+    });
   });
 });
