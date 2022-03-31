@@ -492,10 +492,10 @@
     widest-line "^3.1.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.6.0.tgz#a91333275cd43a49097158f4ae8e15ccf718bd48"
-  integrity sha512-JHerjgRd29EtUVpDIrzohq2XdxJfgmZVGHAFlf75QVhLGFaleopZAQNBXkHkxG//kGib0LhyVGW7azcFKzr1eQ==
+"@oclif/core@^1.6.3":
+  version "1.6.3"
+  resolved "https://registry.npmjs.org/@oclif/core/-/core-1.6.3.tgz#3d1dd4e033f5512ac35963a73878257142390838"
+  integrity sha512-a3DrPNlOYemwnzxuJ3tINjqpMVIYe56Mg+XaQo0nGsqGSk69wF5Q/hD8plsWrtwdkeIxwxhgl7T699EJypAUwg==
   dependencies:
     "@oclif/linewrap" "^1.0.0"
     "@oclif/screen" "^3.0.2"
@@ -618,10 +618,10 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/core@^3.7.9":
-  version "3.7.9"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.7.9.tgz#bcef443046e8680bf80c31a3d0a0740e1d83314e"
-  integrity sha512-yR+0DKWH55T/tU1y55VVFm9s5B8eMIZdVXch/b1FeFfEpycF/tYbbUcsSyV+oo8xEsJ6lxNj+P9m41izoWh2Sw==
+"@salesforce/core@^3.11.0":
+  version "3.11.0"
+  resolved "https://registry.npmjs.org/@salesforce/core/-/core-3.11.0.tgz#e1ec10189103a9133117af938156fb9f3eb2aef2"
+  integrity sha512-OqEkFfgfL2WvuzasjgrsGVa2SB00FCdfu09hPBK3URnR418+ztk283TDNOQ15AGW5oI8EWdEEKpOI+oAXmWS3A==
   dependencies:
     "@oclif/core" "^1.5.1"
     "@salesforce/bunyan" "^2.0.0"
