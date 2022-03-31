@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   release-management: salesforce/npm-release-management@4
 
+jobs:
   external-nut:
     description: Runs NUTs from other (external) repos by cloning them.  Substitutes a dependency for the current pull request.  For example, you're testing a PR to a library and want to test a plugin in another repo that uses the library.
 
