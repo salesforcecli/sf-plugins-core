@@ -122,8 +122,7 @@ workflows:
           size: medium
           matrix:
             parameters:
-              # os: [windows, linux]
-              os: [linux]
+              os: [windows, linux]
               node_version: [lts]
               external_project_git_url: ['https://github.com/salesforcecli/plugin-env']
       # - release-management/release-package:
