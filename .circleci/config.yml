@@ -74,11 +74,11 @@ jobs:
           steps:
             - run: yarn add $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME#$CIRCLE_SHA1
       - run:
-          name: install/build <<parameters.external_project_git_url>> in node_modules
+          name: install/build sf-plugins-core in node_modules
           command: |
             yarn install
             yarn build
-          working_directory: node_modules/@salesforce/$CIRCLE_PROJECT_REPONAME
+          working_directory: node_modules/@salesforce/sf-plugins-core
       - run:
           name: Build the external project
           command: |
@@ -118,7 +118,8 @@ workflows:
           size: medium
           matrix:
             parameters:
-              os: [windows, linux]
+              # os: [windows, linux]
+              os: [linux]
               node_version: [lts]
               external_project_git_url: ['https://github.com/salesforcecli/plugin-env']
       # - release-management/release-package:
