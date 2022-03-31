@@ -125,10 +125,10 @@ workflows:
               os: [windows, linux]
               node_version: [lts]
               external_project_git_url:
-              [
-                'https://github.com/salesforcecli/plugin-env',
-                'https://github.com/salesforcecli/plugin-deploy-retrieve',
-              ]
+                [
+                  'https://github.com/salesforcecli/plugin-env',
+                  'https://github.com/salesforcecli/plugin-deploy-retrieve',
+                ]
       # - release-management/release-package:
       #     github-release: true
       #     requires:
