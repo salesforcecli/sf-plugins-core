@@ -60,7 +60,7 @@ orbs:
       - run:
           name: Install dependencies
           command: yarn
-      - run: yarn remove @salesforce/source-deploy-retrieve
+      - run: yarn remove @salesforce/sf-plugins-core
       # windows/powershell does envs differently so we have to have conditional steps
       - when:
           condition:
@@ -74,16 +74,10 @@ orbs:
             - run: yarn add $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME#$CIRCLE_SHA1
       - run:
           name: install/build <<parameters.external_project_git_url>> in node_modules
-          # why doesn't SDR put the metadataRegistry.json in the lib when run from inside a node module?  I don't know.
-          # prevent dependency conflicts between plugin's top-level imports and imported SDR's deps by deleting them
-          # If there are real conflicts, we'll catch them when bumping a version in the plugin (same nuts)
           command: |
             yarn install
-            npm install shx -g
-            shx rm -rf node_modules/@salesforce/sf-plugins-core
             yarn build
-            cp src/registry/metadataRegistry.json lib/src/registry
-          working_directory: node_modules/@salesforce/source-deploy-retrieve
+          working_directory: node_modules/@salesforce/$CIRCLE_PROJECT_REPONAME
       - run:
           name: Build the external project
           command: |
@@ -97,19 +91,19 @@ workflows:
   version: 2
   test-and-release:
     jobs:
-      - release-management/validate-pr:
-          filters:
-            branches:
-              ignore: main
-      - release-management/test-package:
-          matrix:
-            parameters:
-              os:
-                - linux
-              node_version:
-                - latest
-                - lts
-                - maintenance
+      # - release-management/validate-pr:
+      #     filters:
+      #       branches:
+      #         ignore: main
+      # - release-management/test-package:
+      #     matrix:
+      #       parameters:
+      #         os:
+      #           - linux
+      #         node_version:
+      #           - latest
+      #           - lts
+      #           - maintenance
       - external-nut:
           filters:
             branches:
@@ -117,8 +111,8 @@ workflows:
               # 1) we already ran on a branch
               # 2) they aren't required and would run in parallel to release job
               ignore: main
-          requires:
-            - release-management/test-package
+          # requires:
+          #   - release-management/test-package
           sfdx_version: latest
           size: medium
           matrix:
@@ -126,14 +120,14 @@ workflows:
               os: [windows, linux]
               node_version: [lts]
               external_project_git_url: ['https://github.com/salesforcecli/plugin-env']
-      - release-management/release-package:
-          github-release: true
-          requires:
-            - release-management/test-package
-          filters:
-            branches:
-              only: main
-          context: CLI_CTC
+      # - release-management/release-package:
+      #     github-release: true
+      #     requires:
+      #       - release-management/test-package
+      #     filters:
+      #       branches:
+      #         only: main
+      #     context: CLI_CTC
   dependabot-automerge:
     triggers:
       - schedule:
