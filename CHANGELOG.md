@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.10.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.9.0...v1.10.0) (2022-03-31)
+
+### Features
+
+- warn users when using a beta command ([2cf26f2](https://github.com/salesforcecli/sf-plugins-core/commit/2cf26f2d363a40b0739f082bfe4aedd62fd4531f))
+
 ## [1.9.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.8.1...v1.9.0) (2022-03-24)
 
 ### Features
