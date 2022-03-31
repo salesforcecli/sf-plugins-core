@@ -77,6 +77,10 @@ jobs:
           name: install/build sf-plugins-core in node_modules
           command: |
             yarn install
+            npm install shx -g
+            shx rm -rf node_modules/@oclif/core
+            shx rm -rf node_modules/@salesforce/core
+            shx rm -rf node_modules/@salesforce/kit
             yarn build
           working_directory: node_modules/@salesforce/sf-plugins-core
       - run:
