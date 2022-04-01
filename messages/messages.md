@@ -1,6 +1,6 @@
 # error.prefix
 
-Error:
+Error%s:
 
 # warning.security
 
@@ -65,10 +65,6 @@ The value must be between %s and %s (inclusive).
 # warning.prefix
 
 Warning:
-
-# info.prefix
-
-Info:
 
 # actions.tryThis
 
