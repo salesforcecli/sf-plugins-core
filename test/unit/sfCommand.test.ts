@@ -8,7 +8,7 @@ import * as os from 'os';
 import { test } from '@oclif/test';
 import { Config } from '@oclif/core';
 import { expect } from 'chai';
-import { SfdxError } from '@salesforce/core';
+import { SfError } from '@salesforce/core';
 import { SfCommand } from '../../src/sfCommand';
 
 class TestCommand extends SfCommand<string> {
@@ -25,7 +25,7 @@ describe('info messages', () => {
       testCommand.info('foo bar baz');
     })
     .it('should show a info message from a string', (ctx) => {
-      expect(ctx.stdout).to.include('Info: foo bar baz');
+      expect(ctx.stdout).to.include('foo bar baz');
     });
   test
     .stdout()
@@ -34,17 +34,17 @@ describe('info messages', () => {
       testCommand.info(new Error('foo bar baz') as SfCommand.Info);
     })
     .it('should show a info message from Error, no actions', (ctx) => {
-      expect(ctx.stdout).to.include('Info: foo bar baz');
+      expect(ctx.stdout).to.include('foo bar baz');
     });
   test
     .stdout()
     .do(() => {
       const testCommand = new TestCommand([], {} as Config);
-      const infoError = new SfdxError('foo bar baz', 'foo', ['this', 'is an', 'action']) as Error;
+      const infoError = new SfError('foo bar baz', 'foo', ['this', 'is an', 'action']) as Error;
       testCommand.info(infoError as SfCommand.Info);
     })
-    .it('should show a info message from Error, with actions', (ctx) => {
-      expect(ctx.stdout).to.include('Info: foo bar baz');
+    .it('should show a info message, with actions', (ctx) => {
+      expect(ctx.stdout).to.include('foo bar baz');
       expect(ctx.stdout).to.include(['this', 'is an', 'action'].join(os.EOL));
     });
 });
@@ -71,7 +71,7 @@ describe('warning messages', () => {
     .stdout()
     .do(() => {
       const testCommand = new TestCommand([], {} as Config);
-      const infoError = new SfdxError('foo bar baz', 'foo', ['this', 'is an', 'action']) as Error;
+      const infoError = new SfError('foo bar baz', 'foo', ['this', 'is an', 'action']) as Error;
       testCommand.warn(infoError as SfCommand.Info);
     })
     .it('should show a info message from Error, with actions', (ctx) => {

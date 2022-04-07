@@ -13,7 +13,7 @@ export { Deauthorizer } from './deauthorizer';
 export { Progress, Prompter, generateTableChoices } from './ux';
 export { SfHook } from './hooks';
 export * from './types';
-export { SfCommand, SfCommandInterface } from './sfCommand';
+export { SfCommand, SfCommandInterface, StandardColors } from './sfCommand';
 
 // custom flags
 import { requiredOrgFlag, requiredHubFlag, optionalOrgFlag } from './flags/orgFlags';

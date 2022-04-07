@@ -16,7 +16,7 @@ import {
   EnvironmentVariable,
 } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
-import chalk from 'chalk';
+import * as chalk from 'chalk';
 import { Progress, Prompter, Spinner, Ux } from './ux';
 
 Messages.importMessagesDirectory(__dirname);
@@ -27,6 +27,13 @@ export interface SfCommandInterface extends Interfaces.Command {
   envVariablesSection?: HelpSection;
   errorCodes?: HelpSection;
 }
+
+export const StandardColors = {
+  error: chalk.hex('BF0201'),
+  warning: chalk.hex('FF9A3C'),
+  info: chalk.dim,
+  success: chalk.hex('4BCA81'),
+};
 
 /**
  * A base command that provides convenient access to CLI help
@@ -70,6 +77,15 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
+   * Log a success message that has the standard success message color applied
+   *
+   * @param message
+   * @param args
+   */
+  public logSuccess(message: string): void {
+    this.log(StandardColors.success(message));
+  }
+  /**
    * Log warning to users. If --json is enabled, then the warning
    * will be added to the json output under the warnings property.
    */
@@ -78,9 +94,9 @@ export abstract class SfCommand<T> extends Command {
     this.warnings.push(input);
     const message = typeof input === 'string' ? input : input.message;
 
-    colorizedArgs.push(`${chalk.bold.yellow(messages.getMessage('warning.prefix'))} ${message}`);
+    colorizedArgs.push(`${StandardColors.warning(messages.getMessage('warning.prefix'))} ${message}`);
     colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: chalk.reset })
+      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: StandardColors.info })
     );
 
     this.log(colorizedArgs.join(os.EOL));
@@ -94,9 +110,9 @@ export abstract class SfCommand<T> extends Command {
     const colorizedArgs: string[] = [];
     const message = typeof input === 'string' ? input : input.message;
 
-    colorizedArgs.push(`${chalk.bold(messages.getMessage('info.prefix'))} ${message}`);
+    colorizedArgs.push(`${StandardColors.info(message)}`);
     colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: chalk.reset })
+      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: StandardColors.info })
     );
 
     this.log(colorizedArgs.join(os.EOL));
@@ -255,7 +271,7 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
-   * Format errors and actions for human consumption. Adds 'Error:',
+   * Format errors and actions for human consumption. Adds 'Error (<ErrorCode>):',
    * When there are actions, we add 'Try this:' in blue
    * followed by each action in red on its own line.
    * If Error.code is present it is output last in parentheses
@@ -264,15 +280,13 @@ export abstract class SfCommand<T> extends Command {
    */
   protected formatError(error: SfCommand.Error): string {
     const colorizedArgs: string[] = [];
-    colorizedArgs.push(`${chalk.bold.red(messages.getMessage('error.prefix'))} ${error.message}`);
+    const errorCode = error.code ? ` (${error.code})` : '';
+    const errorPrefix = `${StandardColors.error(messages.getMessage('error.prefix', [errorCode]))}`;
+    colorizedArgs.push(`${errorPrefix} ${error.message}`);
     colorizedArgs.push(...this.formatActions(error.actions || []));
     if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
-      colorizedArgs.push(chalk.red(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
+      colorizedArgs.push(StandardColors.info(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
     }
-    if (error.code) {
-      colorizedArgs.push(chalk.bold(`\n(${error.code})`));
-    }
-
     return colorizedArgs.join('\n');
   }
 
@@ -285,12 +299,12 @@ export abstract class SfCommand<T> extends Command {
    */
   private formatActions(
     actions: string[],
-    options: { actionColor: typeof chalk } = { actionColor: chalk.red }
+    options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }
   ): string[] {
     const colorizedArgs: string[] = [];
     // Format any actions.
     if (actions?.length) {
-      colorizedArgs.push(`\n${chalk.blue.bold(messages.getMessage('actions.tryThis'))}\n`);
+      colorizedArgs.push(`\n${StandardColors.info(messages.getMessage('actions.tryThis'))}\n`);
       actions.forEach((action) => {
         colorizedArgs.push(`${options.actionColor(action)}`);
       });
