@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.11.0...v1.11.1) (2022-04-07)
+
+### Bug Fixes
+
+- adjust message formats ([5b62ced](https://github.com/salesforcecli/sf-plugins-core/commit/5b62cedeb522c08dcce01159a22060be72c1bf62))
+
 ## [1.11.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.10.0...v1.11.0) (2022-03-31)
 
 ### Features
