@@ -10,8 +10,13 @@ import { Messages, Org, ConfigAggregator } from '@salesforce/core';
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
-const maybeGetOrg = async (input?: string): Promise<Org | undefined> =>
-  input ? Org.create({ aliasOrUsername: input }) : undefined;
+const maybeGetOrg = async (input?: string): Promise<Org | undefined> => {
+  try {
+    return Org.create({ aliasOrUsername: input });
+  } catch (e) {
+    return undefined;
+  }
+};
 
 const getOrgOrThrow = async (input?: string): Promise<Org> => {
   const org = await maybeGetOrg(input);
