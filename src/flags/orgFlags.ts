@@ -14,7 +14,11 @@ const maybeGetOrg = async (input?: string): Promise<Org | undefined> => {
   try {
     return Org.create({ aliasOrUsername: input });
   } catch (e) {
-    return undefined;
+    if (!input) {
+      return undefined;
+    } else {
+      throw e;
+    }
   }
 };
 
