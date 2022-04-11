@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.2](https://github.com/salesforcecli/sf-plugins-core/compare/v1.11.1...v1.11.2) (2022-04-11)
+
+### Bug Fixes
+
+- optional orgs can be undefined ([412629d](https://github.com/salesforcecli/sf-plugins-core/commit/412629de689d7d73b7c2b0673b8e9b373cc957bc))
+- throw if input provided but no org found ([10be468](https://github.com/salesforcecli/sf-plugins-core/commit/10be468c0c3e164fed171c947dbe437b2325605c))
+
 ### [1.11.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.11.0...v1.11.1) (2022-04-07)
 
 ### Bug Fixes
