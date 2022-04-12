@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.11.3](https://github.com/salesforcecli/sf-plugins-core/compare/v1.11.2...v1.11.3) (2022-04-12)
+
+### Bug Fixes
+
+- need await in order for the catch to be effective ([2805578](https://github.com/salesforcecli/sf-plugins-core/commit/28055783503177667620528b6246b252ff10cb7f))
+
 ### [1.11.2](https://github.com/salesforcecli/sf-plugins-core/compare/v1.11.1...v1.11.2) (2022-04-11)
 
 ### Bug Fixes

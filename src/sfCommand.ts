@@ -29,10 +29,10 @@ export interface SfCommandInterface extends Interfaces.Command {
 }
 
 export const StandardColors = {
-  error: chalk.hex('BF0201'),
-  warning: chalk.hex('FF9A3C'),
+  error: chalk.bold.red,
+  warning: chalk.bold.yellow,
   info: chalk.dim,
-  success: chalk.hex('4BCA81'),
+  success: chalk.bold.green,
 };
 
 /**
