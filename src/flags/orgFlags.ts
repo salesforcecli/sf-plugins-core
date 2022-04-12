@@ -12,7 +12,7 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
 
 const maybeGetOrg = async (input?: string): Promise<Org | undefined> => {
   try {
-    return Org.create({ aliasOrUsername: input });
+    return await Org.create({ aliasOrUsername: input });
   } catch (e) {
     if (!input) {
       return undefined;
@@ -72,7 +72,7 @@ export const optionalOrgFlag = Flags.build<Org | undefined>({
 });
 
 /**
- * An required org, specified by username or alias
+ * A required org, specified by username or alias
  * Will throw if the specified org default do not exist
  * Will default to the default org if one is not specified.
  * Will throw if no default org exists and none is specified
@@ -98,7 +98,7 @@ export const requiredOrgFlag = Flags.build<Org>({
 });
 
 /**
- * An required org that is a devHub
+ * A required org that is a devHub
  * Will throw if the specified org does not exist
  * Will default to the default dev hub if one is not specified
  * Will throw if no default deb hub exists and none is specified
