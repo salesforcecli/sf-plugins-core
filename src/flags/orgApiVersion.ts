@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
-import { Messages, sfdc, Lifecycle } from '@salesforce/core';
+import { Messages, sfdc, Lifecycle, OrgConfigProperties } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -34,7 +34,7 @@ const getDefaultFromConfig = async (): Promise<string | undefined> => {
   // (perf) only import ConfigAggregator if necessary
   const { ConfigAggregator } = await import('@salesforce/core');
   const config = await ConfigAggregator.create();
-  const apiVersionFromConfig = config.getInfo('apiVersion')?.value as string;
+  const apiVersionFromConfig = config.getInfo(OrgConfigProperties.ORG_API_VERSION)?.value as string;
   if (apiVersionFromConfig) {
     await Lifecycle.getInstance().emitWarning(
       messages.getMessage('flags.apiVersion.overrideWarning', [apiVersionFromConfig])
