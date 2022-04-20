@@ -110,6 +110,9 @@ workflows:
                 - lts
                 - maintenance
       - external-nut:
+          context:
+            - na40-auth-url
+            - na40-jwt
           filters:
             branches:
               # we don't run again on main because
@@ -131,6 +134,9 @@ workflows:
                   'https://github.com/salesforcecli/plugin-generate',
                 ]
       - external-nut:
+          context:
+            - na40-auth-url
+            - na40-jwt
           filters:
             branches:
               # we don't run again on main because
@@ -161,7 +167,9 @@ workflows:
           filters:
             branches:
               only: main
-          context: CLI_CTC
+          context:
+            - CLI_CTC
+            - release
   dependabot-automerge:
     triggers:
       - schedule:
