@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
-import { Messages, Org, ConfigAggregator } from '@salesforce/core';
+import { Messages, Org, ConfigAggregator, OrgConfigProperties } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -34,8 +34,7 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
   if (!aliasOrUsername) {
     // check config for a default
     const config = await ConfigAggregator.create();
-    aliasOrUsername =
-      (config.getInfo('target-dev-hub')?.value as string) ?? (config.getInfo('defaultdevhubusername')?.value as string);
+    aliasOrUsername = config.getInfo(OrgConfigProperties.TARGET_DEV_HUB)?.value as string;
     if (!aliasOrUsername) {
       throw messages.createError('errors.NoDefaultDevHub');
     }
