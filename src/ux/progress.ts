@@ -24,6 +24,7 @@ export class Progress extends UxBase {
 
   private bar!: Progress.Bar;
   private total!: number;
+  private started = false;
 
   public constructor(outputEnabled: boolean) {
     super(outputEnabled);
@@ -86,12 +87,15 @@ export class Progress extends UxBase {
   }
 
   private _start(total: number, payload: Progress.Payload = {}): void {
+    if (this.started) return;
     const start = once((bar: Progress.Bar, t: number, p: Progress.Payload = {}) => {
       bar.start(t);
       if (Object.keys(p).length) {
         bar.update(0, p);
       }
     });
+
+    this.started = true;
     start(this.bar, total, payload);
   }
 }
