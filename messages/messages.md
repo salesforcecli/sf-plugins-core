@@ -24,7 +24,7 @@ The id must begin with %s.
 
 # errors.NoDefaultEnv
 
-No default environment found. Use -e or --target-org to specify an environment.
+No default environment found. Use -o or --target-org to specify an environment.
 
 # errors.NoDefaultDevHub
 
@@ -40,7 +40,7 @@ Override the api version used for api requests made by this command
 
 # flags.apiVersion.overrideWarning
 
-apiVersion configuration overridden at %s
+org-api-version configuration overridden at %s
 
 # flags.apiVersion.warning.deprecated
 
