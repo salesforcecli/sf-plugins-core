@@ -40,7 +40,7 @@ Override the api version used for api requests made by this command
 
 # flags.apiVersion.overrideWarning
 
-apiVersion configuration overridden at %s
+org-api-version configuration overridden at %s
 
 # flags.apiVersion.warning.deprecated
 
