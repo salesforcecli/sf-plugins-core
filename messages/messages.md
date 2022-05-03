@@ -24,7 +24,7 @@ The id must begin with %s.
 
 # errors.NoDefaultEnv
 
-No default environment found. Use -e or --target-org to specify an environment.
+No default environment found. Use -o or --target-org to specify an environment.
 
 # errors.NoDefaultDevHub
 
