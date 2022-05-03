@@ -60,7 +60,7 @@ export class Progress extends UxBase {
 
       this.bar.setTotal(total);
       this.bar.start(total);
-      if (Object.keys(payload)) {
+      if (Object.keys(payload).length) {
         this.bar.update(0, payload);
       }
     });
