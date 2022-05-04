@@ -7,7 +7,6 @@
 
 import * as util from 'util';
 import { CliUx } from '@oclif/core';
-import { once } from '@salesforce/kit';
 import { UxBase } from '.';
 
 /**
@@ -24,6 +23,7 @@ export class Progress extends UxBase {
 
   private bar!: Progress.Bar;
   private total!: number;
+  private started = false;
 
   public constructor(outputEnabled: boolean) {
     super(outputEnabled);
@@ -45,19 +45,24 @@ export class Progress extends UxBase {
     payload: Progress.Payload = {},
     options: Partial<Progress.Options> = Progress.DEFAULT_OPTIONS
   ): void {
-    const opts = Object.assign(Progress.DEFAULT_OPTIONS, options);
-    opts.format = util.format(opts.format, opts.title);
-    this.bar = CliUx.ux.progress({
-      format: opts.format,
-      barCompleteChar: opts.barCompleteChar,
-      barIncompleteChar: opts.barIncompleteChar,
-      linewrap: opts.linewrap,
-    }) as Progress.Bar;
-
-    this.bar.setTotal(total);
+    if (this.started) return;
+    this.started = true;
 
     this.maybeNoop(() => {
-      this._start(total, payload);
+      const opts = Object.assign(Progress.DEFAULT_OPTIONS, options);
+      opts.format = util.format(opts.format, opts.title);
+      this.bar = CliUx.ux.progress({
+        format: opts.format,
+        barCompleteChar: opts.barCompleteChar,
+        barIncompleteChar: opts.barIncompleteChar,
+        linewrap: opts.linewrap,
+      }) as Progress.Bar;
+
+      this.bar.setTotal(total);
+      this.bar.start(total);
+      if (Object.keys(payload).length) {
+        this.bar.update(0, payload);
+      }
     });
   }
 
@@ -83,16 +88,6 @@ export class Progress extends UxBase {
    */
   public stop(): void {
     if (this.bar) this.bar.stop();
-  }
-
-  private _start(total: number, payload: Progress.Payload = {}): void {
-    const start = once((bar: Progress.Bar, t: number, p: Progress.Payload = {}) => {
-      bar.start(t);
-      if (Object.keys(p).length) {
-        bar.update(0, p);
-      }
-    });
-    start(this.bar, total, payload);
   }
 }
 
