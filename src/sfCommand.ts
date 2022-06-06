@@ -261,10 +261,19 @@ export abstract class SfCommand<T> extends Command {
     // transform an unknown error into one that conforms to the interface
     const codeFromError = error instanceof SfError ? error.exitCode : 1;
     process.exitCode ??= codeFromError;
-    const sfCommandError = {
-      ...error,
-      status: process.exitCode,
-      stack: error.stack,
+    const sfErrorProperties =
+      error instanceof SfError
+        ? { data: error.data, actions: error.actions, code: codeFromError, context: error.context }
+        : {};
+    const sfCommandError: SfCommand.Error = {
+      ...sfErrorProperties,
+      ...{
+        message: error.message,
+        name: error.name ?? 'Error',
+        status: process.exitCode,
+        stack: error.stack,
+        exitCode: process.exitCode,
+      },
     };
 
     if (this.jsonEnabled()) {
@@ -341,5 +350,6 @@ export namespace SfCommand {
     code?: unknown;
     exitCode?: number;
     data?: unknown;
+    context?: string;
   }
 }
