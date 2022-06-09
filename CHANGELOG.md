@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.13.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.12.3...v1.13.0) (2022-06-09)
+
+### Features
+
+- catch method supports base and SfError ([2b9a038](https://github.com/salesforcecli/sf-plugins-core/commit/2b9a038713c77e1230e21f5cc6f8ae2a6aaab5be))
+
+### Bug Fixes
+
+- error can't be spread ([30930b7](https://github.com/salesforcecli/sf-plugins-core/commit/30930b74ff5e6b59116228d547362a284ad98388))
+
 ### [1.12.3](https://github.com/salesforcecli/sf-plugins-core/compare/v1.12.2...v1.12.3) (2022-05-04)
 
 ### Bug Fixes
