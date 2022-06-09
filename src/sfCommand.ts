@@ -14,6 +14,7 @@ import {
   Lifecycle,
   Mode,
   EnvironmentVariable,
+  SfError,
 } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
@@ -238,12 +239,9 @@ export abstract class SfCommand<T> extends Command {
   /**
    * Wrap the command error into the standardized JSON structure.
    */
-  protected toErrorJson(error: Error): SfCommand.Error {
+  protected toErrorJson(error: SfCommand.Error): SfCommand.Error {
     return {
-      status: process.exitCode ?? 1,
-      stack: error.stack,
-      name: error.name,
-      message: error.message,
+      ...error,
       warnings: this.warnings,
     };
   }
@@ -259,15 +257,32 @@ export abstract class SfCommand<T> extends Command {
     }
   }
 
-  protected async catch(error: SfCommand.Error): Promise<SfCommand.Error> {
-    process.exitCode = process.exitCode ?? error.exitCode ?? 1;
+  protected async catch(error: Error | SfError | SfCommand.Error): Promise<SfCommand.Error> {
+    // transform an unknown error into one that conforms to the interface
+    const codeFromError = error instanceof SfError ? error.exitCode : 1;
+    process.exitCode ??= codeFromError;
+    const sfErrorProperties =
+      error instanceof SfError
+        ? { data: error.data, actions: error.actions, code: codeFromError, context: error.context }
+        : {};
+    const sfCommandError: SfCommand.Error = {
+      ...sfErrorProperties,
+      ...{
+        message: error.message,
+        name: error.name ?? 'Error',
+        status: process.exitCode,
+        stack: error.stack,
+        exitCode: process.exitCode,
+      },
+    };
+
     if (this.jsonEnabled()) {
-      CliUx.ux.styledJSON(this.toErrorJson(error));
+      CliUx.ux.styledJSON(this.toErrorJson(sfCommandError));
     } else {
       // eslint-disable-next-line no-console
-      console.error(this.formatError(error));
+      console.error(this.formatError(sfCommandError));
     }
-    return error;
+    return sfCommandError;
   }
 
   /**
@@ -334,5 +349,7 @@ export namespace SfCommand {
     actions?: string[];
     code?: unknown;
     exitCode?: number;
+    data?: unknown;
+    context?: string;
   }
 }
