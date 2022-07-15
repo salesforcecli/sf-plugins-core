@@ -6,11 +6,10 @@ The @salesforce/sf-plugins-core provides utilities for writing [sf](https://gith
 
 ## SfCommand Abstract Class
 
-The SfCommand abstract class extends [@oclif/core's Command class](https://github.com/oclif/core/blob/main/src/command.ts) for examples of how to build a definition.
-) class and adds useful extensions to ease the development of commands for use in the Salesforce Unified CLI.
+The SfCommand abstract class extends [@oclif/core's Command class](https://github.com/oclif/core/blob/main/src/command.ts) and adds useful extensions to ease the development of commands for use in the Salesforce Unified CLI.
 
 - SfCommand takes a generic type that defines the success JSON result
-- Enable the json flag support by default
+- It enables the --json flag by default, see the [oclif docs](https://oclif.io/docs/json) for more info.
 - Provides functions that help place success messages, warnings and errors into the correct location in JSON results
 - Enables additional help sections to the standard oclif command help output
 - Provides access to the [cli-ux cli actions](https://github.com/oclif/cli-ux#cliaction) via the public property `spinner` in SfCommand. This avoids having to import that interface from cli-ux.
