@@ -76,7 +76,7 @@ export abstract class Deployer extends EventEmitter {
   /**
    * Deploy the app.
    */
-  public abstract deploy(): Promise<void>;
+  public abstract deploy(): Promise<void | number>;
 }
 
 export namespace Deployer {
