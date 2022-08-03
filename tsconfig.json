@@ -2,10 +2,7 @@
   "extends": "./node_modules/@salesforce/dev-config/tsconfig-strict",
   "compilerOptions": {
     "outDir": "./lib",
-    "declarationMap": true,
-    "paths": {
-      "eslint-plugin-header": ["./node_modules/eslint-plugin-header"]
-    }
+    "declarationMap": true
   },
   "include": ["src/**/*.ts", "test/unit/flags/id.ts"]
 }

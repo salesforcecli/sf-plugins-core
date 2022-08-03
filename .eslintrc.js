@@ -20,4 +20,5 @@ module.exports = {
     'no-underscore-dangle': 'off',
     '@typescript-eslint/require-await': 'off',
   },
+  root: true,
 };
