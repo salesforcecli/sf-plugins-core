@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.1](https://github.com/salesforcecli/sf-plugins-core/compare/v1.13.0...v1.13.1) (2022-08-03)
+
+### Bug Fixes
+
+- add number to deploy function return type ([ac9457b](https://github.com/salesforcecli/sf-plugins-core/commit/ac9457b78ab1242090fc4322ec266e8d0157cb6f))
+
 ## [1.13.0](https://github.com/salesforcecli/sf-plugins-core/compare/v1.12.3...v1.13.0) (2022-06-09)
 
 ### Features
