@@ -8,7 +8,7 @@
 import { Flags as OclifFlags } from '@oclif/core';
 
 export { toHelpSection } from './util';
-export { Deployable, Deployer } from './deployer';
+export { Deployable, Deployer, DeployerResult } from './deployer';
 export { Deauthorizer } from './deauthorizer';
 export { Progress, Prompter, generateTableChoices } from './ux';
 export { SfHook } from './hooks';

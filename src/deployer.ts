@@ -11,6 +11,10 @@ import { QuestionCollection } from 'inquirer';
 import { CliUx } from '@oclif/core';
 import { Prompter } from './ux';
 
+export type DeployerResult = {
+  exitCode: number;
+};
+
 export abstract class Deployable {
   abstract getName(): string;
   abstract getType(): string;
@@ -76,7 +80,7 @@ export abstract class Deployer extends EventEmitter {
   /**
    * Deploy the app.
    */
-  public abstract deploy(): Promise<void>;
+  public abstract deploy<R extends DeployerResult>(): Promise<void | R>;
 }
 
 export namespace Deployer {
