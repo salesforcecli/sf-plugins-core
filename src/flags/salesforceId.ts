@@ -43,7 +43,7 @@ export interface IdFlagConfig extends Partial<Interfaces.OptionFlag<string>> {
 export function salesforceIdFlag(
   inputs: IdFlagConfig & ({ required: true } | { default: Interfaces.Default<string> })
 ): Interfaces.OptionFlag<string>;
-export function salesforceIdFlag(inputs: IdFlagConfig): Interfaces.OptionFlag<string | undefined>;
+export function salesforceIdFlag(inputs?: IdFlagConfig): Interfaces.OptionFlag<string | undefined>;
 export function salesforceIdFlag(
   inputs: IdFlagConfig = {}
 ): Interfaces.OptionFlag<string> | Interfaces.OptionFlag<string | undefined> {
