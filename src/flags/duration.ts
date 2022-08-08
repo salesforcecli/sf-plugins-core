@@ -37,14 +37,20 @@ export interface DurationFlagConfig extends Partial<Interfaces.OptionFlag<Durati
  *    }),
  * }
  */
-export const durationFlag = (durationConfig: DurationFlagConfig): Interfaces.OptionFlag<Duration | undefined> => {
+export function durationFlag(
+  durationConfig: DurationFlagConfig & ({ required: true } | { default: Interfaces.Default<Duration> })
+): Interfaces.OptionFlag<Duration>;
+export function durationFlag(durationConfig: DurationFlagConfig): Interfaces.OptionFlag<Duration | undefined>;
+export function durationFlag(
+  durationConfig: DurationFlagConfig
+): Interfaces.OptionFlag<Duration> | Interfaces.OptionFlag<Duration | undefined> {
   const { defaultValue, min, max, unit, ...baseProps } = durationConfig;
-  return Flags.build<Duration>({
+  return Flags.build({
     ...baseProps,
     parse: async (input: string) => validate(input, { min, max, unit }),
     default: defaultValue ? async () => toDuration(defaultValue, unit) : undefined,
   })();
-};
+}
 
 const validate = (input: string, config: DurationFlagConfig): Duration => {
   const { min, max, unit } = config || {};
