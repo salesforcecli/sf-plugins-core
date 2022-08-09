@@ -40,14 +40,20 @@ export interface IdFlagConfig extends Partial<Interfaces.OptionFlag<string>> {
  *     }),
  * }
  */
-export const salesforceIdFlag = (inputs: IdFlagConfig = {}): Interfaces.OptionFlag<string | undefined> => {
+export function salesforceIdFlag(
+  inputs: IdFlagConfig & ({ required: true } | { default: Interfaces.Default<string> })
+): Interfaces.OptionFlag<string>;
+export function salesforceIdFlag(inputs?: IdFlagConfig): Interfaces.OptionFlag<string | undefined>;
+export function salesforceIdFlag(
+  inputs: IdFlagConfig = {}
+): Interfaces.OptionFlag<string> | Interfaces.OptionFlag<string | undefined> {
   const { length, startsWith, ...baseProps } = inputs;
-  return Flags.build<string>({
+  return Flags.build({
     char: 'i',
     ...baseProps,
     parse: async (input: string) => validate(input, { length, startsWith }),
   })();
-};
+}
 
 const validate = (input: string, config?: IdFlagConfig): string => {
   const { length, startsWith } = config || {};
