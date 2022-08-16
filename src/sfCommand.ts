@@ -338,10 +338,6 @@ export namespace SfCommand {
 
 /**
  * Utility function to format actions lines
- *
- * @param actions
- * @param options
- * @private
  */
 const formatActions = (
   actions: string[],
