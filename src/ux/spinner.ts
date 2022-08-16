@@ -5,6 +5,8 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+/* eslint-disable class-methods-use-this */
+
 import { CliUx } from '@oclif/core';
 import { UxBase } from '.';
 
@@ -15,6 +17,20 @@ import { UxBase } from '.';
 export class Spinner extends UxBase {
   public constructor(outputEnabled: boolean) {
     super(outputEnabled);
+  }
+
+  /**
+   * Get the status of the current spinner.
+   */
+  public get status(): string | undefined {
+    return CliUx.ux.action.status;
+  }
+
+  /**
+   * Set the status of the current spinner.
+   */
+  public set status(status: string | undefined) {
+    CliUx.ux.action.status = status;
   }
 
   /**
@@ -29,20 +45,6 @@ export class Spinner extends UxBase {
    */
   public stop(msg?: string): void {
     this.maybeNoop(() => CliUx.ux.action.stop(msg));
-  }
-
-  /**
-   * Set the status of the current spinner.
-   */
-  public set status(status: string | undefined) {
-    CliUx.ux.action.status = status;
-  }
-
-  /**
-   * Get the status of the current spinner.
-   */
-  public get status(): string | undefined {
-    return CliUx.ux.action.status;
   }
 
   /**

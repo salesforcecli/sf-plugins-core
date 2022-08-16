@@ -9,6 +9,8 @@ import { prompt, QuestionCollection, Separator, ChoiceOptions, ChoiceBase } from
 import { Dictionary, Nullable, ensureString } from '@salesforce/ts-types';
 import { CliUx } from '@oclif/core';
 
+/* eslint-disable class-methods-use-this */
+
 export class Prompter {
   /**
    * Prompt user for information. See https://www.npmjs.com/package/inquirer for more.

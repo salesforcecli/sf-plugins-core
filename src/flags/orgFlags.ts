@@ -65,8 +65,8 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
  */
 export const optionalOrgFlag = Flags.build({
   char: 'e',
-  parse: async (input: string | undefined) => await maybeGetOrg(input),
-  default: async () => await maybeGetOrg(),
+  parse: async (input: string | undefined) => maybeGetOrg(input),
+  default: async () => maybeGetOrg(),
   defaultHelp: async () => (await maybeGetOrg())?.getUsername(),
 });
 
@@ -91,8 +91,8 @@ export const optionalOrgFlag = Flags.build({
  */
 export const requiredOrgFlag = Flags.build({
   char: 'e',
-  parse: async (input: string | undefined) => await getOrgOrThrow(input),
-  default: async () => await getOrgOrThrow(),
+  parse: async (input: string | undefined) => getOrgOrThrow(input),
+  default: async () => getOrgOrThrow(),
   defaultHelp: async () => (await getOrgOrThrow())?.getUsername(),
 });
 
@@ -117,7 +117,7 @@ export const requiredOrgFlag = Flags.build({
  */
 export const requiredHubFlag = Flags.build({
   char: 'v',
-  parse: async (input: string | undefined) => await getHubOrThrow(input),
-  default: async () => await getHubOrThrow(),
+  parse: async (input: string | undefined) => getHubOrThrow(input),
+  default: async () => getHubOrThrow(),
   defaultHelp: async () => (await getHubOrThrow())?.getUsername(),
 });

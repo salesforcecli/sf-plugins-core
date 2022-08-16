@@ -74,6 +74,4 @@ const validate = (input: string, config: DurationFlagConfig): Duration => {
   return toDuration(parsedInput, unit);
 };
 
-const toDuration = (parsedInput: number, unit: DurationUnit): Duration => {
-  return Duration[unit](parsedInput);
-};
+const toDuration = (parsedInput: number, unit: DurationUnit): Duration => Duration[unit](parsedInput);

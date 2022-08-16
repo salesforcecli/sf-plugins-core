@@ -5,6 +5,9 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
+// the Deployable class may already be in use by its consumers, so leave as is
+/* eslint-disable @typescript-eslint/explicit-member-accessibility */
+
 import { EventEmitter } from 'events';
 import { AnyJson, JsonMap } from '@salesforce/ts-types';
 import { QuestionCollection } from 'inquirer';
@@ -37,12 +40,14 @@ export abstract class Deployer extends EventEmitter {
   /**
    * Method for displaying deploy progress to the user
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function, class-methods-use-this
   public progress(current: number, total: number, message: string): void {}
 
   /**
    * Log messages to the console
    */
+  // leaving because class may already be in use
+  // eslint-disable-next-line class-methods-use-this
   public log(msg?: string | undefined, ...args: string[]): void {
     CliUx.ux.log(msg, ...args);
   }

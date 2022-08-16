@@ -56,7 +56,7 @@ export function salesforceIdFlag(
 }
 
 const validate = (input: string, config?: IdFlagConfig): string => {
-  const { length, startsWith } = config || {};
+  const { length, startsWith } = config ?? {};
   if (length && input.length !== length) {
     throw messages.createError('errors.InvalidIdLength', [length]);
   }

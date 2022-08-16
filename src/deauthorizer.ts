@@ -21,6 +21,8 @@ export abstract class Deauthorizer<T = JsonMap> {
     const environments = await this.find();
     for (const id of Object.keys(environments)) {
       try {
+        // avoid configFile concurency issues
+        // eslint-disable-next-line no-await-in-loop
         await this.remove(id);
         result.successes.push(id);
       } catch {

@@ -63,10 +63,6 @@ export abstract class SfCommand<T> extends Command {
   private prompter: Prompter;
   private lifecycle: Lifecycle;
 
-  protected get statics(): typeof SfCommand {
-    return this.constructor as typeof SfCommand;
-  }
-
   public constructor(argv: string[], config: Config) {
     super(argv, config);
     const outputEnabled = !this.jsonEnabled();
@@ -75,6 +71,10 @@ export abstract class SfCommand<T> extends Command {
     this.ux = new Ux(outputEnabled);
     this.prompter = new Prompter();
     this.lifecycle = Lifecycle.getInstance();
+  }
+
+  protected get statics(): typeof SfCommand {
+    return this.constructor as typeof SfCommand;
   }
 
   /**
@@ -97,7 +97,7 @@ export abstract class SfCommand<T> extends Command {
 
     colorizedArgs.push(`${StandardColors.warning(messages.getMessage('warning.prefix'))} ${message}`);
     colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: StandardColors.info })
+      ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
     );
 
     this.log(colorizedArgs.join(os.EOL));
@@ -113,7 +113,7 @@ export abstract class SfCommand<T> extends Command {
 
     colorizedArgs.push(`${StandardColors.info(message)}`);
     colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: StandardColors.info })
+      ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
     );
 
     this.log(colorizedArgs.join(os.EOL));
@@ -246,6 +246,8 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
+  // could be used by subclasses, so keeping it here
+  // eslint-disable-next-line class-methods-use-this
   protected async assignProject(): Promise<SfProject> {
     try {
       return await SfProject.resolve();
@@ -293,38 +295,18 @@ export abstract class SfCommand<T> extends Command {
    *
    * @returns {string} Returns decorated messages.
    */
+  // could be used by subclasses, so keeping it here
+  // eslint-disable-next-line class-methods-use-this
   protected formatError(error: SfCommand.Error): string {
     const colorizedArgs: string[] = [];
     const errorCode = error.code ? ` (${error.code})` : '';
     const errorPrefix = `${StandardColors.error(messages.getMessage('error.prefix', [errorCode]))}`;
     colorizedArgs.push(`${errorPrefix} ${error.message}`);
-    colorizedArgs.push(...this.formatActions(error.actions || []));
+    colorizedArgs.push(...formatActions(error.actions ?? []));
     if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
       colorizedArgs.push(StandardColors.info(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
     }
     return colorizedArgs.join('\n');
-  }
-
-  /**
-   * Utility function to format actions lines
-   *
-   * @param actions
-   * @param options
-   * @private
-   */
-  private formatActions(
-    actions: string[],
-    options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }
-  ): string[] {
-    const colorizedArgs: string[] = [];
-    // Format any actions.
-    if (actions?.length) {
-      colorizedArgs.push(`\n${StandardColors.info(messages.getMessage('actions.tryThis'))}\n`);
-      actions.forEach((action) => {
-        colorizedArgs.push(`${options.actionColor(action)}`);
-      });
-    }
-    return colorizedArgs;
   }
 
   public abstract run(): Promise<T>;
@@ -353,3 +335,25 @@ export namespace SfCommand {
     context?: string;
   }
 }
+
+/**
+ * Utility function to format actions lines
+ *
+ * @param actions
+ * @param options
+ * @private
+ */
+const formatActions = (
+  actions: string[],
+  options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }
+): string[] => {
+  const colorizedArgs: string[] = [];
+  // Format any actions.
+  if (actions?.length) {
+    colorizedArgs.push(`\n${StandardColors.info(messages.getMessage('actions.tryThis'))}\n`);
+    actions.forEach((action) => {
+      colorizedArgs.push(`${options.actionColor(action)}`);
+    });
+  }
+  return colorizedArgs;
+};
