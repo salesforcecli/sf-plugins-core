@@ -62,6 +62,7 @@ jobs:
           name: Install dependencies
           command: yarn
       - run: yarn remove @salesforce/sf-plugins-core
+      - run: yarn upgrade @oclif/core@latest
       # windows/powershell does envs differently so we have to have conditional steps
       - when:
           condition:
