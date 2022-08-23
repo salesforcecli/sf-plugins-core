@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { Flags, Interfaces } from '@oclif/core';
+import { Flags } from '@oclif/core';
 import { Messages } from '@salesforce/core';
 import { Duration } from '@salesforce/kit';
 
@@ -13,12 +13,12 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
 
 type DurationUnit = Lowercase<keyof typeof Duration.Unit>;
 
-export interface DurationFlagConfig extends Partial<Interfaces.OptionFlag<Duration>> {
+export type DurationFlagConfig = {
   unit: Required<DurationUnit>;
   defaultValue?: number;
   min?: number;
   max?: number;
-}
+};
 
 /**
  * Duration flag with built-in default and min/max validation
@@ -37,20 +37,12 @@ export interface DurationFlagConfig extends Partial<Interfaces.OptionFlag<Durati
  *    }),
  * }
  */
-export function durationFlag(
-  durationConfig: DurationFlagConfig & ({ required: true } | { default: Interfaces.Default<Duration> })
-): Interfaces.OptionFlag<Duration>;
-export function durationFlag(durationConfig: DurationFlagConfig): Interfaces.OptionFlag<Duration | undefined>;
-export function durationFlag(
-  durationConfig: DurationFlagConfig
-): Interfaces.OptionFlag<Duration> | Interfaces.OptionFlag<Duration | undefined> {
-  const { defaultValue, min, max, unit, ...baseProps } = durationConfig;
-  return Flags.build({
-    ...baseProps,
-    parse: async (input: string) => validate(input, { min, max, unit }),
-    default: defaultValue ? async () => toDuration(defaultValue, unit) : undefined,
-  })();
-}
+export const durationFlag = Flags.custom<Duration, DurationFlagConfig>({
+  parse: async (input, _, opts) => validate(input, opts),
+  default: async (context) => {
+    return context.options.defaultValue ? toDuration(context.options.defaultValue, context.options.unit) : undefined;
+  },
+});
 
 const validate = (input: string, config: DurationFlagConfig): Duration => {
   const { min, max, unit } = config || {};
