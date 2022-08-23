@@ -79,7 +79,7 @@ jobs:
           command: |
             yarn install
             npm install shx -g
-            # shx rm -rf node_modules/@oclif/core
+            shx rm -rf node_modules/@oclif/core
             shx rm -rf node_modules/@salesforce/core
             shx rm -rf node_modules/@salesforce/kit
             yarn build
