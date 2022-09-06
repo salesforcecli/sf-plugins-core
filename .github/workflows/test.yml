@@ -97,7 +97,7 @@ jobs:
 
   external-nuts-linux:
     name: external-nuts-linux
-    # needs: unit-tests
+    needs: unit-tests
     strategy:
       fail-fast: false
       matrix:
