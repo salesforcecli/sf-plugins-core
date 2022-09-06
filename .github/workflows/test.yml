@@ -106,7 +106,7 @@ jobs:
           - plugin-env
           - plugin-generate
           - plugin-login
-    uses: 'salesforcecli/github-workflows/.github/workflows/externalNut.yml@mdonnalley/external-nut-envs'
+    uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@mdonnalley/external-nut-envs
     with:
       packageName: '@salesforce/sf-plugins-core'
       externalProjectGitUrl: 'https://github.com/salesforcecli/${{matrix.repo}}'
