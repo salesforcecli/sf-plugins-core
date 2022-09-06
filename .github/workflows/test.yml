@@ -8,97 +8,35 @@ jobs:
   unit-tests:
     uses: salesforcecli/github-workflows/.github/workflows/unitTest.yml@main
 
-  # # run a quick nut on each OS to populate the cache
-  # # the following is highly duplicative to allow linux to start all the nuts without waiting for windows primer
-  # external-nuts-deploy-retrieve-primer-linux:
-  #   name: external-nuts-deploy-retrieve-primer-linux
-  #   # needs: unit-tests
-  #   uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@main
-  #   with:
-  #     packageName: '@salesforce/sf-plugins-core'
-  #     externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-deploy-retrieve'
-  #     command: 'yarn test:nuts:deploy:metadata:manifest'
-  #     preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core'
-  #     os: 'ubuntu-latest'
-  #   secrets: inherit
-
-  # extNuts-primer-windows:
-  #   name: extNUTs-windows-prime
-  #   needs: unit-tests
-  #   uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@main
-  #   with:
-  #     packageName: '@salesforce/source-deploy-retrieve'
-  #     externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-source'
-  #     command: 'yarn test:nuts:manifest:create'
-  #     preBuildCommands: 'shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@typescript-eslint; shx rm -rf node_modules/eslint-plugin-header; shx rm -rf node_modules/eslint-plugin-import; shx rm -rf node_modules/eslint-plugin-jsdoc; shx rm -rf node_modules/eslint-plugin-prettier'
-  #     postbuildCommands: 'cp src/registry/metadataRegistry.json lib/src/registry'
-  #     preExternalBuildCommands: 'shx rm -rf node_modules/@salesforce/source-tracking/node_modules/@salesforce/source-deploy-retrieve'
-  #     os: 'windows-latest'
-  #   secrets: inherit
-
-  # now run the rest of the nuts for each os via cached version of al the setup steps
-  # external-nuts-deploy-retrieve-linux:
-  #   # needs: [external-nuts-deploy-retrieve-primer-linux]
-  #   # needs: unit-tests
-  #   name: external-nuts-deploy-retrieve-linux
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       command:
-  #         - 'yarn test:nuts:tracking'
-  #         - 'yarn test:nuts:deploy:metadata:metadata-dir'
-  #         - 'yarn test:nuts:deploy:metadata:manifest'
-  #         - 'yarn test:nuts:deploy:metadata:metadata'
-  #         - 'yarn test:nuts:deploy:metadata:source-dir'
-  #         - 'yarn test:nuts:deploy:metadata:test-level'
-  #         - 'yarn test:nuts:static'
-  #   uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@main
-  #   with:
-  #     packageName: '@salesforce/sf-plugins-core'
-  #     externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-deploy-retrieve'
-  #     preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core'
-  #     command: ${{matrix.command}}
-  #     os: ubuntu-latest
-  #   secrets: inherit
-
-  # # now run the rest of the nuts for each os via cached version of all the setup steps
-  # external-nuts-full-windows:
-  #   needs: [extNuts-primer-windows]
-  #   name: extNUTs-windows
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       command:
-  #         - 'yarn test:nuts:convert'
-  #         - 'yarn test:nuts:delete'
-  #         - 'yarn test:nuts:deploy:async'
-  #         - 'yarn test:nuts:deploy:destructive'
-  #         - 'yarn test:nuts:deploy:manifest'
-  #         - 'yarn test:nuts:deploy:metadata'
-  #         - 'yarn test:nuts:deploy:quick'
-  #         - 'yarn test:nuts:deploy:rest'
-  #         - 'yarn test:nuts:deploy:sourcepath'
-  #         - 'yarn test:nuts:deploy:testlevel'
-  #         - 'yarn test:nuts:mdapi'
-  #         - 'yarn test:nuts:retrieve'
-  #         - 'yarn test:nuts:specialTypes'
-  #         - 'yarn test:nuts:tracking'
-  #   uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@main
-  #   with:
-  #     packageName: '@salesforce/source-deploy-retrieve'
-  #     externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-source'
-  #     command: ${{matrix.command}}
-  #     # the next 3 lines are likely unnecessary due to cache use
-  #     preBuildCommands: 'shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@typescript-eslint; shx rm -rf node_modules/eslint-plugin-header; shx rm -rf node_modules/eslint-plugin-import; shx rm -rf node_modules/eslint-plugin-jsdoc; shx rm -rf node_modules/eslint-plugin-prettier'
-  #     postbuildCommands: 'cp src/registry/metadataRegistry.json lib/src/registry'
-  #     preExternalBuildCommands: 'shx rm -rf node_modules/@salesforce/source-tracking/node_modules/@salesforce/source-deploy-retrieve'
-  #     os: windows-latest
-  #   secrets: inherit
+  external-nuts-deploy-retrieve:
+    needs: unit-tests
+    name: external-nuts-deploy-retrieve
+    strategy:
+      fail-fast: false
+      matrix:
+        command:
+          - 'yarn test:nuts:tracking'
+          - 'yarn test:nuts:deploy:metadata:metadata-dir'
+          - 'yarn test:nuts:deploy:metadata:manifest'
+          - 'yarn test:nuts:deploy:metadata:metadata'
+          - 'yarn test:nuts:deploy:metadata:source-dir'
+          - 'yarn test:nuts:deploy:metadata:test-level'
+          - 'yarn test:nuts:static'
+        os:
+          - ubuntu-latest
+          - windows-latest
+    uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@main
+    with:
+      packageName: '@salesforce/sf-plugins-core'
+      externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-deploy-retrieve'
+      preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core'
+      command: ${{ matrix.command }}
+      os: ${{ matrix.os }}
+    secrets: inherit
 
   external-nuts-linux:
     name: external-nuts-linux
-    # TODO: add this back
-    # needs: unit-tests
+    needs: unit-tests
     strategy:
       fail-fast: false
       matrix:
@@ -106,10 +44,13 @@ jobs:
           - plugin-env
           - plugin-generate
           - plugin-login
+        os:
+          - ubuntu-latest
+          - windows-latest
     uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@mdonnalley/external-nut-envs
     with:
       packageName: '@salesforce/sf-plugins-core'
       externalProjectGitUrl: 'https://github.com/salesforcecli/${{matrix.repo}}'
       preBuildCommands: 'shx rm -rf node_modules/@oclif/core ; shx rm -rf node_modules/@salesforce/kit ; shx rm -rf node_modules/@salesforce/core'
       command: yarn test:nuts
-      os: ubuntu-latest
+      os: ${{ matrix.os }}
