@@ -12,13 +12,13 @@ jobs:
   # the following is highly duplicative to allow linux to start all the nuts without waiting for windows primer
   extNuts-primer-linux:
     name: extNUTs-linux-prime
-    needs: unit-tests
+    # needs: unit-tests
     uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@main
     with:
       packageName: '@salesforce/sf-plugins-core'
-      externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-env'
-      command: 'yarn test:nuts'
-      preBuildCommands: 'shx rm -rf node_modules/@oclif/core'
+      externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-deploy-retrieve'
+      command: 'yarn test:nuts:deploy:metadata:manifest'
+      preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core'
       # postbuildCommands: 'cp src/registry/metadataRegistry.json lib/src/registry'
       # preExternalBuildCommands: 'shx rm -rf node_modules/@salesforce/source-tracking/node_modules/@salesforce/source-deploy-retrieve'
       os: 'ubuntu-latest'
