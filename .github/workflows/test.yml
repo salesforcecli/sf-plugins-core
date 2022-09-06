@@ -103,10 +103,10 @@ jobs:
       fail-fast: false
       matrix:
         repo:
-          - 'plugin-env'
-          - 'plugin-generate'
-          - 'plugin-login'
-    uses: salesforcecli/github-workflows/.github/workflows/externalNut.yml@mdonnalley/external-nut-envs
+          - plugin-env
+          - plugin-generate
+          - plugin-login
+    uses: 'salesforcecli/github-workflows/.github/workflows/externalNut.yml@mdonnalley/external-nut-envs'
     with:
       packageName: '@salesforce/sf-plugins-core'
       externalProjectGitUrl: 'https://github.com/salesforcecli/${{matrix.repo}}'
