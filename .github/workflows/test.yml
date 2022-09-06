@@ -3,7 +3,6 @@ on:
   push:
     branches-ignore: [main]
   workflow_dispatch:
-    secrets: inherit
 
 jobs:
   unit-tests:
@@ -114,9 +113,4 @@ jobs:
       preBuildCommands: 'shx rm -rf node_modules/@oclif/core ; shx rm -rf node_modules/@salesforce/kit ; shx rm -rf node_modules/@salesforce/core'
       command: yarn test:nuts
       os: ubuntu-latest
-    secrets:
-      TESTKIT_AUTH_URL: "${{ secrets.TESTKIT_AUTH_URL}}"
-      TESTKIT_HUB_USERNAME: "${{ secrets.TESTKIT_HUB_USERNAME}}"
-      TESTKIT_HUB_INSTANCE: "${{ secrets.TESTKIT_HUB_INSTANCE}}"
-      TESTKIT_JWT_CLIENT_ID: "${{ secrets.TESTKIT_JWT_CLIENT_ID}}"
-      TESTKIT_JWT_KEY: "${{ secrets.TESTKIT_JWT_KEY}}"
+    secrets: inherit
