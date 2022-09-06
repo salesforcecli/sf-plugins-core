@@ -34,8 +34,8 @@ jobs:
       os: ${{ matrix.os }}
     secrets: inherit
 
-  external-nuts-linux:
-    name: external-nuts-linux
+  external-nuts:
+    name: external-nuts
     needs: unit-tests
     strategy:
       fail-fast: false
