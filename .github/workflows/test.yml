@@ -4,11 +4,11 @@ on:
     branches-ignore: [main]
   workflow_dispatch:
     secrets:
-      TESTKIT_AUTH_URL: ${{ secrets.TESTKIT_AUTH_URL}}
-      TESTKIT_HUB_USERNAME: ${{ secrets.TESTKIT_HUB_USERNAME}}
-      TESTKIT_HUB_INSTANCE: ${{ secrets.TESTKIT_HUB_INSTANCE}}
-      TESTKIT_JWT_CLIENT_ID: ${{ secrets.TESTKIT_JWT_CLIENT_ID}}
-      TESTKIT_JWT_KEY: ${{ secrets.TESTKIT_JWT_KEY}}
+      TESTKIT_AUTH_URL: "${{ secrets.TESTKIT_AUTH_URL}}"
+      TESTKIT_HUB_USERNAME: "${{ secrets.TESTKIT_HUB_USERNAME}}"
+      TESTKIT_HUB_INSTANCE: "${{ secrets.TESTKIT_HUB_INSTANCE}}"
+      TESTKIT_JWT_CLIENT_ID: "${{ secrets.TESTKIT_JWT_CLIENT_ID}}"
+      TESTKIT_JWT_KEY: "${{ secrets.TESTKIT_JWT_KEY}}"
 
 jobs:
   unit-tests:
@@ -120,8 +120,8 @@ jobs:
       command: yarn test:nuts
       os: ubuntu-latest
     secrets:
-      TESTKIT_AUTH_URL: ${{ secrets.TESTKIT_AUTH_URL}}
-      TESTKIT_HUB_USERNAME: ${{ secrets.TESTKIT_HUB_USERNAME}}
-      TESTKIT_HUB_INSTANCE: ${{ secrets.TESTKIT_HUB_INSTANCE}}
-      TESTKIT_JWT_CLIENT_ID: ${{ secrets.TESTKIT_JWT_CLIENT_ID}}
-      TESTKIT_JWT_KEY: ${{ secrets.TESTKIT_JWT_KEY}}
+      TESTKIT_AUTH_URL: "${{ secrets.TESTKIT_AUTH_URL}}"
+      TESTKIT_HUB_USERNAME: "${{ secrets.TESTKIT_HUB_USERNAME}}"
+      TESTKIT_HUB_INSTANCE: "${{ secrets.TESTKIT_HUB_INSTANCE}}"
+      TESTKIT_JWT_CLIENT_ID: "${{ secrets.TESTKIT_JWT_CLIENT_ID}}"
+      TESTKIT_JWT_KEY: "${{ secrets.TESTKIT_JWT_KEY}}"
