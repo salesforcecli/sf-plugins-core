@@ -2958,13 +2958,14 @@ img {
 				<p>See <a href="https://github.com/salesforcecli/plugin-template-sf/blob/main/src/commands/hello/world.ts" class="external">example implementation</a>.</p>
 				<dl class="tsd-comment-tags">
 					<dt>example</dt>
-					<dd><p>import { SfCommand } from &#39;@salesforce/sf-plugins-core&#39;;
-							export type MyJsonOutput = { success: boolean };
-							export default class MyCommand extends SfCommand<MyJsonOutput> {
-								public async run(): Promise<MyJsonOutput> {
-									return { success: true };
-									}
-						}</p>
+					<dd><pre><code><span class="hljs-keyword">import</span> { <span class="hljs-type">SfCommand</span> } from &#x27;<span class="hljs-meta">@salesforce</span>/sf-plugins-core&#x27;;
+export <span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">MyJsonOutput</span> </span>= { success: boolean };
+export <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCommand</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SfCommand&lt;MyJsonOutput&gt;</span> </span>{
+  public async run(): <span class="hljs-type">Promise</span>&lt;<span class="hljs-type">MyJsonOutput</span>&gt; {
+   <span class="hljs-keyword">return</span> { success: <span class="hljs-literal">true</span> };
+ }
+}
+</code></pre>
 					</dd>
 				</dl>
 			</div>
@@ -3104,7 +3105,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StructuredMessage</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L436">src/sfCommand.ts:436</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L447">src/sfCommand.ts:447</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3114,7 +3115,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Warning<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">StructuredMessage</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L437">src/sfCommand.ts:437</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L448">src/sfCommand.ts:448</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3132,7 +3133,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Command.__constructor</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L157">src/sfCommand.ts:157</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L168">src/sfCommand.ts:168</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3222,7 +3223,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">progress<span class="tsd-signature-symbol">:</span> <a href="progress.html" class="tsd-signature-type">Progress</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L147">src/sfCommand.ts:147</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L158">src/sfCommand.ts:158</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3237,7 +3238,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">project<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">SfProject</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L148">src/sfCommand.ts:148</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L159">src/sfCommand.ts:159</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3247,7 +3248,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">spinner<span class="tsd-signature-symbol">:</span> <a href="spinner.html" class="tsd-signature-type">Spinner</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L142">src/sfCommand.ts:142</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L153">src/sfCommand.ts:153</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3262,7 +3263,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">SF_<wbr>ENV<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> = &quot;SF_ENV&quot;</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L69">src/sfCommand.ts:69</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L72">src/sfCommand.ts:72</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3353,7 +3354,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">configuration<wbr>Variables<wbr>Section<span class="tsd-signature-symbol">:</span> <a href="../globals.html#helpsection" class="tsd-signature-type">HelpSection</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L85">src/sfCommand.ts:85</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L90">src/sfCommand.ts:90</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3362,15 +3363,16 @@ img {
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>example</dt>
-						<dd><p>import { SfCommand, toHelpSection } from &#39;@salesforce/sf-plugins-core&#39;;
-								import { OrgConfigProperties } from &#39;@salesforce/core&#39;;
-								export default class MyCommand extends SfCommand {
-								public static configurationVariablesSection = toHelpSection(
-								&#39;CONFIGURATION VARIABLES&#39;,
-								OrgConfigProperties.TARGET_ORG,
-								OrgConfigProperties.ORG_API_VERSION,
-								);
-							}</p>
+						<dd><pre><code><span class="hljs-keyword">import</span> { <span class="hljs-type">SfCommand</span>, toHelpSection } from &#x27;<span class="hljs-meta">@salesforce</span>/sf-plugins-core&#x27;;
+<span class="hljs-keyword">import</span> { <span class="hljs-type">OrgConfigProperties</span> } from &#x27;<span class="hljs-meta">@salesforce</span>/core&#x27;;
+export <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCommand</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SfCommand</span> </span>{
+  public static configurationVariablesSection = toHelpSection(
+    <span class="hljs-symbol">&#x27;CONFIGURATION</span> <span class="hljs-type">VARIABLES</span>&#x27;,
+    <span class="hljs-type">OrgConfigProperties</span>.<span class="hljs-type">TARGET_ORG</span>,
+    <span class="hljs-type">OrgConfigProperties</span>.<span class="hljs-type">ORG_API_VERSION</span>,
+  );
+}
+</code></pre>
 						</dd>
 					</dl>
 				</div>
@@ -3399,7 +3401,7 @@ img {
 				<aside class="tsd-sources">
 					<p>Overrides Command.enableJsonFlag</p>
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L70">src/sfCommand.ts:70</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L73">src/sfCommand.ts:73</a></li>
 					</ul>
 				</aside>
 			</section>
@@ -3409,7 +3411,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">env<wbr>Variables<wbr>Section<span class="tsd-signature-symbol">:</span> <a href="../globals.html#helpsection" class="tsd-signature-type">HelpSection</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L101">src/sfCommand.ts:101</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L108">src/sfCommand.ts:108</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3418,15 +3420,16 @@ img {
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>example</dt>
-						<dd><p>import { SfCommand, toHelpSection } from &#39;@salesforce/sf-plugins-core&#39;;
-								import { EnvironmentVariable } from &#39;@salesforce/core&#39;;
-								export default class MyCommand extends SfCommand {
-								public static envVariablesSection = toHelpSection(
-								&#39;ENVIRONMENT VARIABLES&#39;,
-								EnvironmentVariable.SF_TARGET_ORG,
-								EnvironmentVariable.SF_USE_PROGRESS_BAR,
-								);
-							}</p>
+						<dd><pre><code><span class="hljs-keyword">import</span> { <span class="hljs-type">SfCommand</span>, toHelpSection } from &#x27;<span class="hljs-meta">@salesforce</span>/sf-plugins-core&#x27;;
+<span class="hljs-keyword">import</span> { <span class="hljs-type">EnvironmentVariable</span> } from &#x27;<span class="hljs-meta">@salesforce</span>/core&#x27;;
+export <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCommand</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SfCommand</span> </span>{
+  public static envVariablesSection = toHelpSection(
+    <span class="hljs-symbol">&#x27;ENVIRONMENT</span> <span class="hljs-type">VARIABLES</span>&#x27;,
+    <span class="hljs-type">EnvironmentVariable</span>.<span class="hljs-type">SF_TARGET_ORG</span>,
+    <span class="hljs-type">EnvironmentVariable</span>.<span class="hljs-type">SF_USE_PROGRESS_BAR</span>,
+  );
+}
+</code></pre>
 						</dd>
 					</dl>
 				</div>
@@ -3437,7 +3440,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">error<wbr>Codes<span class="tsd-signature-symbol">:</span> <a href="../globals.html#helpsection" class="tsd-signature-type">HelpSection</a></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L115">src/sfCommand.ts:115</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L124">src/sfCommand.ts:124</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3446,13 +3449,14 @@ img {
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>example</dt>
-						<dd><p>import { SfCommand, toHelpSection } from &#39;@salesforce/sf-plugins-core&#39;;
-								export default class MyCommand extends SfCommand {
-								public static errorCodes = toHelpSection(
-								&#39;ERROR CODES&#39;,
-								{ 0: &#39;Success&#39;, 1: &#39;Failure&#39; },
-								);
-							}</p>
+						<dd><pre><code><span class="hljs-keyword">import</span> { <span class="hljs-type">SfCommand</span>, toHelpSection } from &#x27;<span class="hljs-meta">@salesforce</span>/sf-plugins-core&#x27;;
+export <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCommand</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SfCommand</span> </span>{
+  public static errorCodes = toHelpSection(
+    <span class="hljs-symbol">&#x27;ERROR</span> <span class="hljs-type">CODES</span>&#x27;,
+    { <span class="hljs-number">0</span>: <span class="hljs-symbol">&#x27;Succes</span>s&#x27;, <span class="hljs-number">1</span>: <span class="hljs-symbol">&#x27;Failur</span>e&#x27; },
+  );
+}
+</code></pre>
 						</dd>
 					</dl>
 				</div>
@@ -3568,7 +3572,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">requires<wbr>Project<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L137">src/sfCommand.ts:137</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L148">src/sfCommand.ts:148</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3661,7 +3665,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">table<wbr>Flags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">flags</span><span class="tsd-signature-symbol"> = CliUx.ux.table.flags</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L129">src/sfCommand.ts:129</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L140">src/sfCommand.ts:140</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-comment tsd-typography">
@@ -3670,13 +3674,14 @@ img {
 					</div>
 					<dl class="tsd-comment-tags">
 						<dt>example</dt>
-						<dd><p>import { SfCommand } from &#39;@salesforce/sf-plugins-core&#39;;
-								export default class MyCommand extends SfCommand {
-								public static flags = {
-								...SfCommand.tableFags,
-								&#39;my-flags: flags.string({ char: &#39;m&#39;, description: &#39;my flag&#39; }),
-								}
-							}</p>
+						<dd><pre><code><span class="hljs-keyword">import</span> { <span class="hljs-type">SfCommand</span> } from &#x27;<span class="hljs-meta">@salesforce</span>/sf-plugins-core&#x27;;
+export <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyCommand</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SfCommand</span> </span>{
+  public static flags = {
+   ...<span class="hljs-type">SfCommand</span>.tableFags,
+   <span class="hljs-symbol">&#x27;my</span>-flags: flags.string({ char: &#x27;m&#x27;, description: <span class="hljs-symbol">&#x27;my</span> flag&#x27; }),
+  }
+}
+</code></pre>
 						</dd>
 					</dl>
 				</div>
@@ -3728,7 +3733,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L155">src/sfCommand.ts:155</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L166">src/sfCommand.ts:166</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">typeof </span><a href="sfcommand.html" class="tsd-signature-type">SfCommand</a></h4>
@@ -3817,7 +3822,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Command._run</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L317">src/sfCommand.ts:317</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L328">src/sfCommand.ts:328</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -3840,7 +3845,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L351">src/sfCommand.ts:351</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L362">src/sfCommand.ts:362</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">SfProject</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -3858,7 +3863,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Command.catch</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L362">src/sfCommand.ts:362</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L373">src/sfCommand.ts:373</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -3881,7 +3886,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L292">src/sfCommand.ts:292</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L303">src/sfCommand.ts:303</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4013,7 +4018,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L398">src/sfCommand.ts:398</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L409">src/sfCommand.ts:409</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4045,7 +4050,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L202">src/sfCommand.ts:202</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L213">src/sfCommand.ts:213</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4139,7 +4144,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L219">src/sfCommand.ts:219</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L230">src/sfCommand.ts:230</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4170,7 +4175,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L174">src/sfCommand.ts:174</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L185">src/sfCommand.ts:185</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4267,7 +4272,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L281">src/sfCommand.ts:281</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L292">src/sfCommand.ts:292</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4315,7 +4320,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides <a href="sfcommand.html">SfCommand</a>.<a href="sfcommand.html#run">run</a></p>
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L432">src/sfCommand.ts:432</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L443">src/sfCommand.ts:443</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -4332,7 +4337,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L264">src/sfCommand.ts:264</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L275">src/sfCommand.ts:275</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4363,7 +4368,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L246">src/sfCommand.ts:246</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L257">src/sfCommand.ts:257</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4394,7 +4399,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L255">src/sfCommand.ts:255</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L266">src/sfCommand.ts:266</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4425,7 +4430,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L227">src/sfCommand.ts:227</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L238">src/sfCommand.ts:238</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4465,7 +4470,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L309">src/sfCommand.ts:309</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L320">src/sfCommand.ts:320</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4506,7 +4511,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Command.toErrorJson</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L344">src/sfCommand.ts:344</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L355">src/sfCommand.ts:355</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4535,7 +4540,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Command.toSuccessJson</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L333">src/sfCommand.ts:333</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L344">src/sfCommand.ts:344</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4563,7 +4568,7 @@ img {
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L237">src/sfCommand.ts:237</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L248">src/sfCommand.ts:248</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">
@@ -4606,7 +4611,7 @@ img {
 						<aside class="tsd-sources">
 							<p>Overrides Command.warn</p>
 							<ul>
-								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/sfCommand.ts#L183">src/sfCommand.ts:183</a></li>
+								<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/sfCommand.ts#L194">src/sfCommand.ts:194</a></li>
 							</ul>
 						</aside>
 						<div class="tsd-comment tsd-typography">

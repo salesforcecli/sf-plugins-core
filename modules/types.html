@@ -2754,25 +2754,28 @@ img {
 				</div>
 				<dl class="tsd-comment-tags">
 					<dt>example</dt>
-					<dd><p>{ data: { theURL: &#39;<a href="https://example.com&#39;">https://example.com&#39;</a> } }
-							// Renders as:
-						Key     Value</p>
-						<hr>
-						<p>The URL <a href="https://example.com">https://example.com</a></p>
+					<dd><pre><code>{ data: { theURL: <span class="hljs-string">&#x27;https://example.com&#x27;</span> } }
+<span class="hljs-regexp">//</span> Renders as:
+Key     Value
+------- -------------------
+The URL https:<span class="hljs-regexp">//</span>example.com
+</code></pre>
 					</dd>
 					<dt>example</dt>
-					<dd><p>{
-							data: { theURL: &#39;<a href="https://example.com&#39;">https://example.com&#39;</a> }
-							keys: { theURL: &#39;Url&#39; },
-							}
-							// Renders as:
-						Key Value</p>
-						<hr>
-						<p>Url <a href="https://example.com">https://example.com</a></p>
+					<dd><pre><code>{
+  dat<span class="hljs-variable">a:</span> { theURL: <span class="hljs-string">&#x27;https://example.com&#x27;</span> }
+  key<span class="hljs-variable">s:</span> { theURL: <span class="hljs-string">&#x27;Url&#x27;</span> },
+}
+// Renders <span class="hljs-keyword">a</span><span class="hljs-variable">s:</span>
+Key Value
+--- -------------------
+Url http<span class="hljs-variable">s:</span>//example.<span class="hljs-keyword">com</span>
+</code></pre>
 						<p>If no environment matches the provided targetEnv, then return null in the data field.</p>
 					</dd>
 					<dt>example</dt>
-					<dd><p>{ data: null }</p>
+					<dd><pre><code>{ <span class="hljs-class"><span class="hljs-keyword">data</span>: null }</span>
+</code></pre>
 					</dd>
 				</dl>
 			</div>
@@ -2809,7 +2812,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Hook<wbr>Meta&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>targetEnv<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>return<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol">; </span>keys<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Keys</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/types/index.ts#L45">src/types/index.ts:45</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/types/index.ts#L52">src/types/index.ts:52</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -2849,7 +2852,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Hook<wbr>Meta&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>options<span class="tsd-signature-symbol">: </span><a href="ux.html#options" class="tsd-signature-type">Options</a><span class="tsd-signature-symbol">; </span>return<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="types.html#table" class="tsd-signature-type">Table</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/types/index.ts#L98">src/types/index.ts:98</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/types/index.ts#L112">src/types/index.ts:112</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -2876,7 +2879,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Hook<wbr>Meta&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>return<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/types/index.ts#L105">src/types/index.ts:105</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/types/index.ts#L119">src/types/index.ts:119</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -2903,7 +2906,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Hook<wbr>Meta<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>return<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/types/index.ts#L112">src/types/index.ts:112</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/types/index.ts#L126">src/types/index.ts:126</a></li>
 					</ul>
 				</aside>
 				<div class="tsd-type-declaration">
@@ -2924,7 +2927,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Hook<wbr>Meta&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>return<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/types/index.ts#L119">src/types/index.ts:119</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/types/index.ts#L133">src/types/index.ts:133</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -2951,7 +2954,7 @@ img {
 				<div class="tsd-signature tsd-kind-icon">Table&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>keys<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">keyof </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">; </span>title<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>type<span class="tsd-signature-symbol">: </span><a href="../enums/types.envtype.html" class="tsd-signature-type">EnvType</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></div>
 				<aside class="tsd-sources">
 					<ul>
-						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1c66419/src/types/index.ts#L87">src/types/index.ts:87</a></li>
+						<li>Defined in <a href="https://github.com/salesforcecli/sf-plugins-core/blob/1652088/src/types/index.ts#L101">src/types/index.ts:101</a></li>
 					</ul>
 				</aside>
 				<h4 class="tsd-type-parameters-title">Type parameters</h4>
