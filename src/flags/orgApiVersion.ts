@@ -25,6 +25,8 @@ export const maxDeprecatedUrl = 'https://help.salesforce.com/s/articleView?id=00
  * We leave this up to the plugins to implement
  *
  * @example
+ *
+ * ```
  * import { Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *    'api-version': Flags.orgApiVersion({
@@ -32,6 +34,7 @@ export const maxDeprecatedUrl = 'https://help.salesforce.com/s/articleView?id=00
  *       description: 'api version for the org'
  *    }),
  * }
+ * ```
  */
 export const orgApiVersionFlag = Flags.custom({
   parse: async (input) => validate(input),

@@ -55,10 +55,13 @@ export namespace Prompter {
  * Generate a formatted table for list and checkbox prompts
  *
  * Each option should contain the same keys as specified in columns.
- * For example,
+ *
+ * @example
+ * ```
  * const columns = { name: 'Name', type: 'Type', path: 'Path' };
  * const options = [{ name: 'foo', type: 'org', path: '/path/to/foo/' }];
  * generateTableChoices(columns, options);
+ * ```
  */
 export function generateTableChoices<T>(
   columns: Dictionary<string>,

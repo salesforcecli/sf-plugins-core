@@ -90,6 +90,9 @@ export namespace Deployer {
 
   /**
    * This interface represents the aggregation of all deployer options, e.g.
+   *
+   * @example
+   * ```
    * {
    *   'Salesforce Apps': {
    *      testLevel: 'RunLocalTests',
@@ -97,6 +100,7 @@ export namespace Deployer {
    *    },
    *   'Salesforce Functions': { username: 'user@salesforce.com' },
    * }
+   * ```
    */
   export type Options<T = AnyJson> = JsonMap & {
     [key: string]: T;

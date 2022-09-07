@@ -52,6 +52,8 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
  * Will not throw if the specified org and default do not exist
  *
  * @example
+ *
+ * ```
  * import { Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // setting length or prefix
@@ -62,6 +64,7 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
  *        description: 'flag2 description',
  *     }),
  * }
+ * ```
  */
 export const optionalOrgFlag = Flags.custom({
   char: 'e',
@@ -77,6 +80,8 @@ export const optionalOrgFlag = Flags.custom({
  * Will throw if no default org exists and none is specified
  *
  * @example
+ *
+ * ```
  * import { Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // setting length or prefix
@@ -88,6 +93,7 @@ export const optionalOrgFlag = Flags.custom({
  *        char: 'o'
  *     }),
  * }
+ * ```
  */
 export const requiredOrgFlag = Flags.custom({
   char: 'e',
@@ -103,6 +109,8 @@ export const requiredOrgFlag = Flags.custom({
  * Will throw if no default deb hub exists and none is specified
  *
  * @example
+ *
+ * ```
  * import { Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // setting length or prefix
@@ -114,6 +122,7 @@ export const requiredOrgFlag = Flags.custom({
  *        char: 'h'
  *     }),
  * }
+ * ```
  */
 export const requiredHubFlag = Flags.custom({
   char: 'v',

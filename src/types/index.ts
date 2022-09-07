@@ -18,13 +18,18 @@ export type JsonObject = {
  * you can specify how a key should be displayed to the user.
  *
  * @example
+ *
+ * ```
  * { data: { theURL: 'https://example.com' } }
  * // Renders as:
  * Key     Value
  * ------- -------------------
  * The URL https://example.com
+ * ```
  *
  * @example
+ *
+ * ```
  * {
  *   data: { theURL: 'https://example.com' }
  *   keys: { theURL: 'Url' },
@@ -33,11 +38,13 @@ export type JsonObject = {
  * Key Value
  * --- -------------------
  * Url https://example.com
- *
+ *```
  * If no environment matches the provided targetEnv, then return null in the data field.
  *
  * @example
+ * ```
  * { data: null }
+ * ```
  */
 export namespace EnvDisplay {
   type Keys<T> = Record<keyof T, string>;
@@ -55,6 +62,8 @@ export namespace EnvDisplay {
  * the `keys` property.
  *
  * @example
+ *
+ * ```
  * {
  *   title: 'My Envs',
  *   data: [{ username: 'foo', theURL: 'https://example.com' }]
@@ -64,8 +73,11 @@ export namespace EnvDisplay {
  * ================================
  * | Username | The URL
  * | foo      | https://example.com
+ *```
  *
  * @example
+ *
+ * ```
  * {
  *   data: [{ username: 'foo', theURL: 'https://example.com' }]
  *   keys: { theURL: 'Url', username: 'Name' },
@@ -76,6 +88,8 @@ export namespace EnvDisplay {
  * ============================
  * | Name | Url
  * | foo  | https://example.com
+ *
+ *```
  */
 export namespace EnvList {
   export enum EnvType {

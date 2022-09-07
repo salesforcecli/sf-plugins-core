@@ -26,6 +26,8 @@ export type DurationFlagConfig = {
  * Defaults to undefined if you don't specify a default
  *
  * @example
+ *
+ * ```
  * import { Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *    wait: Flags.duration({
@@ -36,6 +38,7 @@ export type DurationFlagConfig = {
  *       description: 'Wait time in minutes'
  *    }),
  * }
+ * ```
  */
 export const durationFlag = Flags.custom<Duration, DurationFlagConfig>({
   parse: async (input, _, opts) => validate(input, opts),

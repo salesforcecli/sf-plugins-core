@@ -25,6 +25,8 @@ export type IdFlagConfig = {
  * Id flag with built-in validation.  Short character is `i`
  *
  * @example
+ *
+ * ```
  * import { Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // set length or prefix
@@ -39,6 +41,7 @@ export type IdFlagConfig = {
  *        char: 'j',
  *     }),
  * }
+ * ```
  */
 export const salesforceIdFlag = Flags.custom<string, IdFlagConfig>({
   parse: async (input, _ctx, opts) => validate(input, opts),

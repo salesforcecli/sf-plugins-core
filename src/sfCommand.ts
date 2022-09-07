@@ -56,6 +56,8 @@ export const StandardColors = {
  * See {@link https://github.com/salesforcecli/plugin-template-sf/blob/main/src/commands/hello/world.ts example implementation}.
  *
  * @example
+ *
+ * ```
  * import { SfCommand } from '@salesforce/sf-plugins-core';
  * export type MyJsonOutput = { success: boolean };
  * export default class MyCommand extends SfCommand<MyJsonOutput> {
@@ -63,6 +65,7 @@ export const StandardColors = {
  *    return { success: true };
  *  }
  * }
+ * ```
  */
 
 export abstract class SfCommand<T> extends Command {
@@ -72,6 +75,7 @@ export abstract class SfCommand<T> extends Command {
    * Add a CONFIGURATION VARIABLES section to the help output.
    *
    * @example
+   * ```
    * import { SfCommand, toHelpSection } from '@salesforce/sf-plugins-core';
    * import { OrgConfigProperties } from '@salesforce/core';
    * export default class MyCommand extends SfCommand {
@@ -81,6 +85,7 @@ export abstract class SfCommand<T> extends Command {
    *     OrgConfigProperties.ORG_API_VERSION,
    *   );
    * }
+   * ```
    */
   public static configurationVariablesSection?: HelpSection;
 
@@ -88,6 +93,7 @@ export abstract class SfCommand<T> extends Command {
    * Add an Environment VARIABLES section to the help output.
    *
    * @example
+   * ```
    * import { SfCommand, toHelpSection } from '@salesforce/sf-plugins-core';
    * import { EnvironmentVariable } from '@salesforce/core';
    * export default class MyCommand extends SfCommand {
@@ -97,6 +103,7 @@ export abstract class SfCommand<T> extends Command {
    *     EnvironmentVariable.SF_USE_PROGRESS_BAR,
    *   );
    * }
+   * ```
    */
   public static envVariablesSection?: HelpSection;
 
@@ -104,6 +111,7 @@ export abstract class SfCommand<T> extends Command {
    * Add an ERROR CODES section to the help output.
    *
    * @example
+   * ```
    * import { SfCommand, toHelpSection } from '@salesforce/sf-plugins-core';
    * export default class MyCommand extends SfCommand {
    *   public static errorCodes = toHelpSection(
@@ -111,6 +119,7 @@ export abstract class SfCommand<T> extends Command {
    *     { 0: 'Success', 1: 'Failure' },
    *   );
    * }
+   * ```
    */
   public static errorCodes?: HelpSection;
 
@@ -118,6 +127,7 @@ export abstract class SfCommand<T> extends Command {
    * Flags that you can use for manipulating tables.
    *
    * @example
+   * ```
    * import { SfCommand } from '@salesforce/sf-plugins-core';
    * export default class MyCommand extends SfCommand {
    *   public static flags = {
@@ -125,6 +135,7 @@ export abstract class SfCommand<T> extends Command {
    *    'my-flags: flags.string({ char: 'm', description: 'my flag' }),
    *   }
    * }
+   * ```
    */
   public static tableFlags = CliUx.ux.table.flags;
   /**
