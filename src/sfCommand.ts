@@ -50,6 +50,19 @@ export const StandardColors = {
  *  - error codes help section
  *
  * All implementations of this class need to implement the run() method.
+ *
+ * Additionally, all implementations of this class need to provide a generic type that describes the JSON output.
+ *
+ * See {@link https://github.com/salesforcecli/plugin-template-sf/blob/main/src/commands/hello/world.ts example implementation}.
+ *
+ * @example
+ * import { SfCommand } from '@salesforce/sf-plugins-core';
+ * export type MyJsonOutput = { success: boolean };
+ * export default class MyCommand extends SfCommand<MyJsonOutput> {
+ *   public async run(): Promise<MyJsonOutput> {
+ *    return { success: true };
+ *  }
+ * }
  */
 
 export abstract class SfCommand<T> extends Command {

@@ -13,7 +13,7 @@ The SfCommand abstract class extends [@oclif/core's Command class](https://githu
 - Enable the json flag support by default
 - Provides functions that help place success messages, warnings and errors into the correct location in JSON results
 - Enables additional help sections to the standard oclif command help output
-- Provides access to the [cli-ux cli actions](https://github.com/oclif/cli-ux#cliaction) via the public property `spinner` in SfCommand. This avoids having to import that interface from cli-ux.
+- Provides access to the [cli-ux cli actions](https://github.com/oclif/cli-ux#cliaction). This avoids having to import that interface from cli-ux and manually handling the `--json` flag.
 
 ## Sf Hooks
 
