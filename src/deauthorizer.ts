@@ -8,8 +8,7 @@
 import { JsonMap } from '@salesforce/ts-types';
 
 /**
- * The Deauthorizer is an abstract class that is used to implement a concrete implementations
- * of deauthorizing an environment.
+ * The Deauthorizer is an abstract class that is used to implement a concrete implementation of deauthorizing an environment.
  */
 export abstract class Deauthorizer<T = JsonMap> {
   public async removeAll(): Promise<Deauthorizer.Result> {

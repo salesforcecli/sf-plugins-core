@@ -25,7 +25,7 @@ export type IdFlagConfig = {
  * Id flag with built-in validation.  Short character is `i`
  *
  * @example
- * import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
+ * import { Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
  *     // set length or prefix
  *    'flag-name': salesforceId({ length: 15, startsWith: '00D' }),

@@ -37,24 +37,100 @@ export const StandardColors = {
 };
 
 /**
- * A base command that provides convenient access to CLI help
- * output formatting. Extend this command and set specific properties
- * to add help sections to the command's help output.
+ * A base command that provided common functionality for all sf commands.
+ * Functionality includes:
+ *  - JSON support
+ *  - progress bars
+ *  - spinners
+ *  - prompts
+ *  - stylized output (JSON, url, objects, headers)
+ *  - lifecycle events
+ *  - configuration variables help section
+ *  - environment variables help section
+ *  - error codes help section
  *
- * @extends @oclif/core/command
- * @see https://github.com/oclif/core/blob/main/src/command.ts
+ * All implementations of this class need to implement the run() method.
  */
 
 export abstract class SfCommand<T> extends Command {
   public static SF_ENV = 'SF_ENV';
   public static enableJsonFlag = true;
+  /**
+   * Add a CONFIGURATION VARIABLES section to the help output.
+   *
+   * @example
+   * import { SfCommand, toHelpSection } from '@salesforce/sf-plugins-core';
+   * import { OrgConfigProperties } from '@salesforce/core';
+   * export default class MyCommand extends SfCommand {
+   *   public static configurationVariablesSection = toHelpSection(
+   *     'CONFIGURATION VARIABLES',
+   *     OrgConfigProperties.TARGET_ORG,
+   *     OrgConfigProperties.ORG_API_VERSION,
+   *   );
+   * }
+   */
   public static configurationVariablesSection?: HelpSection;
+
+  /**
+   * Add an Environment VARIABLES section to the help output.
+   *
+   * @example
+   * import { SfCommand, toHelpSection } from '@salesforce/sf-plugins-core';
+   * import { EnvironmentVariable } from '@salesforce/core';
+   * export default class MyCommand extends SfCommand {
+   *   public static envVariablesSection = toHelpSection(
+   *     'ENVIRONMENT VARIABLES',
+   *     EnvironmentVariable.SF_TARGET_ORG,
+   *     EnvironmentVariable.SF_USE_PROGRESS_BAR,
+   *   );
+   * }
+   */
   public static envVariablesSection?: HelpSection;
+
+  /**
+   * Add an ERROR CODES section to the help output.
+   *
+   * @example
+   * import { SfCommand, toHelpSection } from '@salesforce/sf-plugins-core';
+   * export default class MyCommand extends SfCommand {
+   *   public static errorCodes = toHelpSection(
+   *     'ERROR CODES',
+   *     { 0: 'Success', 1: 'Failure' },
+   *   );
+   * }
+   */
   public static errorCodes?: HelpSection;
+
+  /**
+   * Flags that you can use for manipulating tables.
+   *
+   * @example
+   * import { SfCommand } from '@salesforce/sf-plugins-core';
+   * export default class MyCommand extends SfCommand {
+   *   public static flags = {
+   *    ...SfCommand.tableFags,
+   *    'my-flags: flags.string({ char: 'm', description: 'my flag' }),
+   *   }
+   * }
+   */
   public static tableFlags = CliUx.ux.table.flags;
+  /**
+   * Set to true if the command must be executed inside a Salesforce project directory.
+   *
+   * If set to true the command will throw an error if the command is executed outside of a Salesforce project directory.
+   * Additionally, this.project will be set to the current Salesforce project (SfProject).
+   *
+   */
   public static requiresProject: boolean;
 
+  /**
+   * Add a spinner to the console. {@link Spinner}
+   */
   public spinner: Spinner;
+
+  /**
+   * Add a progress bar to the console. {@link Progress}
+   */
   public progress: Progress;
   public project!: SfProject;
 
@@ -78,17 +154,18 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
-   * Log a success message that has the standard success message color applied
+   * Log a success message that has the standard success message color applied.
    *
-   * @param message
-   * @param args
+   * @param message The message to log.
    */
   public logSuccess(message: string): void {
     this.log(StandardColors.success(message));
   }
+
   /**
-   * Log warning to users. If --json is enabled, then the warning
-   * will be added to the json output under the warnings property.
+   * Log warning to users. If --json is enabled, then the warning will be added to the json output under the warnings property.
+   *
+   * @param input {@link SfCommand.Warning} The message to log.
    */
   public warn(input: SfCommand.Warning): SfCommand.Warning {
     const colorizedArgs: string[] = [];
@@ -106,6 +183,8 @@ export abstract class SfCommand<T> extends Command {
 
   /**
    * Log info message to users.
+   *
+   * @param input {@link SfCommand.Info} The message to log.
    */
   public info(input: SfCommand.Info): void {
     const colorizedArgs: string[] = [];
@@ -120,8 +199,9 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
-   * Warn user about sensitive information (access tokens, etc...) before
-   * logging to the console.
+   * Warn user about sensitive information (access tokens, etc...) before logging to the console.
+   *
+   * @param msg The message to log.
    */
   public logSensitive(msg?: string): void {
     this.warn(messages.getMessage('warning.security'));
@@ -137,6 +217,9 @@ export abstract class SfCommand<T> extends Command {
 
   /**
    * Log a stylized url to the console. Will automatically be suppressed when --json flag is present.
+   *
+   * @param text The text to display for the url.
+   * @param uri The url to display.
    */
   public url(text: string, uri: string, params = {}): void {
     this.ux.url(text, uri, params);
@@ -144,6 +227,8 @@ export abstract class SfCommand<T> extends Command {
 
   /**
    * Log stylized JSON to the console. Will automatically be suppressed when --json flag is present.
+   *
+   * @param obj The JSON to log.
    */
   public styledJSON(obj: AnyJson): void {
     this.ux.styledJSON(obj);
@@ -151,6 +236,8 @@ export abstract class SfCommand<T> extends Command {
 
   /**
    * Log stylized object to the console. Will automatically be suppressed when --json flag is present.
+   *
+   * @param obj The object to log.
    */
   public styledObject(obj: AnyJson): void {
     this.ux.styledObject(obj);
@@ -158,6 +245,8 @@ export abstract class SfCommand<T> extends Command {
 
   /**
    * Log stylized header to the console. Will automatically be suppressed when --json flag is present.
+   *
+   * @param text the text to display as a header.
    */
   public styledHeader(text: string): void {
     this.ux.styledHeader(text);
@@ -181,7 +270,7 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
-   * Simplified prompt for single-question confirmation.  Times out and throws after 10s
+   * Simplified prompt for single-question confirmation. Times out and throws after 10s
    *
    * @param message text to display.  Do not include a question mark.
    * @param ms milliseconds to wait for user input.  Defaults to 10s.

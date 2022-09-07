@@ -27,9 +27,12 @@ interface SfHooks<T = unknown> extends Hooks {
 type GenericHook<T extends keyof SfHooks, P> = Hook<T, SfHooks<P>>;
 
 /**
- * Class that provides a static method to run a well known hook.
+ * Class that provides a static method to run a pre-defined sf hook. See {@link SfHooks}.
  */
 export class SfHook {
+  /**
+   * Executes a well known Unified CLI hook. See {@link SfHooks}.
+   */
   public static async run<T extends keyof SfHooks>(
     config: Config,
     hookName: T,

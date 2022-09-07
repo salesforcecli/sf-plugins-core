@@ -23,6 +23,15 @@ export const maxDeprecatedUrl = 'https://help.salesforce.com/s/articleView?id=00
  *
  * CAVEAT: unlike the apiversion flag on sfdxCommand, this does not set the version on the org/connection
  * We leave this up to the plugins to implement
+ *
+ * @example
+ * import { Flags } from '@salesforce/sf-plugins-core';
+ * public static flags = {
+ *    'api-version': Flags.orgApiVersion({
+ *       char: 'a',
+ *       description: 'api version for the org'
+ *    }),
+ * }
  */
 export const orgApiVersionFlag = Flags.custom({
   parse: async (input) => validate(input),
