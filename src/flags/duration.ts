@@ -26,9 +26,9 @@ export type DurationFlagConfig = {
  * Defaults to undefined if you don't specify a default
  *
  * @example
- * import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
+ * import { Flags } from '@salesforce/sf-plugins-core';
  * public static flags = {
- *    'wait': duration({
+ *    wait: Flags.duration({
  *       min: 1,
  *       unit: 'minutes'
  *       defaultValue: 33,
