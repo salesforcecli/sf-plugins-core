@@ -37,7 +37,7 @@
     "@salesforce/kit": "^1.5.44",
     "@salesforce/ts-types": "^1.5.20",
     "chalk": "^4",
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.4"
   },
   "devDependencies": {
     "@oclif/test": "^2.1.0",
