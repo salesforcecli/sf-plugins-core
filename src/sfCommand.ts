@@ -163,10 +163,6 @@ export abstract class SfCommand<T> extends Command {
   private prompter: Prompter;
   private lifecycle: Lifecycle;
 
-  protected get statics(): typeof SfCommand {
-    return this.constructor as typeof SfCommand;
-  }
-
   public constructor(argv: string[], config: Config) {
     super(argv, config);
     const outputEnabled = !this.jsonEnabled();
@@ -175,6 +171,10 @@ export abstract class SfCommand<T> extends Command {
     this.ux = new Ux(outputEnabled);
     this.prompter = new Prompter();
     this.lifecycle = Lifecycle.getInstance();
+  }
+
+  protected get statics(): typeof SfCommand {
+    return this.constructor as typeof SfCommand;
   }
 
   /**
@@ -198,7 +198,7 @@ export abstract class SfCommand<T> extends Command {
 
     colorizedArgs.push(`${StandardColors.warning(messages.getMessage('warning.prefix'))} ${message}`);
     colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: StandardColors.info })
+      ...this.formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
     );
 
     this.log(colorizedArgs.join(os.EOL));
@@ -216,7 +216,7 @@ export abstract class SfCommand<T> extends Command {
 
     colorizedArgs.push(`${StandardColors.info(message)}`);
     colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions || [], { actionColor: StandardColors.info })
+      ...this.formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
     );
 
     this.log(colorizedArgs.join(os.EOL));
@@ -289,7 +289,10 @@ export abstract class SfCommand<T> extends Command {
    *   await this.prompt();
    * }
    */
-  public async prompt<R = Prompter.Answers>(questions: Prompter.Questions<R>, initialAnswers?: Partial<R>): Promise<R> {
+  public async prompt<R extends Prompter.Answers>(
+    questions: Prompter.Questions<R>,
+    initialAnswers?: Partial<R>
+  ): Promise<R> {
     return this.prompter.prompt(questions, initialAnswers);
   }
 
@@ -317,7 +320,7 @@ export abstract class SfCommand<T> extends Command {
   /**
    * Prompt user for information with a timeout (in milliseconds). See https://www.npmjs.com/package/inquirer for more.
    */
-  public async timedPrompt<R = Prompter.Answers>(
+  public async timedPrompt<R extends Prompter.Answers>(
     questions: Prompter.Questions<R>,
     ms = 10_000,
     initialAnswers?: Partial<R>
@@ -359,6 +362,7 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
+  // eslint-disable-next-line class-methods-use-this
   protected async assignProject(): Promise<SfProject> {
     try {
       return await SfProject.resolve();
@@ -411,7 +415,7 @@ export abstract class SfCommand<T> extends Command {
     const errorCode = error.code ? ` (${error.code})` : '';
     const errorPrefix = `${StandardColors.error(messages.getMessage('error.prefix', [errorCode]))}`;
     colorizedArgs.push(`${errorPrefix} ${error.message}`);
-    colorizedArgs.push(...this.formatActions(error.actions || []));
+    colorizedArgs.push(...this.formatActions(error.actions ?? []));
     if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
       colorizedArgs.push(StandardColors.info(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
     }
@@ -425,6 +429,7 @@ export abstract class SfCommand<T> extends Command {
    * @param options
    * @private
    */
+  // eslint-disable-next-line class-methods-use-this
   private formatActions(
     actions: string[],
     options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }

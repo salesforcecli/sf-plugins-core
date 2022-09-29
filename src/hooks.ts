@@ -38,7 +38,7 @@ export class SfHook {
     hookName: T,
     options: SfHooks[T]['options'] = {}
   ): Promise<Hook.Result<SfHooks[T]['return']>> {
-    const timeout = Duration.milliseconds(env.getNumber('SF_HOOK_TIMEOUT_MS') || 5000);
+    const timeout = Duration.milliseconds(env.getNumber('SF_HOOK_TIMEOUT_MS') ?? 5000);
     const results = await config.runHook<T>(hookName, options, timeout.milliseconds);
     results.failures.forEach((failure) => {
       CliUx.ux.debug(`Failed to run ${hookName} hook for ${failure.plugin.name}`);

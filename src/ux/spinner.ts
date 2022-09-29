@@ -18,6 +18,22 @@ export class Spinner extends UxBase {
   }
 
   /**
+   * Get the status of the current spinner.
+   */
+  // eslint-disable-next-line class-methods-use-this
+  public get status(): string | undefined {
+    return CliUx.ux.action.status;
+  }
+
+  /**
+   * Set the status of the current spinner.
+   */
+  // eslint-disable-next-line class-methods-use-this
+  public set status(status: string | undefined) {
+    CliUx.ux.action.status = status;
+  }
+
+  /**
    * Start a spinner on the console.
    */
   public start(action: string, status?: string, opts?: { stdout?: boolean }): void {
@@ -29,20 +45,6 @@ export class Spinner extends UxBase {
    */
   public stop(msg?: string): void {
     this.maybeNoop(() => CliUx.ux.action.stop(msg));
-  }
-
-  /**
-   * Set the status of the current spinner.
-   */
-  public set status(status: string | undefined) {
-    CliUx.ux.action.status = status;
-  }
-
-  /**
-   * Get the status of the current spinner.
-   */
-  public get status(): string | undefined {
-    return CliUx.ux.action.status;
   }
 
   /**

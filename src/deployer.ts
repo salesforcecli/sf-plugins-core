@@ -4,10 +4,11 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
+/* eslint-disable @typescript-eslint/explicit-member-accessibility */
 
 import { EventEmitter } from 'events';
 import { AnyJson, JsonMap } from '@salesforce/ts-types';
-import { QuestionCollection } from 'inquirer';
+import { QuestionCollection, Answers } from 'inquirer';
 import { CliUx } from '@oclif/core';
 import { Prompter } from './ux';
 
@@ -37,12 +38,13 @@ export abstract class Deployer extends EventEmitter {
   /**
    * Method for displaying deploy progress to the user
    */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function, class-methods-use-this
   public progress(current: number, total: number, message: string): void {}
 
   /**
    * Log messages to the console
    */
+  // eslint-disable-next-line class-methods-use-this
   public log(msg?: string | undefined, ...args: string[]): void {
     CliUx.ux.log(msg, ...args);
   }
@@ -50,7 +52,7 @@ export abstract class Deployer extends EventEmitter {
   /**
    * Prompt user for additional information
    */
-  public async prompt<T>(questions: QuestionCollection<T>, initialAnswers?: Partial<T>): Promise<T> {
+  public async prompt<T extends Answers>(questions: QuestionCollection<T>, initialAnswers?: Partial<T>): Promise<T> {
     const answers = await this.prompter.prompt<T>(questions, initialAnswers);
     return answers;
   }
