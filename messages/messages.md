@@ -73,3 +73,11 @@ Try this:
 # warning.CommandInBeta
 
 This command is currently in beta. Any aspect of this command can change without advanced notice. Don't use beta commands in your scripts.
+
+# error.InvalidArgumentFormat
+
+Set varargs with this format: key=value or key="value with spaces".
+
+# error.DuplicateArgument
+
+Found duplicate argument %s.

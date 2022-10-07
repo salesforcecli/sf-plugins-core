@@ -14,7 +14,7 @@ import {
   SfdxPropertyKeys,
   SFDX_ALLOWED_PROPERTIES,
 } from '@salesforce/core';
-import { toHelpSection } from '../../src/util';
+import { parseVarArgs, toHelpSection } from '../../src/util';
 
 describe('toHelpSection', () => {
   it('should produce help section for env vars', () => {
@@ -84,5 +84,34 @@ describe('toHelpSection', () => {
       name: 'foo bar',
       description: 'hello world',
     });
+  });
+});
+
+describe('parseVarArgs', () => {
+  it('should parse varargs', () => {
+    const varargs = parseVarArgs({}, ['key1=value1']);
+    expect(varargs).to.deep.equal({ key1: 'value1' });
+  });
+
+  it('should parse varargs and not arguments', () => {
+    const varargs = parseVarArgs({ arg1: 'foobar' }, ['foobar', 'key1=value1']);
+    expect(varargs).to.deep.equal({ key1: 'value1' });
+  });
+
+  it('should parse single set of varargs', () => {
+    const varargs = parseVarArgs({ arg1: 'foobar' }, ['foobar', 'key1', 'value1']);
+    expect(varargs).to.deep.equal({ key1: 'value1' });
+  });
+
+  it('should throw if invalid format', () => {
+    expect(() => parseVarArgs({ arg1: 'foobar' }, ['foobar', 'key1=value1', 'key2:value2'])).to.throw(
+      'Set varargs with this format: key=value or key="value with spaces". key2:value2'
+    );
+  });
+
+  it('should throw if duplicates exist', () => {
+    expect(() => parseVarArgs({ arg1: 'foobar' }, ['foobar', 'key1=value1', 'key1=value1'])).to.throw(
+      'Found duplicate argument key1.'
+    );
   });
 });
