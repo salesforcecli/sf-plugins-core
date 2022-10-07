@@ -42,9 +42,7 @@ export type DurationFlagConfig = {
  */
 export const durationFlag = Flags.custom<Duration, DurationFlagConfig>({
   parse: async (input, _, opts) => validate(input, opts),
-  default: async (context) => {
-    return context.options.defaultValue ? toDuration(context.options.defaultValue, context.options.unit) : undefined;
-  },
+  default: async (context) => context.options.defaultValue ? toDuration(context.options.defaultValue, context.options.unit) : undefined,
 });
 
 const validate = (input: string, config: DurationFlagConfig): Duration => {
@@ -69,6 +67,4 @@ const validate = (input: string, config: DurationFlagConfig): Duration => {
   return toDuration(parsedInput, unit);
 };
 
-const toDuration = (parsedInput: number, unit: DurationUnit): Duration => {
-  return Duration[unit](parsedInput);
-};
+const toDuration = (parsedInput: number, unit: DurationUnit): Duration => Duration[unit](parsedInput);

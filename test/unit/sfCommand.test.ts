@@ -12,6 +12,7 @@ import { SfError } from '@salesforce/core';
 import { SfCommand } from '../../src/sfCommand';
 
 class TestCommand extends SfCommand<string> {
+  // eslint-disable-next-line class-methods-use-this
   public async run(): Promise<string> {
     return Promise.resolve('');
   }

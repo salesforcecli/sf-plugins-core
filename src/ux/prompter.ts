@@ -13,7 +13,11 @@ export class Prompter {
   /**
    * Prompt user for information. See https://www.npmjs.com/package/inquirer for more.
    */
-  public async prompt<T = Prompter.Answers>(questions: Prompter.Questions<T>, initialAnswers?: Partial<T>): Promise<T> {
+  // eslint-disable-next-line class-methods-use-this
+  public async prompt<T extends Prompter.Answers>(
+    questions: Prompter.Questions<T>,
+    initialAnswers?: Partial<T>
+  ): Promise<T> {
     const answers = await prompt<T>(questions, initialAnswers);
     return answers;
   }
@@ -21,7 +25,8 @@ export class Prompter {
   /**
    * Prompt user for information with a timeout (in milliseconds). See https://www.npmjs.com/package/inquirer for more.
    */
-  public async timedPrompt<T = Prompter.Answers>(
+  // eslint-disable-next-line class-methods-use-this
+  public async timedPrompt<T extends Prompter.Answers>(
     questions: Prompter.Questions<T>,
     ms = 10000,
     initialAnswers?: Partial<T>
@@ -48,7 +53,7 @@ export class Prompter {
 
 export namespace Prompter {
   export type Answers<T = Record<string, unknown>> = T & Record<string, unknown>;
-  export type Questions<T> = QuestionCollection<T>;
+  export type Questions<T extends Answers> = QuestionCollection<T>;
 }
 
 /**

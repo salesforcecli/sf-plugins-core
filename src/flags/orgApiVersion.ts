@@ -38,7 +38,7 @@ export const maxDeprecatedUrl = 'https://help.salesforce.com/s/articleView?id=00
  */
 export const orgApiVersionFlag = Flags.custom({
   parse: async (input) => validate(input),
-  default: async () => await getDefaultFromConfig(),
+  default: async () => getDefaultFromConfig(),
   description: messages.getMessage('flags.apiVersion.description'),
 });
 

@@ -35,9 +35,7 @@ export function toHelpSection(
   const body = vars
     .flatMap((v) => {
       if (typeof v === 'string') {
-        const orgConfig = ORG_CONFIG_ALLOWED_PROPERTIES.find(({ key }) => {
-          return key === v;
-        });
+        const orgConfig = ORG_CONFIG_ALLOWED_PROPERTIES.find(({ key }) => key === v);
         if (orgConfig) {
           return { name: orgConfig.key, description: orgConfig.description };
         }
