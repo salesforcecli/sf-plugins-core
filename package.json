@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "1.14.1",
+  "version": "1.15.0",
   "description": "Utils for writing deploy and retrieve plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
@@ -33,7 +33,7 @@
   ],
   "dependencies": {
     "@oclif/core": "^1.16.4",
-    "@salesforce/core": "^3.30.9",
+    "@salesforce/core": "^3.30.14",
     "@salesforce/kit": "^1.5.44",
     "@salesforce/ts-types": "^1.5.20",
     "chalk": "^4",
