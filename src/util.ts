@@ -12,7 +12,11 @@ import {
   SfdxPropertyKeys,
   SFDX_ALLOWED_PROPERTIES,
   SUPPORTED_ENV_VARS,
+  Messages,
 } from '@salesforce/core';
+
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 export type HelpSection = {
   header: string;
@@ -56,4 +60,36 @@ export function toHelpSection(
     })
     .filter((b) => b);
   return { header, body };
+}
+
+export function parseVarArgs(args: Record<string, unknown>, argv: string[]): Record<string, unknown> {
+  const final: Record<string, unknown> = {};
+  const argVals = Object.values(args);
+
+  // Remove arguments from varargs
+  const varargs = argv.filter((val) => !argVals.includes(val));
+
+  // Support `config set key value`
+  if (varargs.length === 2 && !varargs[0].includes('=')) {
+    return { [varargs[0]]: varargs[1] };
+  }
+
+  // Ensure that all args are in the right format (e.g. key=value key1=value1)
+  varargs.forEach((arg) => {
+    const split = arg.split('=');
+
+    if (split.length !== 2) {
+      throw messages.createError('error.InvalidArgumentFormat', [arg]);
+    }
+
+    const [name, value] = split;
+
+    if (final[name]) {
+      throw messages.createError('error.DuplicateArgument', [name]);
+    }
+
+    final[name] = value || undefined;
+  });
+
+  return final;
 }
