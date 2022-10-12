@@ -93,6 +93,16 @@ describe('parseVarArgs', () => {
     expect(varargs).to.deep.equal({ key1: 'value1' });
   });
 
+  it('should parse multiple varargs', () => {
+    const varargs = parseVarArgs({}, ['key1=value1', 'key2=value2']);
+    expect(varargs).to.deep.equal({ key1: 'value1', key2: 'value2' });
+  });
+
+  it('should allow an empty value', () => {
+    const varargs = parseVarArgs({}, ['key1=']);
+    expect(varargs).to.deep.equal({ key1: undefined });
+  });
+
   it('should parse varargs and not arguments', () => {
     const varargs = parseVarArgs({ arg1: 'foobar' }, ['foobar', 'key1=value1']);
     expect(varargs).to.deep.equal({ key1: 'value1' });
