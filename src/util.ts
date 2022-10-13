@@ -62,8 +62,8 @@ export function toHelpSection(
   return { header, body };
 }
 
-export function parseVarArgs(args: Record<string, unknown>, argv: string[]): Record<string, unknown> {
-  const final: Record<string, unknown> = {};
+export function parseVarArgs(args: Record<string, unknown>, argv: string[]): Record<string, string | undefined> {
+  const final: Record<string, string | undefined> = {};
   const argVals = Object.values(args);
 
   // Remove arguments from varargs
