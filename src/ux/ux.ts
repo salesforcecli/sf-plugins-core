@@ -8,10 +8,20 @@
 import { CliUx } from '@oclif/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { UxBase } from './base';
+import { Prompter } from './prompter';
+import { Spinner } from './spinner';
 
+/**
+ * UX methods for plugins. Automatically suppress console output if outputEnabled is set to false.
+ */
 export class Ux extends UxBase {
+  public spinner: Spinner;
+  public prompter: Prompter;
+
   public constructor(outputEnabled: boolean) {
     super(outputEnabled);
+    this.spinner = new Spinner(outputEnabled);
+    this.prompter = new Prompter();
   }
 
   public table<T extends Ux.Table.Data>(data: T[], columns: Ux.Table.Columns<T>, options?: Ux.Table.Options): void {

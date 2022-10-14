@@ -15,6 +15,8 @@ import {
   Mode,
   EnvironmentVariable,
   SfError,
+  ConfigAggregator,
+  SfdxConfigAggregator,
 } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
@@ -158,6 +160,11 @@ export abstract class SfCommand<T> extends Command {
   public progress: Progress;
   public project!: SfProject;
 
+  /**
+   * ConfigAggregator instance for accessing global and local configuration.
+   */
+  public configAggregator!: ConfigAggregator;
+
   private warnings: SfCommand.Warning[] = [];
   private ux: Ux;
   private prompter: Prompter;
@@ -166,10 +173,10 @@ export abstract class SfCommand<T> extends Command {
   public constructor(argv: string[], config: Config) {
     super(argv, config);
     const outputEnabled = !this.jsonEnabled();
-    this.spinner = new Spinner(outputEnabled);
     this.progress = new Progress(outputEnabled && envVars.getBoolean(EnvironmentVariable.SF_USE_PROGRESS_BAR, true));
     this.ux = new Ux(outputEnabled);
-    this.prompter = new Prompter();
+    this.spinner = this.ux.spinner;
+    this.prompter = this.ux.prompter;
     this.lifecycle = Lifecycle.getInstance();
   }
 
@@ -329,6 +336,9 @@ export abstract class SfCommand<T> extends Command {
   }
 
   public async _run<R>(): Promise<R | undefined> {
+    this.configAggregator =
+      this.config.bin === 'sfdx' ? await SfdxConfigAggregator.create() : await ConfigAggregator.create();
+
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();
     }

@@ -42,7 +42,8 @@ export type DurationFlagConfig = {
  */
 export const durationFlag = Flags.custom<Duration, DurationFlagConfig>({
   parse: async (input, _, opts) => validate(input, opts),
-  default: async (context) => context.options.defaultValue ? toDuration(context.options.defaultValue, context.options.unit) : undefined,
+  default: async (context) =>
+    context.options.defaultValue ? toDuration(context.options.defaultValue, context.options.unit) : undefined,
 });
 
 const validate = (input: string, config: DurationFlagConfig): Duration => {
