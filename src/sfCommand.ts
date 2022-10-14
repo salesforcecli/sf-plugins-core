@@ -18,6 +18,7 @@ import {
   ConfigAggregator,
   SfdxConfigAggregator,
 } from '@salesforce/core';
+import { env } from '@salesforce/kit';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
 import { Progress, Prompter, Spinner, Ux } from './ux';
@@ -162,6 +163,29 @@ export abstract class SfCommand<T> extends Command {
 
   /**
    * ConfigAggregator instance for accessing global and local configuration.
+   *
+   * NOTE: If the active executable is sfdx, this will be an instance of SfdxConfigAggregator, which supports
+   * the deprecated sfdx config vars like defaultusername, defaultdevhubusername, apiversion, etc. Otherwise,
+   * it will be an instance of ConfigAggregator will only supports the config vars introduce by @salesforce/core@v3.
+   *
+   * The executable is determined by `this.config.bin` which is supplied by the base oclif/core Command class. The value
+   * of `this.config.bin` will be the executable running (e.g. sfdx or sf) or, for local development (e.g. using bin/dev),
+   * it will be the value of oclif.bin in the plugin's package.json.
+   *
+   * If you need to write NUTS for a plugin that needs to work with both sets of config vars you can
+   * use set the `SF_BIN_OVERRIDE` to `sfdx` to force configAggregator to be an instance of SfdxConfigAggregator or
+   * `sf` to force configAggregator to be an instance of ConfigAggregator.
+   *
+   * @example
+   * ```
+   * import { execCmd } from '@salesforce/cli-plugins-testkit';
+   * execCmd('config:set defaultusername=test@example.com', {
+   *   env: {
+   *     ...process.env,
+   *     SF_BIN_OVERRIDE: 'sfdx',
+   *   }
+   * })
+   * ```
    */
   public configAggregator!: ConfigAggregator;
 
@@ -336,8 +360,8 @@ export abstract class SfCommand<T> extends Command {
   }
 
   public async _run<R>(): Promise<R | undefined> {
-    this.configAggregator =
-      this.config.bin === 'sfdx' ? await SfdxConfigAggregator.create() : await ConfigAggregator.create();
+    const bin = env.getString('SF_BIN_OVERRIDE') ?? env.getString('SFDX_BIN_OVERRIDE') ?? this.config.bin;
+    this.configAggregator = bin === 'sfdx' ? await SfdxConfigAggregator.create() : await ConfigAggregator.create();
 
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();
