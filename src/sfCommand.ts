@@ -173,7 +173,7 @@ export abstract class SfCommand<T> extends Command {
    * it will be the value of oclif.bin in the plugin's package.json.
    *
    * If you need to write NUTS for a plugin that needs to work with both sets of config vars you can
-   * use set the `SF_BIN_OVERRIDE` to `sfdx` to force configAggregator to be an instance of SfdxConfigAggregator or
+   * use set the `SF_USE_DEPRECATED_CONFIG_VARS` to `true` to force configAggregator to be an instance of SfdxConfigAggregator or
    * `sf` to force configAggregator to be an instance of ConfigAggregator.
    *
    * @example
@@ -182,7 +182,7 @@ export abstract class SfCommand<T> extends Command {
    * execCmd('config:set defaultusername=test@example.com', {
    *   env: {
    *     ...process.env,
-   *     SF_BIN_OVERRIDE: 'sfdx',
+   *     SF_USE_DEPRECATED_CONFIG_VARS: true,
    *   }
    * })
    * ```
@@ -360,8 +360,12 @@ export abstract class SfCommand<T> extends Command {
   }
 
   public async _run<R>(): Promise<R | undefined> {
-    const bin = env.getString('SF_BIN_OVERRIDE') ?? env.getString('SFDX_BIN_OVERRIDE') ?? this.config.bin;
-    this.configAggregator = bin === 'sfdx' ? await SfdxConfigAggregator.create() : await ConfigAggregator.create();
+    this.configAggregator =
+      this.config.bin === 'sfdx' ??
+      env.getBoolean('SF_USE_DEPRECATED_CONFIG_VARS') ??
+      env.getBoolean('SFDX_USE_DEPRECATED_CONFIG_VARS')
+        ? await SfdxConfigAggregator.create()
+        : await ConfigAggregator.create();
 
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();
