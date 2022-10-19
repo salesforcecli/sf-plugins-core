@@ -21,7 +21,7 @@ import { Spinner } from './spinner';
  *
  * class MyCommand extends SfCommand<AnyJson> {
  *   public async run(): Promise<AnyJson> {
- *     const ux = new Ux(this.jsonEnabled());
+ *     const ux = new Ux(!this.jsonEnabled());
  *   }
  * }
  *
@@ -31,10 +31,29 @@ export class Ux extends UxBase {
   public spinner: Spinner;
   public prompter: Prompter;
 
-  public constructor(outputEnabled: boolean) {
+  public constructor(public readonly outputEnabled: boolean) {
     super(outputEnabled);
     this.spinner = new Spinner(outputEnabled);
     this.prompter = new Prompter();
+  }
+
+  /**
+   * Log a message to the console. This will be automatically suppressed if output is disabled.
+   *
+   * @param message Message to log. Formatting is supported.
+   * @param args Args to be used for formatting.
+   */
+  public log(message?: string, ...args: string[]): void {
+    this.maybeNoop(() => CliUx.ux.log(message, ...args));
+  }
+
+  /**
+   * Log a warning message to the console. This will be automatically suppressed if output is disabled.
+   *
+   * @param message Warning message to log.
+   */
+  public warn(message: string | Error): void {
+    this.maybeNoop(() => CliUx.ux.warn(message));
   }
 
   /**
@@ -72,15 +91,16 @@ export class Ux extends UxBase {
    * Display stylized object to the console. This will be automatically suppressed if output is disabled.
    *
    * @param obj Object to display
+   * @param keys Keys of object to display
    */
-  public styledObject(obj: AnyJson): void {
-    this.maybeNoop(() => CliUx.ux.styledObject(obj));
+  public styledObject(obj: AnyJson, keys?: string[]): void {
+    this.maybeNoop(() => CliUx.ux.styledObject(obj, keys));
   }
 
   /**
    * Display stylized header to the console. This will be automatically suppressed if output is disabled.
    *
-   * @param obj header to display
+   * @param text header to display
    */
   public styledHeader(text: string): void {
     this.maybeNoop(() => CliUx.ux.styledHeader(text));
