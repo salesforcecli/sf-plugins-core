@@ -174,7 +174,7 @@ export abstract class SfCommand<T> extends Command {
    *
    * If you need to write NUTS for a plugin that needs to work with both sets of config vars you can
    * use set the `SF_USE_DEPRECATED_CONFIG_VARS` to `true` to force configAggregator to be an instance of SfdxConfigAggregator or
-   * `sf` to force configAggregator to be an instance of ConfigAggregator.
+   * `false` to force configAggregator to be an instance of ConfigAggregator.
    *
    * @example
    * ```
