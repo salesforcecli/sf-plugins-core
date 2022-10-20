@@ -15,7 +15,10 @@ import {
   Mode,
   EnvironmentVariable,
   SfError,
+  ConfigAggregator,
+  SfdxConfigAggregator,
 } from '@salesforce/core';
+import { env } from '@salesforce/kit';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
 import { Progress, Prompter, Spinner, Ux } from './ux';
@@ -158,6 +161,34 @@ export abstract class SfCommand<T> extends Command {
   public progress: Progress;
   public project!: SfProject;
 
+  /**
+   * ConfigAggregator instance for accessing global and local configuration.
+   *
+   * NOTE: If the active executable is sfdx, this will be an instance of SfdxConfigAggregator, which supports
+   * the deprecated sfdx config vars like defaultusername, defaultdevhubusername, apiversion, etc. Otherwise,
+   * it will be an instance of ConfigAggregator will only supports the config vars introduce by @salesforce/core@v3.
+   *
+   * The executable is determined by `this.config.bin` which is supplied by the base oclif/core Command class. The value
+   * of `this.config.bin` will be the executable running (e.g. sfdx or sf) or, for local development (e.g. using bin/dev),
+   * it will be the value of oclif.bin in the plugin's package.json.
+   *
+   * If you need to write NUTS for a plugin that needs to work with both sets of config vars you can
+   * use set the `SF_USE_DEPRECATED_CONFIG_VARS` to `true` to force configAggregator to be an instance of SfdxConfigAggregator or
+   * `false` to force configAggregator to be an instance of ConfigAggregator.
+   *
+   * @example
+   * ```
+   * import { execCmd } from '@salesforce/cli-plugins-testkit';
+   * execCmd('config:set defaultusername=test@example.com', {
+   *   env: {
+   *     ...process.env,
+   *     SF_USE_DEPRECATED_CONFIG_VARS: true,
+   *   }
+   * })
+   * ```
+   */
+  public configAggregator!: ConfigAggregator;
+
   private warnings: SfCommand.Warning[] = [];
   private ux: Ux;
   private prompter: Prompter;
@@ -166,10 +197,10 @@ export abstract class SfCommand<T> extends Command {
   public constructor(argv: string[], config: Config) {
     super(argv, config);
     const outputEnabled = !this.jsonEnabled();
-    this.spinner = new Spinner(outputEnabled);
     this.progress = new Progress(outputEnabled && envVars.getBoolean(EnvironmentVariable.SF_USE_PROGRESS_BAR, true));
     this.ux = new Ux(outputEnabled);
-    this.prompter = new Prompter();
+    this.spinner = this.ux.spinner;
+    this.prompter = this.ux.prompter;
     this.lifecycle = Lifecycle.getInstance();
   }
 
@@ -329,6 +360,13 @@ export abstract class SfCommand<T> extends Command {
   }
 
   public async _run<R>(): Promise<R | undefined> {
+    this.configAggregator =
+      this.config.bin === 'sfdx' ??
+      env.getBoolean('SF_USE_DEPRECATED_CONFIG_VARS') ??
+      env.getBoolean('SFDX_USE_DEPRECATED_CONFIG_VARS')
+        ? await SfdxConfigAggregator.create()
+        : await ConfigAggregator.create();
+
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();
     }

@@ -8,7 +8,7 @@
 import { AnyFunction } from '@salesforce/ts-types';
 
 export class UxBase {
-  public constructor(protected outputEnabled: boolean) {}
+  public constructor(public readonly outputEnabled: boolean) {}
 
   protected maybeNoop(fn: AnyFunction<unknown>): void {
     if (this.outputEnabled) fn();
