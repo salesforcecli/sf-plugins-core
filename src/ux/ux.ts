@@ -28,12 +28,14 @@ import { Spinner } from './spinner';
  * ```
  */
 export class Ux extends UxBase {
-  public spinner: Spinner;
-  public prompter: Prompter;
+  public readonly spinner: Spinner;
+  public readonly prompter: Prompter;
+  public readonly outputEnabled: boolean;
 
-  public constructor(public readonly outputEnabled: boolean) {
-    super(outputEnabled);
-    this.spinner = new Spinner(outputEnabled);
+  public constructor({ jsonEnabled } = { jsonEnabled: false }) {
+    super(!jsonEnabled);
+    this.outputEnabled = !jsonEnabled;
+    this.spinner = new Spinner(this.outputEnabled);
     this.prompter = new Prompter();
   }
 

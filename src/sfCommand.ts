@@ -196,9 +196,10 @@ export abstract class SfCommand<T> extends Command {
 
   public constructor(argv: string[], config: Config) {
     super(argv, config);
-    const outputEnabled = !this.jsonEnabled();
-    this.progress = new Progress(outputEnabled && envVars.getBoolean(EnvironmentVariable.SF_USE_PROGRESS_BAR, true));
-    this.ux = new Ux(outputEnabled);
+    this.ux = new Ux({ jsonEnabled: this.jsonEnabled() });
+    this.progress = new Progress(
+      this.ux.outputEnabled && envVars.getBoolean(EnvironmentVariable.SF_USE_PROGRESS_BAR, true)
+    );
     this.spinner = this.ux.spinner;
     this.prompter = this.ux.prompter;
     this.lifecycle = Lifecycle.getInstance();
