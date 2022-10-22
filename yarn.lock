@@ -540,10 +540,10 @@
     is-wsl "^2.1.1"
     tslib "^2.0.0"
 
-"@oclif/core@^1.18.0", "@oclif/core@^1.19.0":
-  version "1.19.0"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.19.0.tgz#b2e5260c2344e5905312efd7538daacaedb75cbf"
-  integrity sha512-4R087E3TAG6Q9cvr+4wnlryHbciioXkZmUF/Qmc08dReoFus1BIfwtR5kUa/thNmQBw5oeGnrxnl9yA/TaxAmA==
+"@oclif/core@^1.18.0", "@oclif/core@^1.19.1":
+  version "1.19.1"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-1.19.1.tgz#6dba92cfb7f1412e43068db3e9716215786f85a3"
+  integrity sha512-+LtMYQNzfLoYUcBTsWSFQ/4mqiA70XRU6tP+lDNmQQTrB5FHzDoBbyYvdjvMeS42izg78gjlN++rLUaAUCloNw==
   dependencies:
     "@oclif/linewrap" "^1.0.0"
     "@oclif/screen" "^3.0.2"
