@@ -5,12 +5,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  unit-tests:
-    uses: salesforcecli/github-workflows/.github/workflows/unitTest.yml@main
+  yarn-lockfile-check:
+    uses: salesforcecli/github-workflows/.github/workflows/lockFileCheck.yml@main
+
+  # Since the Windows unit tests take much longer, we run the linux unit tests first and then run the windows unit tests in parallel with NUTs
+  linux-unit-tests:
+    needs: yarn-lockfile-check
+    uses: salesforcecli/github-workflows/.github/workflows/unitTestsLinux.yml@main
+
+  windows-unit-tests:
+    needs: linux-unit-tests
+    uses: salesforcecli/github-workflows/.github/workflows/unitTestsWindows.yml@main
 
   external-nuts-deploy-retrieve:
-    needs: unit-tests
     name: external-nuts-deploy-retrieve
+    needs: linux-unit-tests
     strategy:
       fail-fast: false
       matrix:
@@ -36,7 +45,7 @@ jobs:
 
   external-nuts:
     name: external-nuts
-    needs: unit-tests
+    needs: linux-unit-tests
     strategy:
       fail-fast: false
       matrix:
