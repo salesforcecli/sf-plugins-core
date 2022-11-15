@@ -66,6 +66,10 @@ The value must be between %s and %s (inclusive).
 
 Warning:
 
+# warning.loglevel
+
+The loglevel flag is no longer in use on this command. You may use it without error, but it will be ignored.
+
 # actions.tryThis
 
 Try this:
