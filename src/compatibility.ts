@@ -8,6 +8,7 @@
 import { Flags } from '@oclif/core';
 import { Messages } from '@salesforce/core';
 import { orgApiVersionFlag } from './flags/orgApiVersion';
+import { optionalOrgFlag, requiredHubFlag, requiredOrgFlag } from './flags/orgFlags';
 
 /**
  * Adds an alias for the deprecated sfdx-style "apiversion" and provides a warning if it is used
@@ -45,4 +46,31 @@ export const loglevel = Flags.string({
   deprecated: {
     message: messages.getMessage('warning.loglevel'),
   },
+});
+
+const deprecatedOrgAliases = {
+  aliases: ['targetusername', 'u'],
+  deprecateAliases: true,
+};
+
+/**
+ * @deprecated
+ */
+export const optionalOrgFlagWithDeprecations = optionalOrgFlag({
+  ...deprecatedOrgAliases,
+});
+
+/**
+ * @deprecated
+ */
+export const requiredOrgFlagWithDeprecations = requiredOrgFlag({
+  ...deprecatedOrgAliases,
+});
+
+/**
+ * @deprecated
+ */
+export const requiredHubFlagWithDeprecations = requiredHubFlag({
+  aliases: ['targetdevhubusername', 'v'],
+  deprecateAliases: true,
 });
