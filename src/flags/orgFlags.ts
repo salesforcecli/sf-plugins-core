@@ -67,7 +67,7 @@ const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
  * ```
  */
 export const optionalOrgFlag = Flags.custom({
-  char: 'e',
+  char: 'o',
   parse: async (input: string | undefined) => maybeGetOrg(input),
   default: async () => maybeGetOrg(),
   defaultHelp: async () => (await maybeGetOrg())?.getUsername(),
@@ -96,7 +96,7 @@ export const optionalOrgFlag = Flags.custom({
  * ```
  */
 export const requiredOrgFlag = Flags.custom({
-  char: 'e',
+  char: 'o',
   parse: async (input: string | undefined) => getOrgOrThrow(input),
   default: async () => getOrgOrThrow(),
   defaultHelp: async () => (await getOrgOrThrow())?.getUsername(),
