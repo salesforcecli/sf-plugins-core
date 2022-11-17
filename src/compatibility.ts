@@ -58,6 +58,7 @@ const deprecatedOrgAliases = {
  */
 export const optionalOrgFlagWithDeprecations = optionalOrgFlag({
   ...deprecatedOrgAliases,
+  description: messages.getMessage('flags.targetOrg.description'),
 });
 
 /**
@@ -65,6 +66,7 @@ export const optionalOrgFlagWithDeprecations = optionalOrgFlag({
  */
 export const requiredOrgFlagWithDeprecations = requiredOrgFlag({
   ...deprecatedOrgAliases,
+  description: messages.getMessage('flags.targetOrg.description'),
 });
 
 /**
@@ -73,4 +75,5 @@ export const requiredOrgFlagWithDeprecations = requiredOrgFlag({
 export const requiredHubFlagWithDeprecations = requiredHubFlag({
   aliases: ['targetdevhubusername', 'v'],
   deprecateAliases: true,
+  description: messages.getMessage('flags.targetDevHubOrg.description'),
 });
