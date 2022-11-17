@@ -34,13 +34,13 @@ No default dev hub found. Use -v or --target-dev-hub to specify an environment.
 
 The specified org %s is not a Dev Hub.
 
-# flags.targetOrg.description
+# flags.targetOrg.summary
 
-Username or alias of the target org
+Username or alias of the target org.
 
-# flags.targetDevHubOrg.description
+# flags.targetDevHubOrg.summary
 
-Username or alias of the Dev Hub org
+Username or alias of the Dev Hub org.
 
 # flags.apiVersion.description
 

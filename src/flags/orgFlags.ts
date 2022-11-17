@@ -97,6 +97,7 @@ export const optionalOrgFlag = Flags.custom({
  */
 export const requiredOrgFlag = Flags.custom({
   char: 'o',
+  summary: messages.getMessage('flags.targetOrg.summary'),
   parse: async (input: string | undefined) => getOrgOrThrow(input),
   default: async () => getOrgOrThrow(),
   defaultHelp: async () => (await getOrgOrThrow())?.getUsername(),
@@ -126,6 +127,7 @@ export const requiredOrgFlag = Flags.custom({
  */
 export const requiredHubFlag = Flags.custom({
   char: 'v',
+  summary: messages.getMessage('flags.targetDevHubOrg.summary'),
   parse: async (input: string | undefined) => getHubOrThrow(input),
   default: async () => getHubOrThrow(),
   defaultHelp: async () => (await getHubOrThrow())?.getUsername(),
