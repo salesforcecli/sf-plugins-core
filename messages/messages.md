@@ -34,6 +34,14 @@ No default dev hub found. Use -v or --target-dev-hub to specify an environment.
 
 The specified org %s is not a Dev Hub.
 
+# flags.targetOrg.summary
+
+Username or alias of the target org.
+
+# flags.targetDevHubOrg.summary
+
+Username or alias of the Dev Hub org.
+
 # flags.apiVersion.description
 
 Override the api version used for api requests made by this command
