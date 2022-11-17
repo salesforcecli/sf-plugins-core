@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "1.17.6",
+  "version": "1.17.7",
   "description": "Utils for writing deploy and retrieve plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
