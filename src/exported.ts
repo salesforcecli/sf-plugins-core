@@ -14,7 +14,7 @@ export { Progress, Prompter, generateTableChoices, Ux } from './ux';
 export { SfHook } from './hooks';
 export * from './types';
 export { SfCommand, SfCommandInterface, StandardColors } from './sfCommand';
-
+export * from './compatibility';
 // custom flags
 import { requiredOrgFlag, requiredHubFlag, optionalOrgFlag } from './flags/orgFlags';
 import { salesforceIdFlag } from './flags/salesforceId';
