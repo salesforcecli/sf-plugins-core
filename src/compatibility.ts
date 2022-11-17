@@ -73,7 +73,7 @@ export const requiredOrgFlagWithDeprecations = requiredOrgFlag({
  * @deprecated
  */
 export const requiredHubFlagWithDeprecations = requiredHubFlag({
-  aliases: ['targetdevhubusername', 'v'],
+  aliases: ['targetdevhubusername'],
   deprecateAliases: true,
   description: messages.getMessage('flags.targetDevHubOrg.description'),
 });
