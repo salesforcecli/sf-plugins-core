@@ -377,6 +377,24 @@ export abstract class SfCommand<T> extends Command {
     this.lifecycle.onWarning(async (warning: string) => {
       this.warn(warning);
     });
+    const options = {
+      Command: this.ctor,
+      argv: this.argv,
+      commandId: this.id,
+    };
+    // what hooks are there in the plugins?  Subscribe to matching lifecycle events
+    this.config.plugins
+      // omit oclif and telemetry (which subscribes itself to events already)
+      .filter((plugin) => !plugin.name.startsWith('@oclif/') && plugin.name !== '@salesforce/plugin-telemetry')
+      .flatMap((p) => Object.entries(p.hooks))
+      .map(([eventName, hooksForEvent]) => {
+        hooksForEvent.map(() => {
+          this.lifecycle.on(eventName, async (result: AnyJson) => {
+            await this.config.runHook(eventName, Object.assign(options, { result }));
+          });
+        });
+      });
+
     return super._run<R>();
   }
 
