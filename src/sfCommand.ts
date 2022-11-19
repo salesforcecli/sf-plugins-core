@@ -150,6 +150,9 @@ export abstract class SfCommand<T> extends Command {
    */
   public static requiresProject: boolean;
 
+  /** Any oclif hooks that should be fired when a Lifecycle event with the matching name is fired. */
+  public static readonly lifecycleEventNames: string[] = [];
+
   /**
    * Add a spinner to the console. {@link Spinner}
    */
@@ -377,6 +380,19 @@ export abstract class SfCommand<T> extends Command {
     this.lifecycle.onWarning(async (warning: string) => {
       this.warn(warning);
     });
+
+    // if a command sets lifecycleEventNames, then listen for those events and call hooks with the same name
+    this.statics.lifecycleEventNames.forEach((eventName) => {
+      this.lifecycle.on(eventName, async (result: AnyJson) => {
+        await this.config.runHook(eventName, {
+          Command: this.ctor,
+          argv: this.argv,
+          commandId: this.id,
+          result,
+        });
+      });
+    });
+
     return super._run<R>();
   }
 
