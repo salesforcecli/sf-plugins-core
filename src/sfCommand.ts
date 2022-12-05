@@ -336,17 +336,7 @@ export abstract class SfCommand<T> extends Command {
    * @return true if the user confirms, false if they do not.
    */
   public async confirm(message: string, ms = 10000): Promise<boolean> {
-    const { confirmed } = await this.timedPrompt<{ confirmed: boolean }>(
-      [
-        {
-          name: 'confirmed',
-          message,
-          type: 'confirm',
-        },
-      ],
-      ms
-    );
-    return confirmed;
+    return this.prompter.confirm(message, ms);
   }
 
   /**
