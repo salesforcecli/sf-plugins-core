@@ -79,7 +79,7 @@ export const requiredHubFlagWithDeprecations = requiredHubFlag({
 /**
  * @deprecated
  */
-export const arrayWithDeprecation = (options: Omit<OptionFlagProps, 'multiple' | 'parse'>) =>
+export const arrayWithDeprecation = (options: Partial<Omit<OptionFlagProps, 'multiple' | 'parse'>>) =>
   Flags.string({
     // populate passed options
     ...options,
