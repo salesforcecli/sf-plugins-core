@@ -77,6 +77,7 @@ Warning:
 # warning.loglevel
 
 The loglevel flag is no longer in use on this command. You may use it without error, but it will be ignored.
+Set the log level using the `SFDX_LOG_LEVEL` environment variable.
 
 # actions.tryThis
 
