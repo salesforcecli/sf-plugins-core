@@ -6,7 +6,8 @@
  */
 
 import { Flags } from '@oclif/core';
-import { Messages } from '@salesforce/core';
+import { Lifecycle, Messages } from '@salesforce/core';
+import { OptionFlagProps } from '@oclif/core/lib/interfaces';
 import { orgApiVersionFlag } from './flags/orgApiVersion';
 import { optionalOrgFlag, requiredHubFlag, requiredOrgFlag } from './flags/orgFlags';
 
@@ -74,3 +75,21 @@ export const requiredHubFlagWithDeprecations = requiredHubFlag({
   aliases: ['targetdevhubusername'],
   deprecateAliases: true,
 });
+
+/**
+ * @deprecated
+ */
+export const arrayWithDeprecation = (options: Partial<Omit<OptionFlagProps, 'multiple' | 'parse'>>) =>
+  Flags.string({
+    // populate passed options
+    ...options,
+    // overlay those options we own
+    multiple: true,
+    parse: async (input: string) => {
+      const inputParts = input.split(',').map((i) => i.trim());
+      if (inputParts.length > 1) {
+        await Lifecycle.getInstance().emitWarning(messages.getMessage('warning.arrayInputFormat'));
+      }
+      return inputParts;
+    },
+  });

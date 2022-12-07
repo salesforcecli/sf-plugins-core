@@ -94,3 +94,7 @@ Set varargs with this format: key=value or key="value with spaces".
 # error.DuplicateArgument
 
 Found duplicate argument %s.
+
+# warning.arrayInputFormat
+
+The input format for array arguments has changed. Use this format: --array-flag value1 --array-flag value2 --array-flag value3
