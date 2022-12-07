@@ -96,4 +96,4 @@ Found duplicate argument %s.
 
 # warning.arrayInputFormat
 
-The input format for array arguments has changed. Use this format: --arrayFlag value1 --arrayFlag value2 --arrayFlag value3
+The input format for array arguments has changed. Use this format: --array-flag value1 --array-flag value2 --array-flag value3
