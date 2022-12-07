@@ -88,7 +88,7 @@ export const arrayWithDeprecation = (options: Partial<Omit<OptionFlagProps, 'mul
     parse: async (input: string) => {
       const inputParts = input.split(',').map((i) => i.trim());
       if (inputParts.length > 1) {
-        await Lifecycle.getInstance().emit('warning', messages.getMessage('warning.arrayInputFormat'));
+        await Lifecycle.getInstance().emitWarning(messages.getMessage('warning.arrayInputFormat'));
       }
       return inputParts;
     },
