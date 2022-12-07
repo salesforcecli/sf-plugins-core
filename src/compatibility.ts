@@ -5,11 +5,10 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { CliUx, Flags } from '@oclif/core';
-import { Messages } from '@salesforce/core';
+import { Flags } from '@oclif/core';
+import { Lifecycle, Messages } from '@salesforce/core';
 import { orgApiVersionFlag } from './flags/orgApiVersion';
 import { optionalOrgFlag, requiredHubFlag, requiredOrgFlag } from './flags/orgFlags';
-import { StandardColors } from './sfCommand';
 
 /**
  * Adds an alias for the deprecated sfdx-style "apiversion" and provides a warning if it is used
@@ -86,12 +85,10 @@ export const arrayWithDeprecation = (options: Record<string, unknown> = {}) =>
     // overlay those options we want to own
     multiple: true,
     parse: async (input: string) => {
-      if (input.includes(',')) {
-        const warningMsg = `${StandardColors.warning(messages.getMessage('warning.prefix'))} ${messages.getMessage(
-          'warning.arrayInputFormat'
-        )}`;
-        CliUx.ux.log(warningMsg);
+      const inputParts = input.split(',').map((i) => i.trim());
+      if (inputParts.length > 1) {
+        await Lifecycle.getInstance().emit('warning', messages.getMessage('warning.arrayInputFormat'));
       }
-      return input.split(',').map((i) => i.trim());
+      return inputParts;
     },
   });
