@@ -55,15 +55,17 @@ export class Prompter {
    *
    * @param message text to display.  Do not include a question mark.
    * @param ms milliseconds to wait for user input.  Defaults to 10s.
+   * @param defaultAnswer default answer for the prompt.  Defaults to true.  Pass in `false` to require a positive response.
    * @return true if the user confirms, false if they do not.
    */
-  public async confirm(message: string, ms = 10000): Promise<boolean> {
+  public async confirm(message: string, ms = 10000, defaultAnswer = true): Promise<boolean> {
     const { confirmed } = await this.timedPrompt<{ confirmed: boolean }>(
       [
         {
           name: 'confirmed',
           message,
           type: 'confirm',
+          default: defaultAnswer,
         },
       ],
       ms
