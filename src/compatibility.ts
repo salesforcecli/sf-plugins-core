@@ -84,7 +84,6 @@ export const arrayWithDeprecation = (options: Record<string, unknown> = {}) =>
     // populate passed options
     ...options,
     // overlay those options we want to own
-    deprecated: { message: messages.getMessage('arrayStyleFlagsDeprecated') },
     multiple: true,
     parse: async (input: string) => {
       if (input.includes(',')) {
