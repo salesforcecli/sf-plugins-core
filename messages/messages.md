@@ -97,7 +97,3 @@ Found duplicate argument %s.
 # warning.arrayInputFormat
 
 The input format for array arguments has changed. Use this format: --arrayFlag value1 --arrayFlag value2 --arrayFlag value3
-
-# arrayStyleFlagsDeprecated
-
-The array style flags are deprecated. Use oclif/core Flags.string({multiple: true}) instead.
