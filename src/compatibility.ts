@@ -66,6 +66,7 @@ export const optionalOrgFlagWithDeprecations = optionalOrgFlag({
  */
 export const requiredOrgFlagWithDeprecations = requiredOrgFlag({
   ...deprecatedOrgAliases,
+  required: true,
 });
 
 /**
@@ -74,6 +75,7 @@ export const requiredOrgFlagWithDeprecations = requiredOrgFlag({
 export const requiredHubFlagWithDeprecations = requiredHubFlag({
   aliases: ['targetdevhubusername'],
   deprecateAliases: true,
+  required: true,
 });
 
 /**
