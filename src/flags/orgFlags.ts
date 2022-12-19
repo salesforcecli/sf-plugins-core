@@ -101,6 +101,7 @@ export const requiredOrgFlag = Flags.custom({
   parse: async (input: string | undefined) => getOrgOrThrow(input),
   default: async () => getOrgOrThrow(),
   defaultHelp: async () => (await getOrgOrThrow())?.getUsername(),
+  required: true,
 });
 
 /**
@@ -131,4 +132,5 @@ export const requiredHubFlag = Flags.custom({
   parse: async (input: string | undefined) => getHubOrThrow(input),
   default: async () => getHubOrThrow(),
   defaultHelp: async () => (await getHubOrThrow())?.getUsername(),
+  required: true,
 });
