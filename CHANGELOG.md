@@ -1,3 +1,14 @@
+## [1.21.3](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.2...1.21.3) (2022-12-19)
+
+
+### Bug Fixes
+
+* get good typing for array flags ([1e6ae3f](https://github.com/salesforcecli/sf-plugins-core/commit/1e6ae3f63be9452e2035f88ae715d1e2457ee9dc))
+* required flags use `required` for oclif types ([40147b7](https://github.com/salesforcecli/sf-plugins-core/commit/40147b7f92b8f371ae357f8d8213a0cf9eb4c3c0))
+* required prop on compatibility ([87401b9](https://github.com/salesforcecli/sf-plugins-core/commit/87401b90dcaf72bfa1a8d276d164fa0b5a94cbd0))
+
+
+
 ## [1.21.2](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.1...1.21.2) (2022-12-18)
 
 
