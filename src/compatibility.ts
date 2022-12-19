@@ -78,7 +78,9 @@ export const requiredHubFlagWithDeprecations = requiredHubFlag({
 });
 
 export type ArrayWithDeprecationOptions = {
+  // prevent invalid options from being passed
   multiple?: true;
+  // parse is disallowed because we have to overwrite it
   parse?: undefined;
 };
 /**
