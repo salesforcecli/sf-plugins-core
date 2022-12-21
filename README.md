@@ -4,6 +4,8 @@
 
 The @salesforce/sf-plugins-core provides utilities for writing [sf](https://github.com/salesforcecli/cli) plugins.
 
+Docs: [https://salesforcecli.github.io/sf-plugins-core](https://salesforcecli.github.io/sf-plugins-core)
+
 ## SfCommand Abstract Class
 
 The SfCommand abstract class extends [@oclif/core's Command class](https://github.com/oclif/core/blob/main/src/command.ts) for examples of how to build a definition.
