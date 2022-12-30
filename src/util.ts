@@ -14,14 +14,10 @@ import {
   SUPPORTED_ENV_VARS,
   Messages,
 } from '@salesforce/core';
+import { HelpSection, HelpSectionKeyValueTable } from '@oclif/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
-
-export type HelpSection = {
-  header: string;
-  body: Array<{ name: string; description: string } | undefined>;
-};
 
 /**
  * Function to build a help section for command help.
@@ -58,9 +54,12 @@ export function toHelpSection(
         return Object.entries(v).map(([name, description]) => ({ name, description }));
       }
     })
-    .filter((b) => b);
+    .filter(isHelpSectionBodyEntry);
   return { header, body };
 }
+
+const isHelpSectionBodyEntry = (entry: unknown): entry is HelpSectionKeyValueTable[number] =>
+  typeof entry === 'object' && entry !== null && 'name' in entry && 'description' in entry;
 
 export function parseVarArgs(args: Record<string, unknown>, argv: string[]): Record<string, string | undefined> {
   const final: Record<string, string | undefined> = {};
