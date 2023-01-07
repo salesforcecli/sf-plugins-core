@@ -1,3 +1,12 @@
+## [1.21.6](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.5...1.21.6) (2023-01-07)
+
+
+### Bug Fixes
+
+* **deps:** bump json5 from 1.0.1 to 1.0.2 ([3e72202](https://github.com/salesforcecli/sf-plugins-core/commit/3e72202da74572423b3bae2200009fc7ede163e5))
+
+
+
 ## [1.21.5](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.4...1.21.5) (2023-01-01)
 
 
