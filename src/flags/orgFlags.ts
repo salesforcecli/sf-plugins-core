@@ -10,10 +10,10 @@ import { Messages, Org, ConfigAggregator, OrgConfigProperties } from '@salesforc
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
-async function maybeGetOrg(input: string): Promise<Org>;
-async function maybeGetOrg(input: undefined): Promise<undefined>;
-async function maybeGetOrg(input?: string | undefined): Promise<Org | undefined>;
-async function maybeGetOrg(input?: string | undefined): Promise<Org | undefined> {
+export async function maybeGetOrg(input: string): Promise<Org>;
+export async function maybeGetOrg(input: undefined): Promise<undefined>;
+export async function maybeGetOrg(input?: string | undefined): Promise<Org | undefined>;
+export async function maybeGetOrg(input?: string | undefined): Promise<Org | undefined> {
   try {
     return await Org.create({ aliasOrUsername: input });
   } catch (e) {
@@ -25,7 +25,7 @@ async function maybeGetOrg(input?: string | undefined): Promise<Org | undefined>
   }
 }
 
-const maybeGetHub = async (input?: string): Promise<Org | undefined> => {
+export const maybeGetHub = async (input?: string): Promise<Org | undefined> => {
   const org = await maybeGetOrg(input ?? (await getDefaultHub(false)));
   if (org) {
     return ensureDevHub(org, input ?? org.getUsername());
@@ -34,7 +34,7 @@ const maybeGetHub = async (input?: string): Promise<Org | undefined> => {
   }
 };
 
-const getOrgOrThrow = async (input?: string): Promise<Org> => {
+export const getOrgOrThrow = async (input?: string): Promise<Org> => {
   const org = await maybeGetOrg(input);
   if (!org) {
     throw messages.createError('errors.NoDefaultEnv');
@@ -61,9 +61,9 @@ async function getDefaultHub(throwIfNotFound: boolean): Promise<string | undefin
   return aliasOrUsername;
 }
 
-const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
+export const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
   const resolved = aliasOrUsername ?? (await getDefaultHub(true));
-  const org = await Org.create({ aliasOrUsername: resolved });
+  const org = await Org.create({ aliasOrUsername: resolved, isDevHub: true });
   return ensureDevHub(org, resolved);
 };
 
