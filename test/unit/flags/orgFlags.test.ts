@@ -7,13 +7,7 @@
 import { Org, SfError, OrgConfigProperties } from '@salesforce/core';
 import { MockTestOrgData, shouldThrow, TestContext } from '@salesforce/core/lib/testSetup';
 import { assert, expect, config } from 'chai';
-import {
-  getHubOrThrow,
-  getOrgOrThrow,
-  maybeGetHub,
-  maybeGetOrg,
-  // maybeGetHub, maybeGetOrg, getHubOrThrow
-} from '../../../src/flags/orgFlags';
+import { getHubOrThrow, getOrgOrThrow, maybeGetHub, maybeGetOrg } from '../../../src/flags/orgFlags';
 
 config.truncateThreshold = 0;
 
@@ -37,6 +31,7 @@ describe('org flags', () => {
       const retrieved = await getOrgOrThrow(testOrg.username);
       expect(retrieved.getOrgId()).to.equal(testOrg.orgId);
     });
+    // skipped tests are waiting for a fix to core/testSetup https://github.com/forcedotcom/sfdx-core/pull/748
     it.skip('has input, no org found => throw', async () => {
       try {
         await shouldThrow(getOrgOrThrow('nope@bad.fail'));
@@ -64,7 +59,6 @@ describe('org flags', () => {
       const retrieved = await maybeGetOrg(testOrg.username);
       expect(retrieved.getOrgId()).to.equal(testOrg.orgId);
     });
-    // skipped tests are waiting for a fix to core/testSetup https://github.com/forcedotcom/sfdx-core/pull/748
     it.skip('has input, no org => throw', async () => {
       try {
         await shouldThrow(maybeGetOrg('nope@bad.fail'));
@@ -93,7 +87,6 @@ describe('org flags', () => {
         expect(e).to.have.property('name', 'NotADevHubError');
       }
     });
-    // skipped tests are waiting for a fix to core/testSetup https://github.com/forcedotcom/sfdx-core/pull/748
     it.skip('has input, no org => throw', async () => {
       try {
         await shouldThrow(maybeGetHub('nope@bad.fail'));
