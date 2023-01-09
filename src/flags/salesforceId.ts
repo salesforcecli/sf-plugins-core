@@ -62,8 +62,8 @@ const validate = (input: string, config?: IdFlagConfig): string => {
   if (!sfdc.validateSalesforceId(input)) {
     throw messages.createError('errors.InvalidId');
   }
-  if (resolvedConfig.startsWith && !input.startsWith(resolvedConfig.startsWith)) {
-    throw messages.createError('errors.InvalidPrefix', [resolvedConfig.startsWith]);
+  if (startsWith && !input.startsWith(startsWith)) {
+    throw messages.createError('errors.InvalidPrefix', [startsWith]);
   }
   return input;
 };
