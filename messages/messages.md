@@ -14,6 +14,10 @@ This command is required to run from within a Salesforce project directory.
 
 The id must be %s characters.
 
+# errors.InvalidIdLength.or
+
+or
+
 # errors.InvalidId
 
 The id is invalid.
