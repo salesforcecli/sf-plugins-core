@@ -24,6 +24,13 @@ describe('id flag', () => {
     expect(out.flags).to.deep.include({ id: id15 });
   });
 
+  it('allows 15 or 18 when both are specified', async () => {
+    const out = await Parser.parse([`--id=${id15}`], {
+      flags: { id: salesforceIdFlag({ length: 'both' }) },
+    });
+    expect(out.flags).to.deep.include({ id: id15 });
+  });
+
   it('throws on invalid length id', async () => {
     try {
       const out = await Parser.parse([`--id=${id16}`], {

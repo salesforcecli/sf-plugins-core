@@ -12,9 +12,9 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
 
 export type IdFlagConfig = {
   /**
-   * Can specify if the version must be 15 or 18 characters long.  Leave blank to allow either 15 or 18.
+   * Can specify if the version must be 15 or 18 characters long or 'both'. Leave blank to allow either 15 or 18.
    */
-  length?: 15 | 18;
+  length?: 15 | 18 | 'both';
   /**
    * If the ID belongs to a certain sobject type, specify the 3 character prefix.
    */
@@ -49,18 +49,22 @@ export const salesforceIdFlag = Flags.custom<string, IdFlagConfig>({
 });
 
 const validate = (input: string, config?: IdFlagConfig): string => {
-  const { length, startsWith } = config ?? {};
-  if (length && input.length !== length) {
-    throw messages.createError('errors.InvalidIdLength', [length]);
-  }
-  if (!length && ![15, 18].includes(input.length)) {
-    throw messages.createError('errors.InvalidIdLength', ['15 or 18']);
+  const resolvedConfig = config ?? {};
+
+  resolvedConfig.length = resolvedConfig.length ?? 'both';
+
+  const length = resolvedConfig.length === 'both' ? [15, 18] : [resolvedConfig.length];
+
+  if (!length.includes(input.length)) {
+    throw messages.createError('errors.InvalidIdLength', [
+      length.join(` ${messages.getMessage('errors.InvalidIdLength.or')} `),
+    ]);
   }
   if (!sfdc.validateSalesforceId(input)) {
     throw messages.createError('errors.InvalidId');
   }
-  if (startsWith && !input.startsWith(startsWith)) {
-    throw messages.createError('errors.InvalidPrefix', [startsWith]);
+  if (resolvedConfig.startsWith && !input.startsWith(resolvedConfig.startsWith)) {
+    throw messages.createError('errors.InvalidPrefix', [resolvedConfig.startsWith]);
   }
   return input;
 };
