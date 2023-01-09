@@ -49,15 +49,14 @@ export const salesforceIdFlag = Flags.custom<string, IdFlagConfig>({
 });
 
 const validate = (input: string, config?: IdFlagConfig): string => {
-  const resolvedConfig = config ?? {};
+  const { length, startsWith } = config ?? {};
 
-  resolvedConfig.length = resolvedConfig.length ?? 'both';
+  // If the flag doesn't specify a length or specifies "both", then let it accept both 15 or 18.
+  const allowedIdLength = (!length || length === 'both') ? [15, 18] : [length];
 
-  const length = resolvedConfig.length === 'both' ? [15, 18] : [resolvedConfig.length];
-
-  if (!length.includes(input.length)) {
+  if (!allowedIdLength.includes(input.length)) {
     throw messages.createError('errors.InvalidIdLength', [
-      length.join(` ${messages.getMessage('errors.InvalidIdLength.or')} `),
+      allowedIdLength.join(` ${messages.getMessage('errors.InvalidIdLength.or')} `),
     ]);
   }
   if (!sfdc.validateSalesforceId(input)) {
