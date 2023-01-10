@@ -1,3 +1,12 @@
+# [1.22.0](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.8...1.22.0) (2023-01-10)
+
+
+### Features
+
+* optional devhub flag (and deprecated equivalent) ([8458fc3](https://github.com/salesforcecli/sf-plugins-core/commit/8458fc3ea1a2ed055d6e9c59e4d9e43da0efbf91))
+
+
+
 ## [1.21.8](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.7...1.21.8) (2023-01-10)
 
 
