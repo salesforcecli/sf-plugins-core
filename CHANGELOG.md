@@ -1,3 +1,12 @@
+## [1.21.7](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.6...1.21.7) (2023-01-09)
+
+
+### Bug Fixes
+
+* add ‘both’ type to id flag ([e58a70f](https://github.com/salesforcecli/sf-plugins-core/commit/e58a70fb7e692f9b91ce39915f6483afda613748))
+
+
+
 ## [1.21.6](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.5...1.21.6) (2023-01-07)
 
 ### Bug Fixes
