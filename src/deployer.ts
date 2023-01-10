@@ -105,6 +105,6 @@ export namespace Deployer {
    * ```
    */
   export type Options<T = AnyJson> = JsonMap & {
-    [key: string]: T;
+    [key: string]: T | undefined;
   };
 }
