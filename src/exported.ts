@@ -16,7 +16,7 @@ export * from './types';
 export { SfCommand, SfCommandInterface, StandardColors } from './sfCommand';
 export * from './compatibility';
 // custom flags
-import { requiredOrgFlag, requiredHubFlag, optionalOrgFlag } from './flags/orgFlags';
+import { requiredOrgFlag, requiredHubFlag, optionalOrgFlag, optionalHubFlag } from './flags/orgFlags';
 import { salesforceIdFlag } from './flags/salesforceId';
 import { orgApiVersionFlag } from './flags/orgApiVersion';
 import { durationFlag } from './flags/duration';
@@ -35,4 +35,5 @@ export const Flags = {
   requiredOrg: requiredOrgFlag,
   requiredHub: requiredHubFlag,
   optionalOrg: optionalOrgFlag,
+  optionalHub: optionalHubFlag,
 };
