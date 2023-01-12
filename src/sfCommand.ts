@@ -373,7 +373,7 @@ export abstract class SfCommand<T> extends Command {
       commandId: this.id,
     };
     // what hooks are there in the plugins?  Subscribe to matching lifecycle events
-    // there might not be any plugin in certain UT scenarios when _run is called
+    // there might not be any plugins in certain UT scenarios when _run is called
     (this.config.plugins ?? [])
       // omit oclif and telemetry (which subscribes itself to events already)
       .filter((plugin) => !plugin.name.startsWith('@oclif/') && plugin.name !== '@salesforce/plugin-telemetry')
