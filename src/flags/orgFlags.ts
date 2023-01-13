@@ -26,9 +26,20 @@ export async function maybeGetOrg(input?: string | undefined): Promise<Org | und
 }
 
 export const maybeGetHub = async (input?: string): Promise<Org | undefined> => {
-  const org = await maybeGetOrg(input ?? (await getDefaultHub(false)));
+  let org: Org | undefined;
+  // user provided input, verify the org exits
+  if (input) {
+    org = await getOrgOrThrow(input);
+  } else {
+    // no input, check config for a default
+    const aliasOrUsername = await getDefaultHub(false);
+    // if there is a default, verify the org exists
+    if (aliasOrUsername) {
+      org = await getOrgOrThrow(aliasOrUsername);
+    }
+  }
   if (org) {
-    return ensureDevHub(org, input ?? org.getUsername());
+    return ensureDevHub(org, org.getUsername());
   } else {
     return undefined;
   }
