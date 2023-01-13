@@ -156,6 +156,10 @@ describe('org flags', () => {
         expect(e).to.have.property('name', 'NotADevHubError');
       }
     });
+    it('no input, no default hub, default target org => undefined', async () => {
+      await $$.stubConfig({ [OrgConfigProperties.TARGET_ORG]: testOrg.username });
+      expect(await maybeGetHub()).to.be.undefined;
+    });
     it('no input, no default => ok', async () => {
       await $$.stubConfig({});
       expect(await maybeGetHub()).to.be.undefined;
