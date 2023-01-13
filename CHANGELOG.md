@@ -1,3 +1,12 @@
+## [1.22.1](https://github.com/salesforcecli/sf-plugins-core/compare/1.22.0...1.22.1) (2023-01-13)
+
+
+### Bug Fixes
+
+* no default hub with default org ([c59d264](https://github.com/salesforcecli/sf-plugins-core/commit/c59d26414f5fdd16433431935f69688e8b42479a))
+
+
+
 # [1.22.0](https://github.com/salesforcecli/sf-plugins-core/compare/1.21.8...1.22.0) (2023-01-10)
 
 
