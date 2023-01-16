@@ -375,7 +375,8 @@ export abstract class SfCommand<T> extends Command {
     // what hooks are there in the plugins?  Subscribe to matching lifecycle events
     this.config.plugins
       // omit oclif and telemetry (which subscribes itself to events already)
-      .filter((plugin) => !plugin.name.startsWith('@oclif/') && plugin.name !== '@salesforce/plugin-telemetry')
+      // oclif says the name is a string, but in UT stuff like https://github.com/salesforcecli/plugin-settings/actions/runs/3917606753/jobs/6697501322 can happen
+      .filter((plugin) => !plugin.name?.startsWith('@oclif/') && plugin.name !== '@salesforce/plugin-telemetry')
       .flatMap((p) => Object.entries(p.hooks))
       .map(([eventName, hooksForEvent]) => {
         hooksForEvent.map(() => {
