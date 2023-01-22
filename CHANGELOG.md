@@ -1,3 +1,12 @@
+## [1.22.2](https://github.com/salesforcecli/sf-plugins-core/compare/1.22.1...1.22.2) (2023-01-22)
+
+
+### Bug Fixes
+
+* **deps:** bump @salesforce/kit from 1.8.0 to 1.8.3 ([0d671c5](https://github.com/salesforcecli/sf-plugins-core/commit/0d671c5582934984b8fd05d1a715d283f6859652))
+
+
+
 ## [1.22.1](https://github.com/salesforcecli/sf-plugins-core/compare/1.22.0...1.22.1) (2023-01-13)
 
 
