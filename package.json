@@ -42,7 +42,7 @@
   "devDependencies": {
     "@oclif/test": "^2.2.20",
     "@salesforce/dev-config": "^3.0.0",
-    "@salesforce/dev-scripts": "^3.1.0",
+    "@salesforce/dev-scripts": "^3.1.1",
     "@salesforce/prettier-config": "^0.0.2",
     "@salesforce/ts-sinon": "^1.4.2",
     "@types/inquirer": "^8.2.3",
