@@ -28,6 +28,7 @@ export const Flags = {
   integer: OclifFlags.integer,
   string: OclifFlags.string,
   url: OclifFlags.url,
+  custom: OclifFlags.custom,
   duration: durationFlag,
   salesforceId: salesforceIdFlag,
   orgApiVersion: orgApiVersionFlag,
