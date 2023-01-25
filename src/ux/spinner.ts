@@ -5,11 +5,11 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { CliUx } from '@oclif/core';
+import { ux } from '@oclif/core';
 import { UxBase } from '.';
 
 /**
- * This class is a light wrapper around CliUx.ux.action that allows us to
+ * This class is a light wrapper around ux.action that allows us to
  * automatically suppress any actions if `--json` flag is present.
  */
 export class Spinner extends UxBase {
@@ -22,7 +22,7 @@ export class Spinner extends UxBase {
    */
   // eslint-disable-next-line class-methods-use-this
   public get status(): string | undefined {
-    return CliUx.ux.action.status;
+    return ux.action.status;
   }
 
   /**
@@ -30,27 +30,27 @@ export class Spinner extends UxBase {
    */
   // eslint-disable-next-line class-methods-use-this
   public set status(status: string | undefined) {
-    CliUx.ux.action.status = status;
+    ux.action.status = status;
   }
 
   /**
    * Start a spinner on the console.
    */
   public start(action: string, status?: string, opts?: { stdout?: boolean }): void {
-    this.maybeNoop(() => CliUx.ux.action.start(action, status, opts));
+    this.maybeNoop(() => ux.action.start(action, status, opts));
   }
 
   /**
    * Stop the spinner on the console.
    */
   public stop(msg?: string): void {
-    this.maybeNoop(() => CliUx.ux.action.stop(msg));
+    this.maybeNoop(() => ux.action.stop(msg));
   }
 
   /**
    * Pause the spinner on the console.
    */
   public pause(fn: () => unknown, icon?: string): void {
-    this.maybeNoop(() => CliUx.ux.action.pause(fn, icon));
+    this.maybeNoop(() => ux.action.pause(fn, icon));
   }
 }

@@ -6,7 +6,7 @@
  */
 import { expect } from 'chai';
 import * as sinon from 'sinon';
-import { CliUx } from '@oclif/core';
+import { ux } from '@oclif/core';
 import { Spinner } from '../../../src/ux';
 
 describe('Spinner', () => {
@@ -16,7 +16,7 @@ describe('Spinner', () => {
   beforeEach(() => {
     sandbox = sinon.createSandbox();
     // @ts-expect-error because _write is a protected member
-    writeStub = sandbox.stub(CliUx.ux.action, '_write');
+    writeStub = sandbox.stub(ux.action, '_write');
   });
 
   afterEach(() => {
@@ -28,7 +28,7 @@ describe('Spinner', () => {
       const spinner = new Spinner(true);
       spinner.start('Doing things');
       spinner.stop('Finished');
-      expect(writeStub.firstCall.args).to.deep.equal(['stderr', 'Doing things...']);
+      expect(writeStub.firstCall.args).to.deep.equal(['stderr', 'Doing things...\n']);
     });
 
     it('should not log anything if output is not enabled', () => {
@@ -45,7 +45,7 @@ describe('Spinner', () => {
       spinner.start('Doing things');
       spinner.pause(() => {});
       spinner.stop('Finished');
-      expect(writeStub.firstCall.args).to.deep.equal(['stderr', 'Doing things...']);
+      expect(writeStub.firstCall.args).to.deep.equal(['stderr', 'Doing things...\n']);
     });
 
     it('should not log anything if output is not enabled', () => {

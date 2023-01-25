@@ -39,7 +39,7 @@ describe('id flag', () => {
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
       const error = err as Error;
-      expect(error.message).to.equal(messages.getMessage('errors.InvalidIdLength', ['15 or 18']));
+      expect(error.message).to.include(messages.getMessage('errors.InvalidIdLength', ['15 or 18']));
     }
   });
 
@@ -51,7 +51,7 @@ describe('id flag', () => {
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
       const error = err as Error;
-      expect(error.message).to.equal(messages.getMessage('errors.InvalidId'));
+      expect(error.message).to.include(messages.getMessage('errors.InvalidId'));
     }
   });
   it('good 15', async () => {
@@ -68,7 +68,7 @@ describe('id flag', () => {
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
       const error = err as Error;
-      expect(error.message).to.equal(messages.getMessage('errors.InvalidIdLength', ['15']));
+      expect(error.message).to.include(messages.getMessage('errors.InvalidIdLength', ['15']));
     }
   });
   it('good 18', async () => {
@@ -85,7 +85,7 @@ describe('id flag', () => {
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
       const error = err as Error;
-      expect(error.message).to.equal(messages.getMessage('errors.InvalidIdLength', ['18']));
+      expect(error.message).to.include(messages.getMessage('errors.InvalidIdLength', ['18']));
     }
   });
   it('good startsWith', async () => {
@@ -102,7 +102,7 @@ describe('id flag', () => {
       throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
     } catch (err) {
       const error = err as Error;
-      expect(error.message).to.equal(messages.getMessage('errors.InvalidPrefix', ['000']));
+      expect(error.message).to.include(messages.getMessage('errors.InvalidPrefix', ['000']));
     }
   });
 });

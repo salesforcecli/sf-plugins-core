@@ -7,7 +7,7 @@
 
 import { prompt, QuestionCollection, Separator, ChoiceOptions, ChoiceBase } from 'inquirer';
 import { Dictionary, Nullable, ensureString } from '@salesforce/ts-types';
-import { CliUx } from '@oclif/core';
+import { ux } from '@oclif/core';
 
 export class Prompter {
   /**
@@ -39,7 +39,7 @@ export class Prompter {
         // @ts-expect-error
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
         thePrompt.ui['activePrompt'].done();
-        CliUx.ux.log();
+        ux.log();
         reject(new Error(`Timed out after ${ms} ms.`));
       }, ms).unref();
     });

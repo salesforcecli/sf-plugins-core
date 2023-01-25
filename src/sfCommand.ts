@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import * as os from 'os';
-import { CliUx, Command, Config, HelpSection, Interfaces } from '@oclif/core';
+import { ux, Command, Config, HelpSection } from '@oclif/core';
 import {
   envVars,
   Messages,
@@ -26,7 +26,7 @@ import { Progress, Prompter, Spinner, Ux } from './ux';
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
-export interface SfCommandInterface extends Interfaces.Command {
+export interface SfCommandInterface extends Command.Class {
   configurationVariablesSection?: HelpSection;
   envVariablesSection?: HelpSection;
   errorCodes?: HelpSection;
@@ -140,7 +140,7 @@ export abstract class SfCommand<T> extends Command {
    * }
    * ```
    */
-  public static tableFlags = CliUx.ux.table.flags;
+  public static tableFlags = ux.table.flags;
   /**
    * Set to true if the command must be executed inside a Salesforce project directory.
    *
@@ -441,7 +441,7 @@ export abstract class SfCommand<T> extends Command {
     };
 
     if (this.jsonEnabled()) {
-      CliUx.ux.styledJSON(this.toErrorJson(sfCommandError));
+      ux.styledJSON(this.toErrorJson(sfCommandError));
     } else {
       // eslint-disable-next-line no-console
       console.error(this.formatError(sfCommandError));
