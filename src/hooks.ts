@@ -8,7 +8,7 @@
 import { Config } from '@oclif/core/lib/interfaces/config';
 import { Hook, Hooks } from '@oclif/core/lib/interfaces/hooks';
 import { Duration, env } from '@salesforce/kit';
-import { CliUx } from '@oclif/core';
+import { ux } from '@oclif/core';
 import { Deployer } from './deployer';
 import { EnvList, EnvDisplay, JsonObject, Deploy, Login, Logout } from './types';
 import { Deauthorizer } from './deauthorizer';
@@ -41,8 +41,8 @@ export class SfHook {
     const timeout = Duration.milliseconds(env.getNumber('SF_HOOK_TIMEOUT_MS') ?? 5000);
     const results = await config.runHook<T>(hookName, options, timeout.milliseconds);
     results.failures.forEach((failure) => {
-      CliUx.ux.debug(`Failed to run ${hookName} hook for ${failure.plugin.name}`);
-      CliUx.ux.debug(failure.error.toString());
+      ux.debug(`Failed to run ${hookName} hook for ${failure.plugin.name}`);
+      ux.debug(failure.error.toString());
     });
     return results;
   }

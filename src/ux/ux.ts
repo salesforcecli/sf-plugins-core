@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { CliUx } from '@oclif/core';
+import { ux } from '@oclif/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { UxBase } from './base';
 import { Prompter } from './prompter';
@@ -46,7 +46,7 @@ export class Ux extends UxBase {
    * @param args Args to be used for formatting.
    */
   public log(message?: string, ...args: string[]): void {
-    this.maybeNoop(() => CliUx.ux.log(message, ...args));
+    this.maybeNoop(() => ux.log(message, ...args));
   }
 
   /**
@@ -55,7 +55,7 @@ export class Ux extends UxBase {
    * @param message Warning message to log.
    */
   public warn(message: string | Error): void {
-    this.maybeNoop(() => CliUx.ux.warn(message));
+    this.maybeNoop(() => ux.warn(message));
   }
 
   /**
@@ -66,7 +66,7 @@ export class Ux extends UxBase {
    * @param options Options for how the table should be displayed
    */
   public table<T extends Ux.Table.Data>(data: T[], columns: Ux.Table.Columns<T>, options?: Ux.Table.Options): void {
-    this.maybeNoop(() => CliUx.ux.table(data, columns, options));
+    this.maybeNoop(() => ux.table(data, columns, options));
   }
 
   /**
@@ -77,7 +77,7 @@ export class Ux extends UxBase {
    * @param params
    */
   public url(text: string, uri: string, params = {}): void {
-    this.maybeNoop(() => CliUx.ux.url(text, uri, params));
+    this.maybeNoop(() => ux.url(text, uri, params));
   }
 
   /**
@@ -86,7 +86,7 @@ export class Ux extends UxBase {
    * @param obj JSON to display
    */
   public styledJSON(obj: AnyJson): void {
-    this.maybeNoop(() => CliUx.ux.styledJSON(obj));
+    this.maybeNoop(() => ux.styledJSON(obj));
   }
 
   /**
@@ -96,7 +96,7 @@ export class Ux extends UxBase {
    * @param keys Keys of object to display
    */
   public styledObject(obj: AnyJson, keys?: string[]): void {
-    this.maybeNoop(() => CliUx.ux.styledObject(obj, keys));
+    this.maybeNoop(() => ux.styledObject(obj, keys));
   }
 
   /**
@@ -105,14 +105,14 @@ export class Ux extends UxBase {
    * @param text header to display
    */
   public styledHeader(text: string): void {
-    this.maybeNoop(() => CliUx.ux.styledHeader(text));
+    this.maybeNoop(() => ux.styledHeader(text));
   }
 }
 
 export namespace Ux {
   export namespace Table {
     export type Data = Record<string, unknown>;
-    export type Columns<T extends Data> = CliUx.Table.table.Columns<T>;
-    export type Options = CliUx.Table.table.Options;
+    export type Columns<T extends Data> = ux.Table.table.Columns<T>;
+    export type Options = ux.Table.table.Options;
   }
 }

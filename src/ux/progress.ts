@@ -6,7 +6,7 @@
  */
 
 import * as util from 'util';
-import { CliUx } from '@oclif/core';
+import { ux } from '@oclif/core';
 import { UxBase } from '.';
 
 /**
@@ -51,7 +51,7 @@ export class Progress extends UxBase {
     this.maybeNoop(() => {
       const opts = Object.assign(Progress.DEFAULT_OPTIONS, options);
       opts.format = util.format(opts.format, opts.title);
-      this.bar = CliUx.ux.progress({
+      this.bar = ux.progress({
         format: opts.format,
         barCompleteChar: opts.barCompleteChar,
         barIncompleteChar: opts.barIncompleteChar,
@@ -59,7 +59,7 @@ export class Progress extends UxBase {
       }) as Progress.Bar;
 
       this.bar.setTotal(total);
-      this.bar.start(total);
+      this.bar.start(total, 0);
       if (Object.keys(payload).length) {
         this.bar.update(0, payload);
       }
@@ -93,9 +93,8 @@ export class Progress extends UxBase {
 
 export namespace Progress {
   export type Bar = {
-    start: (num: number, payload?: unknown) => void;
-    update: (num: number, payload?: unknown) => void;
-    updateTotal: (num: number) => void;
+    start: (total: number, startValue: number, payload?: object) => void;
+    update: (num: number, payload?: object) => void;
     setTotal: (num: number) => void;
     stop: () => void;
   };
