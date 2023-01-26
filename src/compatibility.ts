@@ -95,13 +95,14 @@ export type ArrayWithDeprecationOptions = {
 /**
  * @deprecated
  */
-export const arrayWithDeprecation = Flags.custom<string[], ArrayWithDeprecationOptions>({
+export const arrayWithDeprecation = Flags.custom<string, ArrayWithDeprecationOptions>({
   multiple: true,
+  delimiter: ',',
   parse: async (input: string) => {
     const inputParts = input.split(',').map((i) => i.trim());
     if (inputParts.length > 1) {
       await Lifecycle.getInstance().emitWarning(messages.getMessage('warning.arrayInputFormat'));
     }
-    return inputParts;
+    return input;
   },
 });
