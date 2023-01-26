@@ -95,14 +95,19 @@ export type ArrayWithDeprecationOptions = {
 /**
  * @deprecated
  */
-export const arrayWithDeprecation = Flags.custom<string, ArrayWithDeprecationOptions>({
+export const arrayWithDeprecation = Flags.custom<string[], ArrayWithDeprecationOptions>({
   multiple: true,
   delimiter: ',',
-  parse: async (input: string) => {
-    const inputParts = input.split(',').map((i) => i.trim());
+  parse: async (input, ctx) => {
+    const inputParts = ctx.token.input.split(',').map((i) => i.trim());
     if (inputParts.length > 1) {
       await Lifecycle.getInstance().emitWarning(messages.getMessage('warning.arrayInputFormat'));
     }
-    return input;
+
+    // This is a weird consequence of implementing an array flag. The oclif parser splits the input (e.g. "thing1,thing2")
+    // on the delimiter and passes each value individually to the parse function. However, the return type needs to be
+    // string[] so that upstream consumers have the correct flag typings. So we simply wrap the individual elements in
+    // an array to satisfy typescript. Oclif ensures that the user ends up with a flat array of parsed strings.
+    return [input];
   },
 });
