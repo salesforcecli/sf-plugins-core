@@ -9,7 +9,7 @@
 import { EventEmitter } from 'events';
 import { AnyJson, JsonMap } from '@salesforce/ts-types';
 import { QuestionCollection, Answers } from 'inquirer';
-import { CliUx } from '@oclif/core';
+import { ux } from '@oclif/core';
 import { Prompter } from './ux';
 
 export type DeployerResult = {
@@ -46,7 +46,7 @@ export abstract class Deployer extends EventEmitter {
    */
   // eslint-disable-next-line class-methods-use-this
   public log(msg?: string | undefined, ...args: string[]): void {
-    CliUx.ux.log(msg, ...args);
+    ux.log(msg, ...args);
   }
 
   /**

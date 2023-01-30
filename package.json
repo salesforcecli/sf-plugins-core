@@ -1,7 +1,7 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "1.22.3",
-  "description": "Utils for writing deploy and retrieve plugins",
+  "version": "2.0.0",
+  "description": "Utils for writing Salesforce CLI plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
   "license": "BSD-3-Clause",
@@ -32,7 +32,7 @@
     "/messages"
   ],
   "dependencies": {
-    "@oclif/core": "^1.23.1",
+    "@oclif/core": "^2.0.7",
     "@salesforce/core": "^3.33.1",
     "@salesforce/kit": "^1.8.3",
     "@salesforce/ts-types": "^1.7.1",
