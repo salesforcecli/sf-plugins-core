@@ -333,10 +333,11 @@ export abstract class SfCommand<T> extends Command {
    *
    * @param message text to display.  Do not include a question mark.
    * @param ms milliseconds to wait for user input.  Defaults to 10s.
+   * @param defaultAnswer boolean to set the default answer to.  Defaults to true.
    * @return true if the user confirms, false if they do not.
    */
-  public async confirm(message: string, ms = 10000): Promise<boolean> {
-    return this.prompter.confirm(message, ms);
+  public async confirm(message: string, ms = 10000, defaultAnswer = true): Promise<boolean> {
+    return this.prompter.confirm(message, ms, defaultAnswer);
   }
 
   /**
