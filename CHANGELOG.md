@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/2.0.2...2.1.0) (2023-02-09)
+
+
+### Features
+
+* add default answer param to confirm ([#215](https://github.com/salesforcecli/sf-plugins-core/issues/215)) ([dc40d45](https://github.com/salesforcecli/sf-plugins-core/commit/dc40d45a51e0d153981123e2a435896a7855bc93))
+
+
+
 ## [2.0.2](https://github.com/salesforcecli/sf-plugins-core/compare/2.0.1...2.0.2) (2023-02-07)
 
 
