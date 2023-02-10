@@ -233,7 +233,7 @@ export abstract class SfCommand<T> extends Command {
       ...this.formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
     );
 
-    this.log(colorizedArgs.join(os.EOL));
+    this.logToStderr(colorizedArgs.join(os.EOL));
     return input;
   }
 

@@ -53,6 +53,15 @@ jobs:
           - plugin-env
           - plugin-generate
           - plugin-login
+          - plugin-org
+          - plugin-data
+          - plugin-schema
+          - plugin-limits
+          - plugin-signups
+          - plugin-templates
+          - plugin-custom-metadata
+          - plugin-community
+          - plugin-user
         os:
           - ubuntu-latest
           - windows-latest
