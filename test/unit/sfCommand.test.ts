@@ -51,32 +51,32 @@ describe('info messages', () => {
 });
 describe('warning messages', () => {
   test
-    .stdout()
+    .stderr()
     .do(() => {
       const testCommand = new TestCommand([], {} as Config);
       testCommand.warn('foo bar baz');
     })
     .it('should show a info message from a string', (ctx) => {
-      expect(ctx.stdout).to.include('Warning: foo bar baz');
+      expect(ctx.stderr).to.include('Warning: foo bar baz');
     });
   test
-    .stdout()
+    .stderr()
     .do(() => {
       const testCommand = new TestCommand([], {} as Config);
       testCommand.warn(new Error('foo bar baz') as SfCommand.Warning);
     })
     .it('should show a warning message from Error, no actions', (ctx) => {
-      expect(ctx.stdout).to.include('Warning: foo bar baz');
+      expect(ctx.stderr).to.include('Warning: foo bar baz');
     });
   test
-    .stdout()
+    .stderr()
     .do(() => {
       const testCommand = new TestCommand([], {} as Config);
       const infoError = new SfError('foo bar baz', 'foo', ['this', 'is an', 'action']) as Error;
       testCommand.warn(infoError as SfCommand.Info);
     })
     .it('should show a info message from Error, with actions', (ctx) => {
-      expect(ctx.stdout).to.include('Warning: foo bar baz');
-      expect(ctx.stdout).to.include(['this', 'is an', 'action'].join(os.EOL));
+      expect(ctx.stderr).to.include('Warning: foo bar baz');
+      expect(ctx.stderr).to.include(['this', 'is an', 'action'].join(os.EOL));
     });
 });
