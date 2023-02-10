@@ -1,3 +1,12 @@
+## [2.1.1](https://github.com/salesforcecli/sf-plugins-core/compare/2.1.0...2.1.1) (2023-02-10)
+
+
+### Bug Fixes
+
+* warnings to stderr ([fb0c56a](https://github.com/salesforcecli/sf-plugins-core/commit/fb0c56a51474a9cca7e923e34a0fd0e7ffc3d683))
+
+
+
 # [2.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/2.0.2...2.1.0) (2023-02-09)
 
 
