@@ -1,3 +1,12 @@
+## [2.1.2](https://github.com/salesforcecli/sf-plugins-core/compare/2.1.1...2.1.2) (2023-02-13)
+
+
+### Bug Fixes
+
+* dont allow hooks to exit process ([#217](https://github.com/salesforcecli/sf-plugins-core/issues/217)) ([928f89d](https://github.com/salesforcecli/sf-plugins-core/commit/928f89dce4ba85a2dd8b59d78a6823e7b22cf83d))
+
+
+
 ## [2.1.1](https://github.com/salesforcecli/sf-plugins-core/compare/2.1.0...2.1.1) (2023-02-10)
 
 
