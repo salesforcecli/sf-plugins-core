@@ -351,7 +351,7 @@ export abstract class SfCommand<T> extends Command {
     return this.prompter.timedPrompt(questions, ms, initialAnswers);
   }
 
-  public async _run<R>(): Promise<R | undefined> {
+  public async _run<R>(): Promise<R> {
     this.configAggregator =
       this.config.bin === 'sfdx' ??
       env.getBoolean('SF_USE_DEPRECATED_CONFIG_VARS') ??
@@ -444,8 +444,7 @@ export abstract class SfCommand<T> extends Command {
     if (this.jsonEnabled()) {
       ux.styledJSON(this.toErrorJson(sfCommandError));
     } else {
-      // eslint-disable-next-line no-console
-      console.error(this.formatError(sfCommandError));
+      this.logToStderr(this.formatError(sfCommandError));
     }
     return sfCommandError;
   }
