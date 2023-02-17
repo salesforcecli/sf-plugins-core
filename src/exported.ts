@@ -15,6 +15,7 @@ export { SfHook } from './hooks';
 export * from './types';
 export { SfCommand, SfCommandInterface, StandardColors } from './sfCommand';
 export * from './compatibility';
+export * from './stubUx';
 // custom flags
 import { requiredOrgFlag, requiredHubFlag, optionalOrgFlag, optionalHubFlag } from './flags/orgFlags';
 import { salesforceIdFlag } from './flags/salesforceId';
