@@ -410,6 +410,10 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
+  protected logJson(json: AnyJson | unknown): void {
+    this.ux.styledJSON(json as AnyJson);
+  }
+
   // eslint-disable-next-line class-methods-use-this
   protected async assignProject(): Promise<SfProject> {
     try {
@@ -442,7 +446,7 @@ export abstract class SfCommand<T> extends Command {
     };
 
     if (this.jsonEnabled()) {
-      ux.styledJSON(this.toErrorJson(sfCommandError));
+      this.logJson(this.toErrorJson(sfCommandError));
     } else {
       this.logToStderr(this.formatError(sfCommandError));
     }
