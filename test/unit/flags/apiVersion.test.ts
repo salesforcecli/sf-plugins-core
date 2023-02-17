@@ -20,10 +20,10 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
 
 describe('fs flags', () => {
   const sandbox = sinon.createSandbox();
-  sandbox.stub(Lifecycle, 'getInstance').returns(Lifecycle.prototype);
   let warnStub: sinon.SinonStub;
 
   beforeEach(() => {
+    sandbox.stub(Lifecycle, 'getInstance').returns(Lifecycle.prototype);
     warnStub = sandbox.stub(Lifecycle.prototype, 'emitWarning');
   });
 

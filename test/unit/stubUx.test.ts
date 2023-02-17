@@ -4,9 +4,11 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { createSandbox, SinonSandbox } from 'sinon';
 import { Interfaces } from '@oclif/core';
 import { expect } from 'chai';
+import { TestContext } from '@salesforce/core/lib/testSetup';
+import { stubMethod } from '@salesforce/ts-sinon';
+import { Lifecycle } from '@salesforce/core';
 import { stubUx, stubSfCommandUx, SfCommand, Ux, stubSpinner, Flags } from '../../src/exported';
 
 const TABLE_DATA = Array.from({ length: 10 }).fill({ id: '123', name: 'foo', value: 'bar' }) as Array<
@@ -219,17 +221,18 @@ describe('Ux Stubs', () => {
   let uxStubs: ReturnType<typeof stubUx>;
   let sfCommandUxStubs: ReturnType<typeof stubSfCommandUx>;
   let spinnerStubs: ReturnType<typeof stubSpinner>;
-  let sandbox: SinonSandbox;
+
+  const $$ = new TestContext();
 
   beforeEach(() => {
-    sandbox = createSandbox();
-    uxStubs = stubUx(sandbox);
-    sfCommandUxStubs = stubSfCommandUx(sandbox);
-    spinnerStubs = stubSpinner(sandbox);
-  });
+    stubMethod($$.SANDBOX, Lifecycle, 'getInstance').returns({
+      on: $$.SANDBOX.stub(),
+      onWarning: $$.SANDBOX.stub(),
+    });
 
-  afterEach(() => {
-    sandbox.restore();
+    uxStubs = stubUx($$.SANDBOX);
+    sfCommandUxStubs = stubSfCommandUx($$.SANDBOX);
+    spinnerStubs = stubSpinner($$.SANDBOX);
   });
 
   describe('SfCommand methods', () => {
@@ -285,7 +288,7 @@ describe('Ux Stubs', () => {
 
     it('should stub spinner', async () => {
       await Cmd.run(['--spinner', '--method=SfCommand']);
-      expect(true).to.be.true
+      expect(true).to.be.true;
       expect(spinnerStubs.start.firstCall.args).to.deep.equal(['starting spinner']);
       expect(spinnerStubs.stop.firstCall.args).to.deep.equal(['done']);
     });
