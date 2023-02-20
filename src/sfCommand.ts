@@ -351,7 +351,7 @@ export abstract class SfCommand<T> extends Command {
     return this.prompter.timedPrompt(questions, ms, initialAnswers);
   }
 
-  public async _run<R>(): Promise<R | undefined> {
+  public async _run<R>(): Promise<R> {
     this.configAggregator =
       this.config.bin === 'sfdx' ??
       env.getBoolean('SF_USE_DEPRECATED_CONFIG_VARS') ??
