@@ -7,7 +7,7 @@
 
 import { SinonSandbox } from 'sinon';
 import { SfCommand } from './sfCommand';
-import { Spinner, Ux } from './ux';
+import { Prompter, Spinner, Ux } from './ux';
 
 export function stubUx(sandbox: SinonSandbox) {
   return {
@@ -18,7 +18,7 @@ export function stubUx(sandbox: SinonSandbox) {
     styledHeader: sandbox.stub(Ux.prototype, 'styledHeader'),
     styledObject: sandbox.stub(Ux.prototype, 'styledObject'),
     styledJSON: sandbox.stub(Ux.prototype, 'styledJSON'),
-  }
+  };
 }
 
 export function stubSfCommandUx(sandbox: SinonSandbox) {
@@ -34,12 +34,20 @@ export function stubSfCommandUx(sandbox: SinonSandbox) {
     styledHeader: sandbox.stub(SfCommand.prototype, 'styledHeader'),
     styledObject: sandbox.stub(SfCommand.prototype, 'styledObject'),
     styledJSON: sandbox.stub(SfCommand.prototype, 'styledJSON'),
-  }
+  };
 }
 
 export function stubSpinner(sandbox: SinonSandbox) {
   return {
     start: sandbox.stub(Spinner.prototype, 'start'),
     stop: sandbox.stub(Spinner.prototype, 'stop'),
-  }
+  };
+}
+
+export function stubPrompter(sandbox: SinonSandbox) {
+  return {
+    prompt: sandbox.stub(Prompter.prototype, 'prompt'),
+    confirm: sandbox.stub(Prompter.prototype, 'confirm'),
+    timedPrompt: sandbox.stub(Prompter.prototype, 'timedPrompt'),
+  };
 }
