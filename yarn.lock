@@ -574,10 +574,10 @@
     widest-line "^3.1.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.2.0.tgz#8f8d21df8a664484da4632ae253947a535f7bb2f"
-  integrity sha512-gA1gSZFfVqLWkwdw5qqCK4a0nuwrm1aGCpgNijG1PiNjcro5dD1YxGSooIkxlqqZsXTyj7GJYjemwWwLBQK6cw==
+"@oclif/core@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.2.1.tgz#fc94d3543ed47ddd5393a719346997f2a250204c"
+  integrity sha512-TxIFfccAwb8SiVADZWxIS/GG2bcw0yBDBBxzqBQl7jurfG0wQtdu6jLfHHdVGYaYyMKw1UVZTFFLtX8iwRTW/Q==
   dependencies:
     "@types/cli-progress" "^3.11.0"
     ansi-escapes "^4.3.2"
