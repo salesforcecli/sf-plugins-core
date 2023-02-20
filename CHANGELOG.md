@@ -1,3 +1,12 @@
+## [2.1.3](https://github.com/salesforcecli/sf-plugins-core/compare/2.1.2...2.1.3) (2023-02-20)
+
+
+### Bug Fixes
+
+* _run type ([#227](https://github.com/salesforcecli/sf-plugins-core/issues/227)) ([5b01252](https://github.com/salesforcecli/sf-plugins-core/commit/5b012527c020829f891f029fe77779e75a6e665f))
+
+
+
 ## [2.1.2](https://github.com/salesforcecli/sf-plugins-core/compare/2.1.1...2.1.2) (2023-02-13)
 
 
