@@ -10,11 +10,12 @@ import { Flags as OclifFlags } from '@oclif/core';
 export { toHelpSection, parseVarArgs } from './util';
 export { Deployable, Deployer, DeployerResult } from './deployer';
 export { Deauthorizer } from './deauthorizer';
-export { Progress, Prompter, generateTableChoices, Ux } from './ux';
+export { Progress, Prompter, generateTableChoices, Ux, Spinner } from './ux';
 export { SfHook } from './hooks';
 export * from './types';
 export { SfCommand, SfCommandInterface, StandardColors } from './sfCommand';
 export * from './compatibility';
+export * from './stubUx';
 // custom flags
 import { requiredOrgFlag, requiredHubFlag, optionalOrgFlag, optionalHubFlag } from './flags/orgFlags';
 import { salesforceIdFlag } from './flags/salesforceId';
