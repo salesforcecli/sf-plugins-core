@@ -432,12 +432,21 @@ export abstract class SfCommand<T> extends Command {
 
   protected async catch(error: Error | SfError | SfCommand.Error): Promise<SfCommand.Error> {
     // transform an unknown error into one that conforms to the interface
-    const codeFromError = error instanceof SfError ? error.exitCode : 1;
+
+    // @ts-expect-error because exitCode is not on Error
+    const codeFromError = (error.exitCode as number) ?? 1;
     process.exitCode ??= codeFromError;
-    const sfErrorProperties =
-      error instanceof SfError
-        ? { data: error.data, actions: error.actions, code: codeFromError, context: error.context }
-        : {};
+
+    const sfErrorProperties = removeEmpty({
+      // @ts-expect-error because data is not on Error
+      data: (error.data as unknown) ?? null,
+      // @ts-expect-error because actions is not on Error
+      actions: (error.actions as string[]) ?? null,
+      code: codeFromError,
+      // @ts-expect-error because context is not on Error
+      context: (error.context as string) ?? null,
+    });
+
     const sfCommandError: SfCommand.Error = {
       ...sfErrorProperties,
       ...{
@@ -526,4 +535,9 @@ export namespace SfCommand {
     data?: unknown;
     context?: string;
   }
+}
+
+function removeEmpty(obj: Record<string, unknown>): Record<string, unknown> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
 }
