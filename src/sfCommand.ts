@@ -430,7 +430,7 @@ export abstract class SfCommand<T> extends Command {
     }
   }
 
-  protected async catch(error: Error | SfError | SfCommand.Error): Promise<never> {
+  protected async catch(error: Error | SfError | SfCommand.Error): Promise<SfCommand.Error> {
     // transform an unknown error into one that conforms to the interface
     const codeFromError = error instanceof SfError ? error.exitCode : 1;
     process.exitCode ??= codeFromError;
