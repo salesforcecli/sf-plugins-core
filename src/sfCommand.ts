@@ -447,6 +447,7 @@ export abstract class SfCommand<T> extends Command {
       context: (error.context as string) ?? null,
     });
 
+    // Create printable error object
     const sfCommandError: SfCommand.Error = {
       ...sfErrorProperties,
       ...{
@@ -464,7 +465,22 @@ export abstract class SfCommand<T> extends Command {
       this.logToStderr(this.formatError(sfCommandError));
     }
 
-    throw sfCommandError;
+    // Create SfError that can be thrown
+    const err = new SfError(
+      error.message,
+      error.name ?? 'Error',
+      // @ts-expect-error because actions is not on Error
+      (error.actions as string[]) ?? [],
+      process.exitCode
+    );
+    err.context = sfCommandError.context;
+    err.stack = sfCommandError.stack;
+    // @ts-expect-error because code is not on SfError
+    err.code = codeFromError;
+    // @ts-expect-error because code is not on SfError
+    err.status = sfCommandError.status;
+
+    throw err;
   }
 
   /**
