@@ -1,3 +1,12 @@
+## [2.2.2](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.1...2.2.2) (2023-02-23)
+
+
+### Bug Fixes
+
+* throw SfError from catch ([#230](https://github.com/salesforcecli/sf-plugins-core/issues/230)) ([1eb1c17](https://github.com/salesforcecli/sf-plugins-core/commit/1eb1c1715ceef59ee424677a351607ae0568b513))
+
+
+
 ## [2.2.1](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.0...2.2.1) (2023-02-21)
 
 
