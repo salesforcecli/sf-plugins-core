@@ -308,6 +308,14 @@ export abstract class SfCommand<T> extends Command {
     this.ux.styledHeader(text);
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  public logJson(json: AnyJson | unknown): void {
+    // If `--json` is enabled, then the ux instance on the class will disable output, which
+    // means that the logJson method will not output anything. So, we need to create a new
+    // instance of the ux class that does not have output disabled in order to log the json.
+    new Ux().styledJSON(json as AnyJson);
+  }
+
   /**
    * Prompt user for information. See https://www.npmjs.com/package/inquirer for more.
    *
@@ -408,14 +416,6 @@ export abstract class SfCommand<T> extends Command {
       ...error,
       warnings: this.warnings,
     };
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  protected logJson(json: AnyJson | unknown): void {
-    // If `--json` is enabled, then the ux instance on the class will disable output, which
-    // means that the logJson method will not output anything. So, we need to create a new
-    // instance of the ux class that does not have output disabled in order to log the json.
-    new Ux().styledJSON(json as AnyJson);
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -24,6 +24,7 @@ export function stubUx(sandbox: SinonSandbox) {
 export function stubSfCommandUx(sandbox: SinonSandbox) {
   return {
     log: sandbox.stub(SfCommand.prototype, 'log'),
+    logJson: sandbox.stub(SfCommand.prototype, 'logJson'),
     logToStderr: sandbox.stub(SfCommand.prototype, 'logToStderr'),
     logSuccess: sandbox.stub(SfCommand.prototype, 'logSuccess'),
     logSensitive: sandbox.stub(SfCommand.prototype, 'logSensitive'),
