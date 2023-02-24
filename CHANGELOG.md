@@ -1,3 +1,12 @@
+## [2.2.3](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.2...2.2.3) (2023-02-24)
+
+
+### Bug Fixes
+
+* add logJson stub ([5f84c48](https://github.com/salesforcecli/sf-plugins-core/commit/5f84c489f3365df71a6bc89fe7cdfa3129b38dc4))
+
+
+
 ## [2.2.2](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.1...2.2.2) (2023-02-23)
 
 
