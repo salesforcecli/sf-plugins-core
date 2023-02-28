@@ -129,7 +129,7 @@
       ]
     },
     "test:only": {
-      "command": "nyc mocha \"test/**/*.test.ts\"",
+      "command": "nyc mocha \"test/**/*.test.ts\" --color",
       "files": [
         "test/**/*.ts",
         "src/**/*.ts",
