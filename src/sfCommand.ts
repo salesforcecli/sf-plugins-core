@@ -477,8 +477,11 @@ export abstract class SfCommand<T> extends Command {
     err.stack = sfCommandError.stack;
     // @ts-expect-error because code is not on SfError
     err.code = codeFromError;
-    // @ts-expect-error because code is not on SfError
+    // @ts-expect-error because status is not on SfError
     err.status = sfCommandError.status;
+
+    // @ts-expect-error because skipOclifErrorHandling is not on SfError
+    err.skipOclifErrorHandling = true;
 
     throw err;
   }
