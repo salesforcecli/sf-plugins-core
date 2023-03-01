@@ -1,3 +1,12 @@
+## [2.2.4](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.3...2.2.4) (2023-03-01)
+
+
+### Bug Fixes
+
+* add skipOclifErrorHandling to errors thrown from SfCommand.catch ([#234](https://github.com/salesforcecli/sf-plugins-core/issues/234)) ([82660ef](https://github.com/salesforcecli/sf-plugins-core/commit/82660efe0bbeea085ec4549c7a2407eee87154d5))
+
+
+
 ## [2.2.3](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.2...2.2.3) (2023-02-24)
 
 
