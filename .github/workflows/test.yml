@@ -50,9 +50,6 @@ jobs:
       fail-fast: false
       matrix:
         repo:
-          - plugin-env
-          - plugin-generate
-          - plugin-login
           - plugin-org
           - plugin-data
           - plugin-schema
