@@ -21,7 +21,6 @@ import {
 import { env } from '@salesforce/kit';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
-import { FlagOutput, ArgOutput, Input, ParserOutput } from '@oclif/core/lib/interfaces/parser';
 import { Progress, Prompter, Spinner, Ux } from './ux';
 
 Messages.importMessagesDirectory(__dirname);
@@ -194,7 +193,6 @@ export abstract class SfCommand<T> extends Command {
   private ux: Ux;
   private prompter: Prompter;
   private lifecycle: Lifecycle;
-  private parsedFlags: Record<string, unknown> = {};
 
   public constructor(argv: string[], config: Config) {
     super(argv, config);
@@ -487,7 +485,7 @@ export abstract class SfCommand<T> extends Command {
 
     // Emit an event for plugin-telemetry prerun hook to pick up.
     // @ts-expect-error because TS is strict about the events that can be emitted on process.
-    process.emit('sfCommandError', err, this.parsedFlags);
+    process.emit('sfCommandError', err);
 
     throw err;
   }
@@ -510,15 +508,6 @@ export abstract class SfCommand<T> extends Command {
       colorizedArgs.push(StandardColors.info(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
     }
     return colorizedArgs.join('\n');
-  }
-
-  protected async parse<F extends FlagOutput, B extends FlagOutput, A extends ArgOutput>(
-    options?: Input<F, B, A> | undefined,
-    argv?: string[] | undefined
-  ): Promise<ParserOutput<F, B, A>> {
-    const result = await super.parse(options, argv);
-    this.parsedFlags = result.flags;
-    return result;
   }
 
   /**
