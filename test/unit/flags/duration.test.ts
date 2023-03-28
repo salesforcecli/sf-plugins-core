@@ -27,8 +27,8 @@ describe('duration flag', () => {
     };
     it('passes', async () => {
       const out = await Parser.parse(['--wait=10'], buildProps);
-      expect(out.flags.wait.quantity).to.equal(10);
-      expect(out.flags.wait.unit).to.equal(Duration.Unit.HOURS);
+      expect(out.flags.wait?.quantity).to.equal(10);
+      expect(out.flags.wait?.unit).to.equal(Duration.Unit.HOURS);
     });
     it('passes with default', async () => {
       const out = await Parser.parse([], buildProps);
@@ -50,12 +50,12 @@ describe('duration flag', () => {
     };
     it('passes', async () => {
       const out = await Parser.parse(['--wait=10'], buildProps);
-      expect(out.flags.wait.quantity).to.equal(10);
-      expect(out.flags.wait.unit).to.equal(Duration.Unit.WEEKS);
+      expect(out.flags.wait?.quantity).to.equal(10);
+      expect(out.flags.wait?.unit).to.equal(Duration.Unit.WEEKS);
     });
     it('passes with default', async () => {
       const out = await Parser.parse([], buildProps);
-      expect(out.flags.wait.quantity).to.equal(33);
+      expect(out.flags.wait?.quantity).to.equal(33);
     });
   });
 
@@ -77,19 +77,19 @@ describe('duration flag', () => {
     };
     it('passes', async () => {
       const out = await Parser.parse(['--wait=10'], buildProps);
-      expect(out.flags.wait.quantity).to.equal(10);
+      expect(out.flags.wait?.quantity).to.equal(10);
     });
     it('min passes', async () => {
       const out = await Parser.parse([`--wait=${min}`], buildProps);
-      expect(out.flags.wait.quantity).to.equal(min);
+      expect(out.flags.wait?.quantity).to.equal(min);
     });
     it('max passes', async () => {
       const out = await Parser.parse([`--wait=${max}`], buildProps);
-      expect(out.flags.wait.quantity).to.equal(max);
+      expect(out.flags.wait?.quantity).to.equal(max);
     });
     it('default works', async () => {
       const out = await Parser.parse([], buildProps);
-      expect(out.flags.wait.quantity).to.equal(defaultValue);
+      expect(out.flags.wait?.quantity).to.equal(defaultValue);
     });
     describe('failures', () => {
       it('below min fails', async () => {

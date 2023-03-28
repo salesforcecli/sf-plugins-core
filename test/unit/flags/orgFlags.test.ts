@@ -144,8 +144,8 @@ describe('org flags', () => {
     it('no input, uses default', async () => {
       await $$.stubConfig({ [OrgConfigProperties.TARGET_DEV_HUB]: testHub.username });
       const retrieved = await maybeGetHub();
-      expect(retrieved).to.be.instanceOf(Org);
-      expect(retrieved.getOrgId()).to.equal(testHub.orgId);
+      assert(retrieved instanceof Org);
+      expect(retrieved?.getOrgId()).to.equal(testHub.orgId);
     });
     it('no input, uses default but is not a hub => throw', async () => {
       await $$.stubConfig({ [OrgConfigProperties.TARGET_DEV_HUB]: testOrg.username });
