@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "2.2.6-beta.0",
+  "version": "2.2.5",
   "description": "Utils for writing Salesforce CLI plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
@@ -32,8 +32,8 @@
     "/messages"
   ],
   "dependencies": {
-    "@oclif/core": "^2.7.2-beta.1",
-    "@salesforce/core": "^3.34.4",
+    "@oclif/core": "^2.8.0",
+    "@salesforce/core": "^3.34.6",
     "@salesforce/kit": "^1.9.2",
     "@salesforce/ts-types": "^1.7.3",
     "chalk": "^4",
@@ -83,7 +83,7 @@
       "command": "tsc -p . --pretty --incremental",
       "files": [
         "src/**/*.ts",
-        "tsconfig.json",
+        "**/tsconfig.json",
         "messages/**"
       ],
       "output": [
@@ -109,7 +109,8 @@
         "src/**/*.ts",
         "test/**/*.ts",
         "messages/**",
-        ".eslint*"
+        "**/.eslint*",
+        "**/tsconfig.json"
       ],
       "output": []
     },
@@ -117,8 +118,7 @@
       "command": "tsc -p \"./test\" --pretty",
       "files": [
         "test/**/*.ts",
-        "tsconfig.json",
-        "test/tsconfig.json"
+        "**/tsconfig.json"
       ],
       "output": []
     },
@@ -136,9 +136,8 @@
       "files": [
         "test/**/*.ts",
         "src/**/*.ts",
-        "tsconfig.json",
+        "**/tsconfig.json",
         ".mocha*",
-        "test/tsconfig.json",
         "!*.nut.ts",
         ".nycrc"
       ],
