@@ -132,8 +132,7 @@ export const requiredOrgFlag = Flags.custom({
   summary: messages.getMessage('flags.targetOrg.summary'),
   parse: async (input: string | undefined) => getOrgOrThrow(input),
   default: async () => getOrgOrThrow(),
-  defaultHelp: async (_, isWritingManifest) =>
-    !isWritingManifest ? (await getOrgOrThrow())?.getUsername() : undefined,
+  defaultHelp: async (_, isWritingManifest) => (!isWritingManifest ? (await maybeGetOrg())?.getUsername() : undefined),
   required: true,
 });
 
@@ -164,8 +163,7 @@ export const requiredHubFlag = Flags.custom({
   summary: messages.getMessage('flags.targetDevHubOrg.summary'),
   parse: async (input: string | undefined) => getHubOrThrow(input),
   default: async () => getHubOrThrow(),
-  defaultHelp: async (_, isWritingManifest) =>
-    !isWritingManifest ? (await getHubOrThrow())?.getUsername() : undefined,
+  defaultHelp: async (_, isWritingManifest) => (!isWritingManifest ? (await maybeGetHub())?.getUsername() : undefined),
   required: true,
 });
 

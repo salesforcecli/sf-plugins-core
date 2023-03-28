@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
-import { Messages, sfdc } from '@salesforce/core';
+import { Messages, validateSalesforceId } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -52,14 +52,14 @@ const validate = (input: string, config?: IdFlagConfig): string => {
   const { length, startsWith } = config ?? {};
 
   // If the flag doesn't specify a length or specifies "both", then let it accept both 15 or 18.
-  const allowedIdLength = (!length || length === 'both') ? [15, 18] : [length];
+  const allowedIdLength = !length || length === 'both' ? [15, 18] : [length];
 
   if (!allowedIdLength.includes(input.length)) {
     throw messages.createError('errors.InvalidIdLength', [
       allowedIdLength.join(` ${messages.getMessage('errors.InvalidIdLength.or')} `),
     ]);
   }
-  if (!sfdc.validateSalesforceId(input)) {
+  if (!validateSalesforceId(input)) {
     throw messages.createError('errors.InvalidId');
   }
   if (startsWith && !input.startsWith(startsWith)) {
