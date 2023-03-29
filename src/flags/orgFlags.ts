@@ -106,8 +106,9 @@ export const optionalOrgFlag = Flags.custom({
     if (isWritingManifest) {
       return undefined;
     }
-    if (context.flags instanceof Org) {
-      return context.flags.getUsername();
+    if (context.options instanceof Org) {
+      const org = context.options as Org;
+      return org.getUsername();
     }
     return (await maybeGetOrg())?.getUsername();
   },
@@ -144,8 +145,9 @@ export const requiredOrgFlag = Flags.custom({
     if (isWritingManifest) {
       return undefined;
     }
-    if (context.flags instanceof Org) {
-      return context.flags.getUsername();
+    if (context.options instanceof Org) {
+      const org = context.options as Org;
+      return org.getUsername();
     }
     return (await maybeGetOrg())?.getUsername();
   },
@@ -183,8 +185,9 @@ export const requiredHubFlag = Flags.custom({
     if (isWritingManifest) {
       return undefined;
     }
-    if (context.flags instanceof Org) {
-      return context.flags.getUsername();
+    if (context.options instanceof Org) {
+      const org = context.options as Org;
+      return org.getUsername();
     }
     return (await maybeGetHub())?.getUsername();
   },
@@ -221,8 +224,9 @@ export const optionalHubFlag = Flags.custom({
     if (isWritingManifest) {
       return undefined;
     }
-    if (context.flags instanceof Org) {
-      return context.flags.getUsername();
+    if (context.options instanceof Org) {
+      const org = context.options as Org;
+      return org.getUsername();
     }
     return (await maybeGetHub())?.getUsername();
   },
