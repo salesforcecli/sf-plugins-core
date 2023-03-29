@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "2.2.5",
+  "version": "2.2.6-beta.1",
   "description": "Utils for writing Salesforce CLI plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
@@ -32,7 +32,7 @@
     "/messages"
   ],
   "dependencies": {
-    "@oclif/core": "^2.8.0",
+    "@oclif/core": "^2.8.1-beta.1",
     "@salesforce/core": "^3.34.6",
     "@salesforce/kit": "^1.9.2",
     "@salesforce/ts-types": "^1.7.3",

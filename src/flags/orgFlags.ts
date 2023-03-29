@@ -102,7 +102,15 @@ export const optionalOrgFlag = Flags.custom({
   char: 'o',
   parse: async (input: string | undefined) => maybeGetOrg(input),
   default: async () => maybeGetOrg(),
-  defaultHelp: async (_, isWritingManifest) => (!isWritingManifest ? (await maybeGetOrg())?.getUsername() : undefined),
+  defaultHelp: async (context, isWritingManifest) => {
+    if (isWritingManifest) {
+      return undefined;
+    }
+    if (context.flags instanceof Org) {
+      return context.flags.getUsername();
+    }
+    return (await maybeGetOrg())?.getUsername();
+  },
 });
 
 /**
@@ -132,7 +140,15 @@ export const requiredOrgFlag = Flags.custom({
   summary: messages.getMessage('flags.targetOrg.summary'),
   parse: async (input: string | undefined) => getOrgOrThrow(input),
   default: async () => getOrgOrThrow(),
-  defaultHelp: async (_, isWritingManifest) => (!isWritingManifest ? (await maybeGetOrg())?.getUsername() : undefined),
+  defaultHelp: async (context, isWritingManifest) => {
+    if (isWritingManifest) {
+      return undefined;
+    }
+    if (context.flags instanceof Org) {
+      return context.flags.getUsername();
+    }
+    return (await maybeGetOrg())?.getUsername();
+  },
   required: true,
 });
 
@@ -163,7 +179,15 @@ export const requiredHubFlag = Flags.custom({
   summary: messages.getMessage('flags.targetDevHubOrg.summary'),
   parse: async (input: string | undefined) => getHubOrThrow(input),
   default: async () => getHubOrThrow(),
-  defaultHelp: async (_, isWritingManifest) => (!isWritingManifest ? (await maybeGetHub())?.getUsername() : undefined),
+  defaultHelp: async (context, isWritingManifest) => {
+    if (isWritingManifest) {
+      return undefined;
+    }
+    if (context.flags instanceof Org) {
+      return context.flags.getUsername();
+    }
+    return (await maybeGetHub())?.getUsername();
+  },
   required: true,
 });
 
@@ -193,6 +217,14 @@ export const optionalHubFlag = Flags.custom({
   summary: messages.getMessage('flags.targetDevHubOrg.summary'),
   parse: async (input: string | undefined) => maybeGetHub(input),
   default: async () => maybeGetHub(),
-  defaultHelp: async (_, isWritingManifest) => (!isWritingManifest ? (await maybeGetHub())?.getUsername() : undefined),
+  defaultHelp: async (context, isWritingManifest) => {
+    if (isWritingManifest) {
+      return undefined;
+    }
+    if (context.flags instanceof Org) {
+      return context.flags.getUsername();
+    }
+    return (await maybeGetHub())?.getUsername();
+  },
   required: false,
 });
