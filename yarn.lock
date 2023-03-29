@@ -710,10 +710,10 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^2.8.1-beta.1":
-  version "2.8.1-beta.1"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.8.1-beta.1.tgz#fcb23978df884b568d9d00f0ea764d28303ef5d3"
-  integrity sha512-5FPjy27z0z75nIETTaezIGAcrDCJEn0Cjcu5Sg5jW4wtzM3buAuPpHjm+Yj6LSDtQVyw1If6aQx36Hh9MnnsBA==
+"@oclif/core@^2.8.1-beta.4":
+  version "2.8.1-beta.4"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.8.1-beta.4.tgz#962a6c20b925b49f80c3478e1f34408b534eba17"
+  integrity sha512-aLNElsI+4MXijvcdFHbJYL01/RlWArA4/GkHDK2zfXKyd8xY+NyiJeP+VajFiIkDPxUoo6XHQ7fvE/fpDxa1eQ==
   dependencies:
     "@types/cli-progress" "^3.11.0"
     ansi-escapes "^4.3.2"

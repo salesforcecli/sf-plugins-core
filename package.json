@@ -32,7 +32,7 @@
     "/messages"
   ],
   "dependencies": {
-    "@oclif/core": "^2.8.1-beta.1",
+    "@oclif/core": "^2.8.1-beta.4",
     "@salesforce/core": "^3.34.6",
     "@salesforce/kit": "^1.9.2",
     "@salesforce/ts-types": "^1.7.3",
