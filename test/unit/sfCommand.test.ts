@@ -23,11 +23,15 @@ class TestCommand extends SfCommand<void> {
     const { flags } = await this.parse(TestCommand);
 
     if (flags.error && !flags.warn) {
-      const infoError = new SfError('foo bar baz', 'FooError', flags.actions ? ['this', 'is an', 'action'] : null);
+      const infoError = new SfError('foo bar baz', 'FooError', flags.actions ? ['this', 'is an', 'action'] : undefined);
       this.info(infoError);
     } else if (flags.warn) {
       if (flags.error) {
-        const warnError = new SfError('foo bar baz', 'FooError', flags.actions ? ['this', 'is an', 'action'] : null);
+        const warnError = new SfError(
+          'foo bar baz',
+          'FooError',
+          flags.actions ? ['this', 'is an', 'action'] : undefined
+        );
         this.warn(warnError);
       } else {
         this.warn('foo bar baz');

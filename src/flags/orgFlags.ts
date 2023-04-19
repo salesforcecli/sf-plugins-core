@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
-import { Messages, Org, ConfigAggregator, OrgConfigProperties } from '@salesforce/core';
+import { ConfigAggregator, Messages, Org, OrgConfigProperties } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -102,7 +102,16 @@ export const optionalOrgFlag = Flags.custom({
   char: 'o',
   parse: async (input: string | undefined) => maybeGetOrg(input),
   default: async () => maybeGetOrg(),
-  defaultHelp: async () => (await maybeGetOrg())?.getUsername(),
+  defaultHelp: async (context, isWritingManifest) => {
+    if (isWritingManifest) {
+      return undefined;
+    }
+    if (context.options instanceof Org) {
+      const org = context.options as Org;
+      return org.getUsername();
+    }
+    return (await maybeGetOrg())?.getUsername();
+  },
 });
 
 /**
@@ -132,7 +141,16 @@ export const requiredOrgFlag = Flags.custom({
   summary: messages.getMessage('flags.targetOrg.summary'),
   parse: async (input: string | undefined) => getOrgOrThrow(input),
   default: async () => getOrgOrThrow(),
-  defaultHelp: async () => (await getOrgOrThrow())?.getUsername(),
+  defaultHelp: async (context, isWritingManifest) => {
+    if (isWritingManifest) {
+      return undefined;
+    }
+    if (context.options instanceof Org) {
+      const org = context.options as Org;
+      return org.getUsername();
+    }
+    return (await maybeGetOrg())?.getUsername();
+  },
   required: true,
 });
 
@@ -163,7 +181,16 @@ export const requiredHubFlag = Flags.custom({
   summary: messages.getMessage('flags.targetDevHubOrg.summary'),
   parse: async (input: string | undefined) => getHubOrThrow(input),
   default: async () => getHubOrThrow(),
-  defaultHelp: async () => (await getHubOrThrow())?.getUsername(),
+  defaultHelp: async (context, isWritingManifest) => {
+    if (isWritingManifest) {
+      return undefined;
+    }
+    if (context.options instanceof Org) {
+      const org = context.options as Org;
+      return org.getUsername();
+    }
+    return (await maybeGetHub())?.getUsername();
+  },
   required: true,
 });
 
@@ -193,6 +220,15 @@ export const optionalHubFlag = Flags.custom({
   summary: messages.getMessage('flags.targetDevHubOrg.summary'),
   parse: async (input: string | undefined) => maybeGetHub(input),
   default: async () => maybeGetHub(),
-  defaultHelp: async () => (await maybeGetHub())?.getUsername(),
+  defaultHelp: async (context, isWritingManifest) => {
+    if (isWritingManifest) {
+      return undefined;
+    }
+    if (context.options instanceof Org) {
+      const org = context.options as Org;
+      return org.getUsername();
+    }
+    return (await maybeGetHub())?.getUsername();
+  },
   required: false,
 });
