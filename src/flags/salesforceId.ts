@@ -44,6 +44,7 @@ export type IdFlagConfig = {
  * ```
  */
 export const salesforceIdFlag = Flags.custom<string, IdFlagConfig>({
+  // eslint-disable-next-line @typescript-eslint/require-await
   parse: async (input, _ctx, opts) => validate(input, opts),
   char: 'i',
 });
@@ -52,7 +53,7 @@ const validate = (input: string, config?: IdFlagConfig): string => {
   const { length, startsWith } = config ?? {};
 
   // If the flag doesn't specify a length or specifies "both", then let it accept both 15 or 18.
-  const allowedIdLength = (!length || length === 'both') ? [15, 18] : [length];
+  const allowedIdLength = !length || length === 'both' ? [15, 18] : [length];
 
   if (!allowedIdLength.includes(input.length)) {
     throw messages.createError('errors.InvalidIdLength', [

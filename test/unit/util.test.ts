@@ -13,8 +13,12 @@ import {
   OrgConfigProperties,
   SfdxPropertyKeys,
   SFDX_ALLOWED_PROPERTIES,
+  Messages,
 } from '@salesforce/core';
 import { parseVarArgs, toHelpSection } from '../../src/util';
+
+Messages.importMessagesDirectory(__dirname);
+const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 describe('toHelpSection', () => {
   it('should produce help section for env vars', () => {
@@ -114,9 +118,9 @@ describe('parseVarArgs', () => {
   });
 
   it('should throw if invalid format', () => {
-    expect(() => parseVarArgs({ arg1: 'foobar' }, ['foobar', 'key1=value1', 'key2:value2'])).to.throw(
-      'Set varargs with this format: key=value or key="value with spaces". key2:value2'
-    );
+    const badArg = 'key2:value2';
+    const expectedError = messages.createError('error.InvalidArgumentFormat', [badArg]).message;
+    expect(() => parseVarArgs({ arg1: 'foobar' }, ['foobar', 'key1=value1', badArg])).to.throw(expectedError);
   });
 
   it('should throw if duplicates exist', () => {
