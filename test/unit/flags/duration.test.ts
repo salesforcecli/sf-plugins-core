@@ -91,6 +91,13 @@ describe('duration flag', () => {
       const out = await Parser.parse([], buildProps);
       expect(out.flags.wait?.quantity).to.equal(defaultValue);
     });
+    it('default default function', async () => {
+      // @ts-expect-error: type mismatch
+      buildProps.flags.wait.default = async (context: { options: { defaultValue: number } }) =>
+        Duration.minutes(context.options.defaultValue + 1);
+      const out = await Parser.parse([], buildProps);
+      expect(out.flags.wait?.quantity).to.equal(defaultValue + 1);
+    });
     describe('failures', () => {
       it('below min fails', async () => {
         try {
