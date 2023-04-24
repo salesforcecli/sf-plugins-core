@@ -884,10 +884,10 @@
     jsonwebtoken "9.0.0"
     ts-retry-promise "^0.7.0"
 
-"@salesforce/core@^3.35.0-qa.2":
-  version "3.35.0-qa.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.35.0-qa.2.tgz#e2b554b55ccb8c676383d1406f3bad0b8cee0195"
-  integrity sha512-DEr4jcFxBCwi3IxRPZqUpd/MsOBDzJ8MsUTgPM8ZpkfFJibVbW77t3QkPLdTzPb7NBN8C76X+z/cg0HnsuJ67Q==
+"@salesforce/core@^3.35.0-qa.3":
+  version "3.35.0-qa.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.35.0-qa.3.tgz#99f8183084d1de92f0e8bf3aa43c1b1098ce69b2"
+  integrity sha512-OsLMAAYOSBLFKWajPZMuys9IOKsac7dCbajZFumpjHC+qG6UIJy+n1Q1mW6MkBLMOET63Ht6kIM2IwwzJMwIsg==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
     "@salesforce/kit" "^1.9.2"
