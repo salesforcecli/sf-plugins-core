@@ -483,6 +483,10 @@ export abstract class SfCommand<T> extends Command {
     // @ts-expect-error because skipOclifErrorHandling is not on SfError
     err.skipOclifErrorHandling = true;
 
+    // Emit an event for plugin-telemetry prerun hook to pick up.
+    // @ts-expect-error because TS is strict about the events that can be emitted on process.
+    process.emit('sfCommandError', err);
+
     throw err;
   }
 
