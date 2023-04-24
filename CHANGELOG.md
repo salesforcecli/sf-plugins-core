@@ -1,3 +1,115 @@
+## [2.2.9](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.8...2.2.9) (2023-04-19)
+
+
+
+## [2.2.6-beta.5](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.6-beta.4...2.2.6-beta.5) (2023-03-29)
+
+
+### Bug Fixes
+
+* onRelease flow needs dist tag ([59e02a6](https://github.com/salesforcecli/sf-plugins-core/commit/59e02a606ba68bf00697d10340dac40c8557f0b0))
+
+
+
+## [2.2.6-beta.4](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.6-beta.3...2.2.6-beta.4) (2023-03-29)
+
+
+### Bug Fixes
+
+* use context.options ([9d55ab6](https://github.com/salesforcecli/sf-plugins-core/commit/9d55ab65cec49c493b11fc6c595527dab3023ec1))
+
+
+
+## [2.2.6-beta.3](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.6-beta.2...2.2.6-beta.3) (2023-03-29)
+
+
+### Bug Fixes
+
+* bump core ([256ddc9](https://github.com/salesforcecli/sf-plugins-core/commit/256ddc92c861c2220e94d10573911c7a72efc8b8))
+
+
+
+## [2.2.6-beta.2](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.5...2.2.6-beta.2) (2023-03-29)
+
+
+### Bug Fixes
+
+* use ability to omit default and defaultHelp from manifest ([ad6be7c](https://github.com/salesforcecli/sf-plugins-core/commit/ad6be7cff5d5d8b3317ee7e104502ac44c106f18))
+
+
+
+## [2.2.8](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.7...2.2.8) (2023-04-16)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/core from 2.8.0 to 2.8.2 ([fa99f51](https://github.com/salesforcecli/sf-plugins-core/commit/fa99f514b7de1f0ecf5896dc93cbe96cdf4a36db))
+
+
+
+## [2.2.7](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.6...2.2.7) (2023-04-02)
+
+
+### Bug Fixes
+
+* **deps:** bump @salesforce/core from 3.34.1 to 3.34.6 ([efbc49d](https://github.com/salesforcecli/sf-plugins-core/commit/efbc49d4c46be8f9486299342f8796bb902676c5))
+
+
+
+## [2.2.6](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.6-beta.5...2.2.6) (2023-04-02)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/core from 2.7.1 to 2.8.0 ([580c9c7](https://github.com/salesforcecli/sf-plugins-core/commit/580c9c74f6cfd99004f2f6df0ed497cdaeadbb6c))
+
+
+
+## [2.2.6-beta.5](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.6-beta.4...2.2.6-beta.5) (2023-03-29)
+
+
+### Bug Fixes
+
+* onRelease flow needs dist tag ([59e02a6](https://github.com/salesforcecli/sf-plugins-core/commit/59e02a606ba68bf00697d10340dac40c8557f0b0))
+
+
+
+## [2.2.6-beta.4](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.6-beta.3...2.2.6-beta.4) (2023-03-29)
+
+
+### Bug Fixes
+
+* use context.options ([9d55ab6](https://github.com/salesforcecli/sf-plugins-core/commit/9d55ab65cec49c493b11fc6c595527dab3023ec1))
+
+
+
+## [2.2.6-beta.3](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.6-beta.2...2.2.6-beta.3) (2023-03-29)
+
+
+### Bug Fixes
+
+* bump core ([256ddc9](https://github.com/salesforcecli/sf-plugins-core/commit/256ddc92c861c2220e94d10573911c7a72efc8b8))
+
+
+
+## [2.2.6-beta.2](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.5...2.2.6-beta.2) (2023-03-29)
+
+
+### Bug Fixes
+
+* use ability to omit default and defaultHelp from manifest ([ad6be7c](https://github.com/salesforcecli/sf-plugins-core/commit/ad6be7cff5d5d8b3317ee7e104502ac44c106f18))
+
+
+
+## [2.2.5](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.4...2.2.5) (2023-03-19)
+
+
+### Bug Fixes
+
+* **deps:** bump @salesforce/core from 3.33.5 to 3.34.1 ([b17fbe2](https://github.com/salesforcecli/sf-plugins-core/commit/b17fbe2c6dbe4143a80c05dda7768f703882c628))
+
+
+
 ## [2.2.4](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.3...2.2.4) (2023-03-01)
 
 

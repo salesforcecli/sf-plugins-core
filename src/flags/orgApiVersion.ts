@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
-import { Messages, sfdc, Lifecycle, OrgConfigProperties } from '@salesforce/core';
+import { Messages, Lifecycle, OrgConfigProperties, validateApiVersion } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -57,7 +57,7 @@ const getDefaultFromConfig = async (): Promise<string | undefined> => {
 
 const validate = async (input: string): Promise<string> => {
   // basic format check
-  if (!sfdc.validateApiVersion(input)) {
+  if (!validateApiVersion(input)) {
     throw messages.createError('errors.InvalidApiVersion', [input]);
   }
   const requestedVersion = parseInt(input, 10);
