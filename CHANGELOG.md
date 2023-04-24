@@ -1,3 +1,12 @@
+## [2.2.10](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.9...2.2.10) (2023-04-24)
+
+
+### Bug Fixes
+
+* emit sfCommandError event ([#240](https://github.com/salesforcecli/sf-plugins-core/issues/240)) ([ac385c0](https://github.com/salesforcecli/sf-plugins-core/commit/ac385c0bc16da5c50e53a8d39f582e592f5a1ed3))
+
+
+
 ## [2.2.9](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.8...2.2.9) (2023-04-19)
 
 
