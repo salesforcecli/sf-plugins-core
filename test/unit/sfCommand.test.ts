@@ -43,6 +43,12 @@ class TestCommand extends SfCommand<void> {
   }
 }
 
+class NonJsonCommand extends SfCommand<void> {
+  public static enableJsonFlag = false;
+  public async run(): Promise<void> {
+    await this.parse(TestCommand);
+  }
+}
 describe('jsonEnabled', () => {
   beforeEach(() => {
     delete process.env.SF_CONTENT_TYPE;
@@ -82,6 +88,20 @@ describe('jsonEnabled', () => {
     // @ts-expect-error not really an oclif config
     const cmd = new TestCommand(['--json'], oclifConfig);
     expect(cmd.jsonEnabled()).to.be.true;
+  });
+
+  describe('non json command', () => {
+    it('non-json command base case', () => {
+      // @ts-expect-error not really an oclif config
+      const cmd = new NonJsonCommand([], oclifConfig);
+      expect(cmd.jsonEnabled()).to.be.false;
+    });
+    it('non-json command is not affected by env', () => {
+      process.env.SF_CONTENT_TYPE = 'JSON';
+      // @ts-expect-error not really an oclif config
+      const cmd = new NonJsonCommand([], oclifConfig);
+      expect(cmd.jsonEnabled()).to.be.false;
+    });
   });
 });
 

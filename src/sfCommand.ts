@@ -215,7 +215,7 @@ export abstract class SfCommand<T> extends Command {
     // unless it's been explicitly disabled on the command's statics
     return (
       super.jsonEnabled() ||
-      (SfCommand.enableJsonFlag !== false &&
+      (this.statics.enableJsonFlag !== false &&
         envVars.getString(EnvironmentVariable.SF_CONTENT_TYPE)?.toUpperCase() === 'JSON')
     );
   }
