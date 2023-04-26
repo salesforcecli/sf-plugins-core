@@ -445,6 +445,9 @@ export abstract class SfCommand<T> extends Command {
       code: codeFromError,
       // @ts-expect-error because context is not on Error
       context: (error.context as string) ?? null,
+      commandName: (error as SfCommand.Error).commandName ?? null,
+      // @ts-expect-error because result is not on Error
+      result: (error.result as unknown) ?? null,
     });
 
     // Create printable error object
@@ -557,6 +560,7 @@ export namespace SfCommand {
     exitCode?: number;
     data?: unknown;
     context?: string;
+    commandName?: string;
   }
 }
 
