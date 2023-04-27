@@ -440,8 +440,8 @@ export abstract class SfCommand<T> extends Command {
     const sfErrorProperties = removeEmpty({
       code: codeFromError,
       actions: 'actions' in error ? error.actions : null,
-      context: 'context' in error ? error.context : null,
-      commandName: 'commandName' in error ? error.commandName : null,
+      context: 'context' in error ? error.context : this.statics.name,
+      commandName: 'commandName' in error ? error.commandName : this.statics.name,
       data: 'data' in error ? error.data : null,
       result: 'result' in error ? error.result : null,
     });
