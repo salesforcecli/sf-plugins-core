@@ -438,13 +438,12 @@ export abstract class SfCommand<T> extends Command {
     process.exitCode ??= codeFromError;
 
     const sfErrorProperties = removeEmpty({
-      // @ts-expect-error because data is not on Error
-      data: (error.data as unknown) ?? null,
-      // @ts-expect-error because actions is not on Error
-      actions: (error.actions as string[]) ?? null,
       code: codeFromError,
-      // @ts-expect-error because context is not on Error
-      context: (error.context as string) ?? null,
+      actions: 'actions' in error ? error.actions : null,
+      context: 'context' in error ? error.context : this.statics.name,
+      commandName: 'commandName' in error ? error.commandName : this.statics.name,
+      data: 'data' in error ? error.data : null,
+      result: 'result' in error ? error.result : null,
     });
 
     // Create printable error object
@@ -557,6 +556,7 @@ export namespace SfCommand {
     exitCode?: number;
     data?: unknown;
     context?: string;
+    commandName?: string;
   }
 }
 
