@@ -1,3 +1,12 @@
+## [2.2.11](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.10...2.2.11) (2023-04-27)
+
+
+### Bug Fixes
+
+* add more error properties to support push errors ([b39ada3](https://github.com/salesforcecli/sf-plugins-core/commit/b39ada36d2df142f18363951f38c84758ed9bb6e))
+
+
+
 ## [2.2.10](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.9...2.2.10) (2023-04-24)
 
 
