@@ -1,3 +1,17 @@
+# [2.4.0](https://github.com/salesforcecli/sf-plugins-core/compare/2.3.0...2.4.0) (2023-04-28)
+
+
+### Bug Fixes
+
+* support setting json = true via env ([a02f269](https://github.com/salesforcecli/sf-plugins-core/commit/a02f2698d9d8fd650ecf33bfb311403fb9c71a11))
+
+
+### Features
+
+* support json env in any case ([a6d02bf](https://github.com/salesforcecli/sf-plugins-core/commit/a6d02bf57820b0b70da8de5281017d370c7907a3))
+
+
+
 # [2.3.0](https://github.com/salesforcecli/sf-plugins-core/compare/2.2.11...2.3.0) (2023-04-28)
 
 
