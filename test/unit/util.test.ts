@@ -25,7 +25,7 @@ describe('toHelpSection', () => {
     const envVarSection = toHelpSection('ENV VAR SECTION', EnvironmentVariable.SFDX_ACCESS_TOKEN);
     expect(envVarSection).to.have.property('header', 'ENV VAR SECTION');
     expect(envVarSection).to.have.property('body').to.have.property('length', 1);
-    expect(envVarSection.body[0]).to.deep.equal({
+    expect(envVarSection?.body?.[0]).to.deep.equal({
       name: 'SFDX_ACCESS_TOKEN',
       description: SUPPORTED_ENV_VARS[EnvironmentVariable.SFDX_ACCESS_TOKEN].description,
     });
@@ -36,9 +36,9 @@ describe('toHelpSection', () => {
     expect(orgConfigSection).to.have.property('header', 'ORG CONFIG VAR SECTION');
     expect(orgConfigSection).to.have.property('body').to.have.property('length', 1);
     const orgConfig = ORG_CONFIG_ALLOWED_PROPERTIES.find(({ key }) => key === OrgConfigProperties.TARGET_ORG);
-    expect(orgConfigSection.body[0]).to.deep.equal({
+    expect(orgConfigSection?.body?.[0]).to.deep.equal({
       name: 'target-org',
-      description: orgConfig.description,
+      description: orgConfig?.description,
     });
   });
 
@@ -47,9 +47,9 @@ describe('toHelpSection', () => {
     expect(sfdxConfigSection).to.have.property('header', 'SFDX CONFIG VAR SECTION');
     expect(sfdxConfigSection).to.have.property('body').to.have.property('length', 1);
     const sfdxConfig = SFDX_ALLOWED_PROPERTIES.find(({ key }) => key === SfdxPropertyKeys.INSTANCE_URL);
-    expect(sfdxConfigSection.body[0]).to.deep.equal({
+    expect(sfdxConfigSection?.body?.[0]).to.deep.equal({
       name: 'instanceUrl',
-      description: sfdxConfig.description,
+      description: sfdxConfig?.description,
     });
   });
 
@@ -64,18 +64,18 @@ describe('toHelpSection', () => {
     expect(mixedSection).to.have.property('body').to.have.property('length', 3);
     const sfdxConfig = SFDX_ALLOWED_PROPERTIES.find(({ key }) => key === SfdxPropertyKeys.INSTANCE_URL);
     const orgConfig = ORG_CONFIG_ALLOWED_PROPERTIES.find(({ key }) => key === OrgConfigProperties.TARGET_ORG);
-    expect(mixedSection.body).to.deep.equal([
+    expect(mixedSection?.body).to.deep.equal([
       {
         name: 'SFDX_ACCESS_TOKEN',
         description: SUPPORTED_ENV_VARS[EnvironmentVariable.SFDX_ACCESS_TOKEN].description,
       },
       {
         name: 'target-org',
-        description: orgConfig.description,
+        description: orgConfig?.description,
       },
       {
         name: 'instanceUrl',
-        description: sfdxConfig.description,
+        description: sfdxConfig?.description,
       },
     ]);
   });
@@ -84,7 +84,7 @@ describe('toHelpSection', () => {
     const envVarSection = toHelpSection('ARBITRARY SECTION', { 'foo bar': 'hello world' });
     expect(envVarSection).to.have.property('header', 'ARBITRARY SECTION');
     expect(envVarSection).to.have.property('body').to.have.property('length', 1);
-    expect(envVarSection.body[0]).to.deep.equal({
+    expect(envVarSection?.body?.[0]).to.deep.equal({
       name: 'foo bar',
       description: 'hello world',
     });

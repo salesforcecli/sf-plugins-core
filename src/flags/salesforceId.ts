@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
-import { Messages, sfdc } from '@salesforce/core';
+import { Messages, validateSalesforceId } from '@salesforce/core';
 
 Messages.importMessagesDirectory(__dirname);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -60,7 +60,7 @@ const validate = (input: string, config?: IdFlagConfig): string => {
       allowedIdLength.join(` ${messages.getMessage('errors.InvalidIdLength.or')} `),
     ]);
   }
-  if (!sfdc.validateSalesforceId(input)) {
+  if (!validateSalesforceId(input)) {
     throw messages.createError('errors.InvalidId');
   }
   if (startsWith && !input.startsWith(startsWith)) {
