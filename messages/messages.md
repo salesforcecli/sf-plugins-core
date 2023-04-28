@@ -93,7 +93,9 @@ This command is currently in beta. Any aspect of this command can change without
 
 # error.InvalidArgumentFormat
 
-Set varargs with this format: key=value or key="value with spaces".
+Error in the following argument
+%s
+Set varargs with this format: key=value or key="value with spaces"
 
 # error.DuplicateArgument
 

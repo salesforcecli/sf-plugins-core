@@ -16,9 +16,7 @@ import {
   EnvironmentVariable,
   SfError,
   ConfigAggregator,
-  SfdxConfigAggregator,
 } from '@salesforce/core';
-import { env } from '@salesforce/kit';
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
 import { Progress, Prompter, Spinner, Ux } from './ux';
@@ -42,15 +40,15 @@ export const StandardColors = {
 /**
  * A base command that provided common functionality for all sf commands.
  * Functionality includes:
- *  - JSON support
- *  - progress bars
- *  - spinners
- *  - prompts
- *  - stylized output (JSON, url, objects, headers)
- *  - lifecycle events
- *  - configuration variables help section
- *  - environment variables help section
- *  - error codes help section
+ * - JSON support
+ * - progress bars
+ * - spinners
+ * - prompts
+ * - stylized output (JSON, url, objects, headers)
+ * - lifecycle events
+ * - configuration variables help section
+ * - environment variables help section
+ * - error codes help section
  *
  * All implementations of this class need to implement the run() method.
  *
@@ -163,29 +161,6 @@ export abstract class SfCommand<T> extends Command {
 
   /**
    * ConfigAggregator instance for accessing global and local configuration.
-   *
-   * NOTE: If the active executable is sfdx, this will be an instance of SfdxConfigAggregator, which supports
-   * the deprecated sfdx config vars like defaultusername, defaultdevhubusername, apiversion, etc. Otherwise,
-   * it will be an instance of ConfigAggregator will only supports the config vars introduce by @salesforce/core@v3.
-   *
-   * The executable is determined by `this.config.bin` which is supplied by the base oclif/core Command class. The value
-   * of `this.config.bin` will be the executable running (e.g. sfdx or sf) or, for local development (e.g. using bin/dev),
-   * it will be the value of oclif.bin in the plugin's package.json.
-   *
-   * If you need to write NUTS for a plugin that needs to work with both sets of config vars you can
-   * use set the `SF_USE_DEPRECATED_CONFIG_VARS` to `true` to force configAggregator to be an instance of SfdxConfigAggregator or
-   * `false` to force configAggregator to be an instance of ConfigAggregator.
-   *
-   * @example
-   * ```
-   * import { execCmd } from '@salesforce/cli-plugins-testkit';
-   * execCmd('config:set defaultusername=test@example.com', {
-   *   env: {
-   *     ...process.env,
-   *     SF_USE_DEPRECATED_CONFIG_VARS: true,
-   *   }
-   * })
-   * ```
    */
   public configAggregator!: ConfigAggregator;
 
@@ -209,6 +184,16 @@ export abstract class SfCommand<T> extends Command {
     return this.constructor as typeof SfCommand;
   }
 
+  public jsonEnabled(): boolean {
+    // https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_dev_cli_json_support.htm
+    // can come from either oclif's detection of the flag's presence and truthiness OR from the env
+    // unless it's been explicitly disabled on the command's statics
+    return (
+      super.jsonEnabled() ||
+      (this.statics.enableJsonFlag !== false &&
+        envVars.getString(EnvironmentVariable.SF_CONTENT_TYPE)?.toUpperCase() === 'JSON')
+    );
+  }
   /**
    * Log a success message that has the standard success message color applied.
    *
@@ -360,12 +345,7 @@ export abstract class SfCommand<T> extends Command {
   }
 
   public async _run<R>(): Promise<R> {
-    this.configAggregator =
-      this.config.bin === 'sfdx' ??
-      env.getBoolean('SF_USE_DEPRECATED_CONFIG_VARS') ??
-      env.getBoolean('SFDX_USE_DEPRECATED_CONFIG_VARS')
-        ? await SfdxConfigAggregator.create()
-        : await ConfigAggregator.create();
+    this.configAggregator = await ConfigAggregator.create();
 
     if (this.statics.requiresProject) {
       this.project = await this.assignProject();
@@ -373,6 +353,7 @@ export abstract class SfCommand<T> extends Command {
     if (this.statics.state === 'beta') {
       this.warn(messages.getMessage('warning.CommandInBeta'));
     }
+    // eslint-disable-next-line @typescript-eslint/require-await
     this.lifecycle.onWarning(async (warning: string) => {
       this.warn(warning);
     });
@@ -394,6 +375,7 @@ export abstract class SfCommand<T> extends Command {
         });
       });
 
+    // eslint-disable-next-line no-underscore-dangle
     return super._run<R>();
   }
 
@@ -430,6 +412,7 @@ export abstract class SfCommand<T> extends Command {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/require-await
   protected async catch(error: Error | SfError | SfCommand.Error): Promise<SfCommand.Error> {
     // transform an unknown error into one that conforms to the interface
 
@@ -499,7 +482,7 @@ export abstract class SfCommand<T> extends Command {
    */
   protected formatError(error: SfCommand.Error): string {
     const colorizedArgs: string[] = [];
-    const errorCode = error.code ? ` (${error.code})` : '';
+    const errorCode = typeof error.code === 'string' || typeof error.code === 'number' ? ` (${error.code})` : '';
     const errorPrefix = `${StandardColors.error(messages.getMessage('error.prefix', [errorCode]))}`;
     colorizedArgs.push(`${errorPrefix} ${error.message}`);
     colorizedArgs.push(...this.formatActions(error.actions ?? []));

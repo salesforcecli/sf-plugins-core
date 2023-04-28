@@ -44,6 +44,7 @@ export type IdFlagConfig = {
  * ```
  */
 export const salesforceIdFlag = Flags.custom<string, IdFlagConfig>({
+  // eslint-disable-next-line @typescript-eslint/require-await
   parse: async (input, _ctx, opts) => validate(input, opts),
   char: 'i',
 });

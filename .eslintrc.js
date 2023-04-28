@@ -9,16 +9,10 @@
 // See more at https://github.com/forcedotcom/sfdx-dev-packages/tree/master/packages/dev-scripts
 
 module.exports = {
-  extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license'],
-  rules: {
-    '@typescript-eslint/restrict-template-expressions': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off',
-    'jsdoc/check-indentation': 'off',
-    '@typescript-eslint/prefer-regexp-exec': 'off',
-    '@typescript-eslint/no-use-before-define': 'off',
-    '@typescript-eslint/camelcase': 'off',
-    'no-underscore-dangle': 'off',
-    '@typescript-eslint/require-await': 'off',
-  },
+  extends: ['eslint-config-salesforce-typescript', 'eslint-config-salesforce-license', 'plugin:sf-plugin/library'],
   root: true,
+  rules: {
+    'jsdoc/newline-after-description': 'off',
+    'jsdoc/check-indentation': ['warn', { excludeTags: ['example'] }],
+  },
 };
