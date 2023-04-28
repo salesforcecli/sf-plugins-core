@@ -311,7 +311,7 @@ export abstract class SfCommand<T> extends Command {
    *
    * @example
    * if (!this.jsonEnabled()) {
-   *  await this.prompt();
+   *   await this.prompt();
    * }
    */
   public async prompt<R extends Prompter.Answers>(

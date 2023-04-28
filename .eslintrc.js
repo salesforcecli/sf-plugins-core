@@ -13,5 +13,6 @@ module.exports = {
   root: true,
   rules: {
     'jsdoc/newline-after-description': 'off',
+    'jsdoc/check-indentation': ['error', { excludeTags: ['example'] }],
   },
 };
