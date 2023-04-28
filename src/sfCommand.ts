@@ -184,6 +184,16 @@ export abstract class SfCommand<T> extends Command {
     return this.constructor as typeof SfCommand;
   }
 
+  public jsonEnabled(): boolean {
+    // https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_dev_cli_json_support.htm
+    // can come from either oclif's detection of the flag's presence and truthiness OR from the env
+    // unless it's been explicitly disabled on the command's statics
+    return (
+      super.jsonEnabled() ||
+      (this.statics.enableJsonFlag !== false &&
+        envVars.getString(EnvironmentVariable.SF_CONTENT_TYPE)?.toUpperCase() === 'JSON')
+    );
+  }
   /**
    * Log a success message that has the standard success message color applied.
    *
