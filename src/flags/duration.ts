@@ -61,12 +61,14 @@ const validate = (input: string, config: DurationFlagConfig): Duration => {
     throw messages.createError('errors.InvalidDuration');
   }
 
-  if (min && parsedInput < min) {
+  if (min && max && (parsedInput < min || parsedInput > max)) {
     throw messages.createError('errors.DurationBounds', [min, max]);
+  } else if (min && parsedInput < min) {
+    throw messages.createError('errors.DurationBoundsMin', [min]);
+  } else if (max && parsedInput > max) {
+    throw messages.createError('errors.DurationBoundsMax', [max]);
   }
-  if (max && parsedInput > max) {
-    throw messages.createError('errors.DurationBounds', [min, max]);
-  }
+
   return toDuration(parsedInput, unit);
 };
 

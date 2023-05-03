@@ -74,6 +74,14 @@ The value must be an integer.
 
 The value must be between %s and %s (inclusive).
 
+# errors.DurationBoundsMin
+
+The value must be at least %s.
+
+# errors.DurationBoundsMax
+
+The value must be no more than %s.
+
 # warning.prefix
 
 Warning:
