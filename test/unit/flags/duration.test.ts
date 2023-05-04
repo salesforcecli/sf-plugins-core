@@ -122,4 +122,71 @@ describe('duration flag', () => {
       });
     });
   });
+
+  describe('validation with min not max', () => {
+    const min = 1;
+    const buildProps = {
+      flags: {
+        wait: durationFlag({
+          min,
+          unit: 'minutes',
+          description: 'test',
+          char: 'w',
+        }),
+      },
+    };
+    it('passes', async () => {
+      const out = await Parser.parse(['--wait=10'], buildProps);
+      expect(out.flags.wait?.quantity).to.equal(10);
+    });
+    it('min passes', async () => {
+      const out = await Parser.parse([`--wait=${min}`], buildProps);
+      expect(out.flags.wait?.quantity).to.equal(min);
+    });
+    describe('failures', () => {
+      it('below min fails', async () => {
+        try {
+          const out = await Parser.parse([`--wait=${min - 1}`], buildProps);
+
+          throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
+        } catch (err) {
+          const error = err as Error;
+          expect(error.message).to.include(messages.getMessage('errors.DurationBoundsMin', [min]));
+        }
+      });
+    });
+  });
+
+  describe('validation with max not min', () => {
+    const max = 60;
+    const buildProps = {
+      flags: {
+        wait: durationFlag({
+          max,
+          unit: 'minutes',
+          description: 'test',
+          char: 'w',
+        }),
+      },
+    };
+    it('passes', async () => {
+      const out = await Parser.parse(['--wait=10'], buildProps);
+      expect(out.flags.wait?.quantity).to.equal(10);
+    });
+    it('max passes', async () => {
+      const out = await Parser.parse([`--wait=${max}`], buildProps);
+      expect(out.flags.wait?.quantity).to.equal(max);
+    });
+    describe('failures', () => {
+      it('above max fails', async () => {
+        try {
+          const out = await Parser.parse([`--wait=${max + 1}`], buildProps);
+          throw new Error(`Should have thrown an error ${JSON.stringify(out)}`);
+        } catch (err) {
+          const error = err as Error;
+          expect(error.message).to.include(messages.getMessage('errors.DurationBoundsMax', [max]));
+        }
+      });
+    });
+  });
 });
