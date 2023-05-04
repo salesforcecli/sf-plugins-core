@@ -1,3 +1,12 @@
+## [2.4.1](https://github.com/salesforcecli/sf-plugins-core/compare/2.4.0...2.4.1) (2023-05-04)
+
+
+### Bug Fixes
+
+* nicer error messages for duration min/max violations ([9ec87e6](https://github.com/salesforcecli/sf-plugins-core/commit/9ec87e633c7b00fab6e1f1b946ecde15035ccb41))
+
+
+
 # [2.4.0](https://github.com/salesforcecli/sf-plugins-core/compare/2.3.0...2.4.0) (2023-04-28)
 
 
