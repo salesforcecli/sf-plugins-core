@@ -43,7 +43,7 @@
     "@oclif/test": "^2.3.19",
     "@salesforce/dev-config": "^3.1.0",
     "@salesforce/dev-scripts": "^4.3.1",
-    "@salesforce/prettier-config": "^0.0.2",
+    "@salesforce/prettier-config": "^0.0.3",
     "@salesforce/ts-sinon": "^1.4.6",
     "@types/inquirer": "^8.2.3",
     "@typescript-eslint/eslint-plugin": "^5.59.5",
