@@ -35,17 +35,17 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
-    "@oclif/core": "^2.8.5",
-    "@salesforce/core": "^3.36.1",
-    "@salesforce/kit": "^3.0.1",
-    "@salesforce/ts-types": "^2.0.2",
+    "@oclif/core": "^2.8.2",
+    "@salesforce/core": "^3.36.0",
+    "@salesforce/kit": "^3.0.0",
+    "@salesforce/ts-types": "^2.0.1",
     "chalk": "^4",
     "inquirer": "^8.2.5"
   },
   "devDependencies": {
     "@oclif/test": "^2.3.20",
     "@salesforce/dev-config": "^4.0.1",
-    "@salesforce/dev-scripts": "^5.0.1",
+    "@salesforce/dev-scripts": "^5.1.0",
     "@salesforce/prettier-config": "^0.0.3",
     "@salesforce/ts-sinon": "^1.4.6",
     "@types/inquirer": "^8.2.3",
