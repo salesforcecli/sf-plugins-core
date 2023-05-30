@@ -563,7 +563,7 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/core@^3.36.0", "@salesforce/core@^3.36.1":
+"@salesforce/core@^3.36.1":
   version "3.36.2"
   resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-3.36.2.tgz#135fa2fb858da6245b9ecff1e7819aeaeead5150"
   integrity sha512-IS1rR6Y0tMJYx/+TOAUQ9Gs+Vtum0MHLGfodT7ZJMQZQHEp1S4o0BJ8676uq5sASAnVL64GA+Et/LWCCOWWEuw==
@@ -584,15 +584,36 @@
     jsonwebtoken "9.0.0"
     ts-retry-promise "^0.7.0"
 
+"@salesforce/core@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-4.0.1.tgz#d843c86cfd59f74e33e70d9558e0fe3ee9b49a53"
+  integrity sha512-BjHM3C3QfjW0wSrt0q2+5JOwa/9edg/18TT2C3iykmPxeDXAum/2W/S+7ctyefEJ0/VYlh/DvzLaEc74MadKnA==
+  dependencies:
+    "@salesforce/bunyan" "^2.0.0"
+    "@salesforce/kit" "^3.0.0"
+    "@salesforce/schemas" "^1.5.1"
+    "@salesforce/ts-types" "^2.0.1"
+    "@types/semver" "^7.3.13"
+    ajv "^8.12.0"
+    archiver "^5.3.0"
+    change-case "^4.1.2"
+    debug "^3.2.7"
+    faye "^1.4.0"
+    form-data "^4.0.0"
+    js2xmlparser "^4.0.1"
+    jsforce "^2.0.0-beta.23"
+    jsonwebtoken "9.0.0"
+    ts-retry-promise "^0.7.0"
+
 "@salesforce/dev-config@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-4.0.1.tgz#662ffaa4409713553aaf68eed93e7d2429c3ff0e"
   integrity sha512-0zMjXG4Vjlu/mB7zbuKSXfXiP7CEZBwsPtYqNgburk/wZIU9KcMspLwVBDUxmUj9ltRksD9o1ubRUblN5M3Z0g==
 
-"@salesforce/dev-scripts@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-5.1.0.tgz#6ba8de62d0e9d6c25317ccc0b7af3b03ca965c87"
-  integrity sha512-CnH5m27/avgTO0d+t6gezdzoNs8BcATyPaQhvGEKZ4qeJN0y8aezomX6a/6PTG0i+QqVTTengRijLfdR7np8bQ==
+"@salesforce/dev-scripts@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-5.1.1.tgz#3402c29781b653065c5f0a61441f691026936eb2"
+  integrity sha512-mMbZrCL3bZaYjiWSc6q4aSZHh4REc/61WjEu+CRR2q/h5eyzcJWjkZ3MXp89i3lXncyqUcVWFkxMw8LSUHmwnA==
   dependencies:
     "@commitlint/cli" "^17.1.2"
     "@commitlint/config-conventional" "^17.1.0"
