@@ -1,3 +1,12 @@
+## [3.0.4](https://github.com/salesforcecli/sf-plugins-core/compare/3.0.3...3.0.4) (2023-06-08)
+
+
+### Bug Fixes
+
+* don't truncate tables by default ([2115fe7](https://github.com/salesforcecli/sf-plugins-core/commit/2115fe78b0d9180bf442082b2853fb72c0aa74b7))
+
+
+
 ## [3.0.3](https://github.com/salesforcecli/sf-plugins-core/compare/3.0.2...3.0.3) (2023-06-06)
 
 
