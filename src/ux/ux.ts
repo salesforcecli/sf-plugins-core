@@ -66,7 +66,7 @@ export class Ux extends UxBase {
    * @param options Options for how the table should be displayed
    */
   public table<T extends Ux.Table.Data>(data: T[], columns: Ux.Table.Columns<T>, options?: Ux.Table.Options): void {
-    this.maybeNoop(() => ux.table(data, columns, options));
+    this.maybeNoop(() => ux.table(data, columns, { 'no-truncate': true, ...options }));
   }
 
   /**

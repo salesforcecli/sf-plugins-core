@@ -253,7 +253,7 @@ export abstract class SfCommand<T> extends Command {
    * Display a table on the console. Will automatically be suppressed when --json flag is present.
    */
   public table<R extends Ux.Table.Data>(data: R[], columns: Ux.Table.Columns<R>, options?: Ux.Table.Options): void {
-    this.ux.table(data, columns, { 'no-truncate': true, ...options });
+    this.ux.table(data, columns, options);
   }
 
   /**
