@@ -49,13 +49,10 @@ export class Progress extends UxBase {
     this.started = true;
 
     this.maybeNoop(() => {
-      const opts = Object.assign(Progress.DEFAULT_OPTIONS, options);
-      opts.format = util.format(opts.format, opts.title);
+      const { title, ...rest } = { ...Progress.DEFAULT_OPTIONS, ...options };
       this.bar = ux.progress({
-        format: opts.format,
-        barCompleteChar: opts.barCompleteChar,
-        barIncompleteChar: opts.barIncompleteChar,
-        linewrap: opts.linewrap,
+        ...rest,
+        format: util.format(rest.format, title),
       }) as Progress.Bar;
 
       this.bar.setTotal(total);
@@ -105,6 +102,7 @@ export namespace Progress {
     barCompleteChar: string;
     barIncompleteChar: string;
     linewrap: boolean;
+    noTTYOutput: boolean;
   };
 
   export type Payload = Record<string, unknown>;
