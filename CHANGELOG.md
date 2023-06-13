@@ -1,3 +1,17 @@
+# [3.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/3.0.4...3.1.0) (2023-06-13)
+
+
+### Bug Fixes
+
+* bump versions of kit and core ([0dfdabd](https://github.com/salesforcecli/sf-plugins-core/commit/0dfdabdd00905a6d9022a20be6007882a07e90f2))
+
+
+### Features
+
+* smarter progress defaults, including noTTY ([2ce7882](https://github.com/salesforcecli/sf-plugins-core/commit/2ce7882d0eb0d300321866227793f5cbffc33016))
+
+
+
 ## [3.0.4](https://github.com/salesforcecli/sf-plugins-core/compare/3.0.3...3.0.4) (2023-06-08)
 
 
