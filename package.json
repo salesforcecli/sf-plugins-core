@@ -35,7 +35,7 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
-    "@oclif/core": "^2.8.6",
+    "@oclif/core": "^2.8.7",
     "@salesforce/core": "^4.3.1",
     "@salesforce/kit": "^3.0.3",
     "@salesforce/ts-types": "^2.0.2",
