@@ -590,13 +590,13 @@
     mv "~2"
     safe-json-stringify "~1"
 
-"@salesforce/core@^4.1.0", "@salesforce/core@^4.3.2":
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-4.3.2.tgz#01cab40d349bb0b48044942266a7996f3d1e2b9b"
-  integrity sha512-dsgUYI9pBpJx0l01fumyx85jOPBl5q3J1yTff5ktzlWAs3LXdjqa5KTQMTtS5b36nd4Ht3CVSd36iEOZodoB0g==
+"@salesforce/core@^4.1.0", "@salesforce/core@^4.3.8":
+  version "4.3.8"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-4.3.8.tgz#6cfbd0af923f316fbb85ccc8898ac106bbf8c2c5"
+  integrity sha512-7b4DRkqr6GSgVQxJCPD2myMlLNk/3R0ihABihH5+SQRIwUm4tpV4JvmDznfIfPWL/6PHmQ8cJD2k3cu/QIu+cA==
   dependencies:
     "@salesforce/bunyan" "^2.0.0"
-    "@salesforce/kit" "^3.0.3"
+    "@salesforce/kit" "^3.0.4"
     "@salesforce/schemas" "^1.5.1"
     "@salesforce/ts-types" "^2.0.2"
     "@types/semver" "^7.5.0"
@@ -606,7 +606,7 @@
     faye "^1.4.0"
     form-data "^4.0.0"
     js2xmlparser "^4.0.1"
-    jsforce "^2.0.0-beta.24"
+    jsforce "^2.0.0-beta.27"
     jsonwebtoken "9.0.0"
     jszip "3.10.1"
     proper-lockfile "^4.1.2"
@@ -656,7 +656,7 @@
     typescript "^4.9.5"
     wireit "^0.9.5"
 
-"@salesforce/kit@^3.0.3", "@salesforce/kit@^3.0.4":
+"@salesforce/kit@^3.0.4":
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/@salesforce/kit/-/kit-3.0.4.tgz#c9cbe65d530340e9b0966f4380ccc2bbaa41a57a"
   integrity sha512-i+0/JlysWEhFyqSxFAuptdCs3aVLxaL2e3vDsur4gRkb+AtyzFwJH68ZpqWJI8HiZdSVCMksNXWiuHBS5PpErg==
@@ -3250,10 +3250,10 @@ jsesc@^2.5.1:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
   integrity sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
 
-jsforce@^2.0.0-beta.24:
-  version "2.0.0-beta.24"
-  resolved "https://registry.yarnpkg.com/jsforce/-/jsforce-2.0.0-beta.24.tgz#fe054eb0f6f668eff10566e086892dd2387364f7"
-  integrity sha512-rbDC9Y054Ele3qlDyFZxFY6RRyqpH7DKPYhAwBM2TIzqOl9OG35EB4lnJLaIuv/MZVA2mvTIV/TwxVv8PiB1EA==
+jsforce@^2.0.0-beta.27:
+  version "2.0.0-beta.27"
+  resolved "https://registry.yarnpkg.com/jsforce/-/jsforce-2.0.0-beta.27.tgz#ba822b18b77bea4529491060a9b07bc1009735ac"
+  integrity sha512-d9dDWWeHwayRKPo8FJBAIUyk8sNXGSHwdUjR6al3yK0YKci27Jc1XfNaQTxEAuymHQJVaCb1gxTKqmA4uznFdQ==
   dependencies:
     "@babel/runtime" "^7.12.5"
     "@babel/runtime-corejs3" "^7.12.5"
