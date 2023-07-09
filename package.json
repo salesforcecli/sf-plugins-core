@@ -38,7 +38,7 @@
     "@oclif/core": "^2.8.11",
     "@salesforce/core": "^4.3.2",
     "@salesforce/kit": "^3.0.3",
-    "@salesforce/ts-types": "^2.0.2",
+    "@salesforce/ts-types": "^2.0.4",
     "chalk": "^4",
     "inquirer": "^8.2.5"
   },
