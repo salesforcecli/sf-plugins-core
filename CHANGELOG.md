@@ -1,3 +1,12 @@
+## [3.1.7](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.6...3.1.7) (2023-07-11)
+
+
+### Bug Fixes
+
+* **deps:** bump semver from 5.7.1 to 5.7.2 ([103c4b9](https://github.com/salesforcecli/sf-plugins-core/commit/103c4b94d5c217bb26cad4b9e6279aa9d2a91b68))
+
+
+
 ## [3.1.6](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.5...3.1.6) (2023-07-09)
 
 
