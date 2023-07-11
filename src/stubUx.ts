@@ -10,6 +10,23 @@ import { SinonSandbox } from 'sinon';
 import { SfCommand } from './sfCommand';
 import { Prompter, Spinner, Ux } from './ux';
 
+/**
+ * Stub methods on the Ux class.
+ * Even if you plan to make no assertions, this will silence the output to keep your test results clean
+ *
+ * @example
+ * ```
+ * import { stubUx } from '@salesforce/sf-plugins-core';
+ * let stubUxStubs: ReturnType<typeof stubUx>;
+ *
+ * // inside your beforeEach, $$ is a SinonSandbox
+ * stubUxStubs = stubUx($$.SANDBOX);
+ *
+ * // inside some test
+ * expect(stubUxStubs.log.args.flat()).to.deep.include(`foo`);
+ * ```
+ *
+ */
 export function stubUx(sandbox: SinonSandbox) {
   return {
     log: sandbox.stub(Ux.prototype, 'log'),
@@ -22,6 +39,23 @@ export function stubUx(sandbox: SinonSandbox) {
   };
 }
 
+/**
+ * Stub methods on the Ux class.
+ * Even if you plan to make no assertions, this will silence the output to keep your test results clean
+ *
+ * @example
+ * ```
+ * import { stubSfCommandUx } from '@salesforce/sf-plugins-core';
+ * let stubSfCommandUxStubs: ReturnType<typeof stubSfCommandUx>;
+ *
+ * // inside your beforeEach, $$ is a SinonSandbox
+ * cmdStubs = stubSfCommandUx($$.SANDBOX);
+ *
+ * // inside some test
+ * expect(cmdStubs.warn.args.flat()).to.deep.include(`foo`);
+ * ```
+ *
+ */
 export function stubSfCommandUx(sandbox: SinonSandbox) {
   return {
     log: sandbox.stub(SfCommand.prototype, 'log'),
@@ -39,6 +73,23 @@ export function stubSfCommandUx(sandbox: SinonSandbox) {
   };
 }
 
+/**
+ * Stub the SfCommand spinner.
+ * Even if you plan to make no assertions, this will silence the output to keep your test results clean
+ *
+ * @example
+ * ```
+ * import { stubSpinner } from '@salesforce/sf-plugins-core';
+ * let spinnerStubs: ReturnType<typeof stubSpinner>;
+ *
+ * // inside your beforeEach, $$ is a SinonSandbox
+ * spinnerStubs = stubSpinner($$.SANDBOX);
+ *
+ * // inside some test
+ * expect(spinnerStubs.callCount).equals(1);
+ * ```
+ *
+ */
 export function stubSpinner(sandbox: SinonSandbox) {
   return {
     start: sandbox.stub(Spinner.prototype, 'start'),
@@ -46,6 +97,24 @@ export function stubSpinner(sandbox: SinonSandbox) {
   };
 }
 
+/**
+ * Stub the SfCommand prompter.
+ *
+ * @example
+ * ```
+ * import { stubPrompter } from '@salesforce/sf-plugins-core';
+ * let prompterStubs: ReturnType<typeof stubPrompter>;
+ *
+ * // inside your beforeEach, $$ is a SinonSandbox
+ * prompterStubs = stubPrompter($$.SANDBOX);
+ *
+ * // inside some test
+ * expect(prompterStubs.confirm.firstCall.args[0]).to.equal(
+ *     messages.getMessage('confirmDelete', ['scratch', testOrg.username])
+ *   );
+ * ```
+ *
+ */
 export function stubPrompter(sandbox: SinonSandbox) {
   return {
     prompt: sandbox.stub(Prompter.prototype, 'prompt'),
