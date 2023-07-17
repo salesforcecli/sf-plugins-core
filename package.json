@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "@oclif/core": "^2.9.3",
-    "@salesforce/core": "^4.3.10",
+    "@salesforce/core": "^4.3.11",
     "@salesforce/kit": "^3.0.5",
     "@salesforce/ts-types": "^2.0.5",
     "chalk": "^4",
