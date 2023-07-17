@@ -17,27 +17,6 @@ The SfCommand abstract class extends [@oclif/core's Command class](https://githu
 - Enables additional help sections to the standard oclif command help output
 - Provides access to the [cli-ux cli actions](https://github.com/oclif/cli-ux#cliaction). This avoids having to import that interface from cli-ux and manually handling the `--json` flag.
 
-## Sf Hooks
-
-Interface that defines the well known Unified CLI command hooks.
-SfHooks takes advantage of the [oclif hooks framework](https://oclif.io/docs/hooks), which provides a set of predefined events and the provides ability to define your own.
-
-A hook has a name, say `sf:deploy` and to participate in the hook's run call, one creates a hook consumer, that registers itself using the name `sf:deploy`.
-There can be more than one hook registered with the same name and when the hook is "run", oclif hook will run each registered hook consumer, collect all results and return those results to the caller.
-
-- See [oclif hooks API docs](https://oclif.io/docs/hooks.ts) for a general description of hooks.
-- See [SfHooks](src/hooks.ts) for current hook definitions available in Unified CLI.
-- See Command [Deploy](https://github.com/salesforcecli/plugin-deploy-retrieve/blob/main/src/commands/deploy.ts) for and example of how to run a hook (search for [SfHook](https://github.com/salesforcecli/plugin-deploy-retrieve/blob/main/src/commands/deploy.ts).run in linked file).
-- See [@salesforce/plugin-deploy-retrieve-metadataA#src/hooks/deploy.ts](https://github.com/salesforcecli/plugin-deploy-retrieve-metadata/blob/main/src/hooks/deploy.ts) as an example implementation of a hook consumer.
-
-## Deployer Interface
-
-Interface for deploying Deployables. See [@salesforce/plugin-deploy-retrieve-metadata#src/utils/metadataDeployer.ts](https://github.com/salesforcecli/plugin-deploy-retrieve-metadata/blob/main/src/utils/metadataDeployer.ts) as an example implementation.
-
-## Deauthorizer Abstract Class
-
-The Deauthorizer is an abstract class that is used to implement a concrete implementations of deauthorizing an environment.
-
 ## Prompter Class
 
 A general purpose class that prompts a user for information. See [inquirer NPM Module](https://www.npmjs.com/package/inquirer) for more information.
@@ -77,3 +56,7 @@ These flags can be imported into a command and used like any other flag. See cod
   - validates that IDs are valid salesforce ID
   - optionally restrict to 15/18 char
   - optionally require it to be begin with a certain prefix
+
+### Unit Test Helpers
+
+Want to verify SfCommand Ux behavior (warnings, tables, spinners, prompts)? Check out the functions in `stubUx``.
