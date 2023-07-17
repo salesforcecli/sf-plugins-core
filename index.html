@@ -31,30 +31,6 @@
 <li>Provides access to the <a href="https://github.com/oclif/cli-ux#cliaction">cli-ux cli actions</a>. This avoids having to import that interface from cli-ux and manually handling the <code>--json</code> flag.</li>
 </ul>
 
-<a href="#sf-hooks" id="sf-hooks" style="color: inherit; text-decoration: none;">
-  <h2>Sf Hooks</h2>
-</a>
-<p>Interface that defines the well known Unified CLI command hooks.
-SfHooks takes advantage of the <a href="https://oclif.io/docs/hooks">oclif hooks framework</a>, which provides a set of predefined events and the provides ability to define your own.</p>
-<p>A hook has a name, say <code>sf:deploy</code> and to participate in the hook&#39;s run call, one creates a hook consumer, that registers itself using the name <code>sf:deploy</code>.
-There can be more than one hook registered with the same name and when the hook is &quot;run&quot;, oclif hook will run each registered hook consumer, collect all results and return those results to the caller.</p>
-<ul>
-<li>See <a href="https://oclif.io/docs/hooks.ts">oclif hooks API docs</a> for a general description of hooks.</li>
-<li>See <a href="src/hooks.ts">SfHooks</a> for current hook definitions available in Unified CLI.</li>
-<li>See Command <a href="https://github.com/salesforcecli/plugin-deploy-retrieve/blob/main/src/commands/deploy.ts">Deploy</a> for and example of how to run a hook (search for <a href="https://github.com/salesforcecli/plugin-deploy-retrieve/blob/main/src/commands/deploy.ts">SfHook</a>.run in linked file).</li>
-<li>See <a href="https://github.com/salesforcecli/plugin-deploy-retrieve-metadata/blob/main/src/hooks/deploy.ts">@salesforce/plugin-deploy-retrieve-metadataA#src/hooks/deploy.ts</a> as an example implementation of a hook consumer.</li>
-</ul>
-
-<a href="#deployer-interface" id="deployer-interface" style="color: inherit; text-decoration: none;">
-  <h2>Deployer Interface</h2>
-</a>
-<p>Interface for deploying Deployables. See <a href="https://github.com/salesforcecli/plugin-deploy-retrieve-metadata/blob/main/src/utils/metadataDeployer.ts">@salesforce/plugin-deploy-retrieve-metadata#src/utils/metadataDeployer.ts</a> as an example implementation.</p>
-
-<a href="#deauthorizer-abstract-class" id="deauthorizer-abstract-class" style="color: inherit; text-decoration: none;">
-  <h2>Deauthorizer Abstract Class</h2>
-</a>
-<p>The Deauthorizer is an abstract class that is used to implement a concrete implementations of deauthorizing an environment.</p>
-
 <a href="#prompter-class" id="prompter-class" style="color: inherit; text-decoration: none;">
   <h2>Prompter Class</h2>
 </a>
@@ -110,6 +86,11 @@ There can be more than one hook registered with the same name and when the hook 
 </ul>
 </li>
 </ul>
+
+<a href="#unit-test-helpers" id="unit-test-helpers" style="color: inherit; text-decoration: none;">
+  <h3>Unit Test Helpers</h3>
+</a>
+<p>Want to verify SfCommand Ux behavior (warnings, tables, spinners, prompts)? Check out the functions in `stubUx``.</p>
 </div></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
