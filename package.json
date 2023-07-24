@@ -71,7 +71,7 @@
     "strip-ansi": "6.0.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.9.5",
-    "wireit": "^0.9.5"
+    "wireit": "^0.10.0"
   },
   "publishConfig": {
     "access": "public"
