@@ -1,3 +1,12 @@
+## [3.1.13](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.12...3.1.13) (2023-07-31)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/core from 2.9.4 to 2.11.1 ([8189e89](https://github.com/salesforcecli/sf-plugins-core/commit/8189e8910844c58825a0926589348794d6af52b3))
+
+
+
 ## [3.1.12](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.11...3.1.12) (2023-07-23)
 
 
