@@ -1,3 +1,12 @@
+## [3.1.17](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.16...3.1.17) (2023-08-20)
+
+
+### Bug Fixes
+
+* **deps:** bump @salesforce/ts-types from 2.0.6 to 2.0.7 ([1f572f2](https://github.com/salesforcecli/sf-plugins-core/commit/1f572f240a4220f723dfff4efb09612069a13079))
+
+
+
 ## [3.1.16](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.15...3.1.16) (2023-08-20)
 
 
