@@ -1,3 +1,12 @@
+## [3.1.18](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.17...3.1.18) (2023-08-23)
+
+
+### Bug Fixes
+
+* use getPluginsList to prep for oclif/core v3 ([#377](https://github.com/salesforcecli/sf-plugins-core/issues/377)) ([716f4f8](https://github.com/salesforcecli/sf-plugins-core/commit/716f4f8f615cad1d5ede54b4ba458c2517bf8297))
+
+
+
 ## [3.1.17](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.16...3.1.17) (2023-08-20)
 
 
