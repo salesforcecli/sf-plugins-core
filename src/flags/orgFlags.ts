@@ -100,12 +100,10 @@ export const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
  */
 export const optionalOrgFlag = Flags.custom({
   char: 'o',
+  noCacheDefault: true,
   parse: async (input: string | undefined) => maybeGetOrg(input),
   default: async () => maybeGetOrg(),
-  defaultHelp: async (context, isWritingManifest) => {
-    if (isWritingManifest) {
-      return undefined;
-    }
+  defaultHelp: async (context) => {
     if (context.options instanceof Org) {
       const org = context.options as Org;
       return org.getUsername();
@@ -139,12 +137,10 @@ export const optionalOrgFlag = Flags.custom({
 export const requiredOrgFlag = Flags.custom({
   char: 'o',
   summary: messages.getMessage('flags.targetOrg.summary'),
+  noCacheDefault: true,
   parse: async (input: string | undefined) => getOrgOrThrow(input),
   default: async () => getOrgOrThrow(),
-  defaultHelp: async (context, isWritingManifest) => {
-    if (isWritingManifest) {
-      return undefined;
-    }
+  defaultHelp: async (context) => {
     if (context.options instanceof Org) {
       const org = context.options as Org;
       return org.getUsername();
@@ -179,12 +175,10 @@ export const requiredOrgFlag = Flags.custom({
 export const requiredHubFlag = Flags.custom({
   char: 'v',
   summary: messages.getMessage('flags.targetDevHubOrg.summary'),
+  noCacheDefault: true,
   parse: async (input: string | undefined) => getHubOrThrow(input),
   default: async () => getHubOrThrow(),
-  defaultHelp: async (context, isWritingManifest) => {
-    if (isWritingManifest) {
-      return undefined;
-    }
+  defaultHelp: async (context) => {
     if (context.options instanceof Org) {
       const org = context.options as Org;
       return org.getUsername();
@@ -218,12 +212,10 @@ export const requiredHubFlag = Flags.custom({
 export const optionalHubFlag = Flags.custom({
   char: 'v',
   summary: messages.getMessage('flags.targetDevHubOrg.summary'),
+  noCacheDefault: true,
   parse: async (input: string | undefined) => maybeGetHub(input),
   default: async () => maybeGetHub(),
-  defaultHelp: async (context, isWritingManifest) => {
-    if (isWritingManifest) {
-      return undefined;
-    }
+  defaultHelp: async (context) => {
     if (context.options instanceof Org) {
       const org = context.options as Org;
       return org.getUsername();

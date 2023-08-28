@@ -5,8 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { Config } from '@oclif/core/lib/interfaces/config';
-import { Hook, Hooks } from '@oclif/core/lib/interfaces/hooks';
+import { Interfaces } from '@oclif/core';
 import { Duration, env } from '@salesforce/kit';
 import { ux } from '@oclif/core';
 import { Deployer } from './deployer';
@@ -16,7 +15,7 @@ import { Deauthorizer } from './deauthorizer';
 /**
  * Interface that defines the well known Unified CLI command hooks.
  */
-interface SfHooks<T = unknown> extends Hooks {
+interface SfHooks<T = unknown> extends Interfaces.Hooks {
   'sf:env:list': EnvList.HookMeta<T & JsonObject>;
   'sf:env:display': EnvDisplay.HookMeta<T & JsonObject>;
   'sf:deploy': Deploy.HookMeta<T & Deployer>;
@@ -24,7 +23,7 @@ interface SfHooks<T = unknown> extends Hooks {
   'sf:logout': Logout.HookMeta<T & Deauthorizer>;
 }
 
-type GenericHook<T extends keyof SfHooks, P> = Hook<T, SfHooks<P>>;
+type GenericHook<T extends keyof SfHooks, P> = Interfaces.Hook<T, SfHooks<P>>;
 
 /**
  * Class that provides a static method to run a pre-defined sf hook. See {@link SfHooks}.
@@ -34,10 +33,10 @@ export class SfHook {
    * Executes a well known Unified CLI hook. See {@link SfHooks}.
    */
   public static async run<T extends keyof SfHooks>(
-    config: Config,
+    config: Interfaces.Config,
     hookName: T,
     options: SfHooks[T]['options'] = {}
-  ): Promise<Hook.Result<SfHooks[T]['return']>> {
+  ): Promise<Interfaces.Hook.Result<SfHooks[T]['return']>> {
     const timeout = Duration.milliseconds(env.getNumber('SF_HOOK_TIMEOUT_MS') ?? 5000);
     const results = await config.runHook<T>(hookName, options, timeout.milliseconds, true);
     results.failures.forEach((failure) => {
@@ -52,6 +51,6 @@ export namespace SfHook {
   export type EnvList<T> = GenericHook<'sf:env:list', T>;
   export type EnvDisplay<T> = GenericHook<'sf:env:display', T>;
   export type Deploy<T> = GenericHook<'sf:deploy', T>;
-  export type Login = Hook<'sf:login', SfHooks>;
-  export type Logout = Hook<'sf:logout', SfHooks>;
+  export type Login = Interfaces.Hook<'sf:login', SfHooks>;
+  export type Logout = Interfaces.Hook<'sf:logout', SfHooks>;
 }

@@ -4,13 +4,12 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { Flags } from '@oclif/core';
+import { Flags, Interfaces } from '@oclif/core';
 import { Lifecycle } from '@salesforce/core';
 import { TestContext } from '@salesforce/core/lib/testSetup';
 import { stubMethod } from '@salesforce/ts-sinon';
 import { expect } from 'chai';
 import { SfError } from '@salesforce/core';
-import { Config } from '@oclif/core/lib/interfaces';
 import { SfCommand } from '../../src/sfCommand';
 
 class TestCommand extends SfCommand<void> {
@@ -54,7 +53,7 @@ describe('jsonEnabled', () => {
     delete process.env.SF_CONTENT_TYPE;
   });
 
-  const oclifConfig = {} as unknown as Config;
+  const oclifConfig = {} as unknown as Interfaces.Config;
   it('not json', () => {
     // @ts-expect-error not really an oclif config
     const cmd = new TestCommand([], oclifConfig);
