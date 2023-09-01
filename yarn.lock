@@ -568,10 +568,10 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/core@^3.0.0-beta.11":
-  version "3.0.0-beta.11"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.0.0-beta.11.tgz#c5a66d0b0dc55226ddea16877ca86fae5c872d69"
-  integrity sha512-nibg5oWST66M5Ts5dvD5vCJW8Zd06nhgG9bGcboH6ZoqrdydqpjwSel8PG2Zhm86xTVC4L6ydw47p5r2HM3VOw==
+"@oclif/core@^3.0.0-beta.12":
+  version "3.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.0.0-beta.12.tgz#7367b0fb51e2d8b3c3f9837e47adce02b69cd726"
+  integrity sha512-nHDobiU0Vz45VGWvHTALJbNYlTNwBTzVpAWsnS+kzvNHozuTTN3oC2UJDC4zWZp6RdveGZhnQh5pZg6Kqisr3g==
   dependencies:
     "@types/cli-progress" "^3.11.0"
     ansi-escapes "^4.3.2"
