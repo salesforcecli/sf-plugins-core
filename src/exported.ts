@@ -22,10 +22,6 @@ import { salesforceIdFlag } from './flags/salesforceId';
 import { orgApiVersionFlag } from './flags/orgApiVersion';
 import { durationFlag } from './flags/duration';
 
-export * from './flags/orgFlags';
-export * from './flags/salesforceId';
-export * from './flags/orgApiVersion';
-export * from './flags/duration';
 export const Flags = {
   boolean: OclifFlags.boolean,
   directory: OclifFlags.directory,

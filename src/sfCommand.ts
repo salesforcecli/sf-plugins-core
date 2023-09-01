@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import * as os from 'os';
-import { Command, Config, HelpSection, ux } from '@oclif/core';
+import { ux, Command, Config, HelpSection } from '@oclif/core';
 import {
   envVars,
   Messages,
