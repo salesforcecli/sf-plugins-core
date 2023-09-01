@@ -43,9 +43,9 @@
     "inquirer": "^8.2.5"
   },
   "devDependencies": {
-    "@oclif/test": "^2.5.0",
+    "@oclif/test": "^2.5.1",
     "@salesforce/dev-config": "^4.0.1",
-    "@salesforce/dev-scripts": "^5.7.0",
+    "@salesforce/dev-scripts": "^5.8.0",
     "@salesforce/prettier-config": "^0.0.3",
     "@salesforce/ts-sinon": "^1.4.15",
     "@types/inquirer": "^8.2.3",
