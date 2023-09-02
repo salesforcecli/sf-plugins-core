@@ -532,43 +532,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^2.11.10":
-  version "2.11.10"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.11.10.tgz#638128034b8b4bdf4b23480a7278426f85130170"
-  integrity sha512-/7Umij3OU++6o+z4U+waJ5nP6IvK9KKEVzz+xsla68YoECLQwz43boUKqYizlNMtTfiwNkiYb5QE+OU/q5qEtA==
-  dependencies:
-    "@types/cli-progress" "^3.11.0"
-    ansi-escapes "^4.3.2"
-    ansi-styles "^4.3.0"
-    cardinal "^2.1.1"
-    chalk "^4.1.2"
-    clean-stack "^3.0.1"
-    cli-progress "^3.12.0"
-    debug "^4.3.4"
-    ejs "^3.1.8"
-    fs-extra "^9.1.0"
-    get-package-type "^0.1.0"
-    globby "^11.1.0"
-    hyperlinker "^1.0.0"
-    indent-string "^4.0.0"
-    is-wsl "^2.2.0"
-    js-yaml "^3.14.1"
-    natural-orderby "^2.0.3"
-    object-treeify "^1.1.33"
-    password-prompt "^1.1.2"
-    semver "^7.5.3"
-    slice-ansi "^4.0.0"
-    string-width "^4.2.3"
-    strip-ansi "^6.0.1"
-    supports-color "^8.1.1"
-    supports-hyperlinks "^2.2.0"
-    ts-node "^10.9.1"
-    tslib "^2.5.0"
-    widest-line "^3.1.0"
-    wordwrap "^1.0.0"
-    wrap-ansi "^7.0.0"
-
-"@oclif/core@^2.12.0":
+"@oclif/core@^2.11.10", "@oclif/core@^2.12.0":
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.12.0.tgz#ee2b450cc9c1a54a2445eb192e7881e370178943"
   integrity sha512-RSfEQzYAmex/dVW/3afIMsaB2n5kG26tniAla+HSAQS7MHqM7LpCrDz5FG9VX5ygSPmQcknWPRmD96N5kyUt1g==
@@ -604,13 +568,13 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/test@^2.4.7":
-  version "2.4.7"
-  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-2.4.7.tgz#4372270157aa6598c0d1b61349b2eff4e2003193"
-  integrity sha512-r18sKGNUm/VGQ8BkSF9Kn7QeMGjGMDUrLxTDPzL5ERaBF5YSi+O9CT3mKhcFdrMwGnCqPVvlAdX4U/6gtYPy1A==
+"@oclif/test@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-2.5.1.tgz#75531da3beb0ad80f17544cba6f3e61bacacecb0"
+  integrity sha512-lqkhze4ijrBg1MmnVIbxk9rvsD8NiR3ISJ2SiM43tYTCVY6eY+up9p/IjD8i9ZoT/7khnfA/Jxhq0OYOjRYvuw==
   dependencies:
     "@oclif/core" "^2.11.10"
-    fancy-test "^2.0.34"
+    fancy-test "^2.0.35"
 
 "@salesforce/core@^5.2.1":
   version "5.2.1"
@@ -2312,10 +2276,10 @@ external-editor@^3.0.3:
     iconv-lite "^0.4.24"
     tmp "^0.0.33"
 
-fancy-test@^2.0.34:
-  version "2.0.35"
-  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-2.0.35.tgz#18c0ccd767a7332bea186369a7e7a79a3b4582bb"
-  integrity sha512-XE0L7yAFOKY2jDnkBDDQ3JBD7xbBFwAFl1Z/5WNKBeVNlaEP08wuRTPE3xj2k+fnUp2CMUfD+6aiIS+4pcrjwg==
+fancy-test@^2.0.35:
+  version "2.0.37"
+  resolved "https://registry.yarnpkg.com/fancy-test/-/fancy-test-2.0.37.tgz#7cfd18fcaaa76cd2d72636dda00f6f3fae053187"
+  integrity sha512-lCicyu0gzcWNR0x5LyRNGjBNJfrl+C9rKOaC6nJcyPUXvMhZkMVwsCIDuMPaEET0sD8vSliyAipnQ7RZUgXujw==
   dependencies:
     "@types/chai" "*"
     "@types/lodash" "*"
