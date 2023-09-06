@@ -36,16 +36,16 @@
   },
   "dependencies": {
     "@oclif/core": "3.0.0-beta.13",
-    "@salesforce/core": "^5.2.1",
+    "@salesforce/core": "^5.2.6",
     "@salesforce/kit": "^3.0.11",
     "@salesforce/ts-types": "^2.0.7",
     "chalk": "^4",
     "inquirer": "^8.2.5"
   },
   "devDependencies": {
-    "@oclif/test": "^2.5.1",
+    "@oclif/test": "^2.5.2",
     "@salesforce/dev-config": "^4.0.1",
-    "@salesforce/dev-scripts": "^5.8.0",
+    "@salesforce/dev-scripts": "^5.10.0",
     "@salesforce/prettier-config": "^0.0.3",
     "@salesforce/ts-sinon": "^1.4.15",
     "@types/inquirer": "^8.2.3",
@@ -71,7 +71,7 @@
     "strip-ansi": "6.0.1",
     "ts-node": "^10.7.0",
     "typescript": "^4.9.5",
-    "wireit": "^0.10.0"
+    "wireit": "^0.13.0"
   },
   "publishConfig": {
     "access": "public"
