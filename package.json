@@ -43,7 +43,7 @@
     "inquirer": "^8.2.5"
   },
   "devDependencies": {
-    "@oclif/test": "^2.5.2",
+    "@oclif/test": "^2.5.3",
     "@salesforce/dev-config": "^4.0.1",
     "@salesforce/dev-scripts": "^5.10.0",
     "@salesforce/prettier-config": "^0.0.3",
