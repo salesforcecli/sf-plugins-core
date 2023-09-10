@@ -532,7 +532,7 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^2.11.10", "@oclif/core@^2.15.0":
+"@oclif/core@^2.15.0":
   version "2.15.0"
   resolved "https://registry.yarnpkg.com/@oclif/core/-/core-2.15.0.tgz#f27797b30a77d13279fba88c1698fc34a0bd0d2a"
   integrity sha512-fNEMG5DzJHhYmI3MgpByTvltBOMyFcnRIUMxbiz2ai8rhaYgaTHMG3Q38HcosfIvtw9nCjxpcQtC8MN8QtVCcA==
@@ -566,12 +566,12 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/test@^2.5.2":
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-2.5.2.tgz#a155dca13e3fcb2645884dd51b84238e0c8e734d"
-  integrity sha512-k36vXxWi9wA7anylAi56Hq9qCg34NRcq4hvAFyoLD8vUlhF13yPDto3IZFEJTxXzQ4TFL/K/9UxMxULHfaaVBA==
+"@oclif/test@^2.5.3":
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/@oclif/test/-/test-2.5.3.tgz#08ee0ab60858784ceca11a723445f4ed09c625da"
+  integrity sha512-TmtfMhK9tFCVQ4NyIG9eYW4RBQAmKbkE+pGXsdxiTZvR2sR1WwC7NmmEbTaj2hYNWX3vNZ/x1+odnjLEo6z5Vw==
   dependencies:
-    "@oclif/core" "^2.11.10"
+    "@oclif/core" "^2.15.0"
     fancy-test "^2.0.37"
 
 "@salesforce/core@^5.2.6", "@salesforce/core@^5.2.7":
