@@ -28,7 +28,7 @@ describe('Spinner', () => {
       const spinner = new Spinner(true);
       spinner.start('Doing things');
       spinner.stop('Finished');
-      expect(writeStub.firstCall.args).to.deep.equal(['stderr', 'Doing things...\n']);
+      expect(writeStub.firstCall.args).to.deep.equal(['stderr', 'Doing things...']);
     });
 
     it('should not log anything if output is not enabled', () => {
@@ -45,7 +45,7 @@ describe('Spinner', () => {
       spinner.start('Doing things');
       spinner.pause(() => {});
       spinner.stop('Finished');
-      expect(writeStub.firstCall.args).to.deep.equal(['stderr', 'Doing things...\n']);
+      expect(writeStub.firstCall.args).to.deep.equal(['stderr', 'Doing things...']);
     });
 
     it('should not log anything if output is not enabled', () => {
