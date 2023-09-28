@@ -1,3 +1,9 @@
+## [3.1.25](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.24...3.1.25) (2023-09-28)
+
+### Bug Fixes
+
+- **deps:** bump get-func-name from 2.0.0 to 2.0.2 ([7437cf0](https://github.com/salesforcecli/sf-plugins-core/commit/7437cf0ead86fc40cf1eed1b95859f22c683cf38))
+
 ## [3.1.24](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.23...3.1.24) (2023-09-24)
 
 ### Bug Fixes
