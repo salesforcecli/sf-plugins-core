@@ -415,6 +415,9 @@ export abstract class SfCommand<T> extends Command {
 
   // eslint-disable-next-line @typescript-eslint/require-await
   protected async catch(error: Error | SfError | SfCommand.Error): Promise<SfCommand.Error> {
+    // stop any spinners to prevent it from unintentionally swallowing output.
+    // If there is an active spinner, it'll say "Error" instead of "Done"
+    this.spinner.stop(StandardColors.error('Error'));
     // transform an unknown error into one that conforms to the interface
 
     // @ts-expect-error because exitCode is not on Error
