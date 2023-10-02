@@ -532,12 +532,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@3.0.0-beta.16":
-  version "3.0.0-beta.16"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.0.0-beta.16.tgz#da231238d34b1971c455e9e990b2b48680fa2510"
-  integrity sha512-z/GUi+qJ0CRflIRiKLlnmNS/uaftgrFwXPmROHVHBCAoaxBNsudDbyGxCZlWn0n2n2cyjXX4zqdxX3OLb36TDw==
+"@oclif/core@3.0.0-beta.21":
+  version "3.0.0-beta.21"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.0.0-beta.21.tgz#9b37316012442a35db05d4f3f1bfddb9ffcd9503"
+  integrity sha512-dhP2Y0qKjDnm6uSsBdnb4CUdqJyVCS2Iv83AJU9gdfh3aN+HKSskvVZtqD6MkOK3PLkfcDr7faiHA/Orl1/vKQ==
   dependencies:
-    "@types/cli-progress" "^3.11.0"
     ansi-escapes "^4.3.2"
     ansi-styles "^4.3.0"
     cardinal "^2.1.1"
@@ -560,8 +559,6 @@
     strip-ansi "^6.0.1"
     supports-color "^8.1.1"
     supports-hyperlinks "^2.2.0"
-    ts-node "^10.9.1"
-    tslib "^2.5.0"
     widest-line "^3.1.0"
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
