@@ -1,3 +1,33 @@
+## [3.1.27](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.26...3.1.27) (2023-10-01)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/kit from 3.0.11 to 3.0.13 ([2789a38](https://github.com/salesforcecli/sf-plugins-core/commit/2789a38bfefdec0edc6469d241a4e2eebbbcfdce))
+
+## [3.1.26](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.25...3.1.26) (2023-10-01)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 5.2.10 to 5.3.1 ([a8ddfae](https://github.com/salesforcecli/sf-plugins-core/commit/a8ddfaeb26af68cb64ba2ffd32a37a2036e28ce2))
+
+## [3.1.25](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.24...3.1.25) (2023-09-28)
+
+### Bug Fixes
+
+- **deps:** bump get-func-name from 2.0.0 to 2.0.2 ([7437cf0](https://github.com/salesforcecli/sf-plugins-core/commit/7437cf0ead86fc40cf1eed1b95859f22c683cf38))
+
+## [3.1.24](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.23...3.1.24) (2023-09-24)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 5.2.9 to 5.2.10 ([dcabda3](https://github.com/salesforcecli/sf-plugins-core/commit/dcabda3e3573883ae6396e961528602020931442))
+
+## [3.1.23](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.22...3.1.23) (2023-09-17)
+
+### Bug Fixes
+
+- **deps:** bump @salesforce/core from 5.2.7 to 5.2.9 ([143aa88](https://github.com/salesforcecli/sf-plugins-core/commit/143aa88f2821b6f6bc40e437347fdd653368e3f3))
+
 ## [3.1.22](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.21...3.1.22) (2023-09-03)
 
 ### Bug Fixes
