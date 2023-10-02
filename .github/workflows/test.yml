@@ -38,8 +38,7 @@ jobs:
     with:
       packageName: '@salesforce/sf-plugins-core'
       externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-deploy-retrieve'
-      # preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core; shx rm -rf node_modules/@salesforce/ts-types'
-      preBuildCommands: 'shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core; shx rm -rf node_modules/@salesforce/ts-types'
+      preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core; shx rm -rf node_modules/@salesforce/ts-types'
       command: ${{ matrix.command }}
       os: ${{ matrix.os }}
     secrets: inherit
@@ -67,8 +66,7 @@ jobs:
     with:
       packageName: '@salesforce/sf-plugins-core'
       externalProjectGitUrl: 'https://github.com/salesforcecli/${{matrix.repo}}'
-      # preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core; shx rm -rf node_modules/@salesforce/ts-types'
-      preBuildCommands: 'shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core; shx rm -rf node_modules/@salesforce/ts-types'
+      preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core; shx rm -rf node_modules/@salesforce/ts-types'
       command: yarn test:nuts
       os: ${{ matrix.os }}
     secrets: inherit
