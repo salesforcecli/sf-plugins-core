@@ -532,10 +532,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@3.0.0-beta.21":
-  version "3.0.0-beta.21"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.0.0-beta.21.tgz#9b37316012442a35db05d4f3f1bfddb9ffcd9503"
-  integrity sha512-dhP2Y0qKjDnm6uSsBdnb4CUdqJyVCS2Iv83AJU9gdfh3aN+HKSskvVZtqD6MkOK3PLkfcDr7faiHA/Orl1/vKQ==
+"@oclif/core@3.0.0-beta.22":
+  version "3.0.0-beta.22"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-3.0.0-beta.22.tgz#9d29d38885a77d478cdcdacd9f684440a147d8f9"
+  integrity sha512-uUuYAEfYCQWrluB1/SELdjLTzBoXPCGFm+BSDdUZy7itTd6O0j86/05SG/bdsXgSgRGykIyZi58O++vaTHcy/A==
   dependencies:
     ansi-escapes "^4.3.2"
     ansi-styles "^4.3.0"
