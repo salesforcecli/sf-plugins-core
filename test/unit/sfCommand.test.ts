@@ -8,11 +8,11 @@ import { Flags } from '@oclif/core';
 import { Lifecycle } from '@salesforce/core';
 import { TestContext } from '@salesforce/core/lib/testSetup';
 import { stubMethod } from '@salesforce/ts-sinon';
-import { expect } from 'chai';
+import { assert, expect } from 'chai';
 import { SfError } from '@salesforce/core';
 import { Config } from '@oclif/core/lib/interfaces';
-import { SfCommand } from '../../src/sfCommand';
-
+import { SfCommand, StandardColors } from '../../src/sfCommand';
+import { stubSfCommandUx, stubSpinner } from '../../src/stubUx';
 class TestCommand extends SfCommand<void> {
   public static readonly flags = {
     actions: Flags.boolean({ char: 'a', description: 'show actions' }),
@@ -49,6 +49,7 @@ class NonJsonCommand extends SfCommand<void> {
     await this.parse(TestCommand);
   }
 }
+
 describe('jsonEnabled', () => {
   beforeEach(() => {
     delete process.env.SF_CONTENT_TYPE;
@@ -167,5 +168,46 @@ describe('warning messages', () => {
       .and.to.include('this')
       .and.to.include('is an')
       .and.to.include('action');
+  });
+});
+
+describe('spinner stops on errors', () => {
+  const $$ = new TestContext();
+
+  class SpinnerThrow extends SfCommand<void> {
+    // public static enableJsonFlag = true;
+    public static flags = {
+      throw: Flags.boolean(),
+    };
+    public async run(): Promise<void> {
+      const { flags } = await this.parse(SpinnerThrow);
+      this.spinner.start('go');
+      if (flags.throw) {
+        throw new Error('boo');
+      }
+    }
+  }
+
+  it("spinner stops but stop isn't called", async () => {
+    const spinnerStub = stubSpinner($$.SANDBOX);
+    stubSfCommandUx($$.SANDBOX);
+    try {
+      await SpinnerThrow.run(['--throw']);
+      throw new Error('should have thrown');
+    } catch (e) {
+      assert(e instanceof Error);
+      expect(e.message).to.equal('boo');
+      expect(spinnerStub.start.callCount).to.equal(1);
+      expect(spinnerStub.stop.callCount).to.equal(1);
+      expect(spinnerStub.stop.firstCall.firstArg).to.equal(StandardColors.error('Error'));
+    }
+  });
+  it('spinner not stopped when no throw', async () => {
+    const spinnerStub = stubSpinner($$.SANDBOX);
+    stubSfCommandUx($$.SANDBOX);
+    await SpinnerThrow.run([]);
+
+    expect(spinnerStub.start.callCount).to.equal(1);
+    expect(spinnerStub.stop.callCount).to.equal(0);
   });
 });
