@@ -1,3 +1,9 @@
+## [3.1.28](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.27...3.1.28) (2023-10-02)
+
+### Bug Fixes
+
+- stop spinners on caught error ([c3242a7](https://github.com/salesforcecli/sf-plugins-core/commit/c3242a7127a2721eea60edad29f3ad72261a96e6))
+
 ## [3.1.27](https://github.com/salesforcecli/sf-plugins-core/compare/3.1.26...3.1.27) (2023-10-01)
 
 ### Bug Fixes
