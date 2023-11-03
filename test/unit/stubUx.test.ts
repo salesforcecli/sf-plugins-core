@@ -7,7 +7,7 @@
 import { Interfaces } from '@oclif/core';
 import { expect } from 'chai';
 import { TestContext } from '@salesforce/core/lib/testSetup';
-import { stubMethod } from '@salesforce/ts-sinon';
+// import { stubMethod } from '@salesforce/ts-sinon';
 import { Lifecycle } from '@salesforce/core';
 import { stubUx, stubSfCommandUx, SfCommand, Ux, stubSpinner, Flags } from '../../src/exported';
 
@@ -225,7 +225,8 @@ describe('Ux Stubs', () => {
   const $$ = new TestContext();
 
   beforeEach(() => {
-    stubMethod($$.SANDBOX, Lifecycle, 'getInstance').returns({
+    // @ts-expect-error not the full lifecycle class
+    $$.SANDBOX.stub(Lifecycle, 'getInstance').returns({
       on: $$.SANDBOX.stub(),
       onWarning: $$.SANDBOX.stub(),
     });

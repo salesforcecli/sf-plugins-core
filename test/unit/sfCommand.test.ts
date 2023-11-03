@@ -7,7 +7,6 @@
 import { Flags } from '@oclif/core';
 import { Lifecycle } from '@salesforce/core';
 import { TestContext } from '@salesforce/core/lib/testSetup';
-import { stubMethod } from '@salesforce/ts-sinon';
 import { assert, expect } from 'chai';
 import { SfError } from '@salesforce/core';
 import { Config } from '@oclif/core/lib/interfaces';
@@ -109,26 +108,27 @@ describe('jsonEnabled', () => {
 describe('info messages', () => {
   const $$ = new TestContext();
   beforeEach(() => {
-    stubMethod($$.SANDBOX, Lifecycle, 'getInstance').returns({
+    // @ts-expect-error not the full lifecycle class
+    $$.SANDBOX.stub(Lifecycle, 'getInstance').returns({
       on: $$.SANDBOX.stub(),
       onWarning: $$.SANDBOX.stub(),
     });
   });
 
   it('should show a info message from a string', async () => {
-    const infoStub = stubMethod($$.SANDBOX, SfCommand.prototype, 'info');
+    const infoStub = $$.SANDBOX.stub(SfCommand.prototype, 'info');
     await TestCommand.run([]);
     expect(infoStub.calledWith('foo bar baz')).to.be.true;
   });
 
   it('should show a info message from Error, no actions', async () => {
-    const logStub = stubMethod($$.SANDBOX, SfCommand.prototype, 'log');
+    const logStub = $$.SANDBOX.stub(SfCommand.prototype, 'log');
     await TestCommand.run(['--error']);
     expect(logStub.firstCall.firstArg).to.include('foo bar baz');
   });
 
   it('should show a info message, with actions', async () => {
-    const logStub = stubMethod($$.SANDBOX, SfCommand.prototype, 'log');
+    const logStub = $$.SANDBOX.stub(SfCommand.prototype, 'log');
     await TestCommand.run(['--error', '--actions']);
     expect(logStub.firstCall.firstArg)
       .to.include('foo bar baz')
@@ -141,26 +141,27 @@ describe('info messages', () => {
 describe('warning messages', () => {
   const $$ = new TestContext();
   beforeEach(() => {
-    stubMethod($$.SANDBOX, Lifecycle, 'getInstance').returns({
+    // @ts-expect-error not the full lifecycle class
+    $$.SANDBOX.stub(Lifecycle, 'getInstance').returns({
       on: $$.SANDBOX.stub(),
       onWarning: $$.SANDBOX.stub(),
     });
   });
 
   it('should show a info message from a string', async () => {
-    const logToStderrStub = stubMethod($$.SANDBOX, SfCommand.prototype, 'logToStderr');
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
     await TestCommand.run(['--warn']);
     expect(logToStderrStub.firstCall.firstArg).to.include('Warning').and.to.include('foo bar baz');
   });
 
   it('should show a warning message from Error, no actions', async () => {
-    const logToStderrStub = stubMethod($$.SANDBOX, SfCommand.prototype, 'logToStderr');
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
     await TestCommand.run(['--warn', '--error']);
     expect(logToStderrStub.firstCall.firstArg).to.include('Warning').and.to.include('foo bar baz');
   });
 
   it('should show a info message from Error, with actions', async () => {
-    const logToStderrStub = stubMethod($$.SANDBOX, SfCommand.prototype, 'logToStderr');
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
     await TestCommand.run(['--warn', '--error', '--actions']);
     expect(logToStderrStub.firstCall.firstArg)
       .to.include('Warning')

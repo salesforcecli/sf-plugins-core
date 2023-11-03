@@ -35,11 +35,11 @@ export function toHelpSection(
   const body = vars
     .flatMap((v) => {
       if (typeof v === 'string') {
-        const orgConfig = ORG_CONFIG_ALLOWED_PROPERTIES.find(({ key }) => key === v);
+        const orgConfig = ORG_CONFIG_ALLOWED_PROPERTIES.find(({ key }) => key.toString() === v);
         if (orgConfig) {
           return { name: orgConfig.key, description: orgConfig.description };
         }
-        const sfdxProperty = SFDX_ALLOWED_PROPERTIES.find(({ key }) => key === v);
+        const sfdxProperty = SFDX_ALLOWED_PROPERTIES.find(({ key }) => key.toString() === v);
         if (sfdxProperty) {
           return { name: sfdxProperty.key.valueOf(), description: sfdxProperty.description };
         }
