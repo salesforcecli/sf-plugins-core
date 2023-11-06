@@ -12,7 +12,6 @@ import {
   SfProject,
   StructuredMessage,
   Lifecycle,
-  Mode,
   EnvironmentVariable,
   SfError,
   ConfigAggregator,
@@ -20,9 +19,11 @@ import {
 import { AnyJson } from '@salesforce/ts-types';
 import * as chalk from 'chalk';
 import { Progress, Prompter, Spinner, Ux } from './ux';
+import { formatActions } from './formatActions';
+import { computeErrorCode, formatError } from './errorHandling';
 
 Messages.importMessagesDirectory(__dirname);
-const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
+export const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 export interface SfCommandInterface extends Command.Class {
   configurationVariablesSection?: HelpSection;
@@ -215,7 +216,7 @@ export abstract class SfCommand<T> extends Command {
 
     colorizedArgs.push(`${StandardColors.warning(messages.getMessage('warning.prefix'))} ${message}`);
     colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
+      ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
     );
 
     this.logToStderr(colorizedArgs.join(os.EOL));
@@ -233,7 +234,7 @@ export abstract class SfCommand<T> extends Command {
 
     colorizedArgs.push(`${StandardColors.info(message)}`);
     colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
+      ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
     );
 
     this.log(colorizedArgs.join(os.EOL));
@@ -419,10 +420,9 @@ export abstract class SfCommand<T> extends Command {
     // If there is an active spinner, it'll say "Error" instead of "Done"
     this.spinner.stop(StandardColors.error('Error'));
     // transform an unknown error into one that conforms to the interface
-
-    // @ts-expect-error because exitCode is not on Error
-    const codeFromError = (error.exitCode as number) ?? 1;
-    process.exitCode ??= codeFromError;
+    const codeFromError = computeErrorCode(error);
+    // this could be setting it to the same thing it was already, and that's ok.
+    process.exitCode = codeFromError;
 
     const sfErrorProperties = removeEmpty({
       code: codeFromError,
@@ -448,7 +448,7 @@ export abstract class SfCommand<T> extends Command {
     if (this.jsonEnabled()) {
       this.logJson(this.toErrorJson(sfCommandError));
     } else {
-      this.logToStderr(this.formatError(sfCommandError));
+      this.logToStderr(formatError(sfCommandError));
     }
 
     // Create SfError that can be thrown
@@ -474,49 +474,6 @@ export abstract class SfCommand<T> extends Command {
     process.emit('sfCommandError', err);
 
     throw err;
-  }
-
-  /**
-   * Format errors and actions for human consumption. Adds 'Error (<ErrorCode>):',
-   * When there are actions, we add 'Try this:' in blue
-   * followed by each action in red on its own line.
-   * If Error.code is present it is output last in parentheses
-   *
-   * @returns {string} Returns decorated messages.
-   */
-  protected formatError(error: SfCommand.Error): string {
-    const colorizedArgs: string[] = [];
-    const errorCode = typeof error.code === 'string' || typeof error.code === 'number' ? ` (${error.code})` : '';
-    const errorPrefix = `${StandardColors.error(messages.getMessage('error.prefix', [errorCode]))}`;
-    colorizedArgs.push(`${errorPrefix} ${error.message}`);
-    colorizedArgs.push(...this.formatActions(error.actions ?? []));
-    if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
-      colorizedArgs.push(StandardColors.info(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
-    }
-    return colorizedArgs.join('\n');
-  }
-
-  /**
-   * Utility function to format actions lines
-   *
-   * @param actions
-   * @param options
-   * @private
-   */
-  // eslint-disable-next-line class-methods-use-this
-  private formatActions(
-    actions: string[],
-    options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }
-  ): string[] {
-    const colorizedArgs: string[] = [];
-    // Format any actions.
-    if (actions?.length) {
-      colorizedArgs.push(`\n${StandardColors.info(messages.getMessage('actions.tryThis'))}\n`);
-      actions.forEach((action) => {
-        colorizedArgs.push(`${options.actionColor(action)}`);
-      });
-    }
-    return colorizedArgs;
   }
 
   public abstract run(): Promise<T>;
