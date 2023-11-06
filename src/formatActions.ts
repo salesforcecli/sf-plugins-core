@@ -8,16 +8,12 @@ import * as chalk from 'chalk';
 import { StandardColors, messages } from './sfCommand';
 
 export const formatActions = (
-  actions: string[],
+  actions: string[] = [],
   options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }
-): string[] => {
-  const colorizedArgs: string[] = [];
-  // Format any actions.
-  if (actions?.length) {
-    colorizedArgs.push(`\n${StandardColors.info(messages.getMessage('actions.tryThis'))}\n`);
-    actions.forEach((action) => {
-      colorizedArgs.push(`${options.actionColor(action)}`);
-    });
-  }
-  return colorizedArgs;
-};
+): string[] =>
+  actions.length
+    ? [
+        `\n${StandardColors.info(messages.getMessage('actions.tryThis'))}\n`,
+        ...actions.map((action) => `${options.actionColor(action)}`),
+      ]
+    : [];

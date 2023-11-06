@@ -210,16 +210,12 @@ export abstract class SfCommand<T> extends Command {
    * @param input {@link SfCommand.Warning} The message to log.
    */
   public warn(input: SfCommand.Warning): SfCommand.Warning {
-    const colorizedArgs: string[] = [];
     this.warnings.push(input);
-    const message = typeof input === 'string' ? input : input.message;
-
-    colorizedArgs.push(`${StandardColors.warning(messages.getMessage('warning.prefix'))} ${message}`);
-    colorizedArgs.push(
-      ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
+    this.logToStderr(
+      [`${StandardColors.warning(messages.getMessage('warning.prefix'))} ${parseMessage(input)}`]
+        .concat(formatActions(typeof input === 'string' ? [] : input.actions))
+        .join(os.EOL)
     );
-
-    this.logToStderr(colorizedArgs.join(os.EOL));
     return input;
   }
 
@@ -229,15 +225,11 @@ export abstract class SfCommand<T> extends Command {
    * @param input {@link SfCommand.Info} The message to log.
    */
   public info(input: SfCommand.Info): void {
-    const colorizedArgs: string[] = [];
-    const message = typeof input === 'string' ? input : input.message;
-
-    colorizedArgs.push(`${StandardColors.info(message)}`);
-    colorizedArgs.push(
-      ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
+    this.log(
+      [`${StandardColors.info(parseMessage(input))}`]
+        .concat(formatActions(typeof input === 'string' ? [] : input.actions))
+        .join(os.EOL)
     );
-
-    this.log(colorizedArgs.join(os.EOL));
   }
 
   /**
@@ -402,6 +394,10 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
+  /**
+   *
+   * @deprecated.  This should not have been exposeed for extension and should be removed in the next major version
+   */
   // eslint-disable-next-line class-methods-use-this
   protected async assignProject(): Promise<SfProject> {
     try {
@@ -508,3 +504,6 @@ function removeEmpty(obj: Record<string, unknown>): Record<string, unknown> {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
 }
+
+const parseMessage = (input: SfCommand.Info | SfCommand.Warning): string =>
+  typeof input === 'string' ? input : input.message;

@@ -53,6 +53,14 @@ export const errorIsGack = (error: Error | SfError): boolean => {
   );
 };
 
+/** identifies TypeError.  Searches the error message, stack, and recursively checks the cause chain */
+export const errorIsTypeError = (error: Error | SfError): boolean =>
+  error instanceof TypeError ||
+  error.name === 'TypeError' ||
+  error.message.includes('TypeError') ||
+  Boolean(error.stack?.includes('TypeError')) ||
+  ('cause' in error && error.cause instanceof Error && errorIsTypeError(error.cause));
+
 /**
  * Format errors and actions for human consumption. Adds 'Error (<ErrorCode>):',
  * When there are actions, we add 'Try this:' in blue
@@ -65,21 +73,14 @@ export const formatError = (error: SfCommand.Error): string => {
   Messages.importMessagesDirectory(__dirname);
   const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
-  const colorizedArgs: string[] = [];
   const errorCode = typeof error.code === 'string' || typeof error.code === 'number' ? ` (${error.code})` : '';
   const errorPrefix = `${StandardColors.error(messages.getMessage('error.prefix', [errorCode]))}`;
-  colorizedArgs.push(`${errorPrefix} ${error.message}`);
-  colorizedArgs.push(...formatActions(error.actions ?? []));
-  if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
-    colorizedArgs.push(StandardColors.info(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
-  }
-  return colorizedArgs.join('\n');
+  return [`${errorPrefix} ${error.message}`]
+    .concat(formatActions(error.actions))
+    .concat(
+      error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT
+        ? [`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`]
+        : []
+    )
+    .join('\n');
 };
-
-/** identifies TypeError.  Searches the error message, stack, and recursively checks the cause chain */
-export const errorIsTypeError = (error: Error | SfError): boolean =>
-  error instanceof TypeError ||
-  error.name === 'TypeError' ||
-  error.message.includes('TypeError') ||
-  Boolean(error.stack?.includes('TypeError')) ||
-  ('cause' in error && error.cause instanceof Error && errorIsTypeError(error.cause));
