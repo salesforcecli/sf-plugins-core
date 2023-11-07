@@ -128,3 +128,5 @@ export function generateTableChoices<T>(
 
   return choicesOptions;
 }
+
+export { Separator } from 'inquirer';
