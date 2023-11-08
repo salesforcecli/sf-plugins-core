@@ -8,5 +8,5 @@
 export { UxBase } from './base';
 export { Ux } from './ux';
 export { Progress } from './progress';
-export { Prompter, generateTableChoices } from './prompter';
+export { Prompter, generateTableChoices, Separator } from './prompter';
 export { Spinner } from './spinner';
