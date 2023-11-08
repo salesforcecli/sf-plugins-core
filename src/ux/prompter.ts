@@ -10,6 +10,8 @@ import { Dictionary, Nullable, ensureString } from '@salesforce/ts-types';
 import { ux } from '@oclif/core';
 
 export class Prompter {
+  public static readonly Separator = Separator;
+
   /**
    * Prompt user for information. See https://www.npmjs.com/package/inquirer for more.
    */
@@ -128,5 +130,3 @@ export function generateTableChoices<T>(
 
   return choicesOptions;
 }
-
-export { Separator } from 'inquirer';
