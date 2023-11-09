@@ -27,8 +27,15 @@ describe('typeErrors', () => {
     expect(errorIsTypeError(typeError)).to.be.true;
   });
 
-  it('matches on TypeError in ', () => {
-    expect(errorIsTypeError(typeError)).to.be.true;
+  it('matches on TypeError in stack', () => {
+    const e = new Error('some error');
+    e.stack = e.stack + typeError.name;
+    expect(errorIsTypeError(e)).to.be.true;
+  });
+
+  it('matches on TypeError in stack (check against false positive)', () => {
+    const e = new Error('some error');
+    expect(errorIsTypeError(e)).to.be.false;
   });
 
   it('matches on TypeError as cause', () => {
