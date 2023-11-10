@@ -1,3 +1,12 @@
+## [4.1.1](https://github.com/salesforcecli/sf-plugins-core/compare/4.1.0...4.1.1) (2023-11-10)
+
+
+### Bug Fixes
+
+* add ctrl+c 130 listener ([#445](https://github.com/salesforcecli/sf-plugins-core/issues/445)) ([6b005cb](https://github.com/salesforcecli/sf-plugins-core/commit/6b005cb91c54956d44b9f0e8d6b895308c267118))
+
+
+
 # [4.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/4.0.0...4.1.0) (2023-11-09)
 
 
