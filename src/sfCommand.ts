@@ -351,11 +351,11 @@ export abstract class SfCommand<T> extends Command {
       });
     });
 
-    this.configAggregator = await ConfigAggregator.create();
+    [this.configAggregator, this.project] = await Promise.all([
+      ConfigAggregator.create(),
+      ...(this.statics.requiresProject ? [this.assignProject()] : []),
+    ]);
 
-    if (this.statics.requiresProject) {
-      this.project = await this.assignProject();
-    }
     if (this.statics.state === 'beta') {
       this.warn(messages.getMessage('warning.CommandInBeta'));
     }
