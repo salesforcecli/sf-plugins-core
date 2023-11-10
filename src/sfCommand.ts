@@ -345,9 +345,12 @@ export abstract class SfCommand<T> extends Command {
   }
 
   public async _run<R>(): Promise<R> {
-    process.on('SIGINT', () => {
-      this.exit(130);
+    ['SIGINT', 'SIGTERM', 'SIGBREAK', 'SIGHUP'].map((listener) => {
+      process.on(listener, () => {
+        this.exit(130);
+      });
     });
+
     this.configAggregator = await ConfigAggregator.create();
 
     if (this.statics.requiresProject) {
