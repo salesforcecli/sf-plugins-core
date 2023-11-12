@@ -6,7 +6,7 @@
  */
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
 
-import { EventEmitter } from 'events';
+import { EventEmitter } from 'node:events';
 import { AnyJson, JsonMap } from '@salesforce/ts-types';
 import { QuestionCollection, Answers } from 'inquirer';
 import { ux } from '@oclif/core';
