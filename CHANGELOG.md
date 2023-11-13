@@ -1,3 +1,12 @@
+## [4.1.2](https://github.com/salesforcecli/sf-plugins-core/compare/4.1.1...4.1.2) (2023-11-13)
+
+
+### Bug Fixes
+
+* **perf:** 2 fs ops in parallel ([#446](https://github.com/salesforcecli/sf-plugins-core/issues/446)) ([a6aa122](https://github.com/salesforcecli/sf-plugins-core/commit/a6aa12229e229a7bdc537187a7fa90bf5afaf4bc))
+
+
+
 ## [4.1.1](https://github.com/salesforcecli/sf-plugins-core/compare/4.1.0...4.1.1) (2023-11-10)
 
 
