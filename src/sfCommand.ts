@@ -293,7 +293,8 @@ export abstract class SfCommand<T> extends Command {
     this.ux.styledHeader(text);
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  // leaving AnyJson and unknown to maintain the public API.
+  // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-redundant-type-constituents
   public logJson(json: AnyJson | unknown): void {
     // If `--json` is enabled, then the ux instance on the class will disable output, which
     // means that the logJson method will not output anything. So, we need to create a new
