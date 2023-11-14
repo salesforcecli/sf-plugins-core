@@ -4,7 +4,7 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import * as os from 'os';
+import * as os from 'node:os';
 import { ux, Command, Config, HelpSection } from '@oclif/core';
 import {
   envVars,
@@ -293,7 +293,8 @@ export abstract class SfCommand<T> extends Command {
     this.ux.styledHeader(text);
   }
 
-  // eslint-disable-next-line class-methods-use-this
+  // leaving AnyJson and unknown to maintain the public API.
+  // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-redundant-type-constituents
   public logJson(json: AnyJson | unknown): void {
     // If `--json` is enabled, then the ux instance on the class will disable output, which
     // means that the logJson method will not output anything. So, we need to create a new
