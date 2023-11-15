@@ -1,3 +1,7 @@
+## [4.1.3](https://github.com/salesforcecli/sf-plugins-core/compare/4.1.2...4.1.3) (2023-11-15)
+
+
+
 ## [4.1.2](https://github.com/salesforcecli/sf-plugins-core/compare/4.1.1...4.1.2) (2023-11-13)
 
 
