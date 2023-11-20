@@ -44,7 +44,7 @@ Username or alias of the target org. Not required if the `target-org` configurat
 
 # flags.targetDevHubOrg.summary
 
-Username or alias of the Dev Hub org. Can be omitted if `target-dev-hub` exists in the config.
+Username or alias of the Dev Hub org. Not required if the `target-dev-hub` configuration variable is already set.
 
 # flags.apiVersion.description
 
