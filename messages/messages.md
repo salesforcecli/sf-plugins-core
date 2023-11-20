@@ -40,7 +40,7 @@ The specified org %s is not a Dev Hub.
 
 # flags.targetOrg.summary
 
-Username or alias of the target org. Can be omitted if `target-org` exists in the config.
+Username or alias of the target org. Not required if the `target-org` configuration variable is already set.
 
 # flags.targetDevHubOrg.summary
 
