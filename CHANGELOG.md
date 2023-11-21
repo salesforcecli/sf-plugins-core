@@ -1,3 +1,12 @@
+## [5.0.3](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.2...5.0.3) (2023-11-21)
+
+
+### Bug Fixes
+
+* docs about required flags that read from config ([#455](https://github.com/salesforcecli/sf-plugins-core/issues/455)) ([ca7b8d5](https://github.com/salesforcecli/sf-plugins-core/commit/ca7b8d52251665fba661a4412cff0a14001c1066))
+
+
+
 ## [5.0.2](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.1...5.0.2) (2023-11-19)
 
 
