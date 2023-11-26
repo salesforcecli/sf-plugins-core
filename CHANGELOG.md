@@ -1,3 +1,12 @@
+## [5.0.4](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.3...5.0.4) (2023-11-26)
+
+
+### Bug Fixes
+
+* **deps:** bump @salesforce/core from 6.1.3 to 6.2.0 ([23ee019](https://github.com/salesforcecli/sf-plugins-core/commit/23ee019ace63b3d6bf4c1752fd93d5cba78ec002))
+
+
+
 ## [5.0.3](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.2...5.0.3) (2023-11-21)
 
 
