@@ -1,3 +1,12 @@
+## [5.0.7](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.6...5.0.7) (2023-12-07)
+
+
+### Bug Fixes
+
+* preserve oclif exit code ([#460](https://github.com/salesforcecli/sf-plugins-core/issues/460)) ([8a3c370](https://github.com/salesforcecli/sf-plugins-core/commit/8a3c370096f970b7bac8e8dabe1384bc1239a441))
+
+
+
 ## [5.0.6](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.5...5.0.6) (2023-12-06)
 
 
