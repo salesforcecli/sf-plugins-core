@@ -428,7 +428,8 @@ export abstract class SfCommand<T> extends Command {
     // transform an unknown error into one that conforms to the interface
 
     // @ts-expect-error because exitCode is not on Error
-    const codeFromError = (error.exitCode as number) ?? 1;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    const codeFromError = (error.exitCode as number | undefined) ?? (error.oclif?.exit as number | undefined) ?? 1;
     process.exitCode ??= codeFromError;
 
     const sfErrorProperties = removeEmpty({
@@ -475,6 +476,10 @@ export abstract class SfCommand<T> extends Command {
 
     // @ts-expect-error because skipOclifErrorHandling is not on SfError
     err.skipOclifErrorHandling = true;
+
+    // Add oclif exit code to the error so that oclif can use the exit code when exiting.
+    // @ts-expect-error because oclif is not on SfError
+    err.oclif = { exit: process.exitCode };
 
     // Emit an event for plugin-telemetry prerun hook to pick up.
     // @ts-expect-error because TS is strict about the events that can be emitted on process.
