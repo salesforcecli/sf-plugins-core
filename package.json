@@ -48,7 +48,7 @@
     "eslint-plugin-sf-plugin": "^1.16.15",
     "shelljs": "0.8.5",
     "strip-ansi": "6.0.1",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "typescript": "^4.9.5"
   },
   "publishConfig": {
