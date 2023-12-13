@@ -47,6 +47,11 @@ describe('duration flag', () => {
         }),
       },
     };
+    it('passes', async () => {
+      const out = await Parser.parse(['--wait=10'], buildProps);
+      expect(out.flags.wait?.quantity).to.equal(10);
+      expect(out.flags.wait?.unit).to.equal(Duration.Unit.HOURS);
+    });
     it('passes using defaultValue', async () => {
       const out = await Parser.parse([], buildProps);
       expect(out.flags.wait?.quantity).to.equal(0);
