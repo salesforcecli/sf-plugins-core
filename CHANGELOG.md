@@ -1,3 +1,12 @@
+## [5.0.10](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.9...5.0.10) (2023-12-14)
+
+
+### Bug Fixes
+
+* allow zero default duration flags ([#470](https://github.com/salesforcecli/sf-plugins-core/issues/470)) ([fdc04b8](https://github.com/salesforcecli/sf-plugins-core/commit/fdc04b88bf45567b1b6476f807989a8b39936ed1))
+
+
+
 ## [5.0.9](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.8...5.0.9) (2023-12-14)
 
 
