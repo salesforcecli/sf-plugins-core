@@ -429,7 +429,7 @@ export abstract class SfCommand<T> extends Command {
 
     // @ts-expect-error because exitCode is not on Error
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const codeFromError = (error.exitCode as number | undefined) ?? (error.oclif?.exit as number | undefined) ?? 1;
+    const codeFromError = (error.oclif?.exit as number | undefined) ?? (error.exitCode as number | undefined) ?? 1;
     process.exitCode ??= codeFromError;
 
     const sfErrorProperties = removeEmpty({
