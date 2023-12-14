@@ -45,7 +45,9 @@ export const durationFlag = Flags.custom<Duration, DurationFlagConfig>({
   parse: async (input, _, opts) => validate(input, opts),
   // eslint-disable-next-line @typescript-eslint/require-await
   default: async (context) =>
-    context.options.defaultValue ? toDuration(context.options.defaultValue, context.options.unit) : undefined,
+    typeof context.options.defaultValue === 'number'
+      ? toDuration(context.options.defaultValue, context.options.unit)
+      : undefined,
 });
 
 const validate = (input: string, config: DurationFlagConfig): Duration => {

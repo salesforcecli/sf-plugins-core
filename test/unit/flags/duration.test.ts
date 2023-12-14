@@ -36,6 +36,29 @@ describe('duration flag', () => {
     });
   });
 
+  describe('defaultValue zero', () => {
+    const buildProps = {
+      flags: {
+        wait: durationFlag({
+          unit: 'hours',
+          description: 'test',
+          defaultValue: 0,
+          char: 'w',
+        }),
+      },
+    };
+    it('passes', async () => {
+      const out = await Parser.parse(['--wait=10'], buildProps);
+      expect(out.flags.wait?.quantity).to.equal(10);
+      expect(out.flags.wait?.unit).to.equal(Duration.Unit.HOURS);
+    });
+    it('passes using defaultValue', async () => {
+      const out = await Parser.parse([], buildProps);
+      expect(out.flags.wait?.quantity).to.equal(0);
+      expect(out.flags.wait?.unit).to.equal(Duration.Unit.HOURS);
+    });
+  });
+
   describe('validation with no options and weeks unit', () => {
     const defaultValue = 33;
     const buildProps = {
