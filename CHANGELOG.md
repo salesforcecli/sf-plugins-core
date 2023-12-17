@@ -1,3 +1,12 @@
+## [5.0.12](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.11...5.0.12) (2023-12-17)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/core from 3.14.1 to 3.15.0 ([9ebc68b](https://github.com/salesforcecli/sf-plugins-core/commit/9ebc68bbf48ffff0f5e1df5d03a941399dbb84b9))
+
+
+
 ## [5.0.11](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.10...5.0.11) (2023-12-17)
 
 
