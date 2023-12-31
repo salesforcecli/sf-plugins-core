@@ -582,10 +582,10 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@salesforce/core@^6.4.0", "@salesforce/core@^6.4.1":
-  version "6.4.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-6.4.2.tgz#e6e5e2d5e6ad17f1cbe0feb5a0e55e8b74c91e3c"
-  integrity sha512-ZtLwgI18f1th6SY0fKmuiyVGGwTXPy4nI+KfXzkww/vqdPxDhAfoHwqvFeo4tjFE2rldK7IPiIIYdtpsaI8d5g==
+"@salesforce/core@^6.4.0", "@salesforce/core@^6.4.2":
+  version "6.4.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-6.4.3.tgz#77edcf00c4b6e0b43a0620eb7d1cd97ad0bf17e4"
+  integrity sha512-MEHd9W2PM+Ytosirry7vInBrtU4RZK+v7ubNozbR4kCWr4yMe+1vzAkGqB2NoL5vAVbOmF7wyy8+tMGYCyLyww==
   dependencies:
     "@salesforce/kit" "^3.0.15"
     "@salesforce/schemas" "^1.6.1"
@@ -601,7 +601,7 @@
     jszip "3.10.1"
     pino "^8.16.2"
     pino-abstract-transport "^1.1.0"
-    pino-pretty "^10.3.0"
+    pino-pretty "^10.3.1"
     proper-lockfile "^4.1.2"
     semver "^7.5.4"
     ts-retry-promise "^0.7.1"
@@ -611,16 +611,16 @@
   resolved "https://registry.yarnpkg.com/@salesforce/dev-config/-/dev-config-4.1.0.tgz#e529576466d074e7a5f1441236510fef123da01e"
   integrity sha512-2iDDepiIwjXHS5IVY7pwv8jMo4xWosJ7p/UTj+lllpB/gnJiYLhjJPE4Z3FCGFKyvfg5jGaimCd8Ca6bLGsCQA==
 
-"@salesforce/dev-scripts@^8.1.2":
-  version "8.1.2"
-  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-8.1.2.tgz#ec3e528328fe7c7b8b312688e970ea258913980b"
-  integrity sha512-DQscqQPMuj2b1D8sfh77zAKQVEuo0SQ05XlFSbVKgvxO/yPrSpUK0LgHsbyG4Js88TWBqsf4K7mkdaryukSnSA==
+"@salesforce/dev-scripts@^8.1.3":
+  version "8.1.3"
+  resolved "https://registry.yarnpkg.com/@salesforce/dev-scripts/-/dev-scripts-8.1.3.tgz#b33c53b4b648b5090322d1144c6852ca587d6eb7"
+  integrity sha512-mSWCab+uO3O2QNBCRJpKsHw/UYpOGpNFWT12BC85e+VyWBp4LTIAsssBKDY8czRI02K7NwiYaC34fNdP+yqrzA==
   dependencies:
     "@commitlint/cli" "^17.1.2"
     "@commitlint/config-conventional" "^17.8.1"
     "@salesforce/dev-config" "^4.1.0"
     "@salesforce/prettier-config" "^0.0.3"
-    "@types/chai" "^4.3.10"
+    "@types/chai" "^4.3.11"
     "@types/mocha" "^10.0.6"
     "@types/node" "^18"
     "@types/sinon" "^10.0.20"
@@ -746,10 +746,10 @@
   resolved "https://registry.yarnpkg.com/@tsconfig/node16/-/node16-1.0.4.tgz#0b92dcc0cc1c81f6f306a381f28e31b1a56536e9"
   integrity sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==
 
-"@types/chai@*", "@types/chai@^4.3.10":
-  version "4.3.10"
-  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.3.10.tgz#2ad2959d1767edee5b0e4efb1a0cd2b500747317"
-  integrity sha512-of+ICnbqjmFCiixUnqRulbylyXQrPqIGf/B3Jax1wIF3DvSheysQxAWvqHhZiW3IQrycvokcLcFQlveGp+vyNg==
+"@types/chai@*", "@types/chai@^4.3.11":
+  version "4.3.11"
+  resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.3.11.tgz#e95050bf79a932cb7305dd130254ccdf9bde671c"
+  integrity sha512-qQR1dr2rGIHYlJulmr8Ioq3De0Le9E4MJ5AiaeAETJJpndT1uUNHsGFK3L/UIu+rbkQSdj8J/w2bCsBZc/Y5fQ==
 
 "@types/inquirer@^8.2.3":
   version "8.2.6"
@@ -4392,10 +4392,10 @@ pino-abstract-transport@^1.0.0, pino-abstract-transport@^1.1.0, pino-abstract-tr
     readable-stream "^4.0.0"
     split2 "^4.0.0"
 
-pino-pretty@^10.3.0:
-  version "10.3.0"
-  resolved "https://registry.yarnpkg.com/pino-pretty/-/pino-pretty-10.3.0.tgz#483ff78b98d277c33d00e0419c00601d9152bc7e"
-  integrity sha512-JthvQW289q3454mhM3/38wFYGWPiBMR28T3CpDNABzoTQOje9UKS7XCJQSnjWF9LQGQkGd8D7h0oq+qwiM3jFA==
+pino-pretty@^10.3.1:
+  version "10.3.1"
+  resolved "https://registry.yarnpkg.com/pino-pretty/-/pino-pretty-10.3.1.tgz#e3285a5265211ac6c7cd5988f9e65bf3371a0ca9"
+  integrity sha512-az8JbIYeN/1iLj2t0jR9DV48/LQ3RC6hZPpapKPkb84Q+yTidMCpgWxIT3N0flnBDilyBQ1luWNpOeJptjdp/g==
   dependencies:
     colorette "^2.0.7"
     dateformat "^4.6.3"
