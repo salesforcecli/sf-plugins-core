@@ -29,7 +29,7 @@ Flags is a convenience reference to [@oclif/core#Flags](https://github.com/oclif
 
 These flags can be imported into a command and used like any other flag. See code examples in the links
 
-- [orgApiVersionFlag](src/flags/apiVersion.ts)
+- [orgApiVersionFlag](src/flags/orgApiVersion.ts)
   - specifies a Salesforce API version.
   - reads from Config (if available)
   - validates version is still active
