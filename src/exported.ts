@@ -5,36 +5,13 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { Flags as OclifFlags } from '@oclif/core';
+export { toHelpSection, parseVarArgs } from './util.js';
+export { Progress } from './ux/progress.js';
+export { Spinner } from './ux/spinner.js';
+export { Ux } from './ux/ux.js';
+export { StandardColors } from './ux/standardColors.js';
 
-export { toHelpSection, parseVarArgs } from './util';
-export { Deployable, Deployer, DeployerResult } from './deployer';
-export { Deauthorizer } from './deauthorizer';
-export { Progress, Prompter, generateTableChoices, Ux, Spinner, Separator } from './ux';
-export { SfHook } from './hooks';
-export * from './types';
-export { SfCommand, SfCommandInterface, StandardColors } from './sfCommand';
-export * from './compatibility';
-export * from './stubUx';
-// custom flags
-import { requiredOrgFlag, requiredHubFlag, optionalOrgFlag, optionalHubFlag } from './flags/orgFlags';
-import { salesforceIdFlag } from './flags/salesforceId';
-import { orgApiVersionFlag } from './flags/orgApiVersion';
-import { durationFlag } from './flags/duration';
-
-export const Flags = {
-  boolean: OclifFlags.boolean,
-  directory: OclifFlags.directory,
-  file: OclifFlags.file,
-  integer: OclifFlags.integer,
-  string: OclifFlags.string,
-  url: OclifFlags.url,
-  custom: OclifFlags.custom,
-  duration: durationFlag,
-  salesforceId: salesforceIdFlag,
-  orgApiVersion: orgApiVersionFlag,
-  requiredOrg: requiredOrgFlag,
-  requiredHub: requiredHubFlag,
-  optionalOrg: optionalOrgFlag,
-  optionalHub: optionalHubFlag,
-};
+export { SfCommand, SfCommandInterface } from './sfCommand.js';
+export * from './compatibility.js';
+export * from './stubUx.js';
+export { Flags } from './flags/flags.js';

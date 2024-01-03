@@ -7,7 +7,7 @@
 
 import * as util from 'node:util';
 import { ux } from '@oclif/core';
-import { UxBase } from '.';
+import { UxBase } from './base.js';
 
 /**
  * Class for display a progress bar to the console. Will automatically be suppressed if the --json flag is present.

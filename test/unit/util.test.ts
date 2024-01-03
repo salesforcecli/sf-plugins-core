@@ -15,9 +15,9 @@ import {
   SFDX_ALLOWED_PROPERTIES,
   Messages,
 } from '@salesforce/core';
-import { parseVarArgs, toHelpSection } from '../../src/util';
+import { parseVarArgs, toHelpSection } from '../../src/util.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 describe('toHelpSection', () => {

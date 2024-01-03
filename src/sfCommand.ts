@@ -4,24 +4,28 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import * as os from 'node:os';
-import { ux, Command, Config, HelpSection } from '@oclif/core';
+import os from 'node:os';
+import { Command, Config, HelpSection } from '@oclif/core';
 import {
   envVars,
   Messages,
   SfProject,
-  StructuredMessage,
   Lifecycle,
-  Mode,
   EnvironmentVariable,
   SfError,
   ConfigAggregator,
 } from '@salesforce/core';
-import { AnyJson } from '@salesforce/ts-types';
-import * as chalk from 'chalk';
-import { Progress, Prompter, Spinner, Ux } from './ux';
+import type { AnyJson } from '@salesforce/ts-types';
+import { Progress } from './ux/progress.js';
+import { Spinner } from './ux/spinner.js';
+import { Ux } from './ux/ux.js';
+import { SfCommand as ns } from './sfCommandNamespace.js';
+import { formatActions, formatError } from './errorFormatting.js';
+import { StandardColors } from './ux/standardColors.js';
+import { confirm, secretPrompt, PromptInputs } from './prompts.js';
+import { removeEmpty } from './util.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 export interface SfCommandInterface extends Command.Class {
@@ -29,13 +33,6 @@ export interface SfCommandInterface extends Command.Class {
   envVariablesSection?: HelpSection;
   errorCodes?: HelpSection;
 }
-
-export const StandardColors = {
-  error: chalk.bold.red,
-  warning: chalk.bold.yellow,
-  info: chalk.dim,
-  success: chalk.bold.green,
-};
 
 /**
  * A base command that provided common functionality for all sf commands.
@@ -70,7 +67,6 @@ export const StandardColors = {
  */
 
 export abstract class SfCommand<T> extends Command {
-  public static SF_ENV = 'SF_ENV';
   public static enableJsonFlag = true;
   /**
    * Add a CONFIGURATION VARIABLES section to the help output.
@@ -125,21 +121,6 @@ export abstract class SfCommand<T> extends Command {
   public static errorCodes?: HelpSection;
 
   /**
-   * Flags that you can use for manipulating tables.
-   *
-   * @example
-   * ```
-   * import { SfCommand } from '@salesforce/sf-plugins-core';
-   * export default class MyCommand extends SfCommand {
-   *   public static flags = {
-   *    ...SfCommand.tableFags,
-   *    'my-flags: flags.string({ char: 'm', description: 'my flag' }),
-   *   }
-   * }
-   * ```
-   */
-  public static tableFlags = ux.table.flags;
-  /**
    * Set to true if the command must be executed inside a Salesforce project directory.
    *
    * If set to true the command will throw an error if the command is executed outside of a Salesforce project directory.
@@ -157,16 +138,15 @@ export abstract class SfCommand<T> extends Command {
    * Add a progress bar to the console. {@link Progress}
    */
   public progress: Progress;
-  public project!: SfProject;
+  public project?: SfProject;
 
   /**
    * ConfigAggregator instance for accessing global and local configuration.
    */
   public configAggregator!: ConfigAggregator;
 
-  private warnings: SfCommand.Warning[] = [];
+  private warnings: ns.Warning[] = [];
   private ux: Ux;
-  private prompter: Prompter;
   private lifecycle: Lifecycle;
 
   public constructor(argv: string[], config: Config) {
@@ -176,7 +156,6 @@ export abstract class SfCommand<T> extends Command {
       this.ux.outputEnabled && envVars.getBoolean(EnvironmentVariable.SF_USE_PROGRESS_BAR, true)
     );
     this.spinner = this.ux.spinner;
-    this.prompter = this.ux.prompter;
     this.lifecycle = Lifecycle.getInstance();
   }
 
@@ -208,15 +187,14 @@ export abstract class SfCommand<T> extends Command {
    *
    * @param input {@link SfCommand.Warning} The message to log.
    */
-  public warn(input: SfCommand.Warning): SfCommand.Warning {
-    const colorizedArgs: string[] = [];
+  public warn(input: ns.Warning): ns.Warning {
     this.warnings.push(input);
     const message = typeof input === 'string' ? input : input.message;
 
-    colorizedArgs.push(`${StandardColors.warning(messages.getMessage('warning.prefix'))} ${message}`);
-    colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
-    );
+    const colorizedArgs = [
+      `${StandardColors.warning(messages.getMessage('warning.prefix'))} ${message}`,
+      ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info }),
+    ];
 
     this.logToStderr(colorizedArgs.join(os.EOL));
     return input;
@@ -227,16 +205,14 @@ export abstract class SfCommand<T> extends Command {
    *
    * @param input {@link SfCommand.Info} The message to log.
    */
-  public info(input: SfCommand.Info): void {
-    const colorizedArgs: string[] = [];
+  public info(input: ns.Info): void {
     const message = typeof input === 'string' ? input : input.message;
-
-    colorizedArgs.push(`${StandardColors.info(message)}`);
-    colorizedArgs.push(
-      ...this.formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info })
+    this.log(
+      [
+        `${StandardColors.info(message)}`,
+        ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info }),
+      ].join(os.EOL)
     );
-
-    this.log(colorizedArgs.join(os.EOL));
   }
 
   /**
@@ -303,46 +279,32 @@ export abstract class SfCommand<T> extends Command {
   }
 
   /**
-   * Prompt user for information. See https://www.npmjs.com/package/inquirer for more.
-   *
-   * This will NOT be automatically suppressed when the --json flag is present since we assume
-   * that any command that prompts the user for required information will not also support the --json flag.
-   *
-   * If you need to conditionally suppress prompts to support json output, then do the following:
-   *
-   * @example
-   * if (!this.jsonEnabled()) {
-   *   await this.prompt();
-   * }
-   */
-  public async prompt<R extends Prompter.Answers>(
-    questions: Prompter.Questions<R>,
-    initialAnswers?: Partial<R>
-  ): Promise<R> {
-    return this.prompter.prompt(questions, initialAnswers);
-  }
-
-  /**
-   * Simplified prompt for single-question confirmation. Times out and throws after 10s
+   * Prompt user for yes/no confirmation.
+   * Avoid calling in --json scenarios and always provide a `--no-prompt` option for scripting
    *
    * @param message text to display.  Do not include a question mark.
-   * @param ms milliseconds to wait for user input.  Defaults to 10s.
-   * @param defaultAnswer boolean to set the default answer to.  Defaults to true.
-   * @return true if the user confirms, false if they do not.
+   * @param ms milliseconds to wait for user input.  Defaults to 60s.  Will throw an error when timeout is reached.
+   *
    */
-  public async confirm(message: string, ms = 10000, defaultAnswer = true): Promise<boolean> {
-    return this.prompter.confirm(message, ms, defaultAnswer);
+
+  // eslint-disable-next-line class-methods-use-this
+  public async secretPrompt({ message, ms = 60_000 }: PromptInputs<string>): Promise<string> {
+    return secretPrompt({ message, ms });
   }
 
   /**
-   * Prompt user for information with a timeout (in milliseconds). See https://www.npmjs.com/package/inquirer for more.
+   * Prompt user for yes/no confirmation.
+   * Avoid calling in --json scenarios and always provide a `--no-prompt` option for scripting
+   *
+   * @param message text to display.  Do not include a question mark or Y/N.
+   * @param ms milliseconds to wait for user input.  Defaults to 10s.  Will use the default value when timeout is reached.
+   * @param defaultAnswer boolean to set the default answer to.  Defaults to false.
+   *
    */
-  public async timedPrompt<R extends Prompter.Answers>(
-    questions: Prompter.Questions<R>,
-    ms = 10_000,
-    initialAnswers?: Partial<R>
-  ): Promise<R> {
-    return this.prompter.timedPrompt(questions, ms, initialAnswers);
+
+  // eslint-disable-next-line class-methods-use-this
+  public async confirm({ message, ms = 10_000, defaultAnswer = false }: PromptInputs<boolean>): Promise<boolean> {
+    return confirm({ message, ms, defaultAnswer });
   }
 
   public async _run<R>(): Promise<R> {
@@ -354,7 +316,7 @@ export abstract class SfCommand<T> extends Command {
 
     [this.configAggregator, this.project] = await Promise.all([
       ConfigAggregator.create(),
-      ...(this.statics.requiresProject ? [this.assignProject()] : []),
+      ...(this.statics.requiresProject ? [assignProject()] : []),
     ]);
 
     if (this.statics.state === 'beta') {
@@ -390,7 +352,7 @@ export abstract class SfCommand<T> extends Command {
   /**
    * Wrap the command result into the standardized JSON structure.
    */
-  protected toSuccessJson(result: T): SfCommand.Json<T> {
+  protected toSuccessJson(result: T): ns.Json<T> {
     return {
       status: process.exitCode ?? 0,
       result,
@@ -401,27 +363,15 @@ export abstract class SfCommand<T> extends Command {
   /**
    * Wrap the command error into the standardized JSON structure.
    */
-  protected toErrorJson(error: SfCommand.Error): SfCommand.Error {
+  protected toErrorJson(error: ns.Error): ns.Error {
     return {
       ...error,
       warnings: this.warnings,
     };
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  protected async assignProject(): Promise<SfProject> {
-    try {
-      return await SfProject.resolve();
-    } catch (err) {
-      if (err instanceof Error && err.name === 'InvalidProjectWorkspaceError') {
-        throw messages.createError('errors.RequiresProject');
-      }
-      throw err;
-    }
-  }
-
   // eslint-disable-next-line @typescript-eslint/require-await
-  protected async catch(error: Error | SfError | SfCommand.Error): Promise<SfCommand.Error> {
+  protected async catch(error: Error | SfError | ns.Error): Promise<ns.Error> {
     // stop any spinners to prevent it from unintentionally swallowing output.
     // If there is an active spinner, it'll say "Error" instead of "Done"
     this.spinner.stop(StandardColors.error('Error'));
@@ -442,7 +392,7 @@ export abstract class SfCommand<T> extends Command {
     });
 
     // Create printable error object
-    const sfCommandError: SfCommand.Error = {
+    const sfCommandError: ns.Error = {
       ...sfErrorProperties,
       ...{
         message: error.message,
@@ -456,7 +406,7 @@ export abstract class SfCommand<T> extends Command {
     if (this.jsonEnabled()) {
       this.logJson(this.toErrorJson(sfCommandError));
     } else {
-      this.logToStderr(this.formatError(sfCommandError));
+      this.logToStderr(formatError(sfCommandError));
     }
 
     // Create SfError that can be thrown
@@ -488,78 +438,16 @@ export abstract class SfCommand<T> extends Command {
     throw err;
   }
 
-  /**
-   * Format errors and actions for human consumption. Adds 'Error (<ErrorCode>):',
-   * When there are actions, we add 'Try this:' in blue
-   * followed by each action in red on its own line.
-   * If Error.code is present it is output last in parentheses
-   *
-   * @returns {string} Returns decorated messages.
-   */
-  protected formatError(error: SfCommand.Error): string {
-    const colorizedArgs: string[] = [];
-    const errorCode = typeof error.code === 'string' || typeof error.code === 'number' ? ` (${error.code})` : '';
-    const errorPrefix = `${StandardColors.error(messages.getMessage('error.prefix', [errorCode]))}`;
-    colorizedArgs.push(`${errorPrefix} ${error.message}`);
-    colorizedArgs.push(...this.formatActions(error.actions ?? []));
-    if (error.stack && envVars.getString(SfCommand.SF_ENV) === Mode.DEVELOPMENT) {
-      colorizedArgs.push(StandardColors.info(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`));
-    }
-    return colorizedArgs.join('\n');
-  }
-
-  /**
-   * Utility function to format actions lines
-   *
-   * @param actions
-   * @param options
-   * @private
-   */
-  // eslint-disable-next-line class-methods-use-this
-  private formatActions(
-    actions: string[],
-    options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }
-  ): string[] {
-    const colorizedArgs: string[] = [];
-    // Format any actions.
-    if (actions?.length) {
-      colorizedArgs.push(`\n${StandardColors.info(messages.getMessage('actions.tryThis'))}\n`);
-      actions.forEach((action) => {
-        colorizedArgs.push(`${options.actionColor(action)}`);
-      });
-    }
-    return colorizedArgs;
-  }
-
   public abstract run(): Promise<T>;
 }
 
-export namespace SfCommand {
-  export type Info = StructuredMessage | string;
-  export type Warning = StructuredMessage | string;
-
-  export interface Json<T> {
-    status: number;
-    result: T;
-    warnings?: Warning[];
+const assignProject = async (): Promise<SfProject> => {
+  try {
+    return await SfProject.resolve();
+  } catch (err) {
+    if (err instanceof Error && err.name === 'InvalidProjectWorkspaceError') {
+      throw messages.createError('errors.RequiresProject');
+    }
+    throw err;
   }
-
-  export interface Error {
-    status: number;
-    name: string;
-    message: string;
-    stack: string | undefined;
-    warnings?: Warning[];
-    actions?: string[];
-    code?: unknown;
-    exitCode?: number;
-    data?: unknown;
-    context?: string;
-    commandName?: string;
-  }
-}
-
-function removeEmpty(obj: Record<string, unknown>): Record<string, unknown> {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  return Object.fromEntries(Object.entries(obj).filter(([_, v]) => v != null));
-}
+};

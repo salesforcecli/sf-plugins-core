@@ -7,9 +7,8 @@
 
 import { ux } from '@oclif/core';
 import { AnyJson } from '@salesforce/ts-types';
-import { UxBase } from './base';
-import { Prompter } from './prompter';
-import { Spinner } from './spinner';
+import { UxBase } from './base.js';
+import { Spinner } from './spinner.js';
 
 /**
  * UX methods for plugins. Automatically suppress console output if outputEnabled is set to false.
@@ -29,14 +28,12 @@ import { Spinner } from './spinner';
  */
 export class Ux extends UxBase {
   public readonly spinner: Spinner;
-  public readonly prompter: Prompter;
   public readonly outputEnabled: boolean;
 
   public constructor({ jsonEnabled } = { jsonEnabled: false }) {
     super(!jsonEnabled);
     this.outputEnabled = !jsonEnabled;
     this.spinner = new Spinner(this.outputEnabled);
-    this.prompter = new Prompter();
   }
 
   /**

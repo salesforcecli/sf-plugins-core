@@ -7,9 +7,9 @@
 import { expect } from 'chai';
 import { Parser } from '@oclif/core';
 import { Messages } from '@salesforce/core';
-import { salesforceIdFlag } from '../../../src/flags/salesforceId';
+import { salesforceIdFlag } from '../../../src/flags/salesforceId.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 describe('id flag', () => {

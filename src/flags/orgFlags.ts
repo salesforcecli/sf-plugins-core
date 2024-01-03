@@ -7,7 +7,7 @@
 import { Flags } from '@oclif/core';
 import { ConfigAggregator, Messages, Org, OrgConfigProperties } from '@salesforce/core';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 export async function maybeGetOrg(input: string): Promise<Org>;

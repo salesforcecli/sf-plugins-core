@@ -16,9 +16,6 @@ import {
 } from '@salesforce/core';
 import { HelpSection, HelpSectionKeyValueTable } from '@oclif/core';
 
-Messages.importMessagesDirectory(__dirname);
-const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
-
 /**
  * Function to build a help section for command help.
  * Takes a string to be used as section header text and an array of enums
@@ -73,6 +70,9 @@ export function parseVarArgs(args: Record<string, unknown>, argv: string[]): Rec
     return { [varargs[0]]: varargs[1] };
   }
 
+  Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
+  const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
+
   // Ensure that all args are in the right format (e.g. key=value key1=value1)
   varargs.forEach((arg) => {
     const split = arg.split('=');
@@ -92,3 +92,5 @@ export function parseVarArgs(args: Record<string, unknown>, argv: string[]): Rec
 
   return final;
 }
+export const removeEmpty = (obj: Record<string, unknown>): Record<string, unknown> =>
+  Object.fromEntries(Object.entries(obj).filter(([, v]) => v != null));

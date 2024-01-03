@@ -4,6 +4,7 @@
   "description": "Utils for writing Salesforce CLI plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
+  "type": "module",
   "license": "BSD-3-Clause",
   "scripts": {
     "build": "wireit",
@@ -12,6 +13,7 @@
     "compile": "wireit",
     "docs": "sf-docs",
     "format": "wireit",
+    "link-check": "wireit",
     "lint": "wireit",
     "lint-fix": "yarn sf-lint --fix",
     "postcompile": "tsc -p test",
@@ -19,6 +21,13 @@
     "prepare": "sf-install",
     "test": "wireit",
     "test:only": "wireit"
+  },
+  "exports": {
+    "./SfCommand": "./lib/SfCommand.js",
+    "./Flags": "./lib/flags/flags.js",
+    "./Ux": "./lib/ux/ux.js",
+    "./StandardColors": "./lib/ux/standardColors.js",
+    ".": "./lib/exported.js"
   },
   "repository": "salesforcecli/sf-plugins-core",
   "bugs": {
@@ -34,22 +43,20 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
+    "@inquirer/confirm": "^2.0.15",
+    "@inquirer/password": "^1.1.14",
     "@oclif/core": "^3.14.1",
-    "@salesforce/core": "^6.2.2",
+    "@salesforce/core": "^6.4.1",
     "@salesforce/kit": "^3.0.15",
     "@salesforce/ts-types": "^2.0.9",
-    "@types/inquirer": "^8.2.3",
-    "chalk": "^4",
-    "inquirer": "^8.2.5"
+    "chalk": "^5.3.0"
   },
   "devDependencies": {
-    "@oclif/test": "^3.1.3",
-    "@salesforce/dev-scripts": "^7.1.1",
-    "eslint-plugin-sf-plugin": "^1.16.15",
-    "shelljs": "0.8.5",
-    "strip-ansi": "6.0.1",
+    "@inquirer/type": "^1.1.5",
+    "@salesforce/dev-scripts": "^8.1.2",
+    "eslint-plugin-sf-plugin": "^1.17.0",
     "ts-node": "^10.9.2",
-    "typescript": "^4.9.5"
+    "typescript": "^5.3.3"
   },
   "publishConfig": {
     "access": "public"
@@ -107,7 +114,8 @@
     "test": {
       "dependencies": [
         "test:only",
-        "test:compile"
+        "test:compile",
+        "link-check"
       ]
     },
     "test:only": {
@@ -122,6 +130,15 @@
         ".mocha*",
         "!*.nut.ts",
         ".nycrc"
+      ],
+      "output": []
+    },
+    "link-check": {
+      "command": "node -e \"process.exit(process.env.CI ? 0 : 1)\" || linkinator \"**/*.md\" --skip \"CHANGELOG.md|node_modules|test/|confluence.internal.salesforce.com|%s\" --markdown --retry --directory-listing --verbosity error",
+      "files": [
+        "./*.md",
+        "./!(CHANGELOG).md",
+        "messages/**/*.md"
       ],
       "output": []
     }

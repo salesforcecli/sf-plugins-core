@@ -6,12 +6,13 @@
  */
 import { Flags } from '@oclif/core';
 import { Lifecycle } from '@salesforce/core';
-import { TestContext } from '@salesforce/core/lib/testSetup';
+import { TestContext } from '@salesforce/core/lib/testSetup.js';
 import { assert, expect } from 'chai';
 import { SfError } from '@salesforce/core';
 import { Config } from '@oclif/core/lib/interfaces';
-import { SfCommand, StandardColors } from '../../src/sfCommand';
-import { stubSfCommandUx, stubSpinner } from '../../src/stubUx';
+import { SfCommand } from '../../src/sfCommand.js';
+import { StandardColors } from '../../src/ux/standardColors.js';
+import { stubSfCommandUx, stubSpinner } from '../../src/stubUx.js';
 class TestCommand extends SfCommand<void> {
   public static readonly flags = {
     actions: Flags.boolean({ char: 'a', description: 'show actions' }),

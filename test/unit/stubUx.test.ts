@@ -6,9 +6,9 @@
  */
 import { Interfaces } from '@oclif/core';
 import { expect } from 'chai';
-import { TestContext } from '@salesforce/core/lib/testSetup';
+import { TestContext } from '@salesforce/core/lib/testSetup.js';
 import { Lifecycle } from '@salesforce/core';
-import { stubUx, stubSfCommandUx, SfCommand, Ux, stubSpinner, Flags } from '../../src/exported';
+import { stubUx, stubSfCommandUx, SfCommand, Ux, stubSpinner, Flags } from '../../src/exported.js';
 
 const TABLE_DATA = Array.from({ length: 10 }).fill({ id: '123', name: 'foo', value: 'bar' }) as Array<
   Record<string, unknown>

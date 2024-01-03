@@ -17,9 +17,7 @@ The SfCommand abstract class extends [@oclif/core's Command class](https://githu
 - Enables additional help sections to the standard oclif command help output
 - Provides access to the [cli-ux cli actions](https://github.com/oclif/cli-ux#cliaction). This avoids having to import that interface from cli-ux and manually handling the `--json` flag.
 
-## Prompter Class
-
-A general purpose class that prompts a user for information. See [inquirer NPM Module](https://www.npmjs.com/package/inquirer) for more information.
+## Prompts
 
 ## Flags
 
@@ -29,7 +27,7 @@ Flags is a convenience reference to [@oclif/core#Flags](https://github.com/oclif
 
 These flags can be imported into a command and used like any other flag. See code examples in the links
 
-- [orgApiVersionFlag](src/flags/apiVersion.ts)
+- [orgApiVersionFlag](src/flags/orgApiVersion.ts)
   - specifies a Salesforce API version.
   - reads from Config (if available)
   - validates version is still active

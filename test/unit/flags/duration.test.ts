@@ -9,9 +9,9 @@ import { Parser } from '@oclif/core';
 import { Messages } from '@salesforce/core';
 import { expect } from 'chai';
 import { Duration } from '@salesforce/kit';
-import { durationFlag } from '../../../src/flags/duration';
+import { durationFlag } from '../../../src/flags/duration.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 describe('duration flag', () => {
