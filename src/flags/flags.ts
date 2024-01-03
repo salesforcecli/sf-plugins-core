@@ -18,6 +18,7 @@ export const Flags = {
   file: OclifFlags.file,
   integer: OclifFlags.integer,
   string: OclifFlags.string,
+  option: OclifFlags.option,
   url: OclifFlags.url,
   custom: OclifFlags.custom,
   duration: durationFlag,
