@@ -14,12 +14,13 @@ import {
   EnvironmentVariable,
   SfError,
   ConfigAggregator,
+  StructuredMessage,
 } from '@salesforce/core';
 import type { AnyJson } from '@salesforce/ts-types';
 import { Progress } from './ux/progress.js';
 import { Spinner } from './ux/spinner.js';
 import { Ux } from './ux/ux.js';
-import { SfCommand as ns } from './sfCommandNamespace.js';
+import { SfCommandError } from './types.js';
 import { formatActions, formatError } from './errorFormatting.js';
 import { StandardColors } from './ux/standardColors.js';
 import { confirm, secretPrompt, PromptInputs } from './ux/prompts.js';
@@ -145,7 +146,7 @@ export abstract class SfCommand<T> extends Command {
    */
   public configAggregator!: ConfigAggregator;
 
-  private warnings: ns.Warning[] = [];
+  private warnings: SfCommand.Warning[] = [];
   private ux: Ux;
   private lifecycle: Lifecycle;
 
@@ -187,7 +188,7 @@ export abstract class SfCommand<T> extends Command {
    *
    * @param input {@link SfCommand.Warning} The message to log.
    */
-  public warn(input: ns.Warning): ns.Warning {
+  public warn(input: SfCommand.Warning): SfCommand.Warning {
     this.warnings.push(input);
     const message = typeof input === 'string' ? input : input.message;
 
@@ -205,7 +206,7 @@ export abstract class SfCommand<T> extends Command {
    *
    * @param input {@link SfCommand.Info} The message to log.
    */
-  public info(input: ns.Info): void {
+  public info(input: SfCommand.Info): void {
     const message = typeof input === 'string' ? input : input.message;
     this.log(
       [
@@ -352,7 +353,7 @@ export abstract class SfCommand<T> extends Command {
   /**
    * Wrap the command result into the standardized JSON structure.
    */
-  protected toSuccessJson(result: T): ns.Json<T> {
+  protected toSuccessJson(result: T): SfCommand.Json<T> {
     return {
       status: process.exitCode ?? 0,
       result,
@@ -363,7 +364,7 @@ export abstract class SfCommand<T> extends Command {
   /**
    * Wrap the command error into the standardized JSON structure.
    */
-  protected toErrorJson(error: ns.Error): ns.Error {
+  protected toErrorJson(error: SfCommand.Error): SfCommand.Error {
     return {
       ...error,
       warnings: this.warnings,
@@ -371,7 +372,7 @@ export abstract class SfCommand<T> extends Command {
   }
 
   // eslint-disable-next-line @typescript-eslint/require-await
-  protected async catch(error: Error | SfError | ns.Error): Promise<never> {
+  protected async catch(error: Error | SfError | SfCommand.Error): Promise<never> {
     // stop any spinners to prevent it from unintentionally swallowing output.
     // If there is an active spinner, it'll say "Error" instead of "Done"
     this.spinner.stop(StandardColors.error('Error'));
@@ -392,7 +393,7 @@ export abstract class SfCommand<T> extends Command {
     });
 
     // Create printable error object
-    const sfCommandError: ns.Error = {
+    const sfCommandError: SfCommand.Error = {
       ...sfErrorProperties,
       ...{
         message: error.message,
@@ -451,3 +452,15 @@ const assignProject = async (): Promise<SfProject> => {
     throw err;
   }
 };
+
+export namespace SfCommand {
+  export type Info = StructuredMessage | string;
+  export type Warning = StructuredMessage | string;
+
+  export interface Json<T> {
+    status: number;
+    result: T;
+    warnings?: Warning[];
+  }
+  export type Error = SfCommandError;
+}

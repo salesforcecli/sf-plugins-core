@@ -8,7 +8,7 @@
 import { Mode, Messages, envVars } from '@salesforce/core';
 import type { ChalkInstance } from 'chalk';
 import { StandardColors } from './ux/standardColors.js';
-import { SfCommand } from './sfCommandNamespace.js';
+import { SfCommandError } from './types.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -40,7 +40,7 @@ export const formatActions = (
       ]
     : [];
 
-export const formatError = (error: SfCommand.Error): string =>
+export const formatError = (error: SfCommandError): string =>
   [
     `${formatErrorPrefix(error)} ${error.message}`,
     ...formatActions(error.actions ?? []),
@@ -49,8 +49,8 @@ export const formatError = (error: SfCommand.Error): string =>
       : [],
   ].join('\n');
 
-const formatErrorPrefix = (error: SfCommand.Error): string =>
+const formatErrorPrefix = (error: SfCommandError): string =>
   `${StandardColors.error(messages.getMessage('error.prefix', [formatErrorCode(error)]))}`;
 
-const formatErrorCode = (error: SfCommand.Error): string =>
+const formatErrorCode = (error: SfCommandError): string =>
   typeof error.code === 'string' || typeof error.code === 'number' ? ` (${error.code})` : '';
