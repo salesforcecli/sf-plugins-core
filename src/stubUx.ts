@@ -118,7 +118,7 @@ export function stubSpinner(sandbox: SinonSandbox) {
  */
 export function stubPrompter(sandbox: SinonSandbox) {
   return {
-    prompt: sandbox.stub(SfCommand.prototype, 'secretPrompt'),
+    secret: sandbox.stub(SfCommand.prototype, 'secretPrompt'),
     confirm: sandbox.stub(SfCommand.prototype, 'confirm'),
   };
 }
