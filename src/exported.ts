@@ -15,3 +15,4 @@ export { SfCommand, SfCommandInterface } from './sfCommand.js';
 export * from './compatibility.js';
 export * from './stubUx.js';
 export { Flags } from './flags/flags.js';
+export { prompts } from './ux/prompts.js';

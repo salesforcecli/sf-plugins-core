@@ -22,7 +22,7 @@ import { Ux } from './ux/ux.js';
 import { SfCommand as ns } from './sfCommandNamespace.js';
 import { formatActions, formatError } from './errorFormatting.js';
 import { StandardColors } from './ux/standardColors.js';
-import { confirm, secretPrompt, PromptInputs } from './prompts.js';
+import { confirm, secretPrompt, PromptInputs } from './ux/prompts.js';
 import { removeEmpty } from './util.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);

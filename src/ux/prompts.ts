@@ -42,3 +42,5 @@ const handleTimeout = async <T>(answer: CancelablePromise<T>, ms: number, defaul
     if (typeof defaultAnswer !== 'undefined') return defaultAnswer;
     throw new SfError('Prompt timed out.');
   });
+
+export const prompts = { confirm, secretPrompt };
