@@ -6,8 +6,8 @@
  */
 
 import { Mode, Messages, envVars } from '@salesforce/core';
-import chalk from 'chalk';
-import { StandardColors } from './exported.js';
+import type { ChalkInstance } from 'chalk';
+import { StandardColors } from './ux/standardColors.js';
 import { SfCommand } from './sfCommandNamespace.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
@@ -31,7 +31,7 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
  */
 export const formatActions = (
   actions: string[],
-  options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }
+  options: { actionColor: ChalkInstance } = { actionColor: StandardColors.info }
 ): string[] =>
   actions.length
     ? [
