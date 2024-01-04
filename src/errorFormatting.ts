@@ -31,7 +31,7 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
  */
 export const formatActions = (
   actions: string[],
-  options: { actionColor: typeof chalk } = { actionColor: StandardColors.info }
+  options: { actionColor: chalk.Chalk } = { actionColor: StandardColors.info }
 ): string[] =>
   actions.length
     ? [

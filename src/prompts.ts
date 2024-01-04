@@ -36,10 +36,9 @@ export const secretPrompt = async ({ message, ms = 60_000 }: PromptInputs<string
   return Promise.race([answer, handleTimeout(answer, ms)]);
 };
 
-const handleTimeout = async <T>(answer: CancelablePromise<T>, ms: number, defaultAnswer?: T): Promise<T> => {
-  await setTimeout(ms);
-  answer.cancel();
-
-  if (typeof defaultAnswer !== 'undefined') return defaultAnswer;
-  throw new SfError('Prompt timed out.');
-};
+const handleTimeout = async <T>(answer: CancelablePromise<T>, ms: number, defaultAnswer?: T): Promise<T> =>
+  setTimeout(ms, undefined, { ref: false }).then(() => {
+    answer.cancel();
+    if (typeof defaultAnswer !== 'undefined') return defaultAnswer;
+    throw new SfError('Prompt timed out.');
+  });
