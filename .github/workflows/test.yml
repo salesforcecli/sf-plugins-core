@@ -57,6 +57,7 @@ jobs:
           - plugin-signups
           - plugin-templates
           - plugin-custom-metadata
+          - plugin-settings
           - plugin-community
           - plugin-user
         os:

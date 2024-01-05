@@ -6,9 +6,9 @@
  */
 
 import { expect } from 'chai';
-import * as sinon from 'sinon';
+import sinon from 'sinon';
 import { ux as coreUx } from '@oclif/core';
-import { Ux } from '../../../src/ux';
+import { Ux } from '../../../src/ux/ux.js';
 
 describe('Ux', () => {
   let sandbox: sinon.SinonSandbox;

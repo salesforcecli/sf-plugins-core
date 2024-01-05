@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { AnyFunction } from '@salesforce/ts-types';
+import type { AnyFunction } from '@salesforce/ts-types';
 
 export class UxBase {
   public constructor(public readonly outputEnabled: boolean) {}

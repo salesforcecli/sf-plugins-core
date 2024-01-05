@@ -7,8 +7,8 @@
 
 import { Flags } from '@oclif/core';
 import { Lifecycle, Messages } from '@salesforce/core';
-import { orgApiVersionFlag } from './flags/orgApiVersion';
-import { optionalHubFlag, optionalOrgFlag, requiredHubFlag, requiredOrgFlag } from './flags/orgFlags';
+import { orgApiVersionFlag } from './flags/orgApiVersion.js';
+import { optionalHubFlag, optionalOrgFlag, requiredHubFlag, requiredOrgFlag } from './flags/orgFlags.js';
 
 /**
  * Adds an alias for the deprecated sfdx-style "apiversion" and provides a warning if it is used
@@ -31,7 +31,7 @@ export const orgApiVersionFlagWithDeprecations = orgApiVersionFlag({
   deprecateAliases: true,
 });
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 /**
  * Use only for commands that maintain sfdx compatibility.

@@ -7,8 +7,9 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
 import { SinonSandbox } from 'sinon';
-import { SfCommand } from './sfCommand';
-import { Prompter, Spinner, Ux } from './ux';
+import { SfCommand } from './sfCommand.js';
+import { Spinner } from './ux/spinner.js';
+import { Ux } from './ux/ux.js';
 
 /**
  * Stub methods on the Ux class.
@@ -117,8 +118,7 @@ export function stubSpinner(sandbox: SinonSandbox) {
  */
 export function stubPrompter(sandbox: SinonSandbox) {
   return {
-    prompt: sandbox.stub(Prompter.prototype, 'prompt'),
-    confirm: sandbox.stub(Prompter.prototype, 'confirm'),
-    timedPrompt: sandbox.stub(Prompter.prototype, 'timedPrompt'),
+    secret: sandbox.stub(SfCommand.prototype, 'secretPrompt'),
+    confirm: sandbox.stub(SfCommand.prototype, 'confirm'),
   };
 }

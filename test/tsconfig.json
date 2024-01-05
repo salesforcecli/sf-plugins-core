@@ -1,5 +1,5 @@
 {
-  "extends": "@salesforce/dev-config/tsconfig-test-strict",
+  "extends": "@salesforce/dev-config/tsconfig-test-strict-esm",
   "include": ["unit/**/*.ts", "../node_modules/@types/**/*.d.ts"],
   "compilerOptions": {
     "noEmit": true,

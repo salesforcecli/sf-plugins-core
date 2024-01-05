@@ -7,15 +7,15 @@
 import { expect } from 'chai';
 import { Parser } from '@oclif/core';
 import { Lifecycle, Messages } from '@salesforce/core';
-import * as sinon from 'sinon';
+import sinon from 'sinon';
 import {
   orgApiVersionFlag,
   minValidApiVersion,
   maxDeprecated,
   maxDeprecatedUrl,
-} from '../../../src/flags/orgApiVersion';
+} from '../../../src/flags/orgApiVersion.js';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 describe('fs flags', () => {

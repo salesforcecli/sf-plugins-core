@@ -1,9 +1,10 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "5.0.13",
+  "version": "6.0.0",
   "description": "Utils for writing Salesforce CLI plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
+  "type": "module",
   "license": "BSD-3-Clause",
   "scripts": {
     "build": "wireit",
@@ -21,6 +22,13 @@
     "test": "wireit",
     "test:only": "wireit"
   },
+  "exports": {
+    "./SfCommand": "./lib/SfCommand.js",
+    "./Flags": "./lib/flags/flags.js",
+    "./Ux": "./lib/ux/ux.js",
+    "./StandardColors": "./lib/ux/standardColors.js",
+    ".": "./lib/exported.js"
+  },
   "repository": "salesforcecli/sf-plugins-core",
   "bugs": {
     "url": "https://github.com/salesforcecli/sf-plugins-core/issues"
@@ -35,22 +43,20 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@oclif/core": "^3.15.1",
+    "@inquirer/confirm": "^2.0.15",
+    "@inquirer/password": "^1.1.14",
+    "@oclif/core": "^3.16.0",
     "@salesforce/core": "^6.4.2",
     "@salesforce/kit": "^3.0.15",
     "@salesforce/ts-types": "^2.0.9",
-    "@types/inquirer": "^8.2.3",
-    "chalk": "^4",
-    "inquirer": "^8.2.5"
+    "chalk": "^5.3.0"
   },
   "devDependencies": {
-    "@oclif/test": "^3.1.5",
+    "@inquirer/type": "^1.1.5",
     "@salesforce/dev-scripts": "^8.1.3",
     "eslint-plugin-sf-plugin": "^1.17.0",
-    "shelljs": "0.8.5",
-    "strip-ansi": "6.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^4.9.5"
+    "typescript": "^5.3.3"
   },
   "publishConfig": {
     "access": "public"

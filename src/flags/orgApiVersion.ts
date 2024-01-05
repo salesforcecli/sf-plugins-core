@@ -7,7 +7,7 @@
 import { Flags } from '@oclif/core';
 import { Messages, Lifecycle, OrgConfigProperties, validateApiVersion } from '@salesforce/core';
 
-Messages.importMessagesDirectory(__dirname);
+Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
 // versions below this are retired

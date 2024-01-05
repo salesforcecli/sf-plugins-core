@@ -6,7 +6,7 @@
  */
 
 import { ux } from '@oclif/core';
-import { UxBase } from '.';
+import { UxBase } from './base.js';
 
 /**
  * This class is a light wrapper around ux.action that allows us to
