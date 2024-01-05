@@ -30,6 +30,7 @@ export const Flags = {
   string: OclifFlags.string,
   url: OclifFlags.url,
   custom: OclifFlags.custom,
+  option: OclifFlags.option,
   duration: durationFlag,
   salesforceId: salesforceIdFlag,
   orgApiVersion: orgApiVersionFlag,
