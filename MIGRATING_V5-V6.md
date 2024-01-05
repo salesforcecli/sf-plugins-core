@@ -11,18 +11,18 @@ This library uses [`inquirer`](https://github.com/SBoudrias/Inquirer.js) for int
 The API is completely different, resulting in changes to sf-plugins-core. The new philopsophy is
 
 1. provide limited, simplified prompts for common use cases
-1. plugins that need more advanced propting should import the parts of inquirer that they need
+2. plugins that need more advanced propting should import the parts of inquirer that they need
 
 ### Changes
 
-The `Prompter`` class is removed.
+The `Prompter` class is removed.
 
 SfCommand contains two prompt methods
 
 1. `confirm` provides boolean confirmation prompts
-1. `secretPrompt` takes masked string input from the user
+2. `secretPrompt` takes masked string input from the user
 
-Unlike then inquirer base prompts (`confirm` and `password`, respectively) these have a built-in default timeout. Both take an object parameter that lets you change the timeout (confirm previously took a series of parameters)
+Unlike the inquirer base prompts (`confirm` and `password`, respectively) these have a built-in default timeout. Both take an object parameter that lets you change the timeout (confirm previously took a series of parameters)
 
 These methods are also built into the `stubPrompter` method for simplified test stubbing.
 
