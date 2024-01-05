@@ -1,4 +1,4 @@
-# Migrating from v5 to v6
+# Migrating from v5 to v7
 
 ## ESM
 
@@ -43,3 +43,7 @@ Project was typed as an `SfProject` but could be undefined when `requiresProject
 ### SfCommand.catch
 
 Catch was previously typed to return an error, but it always threw the error. It's now properly typed as `never`. If you extended `catch`, your method should also return `never`.
+
+### Why 5=>7 What happened to 6?
+
+The CI published it as 7; we just try to keep the robots happy.
