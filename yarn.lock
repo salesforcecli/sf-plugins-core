@@ -626,10 +626,10 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@salesforce/core@^6.4.0", "@salesforce/core@^6.4.2":
-  version "6.4.3"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-6.4.3.tgz#77edcf00c4b6e0b43a0620eb7d1cd97ad0bf17e4"
-  integrity sha512-MEHd9W2PM+Ytosirry7vInBrtU4RZK+v7ubNozbR4kCWr4yMe+1vzAkGqB2NoL5vAVbOmF7wyy8+tMGYCyLyww==
+"@salesforce/core@^6.4.0", "@salesforce/core@^6.4.4":
+  version "6.4.4"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-6.4.4.tgz#e96d2ef9cd05c3894578374d1054af80bfdca119"
+  integrity sha512-VegX3ChnJUOOztSP05QPiXCTOSioShB22NyhYjL7vVhf6yqSOH0VT2oQ3ywrMYbYCbjLSdsmFdTVLiQIFpK57g==
   dependencies:
     "@salesforce/kit" "^3.0.15"
     "@salesforce/schemas" "^1.6.1"
