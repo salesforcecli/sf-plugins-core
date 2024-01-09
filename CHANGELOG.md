@@ -1,3 +1,12 @@
+# [7.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/7.0.0...7.1.0) (2024-01-09)
+
+
+### Features
+
+* oclif error code handling ([61582b5](https://github.com/salesforcecli/sf-plugins-core/commit/61582b5612204eafc3fa75b23ad4190a22f40ee0))
+
+
+
 # [7.0.0](https://github.com/salesforcecli/sf-plugins-core/compare/5.0.13...7.0.0) (2024-01-05)
 
 
