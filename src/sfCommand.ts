@@ -25,6 +25,7 @@ import { formatActions, formatError } from './errorFormatting.js';
 import { StandardColors } from './ux/standardColors.js';
 import { confirm, secretPrompt, PromptInputs } from './ux/prompts.js';
 import { removeEmpty } from './util.js';
+import { computeErrorCode } from './errorHandling.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -378,10 +379,10 @@ export abstract class SfCommand<T> extends Command {
     this.spinner.stop(StandardColors.error('Error'));
     // transform an unknown error into one that conforms to the interface
 
-    // @ts-expect-error because exitCode is not on Error
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const codeFromError = (error.oclif?.exit as number | undefined) ?? (error.exitCode as number | undefined) ?? 1;
-    process.exitCode ??= codeFromError;
+    // const codeFromError = (error.oclif?.exit as number | undefined) ?? (error.exitCode as number | undefined) ?? 1;
+    const codeFromError = computeErrorCode(error);
+    process.exitCode = codeFromError;
 
     const sfErrorProperties = removeEmpty({
       code: codeFromError,
