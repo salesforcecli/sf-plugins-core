@@ -54,7 +54,7 @@
   "devDependencies": {
     "@inquirer/type": "^1.1.5",
     "@salesforce/dev-scripts": "^8.3.0",
-    "eslint-plugin-sf-plugin": "^1.17.1",
+    "eslint-plugin-sf-plugin": "^1.17.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
