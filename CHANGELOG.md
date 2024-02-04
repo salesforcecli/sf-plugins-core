@@ -1,3 +1,12 @@
+## [7.1.7](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.6...7.1.7) (2024-02-04)
+
+
+### Bug Fixes
+
+* **deps:** bump @inquirer/password from 1.1.14 to 1.1.16 ([5700f4c](https://github.com/salesforcecli/sf-plugins-core/commit/5700f4ce1dd1f6f459325d1277be154cb8a8279c))
+
+
+
 ## [7.1.6](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.5...7.1.6) (2024-02-04)
 
 
