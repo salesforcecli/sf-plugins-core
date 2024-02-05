@@ -1,3 +1,12 @@
+## [7.1.8](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.7...7.1.8) (2024-02-05)
+
+
+### Bug Fixes
+
+* **deps:** bump @inquirer/confirm from 2.0.15 to 2.0.17 ([fcbb1c1](https://github.com/salesforcecli/sf-plugins-core/commit/fcbb1c1c750b9387acc89cab74190285647e4b14))
+
+
+
 ## [7.1.7](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.6...7.1.7) (2024-02-04)
 
 
