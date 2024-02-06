@@ -1,3 +1,12 @@
+## [7.1.9](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.8...7.1.9) (2024-02-06)
+
+
+### Bug Fixes
+
+* bump oclif/core ([#497](https://github.com/salesforcecli/sf-plugins-core/issues/497)) ([ebba3ac](https://github.com/salesforcecli/sf-plugins-core/commit/ebba3ac983a3b3e9de78a39aa6355f723a935bd5)), closes [/github.com/oclif/core/blob/main/CHANGELOG.md#3191-2024-02-06](https://github.com//github.com/oclif/core/blob/main/CHANGELOG.md/issues/3191-2024-02-06)
+
+
+
 ## [7.1.8](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.7...7.1.8) (2024-02-05)
 
 
