@@ -475,10 +475,10 @@
     ansi-escapes "^4.3.2"
     chalk "^4.1.2"
 
-"@inquirer/type@^1.1.5", "@inquirer/type@^1.1.6":
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/@inquirer/type/-/type-1.1.6.tgz#f2656456e58fb93c7b73d5aad583b928c77b9206"
-  integrity sha512-OCKOpn0CrFDslR8s3who7hlr823zXTb1iShGCaaWgEJFfkIV0T9aLZV2QGnOuU78IrsPYLkr3oKx9dZwwCH3Rw==
+"@inquirer/type@^1.1.6", "@inquirer/type@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@inquirer/type/-/type-1.2.0.tgz#a569613628a881c2104289ca868a7def54e5c49d"
+  integrity sha512-/vvkUkYhrjbm+RolU7V1aUFDydZVKNKqKHR5TsE+j5DXgXFwrsOPcoGUJ02K0O7q7O53CU2DOTMYCHeGZ25WHA==
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
