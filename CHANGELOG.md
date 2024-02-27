@@ -1,3 +1,12 @@
+## [7.1.14](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.13...7.1.14) (2024-02-27)
+
+
+### Bug Fixes
+
+* bump core to 6.6.0 ([58d2760](https://github.com/salesforcecli/sf-plugins-core/commit/58d2760481139a10b6b83e18c4fa9b42c8a8dcd5))
+
+
+
 ## [7.1.13](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.12...7.1.13) (2024-02-25)
 
 
