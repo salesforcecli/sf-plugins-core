@@ -45,7 +45,7 @@
   "dependencies": {
     "@inquirer/confirm": "^2.0.17",
     "@inquirer/password": "^1.1.16",
-    "@oclif/core": "^3.23.0",
+    "@oclif/core": "^3.25.2",
     "@salesforce/core": "^6.6.0",
     "@salesforce/kit": "^3.0.15",
     "@salesforce/ts-types": "^2.0.9",
