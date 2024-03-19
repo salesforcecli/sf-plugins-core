@@ -1,3 +1,12 @@
+## [7.1.16](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.15...7.1.16) (2024-03-19)
+
+
+### Bug Fixes
+
+* set defaultHelp on duration flag ([85a502a](https://github.com/salesforcecli/sf-plugins-core/commit/85a502af1494dc21f7c119be384ba573f4099c9c))
+
+
+
 ## [7.1.15](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.14...7.1.15) (2024-03-10)
 
 
