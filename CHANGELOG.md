@@ -1,3 +1,15 @@
+# [8.0.0](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.16...8.0.0) (2024-03-22)
+
+
+* feat!: add flags-dir base flag (#519) ([c8fd443](https://github.com/salesforcecli/sf-plugins-core/commit/c8fd44358a2ab39d49f8eb4f90f1631708179719)), closes [#519](https://github.com/salesforcecli/sf-plugins-core/issues/519)
+
+
+### BREAKING CHANGES
+
+* SfCommand.baseFlags may cause compilation errors
+
+
+
 ## [7.1.16](https://github.com/salesforcecli/sf-plugins-core/compare/7.1.15...7.1.16) (2024-03-19)
 
 
