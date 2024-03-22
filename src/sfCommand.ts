@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import os from 'node:os';
-import { Command, Config, HelpSection } from '@oclif/core';
+import { Command, Config, HelpSection, Flags } from '@oclif/core';
 import {
   envVars,
   Messages,
@@ -121,6 +121,13 @@ export abstract class SfCommand<T> extends Command {
    * ```
    */
   public static errorCodes?: HelpSection;
+
+  public static baseFlags = {
+    'flags-dir': Flags.directory({
+      summary: messages.getMessage('flags.flags-dir.summary'),
+      helpGroup: 'GLOBAL',
+    }),
+  };
 
   /**
    * Set to true if the command must be executed inside a Salesforce project directory.
