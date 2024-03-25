@@ -6,6 +6,8 @@
  */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 
+// intentionally keep sinon out of dependencies since this is meant for test-time only
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { SinonSandbox } from 'sinon';
 import { SfCommand } from './sfCommand.js';
 import { Spinner } from './ux/spinner.js';
