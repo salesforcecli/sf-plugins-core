@@ -7,7 +7,7 @@
 
 import { setTimeout } from 'node:timers/promises';
 import { SfError } from '@salesforce/core';
-import { CancelablePromise } from '@inquirer/type';
+import type { CancelablePromise } from '@inquirer/type';
 
 export type PromptInputs<T> = {
   /** text to display.  Do not include a question mark */
