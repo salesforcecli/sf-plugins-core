@@ -1,3 +1,12 @@
+## [8.0.3](https://github.com/salesforcecli/sf-plugins-core/compare/8.0.2...8.0.3) (2024-03-31)
+
+
+### Bug Fixes
+
+* **deps:** bump @salesforce/kit from 3.0.15 to 3.1.0 ([aa5166b](https://github.com/salesforcecli/sf-plugins-core/commit/aa5166b67e9e59547f7da1eb9c64d7b28c36e38b))
+
+
+
 ## [8.0.2](https://github.com/salesforcecli/sf-plugins-core/compare/8.0.1...8.0.2) (2024-03-26)
 
 
