@@ -7,7 +7,7 @@
 import { StructuredMessage } from '@salesforce/core';
 
 // a standlone type here to avoid circular dependencies
-export interface SfCommandError {
+export type SfCommandError = {
   status: number;
   name: string;
   message: string;
