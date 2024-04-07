@@ -30,11 +30,11 @@ import { computeErrorCode } from './errorHandling.js';
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
 
-export interface SfCommandInterface extends Command.Class {
+export type SfCommandInterface = {
   configurationVariablesSection?: HelpSection;
   envVariablesSection?: HelpSection;
   errorCodes?: HelpSection;
-}
+} & Command.Class
 
 /**
  * A base command that provided common functionality for all sf commands.
@@ -465,7 +465,7 @@ export namespace SfCommand {
   export type Info = StructuredMessage | string;
   export type Warning = StructuredMessage | string;
 
-  export interface Json<T> {
+  export type Json<T> = {
     status: number;
     result: T;
     warnings?: Warning[];
