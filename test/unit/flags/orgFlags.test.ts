@@ -6,7 +6,7 @@
  */
 import { assert, expect, config } from 'chai';
 import { Org, SfError, OrgConfigProperties } from '@salesforce/core';
-import { MockTestOrgData, shouldThrow, TestContext } from '@salesforce/core/lib/testSetup.js';
+import { MockTestOrgData, shouldThrow, TestContext } from '@salesforce/core/testSetup';
 import { getHubOrThrow, getOrgOrThrow, maybeGetHub, maybeGetOrg } from '../../../src/flags/orgFlags.js';
 
 config.truncateThreshold = 0;

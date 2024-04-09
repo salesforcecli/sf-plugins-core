@@ -6,7 +6,7 @@
  */
 import { Flags } from '@oclif/core';
 import { Lifecycle } from '@salesforce/core';
-import { TestContext } from '@salesforce/core/lib/testSetup.js';
+import { TestContext } from '@salesforce/core/testSetup';
 import { assert, expect } from 'chai';
 import { SfError } from '@salesforce/core';
 import { Config } from '@oclif/core/lib/interfaces';
