@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "8.0.4",
+  "version": "8.0.5-qa.0",
   "description": "Utils for writing Salesforce CLI plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
