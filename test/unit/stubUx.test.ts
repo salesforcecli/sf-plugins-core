@@ -6,7 +6,7 @@
  */
 import { Interfaces } from '@oclif/core';
 import { expect } from 'chai';
-import { TestContext } from '@salesforce/core/lib/testSetup.js';
+import { TestContext } from '@salesforce/core/testSetup';
 import { Lifecycle } from '@salesforce/core';
 import { stubUx, stubSfCommandUx, SfCommand, Ux, stubSpinner, Flags } from '../../src/exported.js';
 
