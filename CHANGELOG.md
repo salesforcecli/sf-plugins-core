@@ -1,3 +1,15 @@
+# [9.0.0](https://github.com/salesforcecli/sf-plugins-core/compare/8.0.4...9.0.0) (2024-04-10)
+
+
+* feat!: jsforce-node (#529) ([8255b52](https://github.com/salesforcecli/sf-plugins-core/commit/8255b523efe70779d94746c644c08e211632ecad)), closes [#529](https://github.com/salesforcecli/sf-plugins-core/issues/529)
+
+
+### BREAKING CHANGES
+
+* core7, jsforce-node
+
+
+
 ## [8.0.4](https://github.com/salesforcecli/sf-plugins-core/compare/8.0.3...8.0.4) (2024-04-07)
 
 
