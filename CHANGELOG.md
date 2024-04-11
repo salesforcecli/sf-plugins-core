@@ -1,3 +1,12 @@
+## [9.0.1](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.0...9.0.1) (2024-04-11)
+
+
+### Bug Fixes
+
+* extract handler transform for ut, handle undefined ([#530](https://github.com/salesforcecli/sf-plugins-core/issues/530)) ([7eb46a8](https://github.com/salesforcecli/sf-plugins-core/commit/7eb46a8d45f3663f4e28f57a070ac3f82a5ac156))
+
+
+
 # [9.0.0](https://github.com/salesforcecli/sf-plugins-core/compare/8.0.4...9.0.0) (2024-04-10)
 
 
