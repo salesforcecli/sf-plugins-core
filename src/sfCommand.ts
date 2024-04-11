@@ -24,8 +24,7 @@ import { SfCommandError } from './types.js';
 import { formatActions, formatError } from './errorFormatting.js';
 import { StandardColors } from './ux/standardColors.js';
 import { confirm, secretPrompt, PromptInputs } from './ux/prompts.js';
-import { removeEmpty } from './util.js';
-import { computeErrorCode } from './errorHandling.js';
+import { computeErrorCode, errorToSfCommandError } from './errorHandling.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -34,7 +33,7 @@ export type SfCommandInterface = {
   configurationVariablesSection?: HelpSection;
   envVariablesSection?: HelpSection;
   errorCodes?: HelpSection;
-} & Command.Class
+} & Command.Class;
 
 /**
  * A base command that provided common functionality for all sf commands.
@@ -391,26 +390,7 @@ export abstract class SfCommand<T> extends Command {
     const codeFromError = computeErrorCode(error);
     process.exitCode = codeFromError;
 
-    const sfErrorProperties = removeEmpty({
-      code: codeFromError,
-      actions: 'actions' in error ? error.actions : null,
-      context: 'context' in error ? error.context : this.statics.name,
-      commandName: 'commandName' in error ? error.commandName : this.statics.name,
-      data: 'data' in error ? error.data : null,
-      result: 'result' in error ? error.result : null,
-    });
-
-    // Create printable error object
-    const sfCommandError: SfCommand.Error = {
-      ...sfErrorProperties,
-      ...{
-        message: error.message,
-        name: error.name ?? 'Error',
-        status: process.exitCode,
-        stack: error.stack,
-        exitCode: process.exitCode,
-      },
-    };
+    const sfCommandError = errorToSfCommandError(codeFromError, error, this.statics.name);
 
     if (this.jsonEnabled()) {
       this.logJson(this.toErrorJson(sfCommandError));
@@ -469,6 +449,6 @@ export namespace SfCommand {
     status: number;
     result: T;
     warnings?: Warning[];
-  }
+  };
   export type Error = SfCommandError;
 }

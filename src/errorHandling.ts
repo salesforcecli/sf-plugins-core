@@ -8,6 +8,7 @@
 import { SfError } from '@salesforce/core';
 import { OclifError } from '@oclif/core/lib/interfaces/errors.js';
 import { SfCommandError } from './types.js';
+import { removeEmpty } from './util.js';
 
 /**
  *
@@ -64,6 +65,28 @@ export const errorIsTypeError = (error: Error | SfError): boolean =>
   error.message.includes('TypeError') ||
   Boolean(error.stack?.includes('TypeError')) ||
   ('cause' in error && error.cause instanceof Error && errorIsTypeError(error.cause));
+
+export const errorToSfCommandError = (
+  codeFromError: number,
+  error: Error | SfError | SfCommandError,
+  commandName: string
+): SfCommandError => ({
+  ...removeEmpty({
+    code: codeFromError,
+    actions: 'actions' in error ? error.actions : null,
+    context: ('context' in error ? error.context : commandName) ?? commandName,
+    commandName: ('commandName' in error ? error.commandName : commandName) ?? commandName,
+    data: 'data' in error ? error.data : null,
+    result: 'result' in error ? error.result : null,
+  }),
+  ...{
+    message: error.message,
+    name: error.name ?? 'Error',
+    status: codeFromError,
+    stack: error.stack,
+    exitCode: codeFromError,
+  },
+});
 
 /** custom typeGuard for handling the fact the SfCommand doesn't know about oclif error structure */
 const isOclifError = <T extends Error | SfError | SfCommandError>(e: T): e is T & OclifError =>
