@@ -6,7 +6,7 @@
  */
 import { expect } from 'chai';
 import { SfError } from '@salesforce/core';
-import { computeErrorCode, errorIsGack, errorIsTypeError } from '../../src/errorHandling.js';
+import { computeErrorCode, errorIsGack, errorIsTypeError, errorToSfCommandError } from '../../src/errorHandling.js';
 
 describe('typeErrors', () => {
   let typeError: Error;
@@ -120,5 +120,52 @@ describe('precedence', () => {
       exit: 99,
     };
     expect(computeErrorCode(e)).to.equal(10);
+  });
+});
+
+describe('errorToSfCommandError', () => {
+  it('basic', () => {
+    const result = errorToSfCommandError(1, new Error('foo'), 'the:cmd');
+    expect(result).to.deep.include({
+      code: 1,
+      status: 1,
+      exitCode: 1,
+      commandName: 'the:cmd',
+      context: 'the:cmd',
+      message: 'foo',
+      name: 'Error', // this is the default
+    });
+    expect(result.stack).to.be.a('string').and.include('Error: foo');
+  });
+  describe('context', () => {
+    it('sfError with context', () => {
+      const sfError = SfError.create({ name: 'myError', message: 'foo', actions: ['bar'], context: 'myContext' });
+      const result = errorToSfCommandError(8, sfError, 'the:cmd');
+      expect(result).to.deep.include({
+        code: 8,
+        status: 8,
+        exitCode: 8,
+        commandName: 'the:cmd',
+        context: 'myContext',
+        message: 'foo',
+        name: 'myError',
+      });
+      expect(result.stack).to.be.a('string').and.include('myError: foo');
+    });
+    it('sfError with undefined context', () => {
+      const sfError = SfError.create({ name: 'myError', message: 'foo', actions: ['bar'], context: undefined });
+      const result = errorToSfCommandError(8, sfError, 'the:cmd');
+      expect(result).to.deep.include({
+        code: 8,
+        status: 8,
+        exitCode: 8,
+        commandName: 'the:cmd',
+        // defaults to the command name
+        context: 'the:cmd',
+        message: 'foo',
+        name: 'myError',
+      });
+      expect(result.stack).to.be.a('string').and.include('myError: foo');
+    });
   });
 });
