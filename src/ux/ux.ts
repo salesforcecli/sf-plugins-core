@@ -11,7 +11,7 @@ import { AnyJson } from '@salesforce/ts-types';
 import terminalLink from 'terminal-link';
 import { UxBase } from './base.js';
 import { Spinner } from './spinner.js';
-import { table } from './table.js';
+import { table, Columns as TableColumns, Options as TableOptions } from './table.js';
 import styledJSON from './styledJSON.js';
 import styledObject from './styledObject.js';
 import write from './write.js';
@@ -125,7 +125,7 @@ export class Ux extends UxBase {
 export namespace Ux {
   export namespace Table {
     export type Data = Record<string, unknown>;
-    export type Columns<T extends Data> = table.Columns<T>;
-    export type Options = table.Options;
+    export type Columns<T extends Data> = TableColumns<T>;
+    export type Options = TableOptions;
   }
 }
