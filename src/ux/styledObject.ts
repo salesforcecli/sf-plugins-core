@@ -6,43 +6,42 @@
  */
 import { inspect } from 'node:util';
 import chalk from 'chalk';
+import { AnyJson } from '@salesforce/ts-types';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
-function pp(obj: any): any {
-  if (typeof obj === 'string' || typeof obj === 'number') return obj;
+function prettyPrint(obj: AnyJson): string {
+  if (!obj) return inspect(obj);
+  if (typeof obj === 'string') return obj;
+  if (typeof obj === 'number') return obj.toString();
+  if (typeof obj === 'boolean') return obj.toString();
   if (typeof obj === 'object') {
-    return (
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      Object.keys(obj)
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        .map((k) => k + ': ' + inspect(obj[k]))
-        .join(', ')
-    );
+    return Object.entries(obj)
+      .map(([key, value]) => `${key}: ${inspect(value)}`)
+      .join(', ');
   }
 
   return inspect(obj);
 }
 
-// @oclif/core v4 will have native support for coloring JSON so we won't need this then.
-export default function styledObject(obj: any, keys?: string[]): string {
+export default function styledObject(obj: AnyJson, keys?: string[]): string {
+  if (!obj) return inspect(obj);
+  if (typeof obj === 'string') return obj;
+  if (typeof obj === 'number') return obj.toString();
+  if (typeof obj === 'boolean') return obj.toString();
+
   const output: string[] = [];
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const keyLengths = Object.keys(obj).map((key) => key.toString().length);
   const maxKeyLength = Math.max(...keyLengths) + 2;
 
-  const logKeyValue = (key: string, value: any): string =>
-    `${chalk.blue(key)}:` + ' '.repeat(maxKeyLength - key.length - 1) + pp(value);
+  const logKeyValue = (key: string, value: AnyJson): string =>
+    `${chalk.blue(key)}:` + ' '.repeat(maxKeyLength - key.length - 1) + prettyPrint(value);
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  for (const key of keys ?? Object.keys(obj).sort()) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    const value = obj[key];
+  for (const [key, value] of Object.entries(obj)) {
+    if (keys && !keys.includes(key)) continue;
     if (Array.isArray(value)) {
       if (value.length > 0) {
         output.push(logKeyValue(key, value[0]));
         for (const e of value.slice(1)) {
-          output.push(' '.repeat(maxKeyLength) + pp(e));
+          output.push(' '.repeat(maxKeyLength) + prettyPrint(e));
         }
       }
     } else if (value !== null && value !== undefined) {
