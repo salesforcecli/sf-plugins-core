@@ -233,16 +233,6 @@ describe('table', () => {
  ─── ─────────────────${ws}
  123 supertable-test-1${ws}\n`);
     });
-
-    // This test doesn't work because tests have process.stdout.isTTY=undefined when wireit runs the tests
-    // `yarn mocha test` works fine since process.stdout.isTTY=true
-    it.skip('should not truncate', () => {
-      const three = { ...apps[0], id: '0'.repeat(80), name: 'supertable-test-3' };
-      table([...apps, three], columns, { filter: 'id=0', printLine, truncate: false });
-      expect(output).to.equal(` ID${ws.padEnd(78)} Name${ws.padEnd(14)}
- ${''.padEnd(three.id.length, '─')} ─────────────────${ws}
- ${three.id} supertable-test-3${ws}\n`);
-    });
   });
 
   describe('edge cases', () => {
@@ -271,33 +261,6 @@ describe('table', () => {
      3${ws.padEnd(17)}
  321 supertable-test-2${ws}
  123 supertable-test-1${ws}\n`);
-    });
-
-    it('does not exceed stack depth on very tall tables', () => {
-      const data = Array.from({ length: 150_000 }).fill({ id: '123', name: 'foo', value: 'bar' }) as Array<
-        Record<string, unknown>
-      >;
-      const tallColumns = {
-        id: { header: 'ID' },
-        name: {},
-        value: { header: 'TEST' },
-      };
-
-      table(data, tallColumns, { printLine });
-      expect(output).to.include('ID');
-    });
-
-    // Skip because it takes too long
-    it.skip('does not exceed stack depth on very tall, wide tables', () => {
-      const columnsLength = 100;
-      const row = Object.fromEntries(Array.from({ length: columnsLength }).map((_, i) => [`col${i}`, 'foo']));
-      const data = Array.from({ length: 150_000 }).fill(row) as Array<Record<string, unknown>>;
-      const bigColumns = Object.fromEntries(
-        Array.from({ length: columnsLength }).map((_, i) => [`col${i}`, { header: `col${i}`.toUpperCase() }])
-      );
-
-      table(data, bigColumns, { printLine });
-      expect(output).to.include('COL1');
     });
   });
 });

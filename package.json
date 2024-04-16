@@ -20,6 +20,7 @@
     "prepack": "sf-prepack",
     "prepare": "sf-install",
     "test": "wireit",
+    "test:integration": "mocha test/**/*.integration.ts --timeout 30000",
     "test:only": "wireit"
   },
   "exports": {
