@@ -1,3 +1,12 @@
+## [9.0.4](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.3...9.0.4) (2024-04-17)
+
+
+### Bug Fixes
+
+* pass command id to sfCommandError event ([6a069af](https://github.com/salesforcecli/sf-plugins-core/commit/6a069af5d88456b6c3ea822973ec20af1dd8f1c8))
+
+
+
 ## [9.0.3](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.2...9.0.3) (2024-04-17)
 
 
