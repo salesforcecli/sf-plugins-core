@@ -59,9 +59,7 @@ describe('Ux', () => {
     it('should log stylized json', () => {
       const ux = new Ux();
       ux.styledJSON({ foo: 'bar' });
-      expect(stdoutStub.firstCall.args).to.deep.equal([
-        '\x1B[97m{\x1B[39m\n  \x1B[94m"foo"\x1B[39m\x1B[93m:\x1B[39m \x1B[92m"bar"\x1B[39m\n\x1B[97m}\x1B[39m',
-      ]);
+      expect(stdoutStub.firstCall.args).to.deep.equal(['{\n  \u001b[94m"foo"\u001b[39m: \u001b[92m"bar"\u001b[39m\n}']);
     });
 
     it('should not log anything if output is not enabled', () => {

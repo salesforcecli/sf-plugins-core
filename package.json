@@ -46,14 +46,12 @@
   "dependencies": {
     "@inquirer/confirm": "^2.0.17",
     "@inquirer/password": "^1.1.16",
-    "@oclif/core": "^3.26.0",
+    "@oclif/core": "^4.0.0-beta.1",
     "@salesforce/core": "^7.2.0",
     "@salesforce/kit": "^3.1.0",
     "@salesforce/ts-types": "^2.0.9",
-    "cardinal": "^2.1.1",
-    "chalk": "^5.3.0",
+    "ansis": "^3.1.1",
     "cli-progress": "^3.12.0",
-    "js-yaml": "^4.1.0",
     "natural-orderby": "^3.0.2",
     "slice-ansi": "^7.1.0",
     "string-width": "^7.1.0",
@@ -62,9 +60,7 @@
   "devDependencies": {
     "@inquirer/type": "^1.2.1",
     "@salesforce/dev-scripts": "^8.5.0",
-    "@types/cardinal": "^2.1.1",
     "@types/cli-progress": "^3.11.5",
-    "@types/js-yaml": "^4.0.9",
     "eslint-plugin-sf-plugin": "^1.18.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"

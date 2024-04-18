@@ -5,8 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { inspect } from 'node:util';
-import chalk from 'chalk';
-import jsyaml from 'js-yaml';
+import ansis from 'ansis';
 import { orderBy } from 'natural-orderby';
 import sliceAnsi from 'slice-ansi';
 import sw from 'string-width';
@@ -68,14 +67,13 @@ class Table<T extends Record<string, unknown>> {
 
     // assign options
     // eslint-disable-next-line @typescript-eslint/unbound-method
-    const { columns: cols, csv, extended, filter, output, printLine, sort, title } = options;
+    const { columns: cols, extended, filter, printLine, sort, title } = options;
     this.options = {
       columns: cols,
       extended,
       filter,
       'no-header': options['no-header'] ?? false,
       'no-truncate': options['no-truncate'] ?? false,
-      output: csv ? 'csv' : output,
       printLine: printLine ?? ((s: string): void => write.stdout(s)),
       rowStart: ' ',
       sort,
@@ -135,72 +133,6 @@ class Table<T extends Record<string, unknown>> {
   }
 
   public display(): void {
-    switch (this.options.output) {
-      case 'csv': {
-        this.outputCSV();
-        break;
-      }
-
-      case 'json': {
-        this.outputJSON();
-        break;
-      }
-
-      case 'yaml': {
-        this.outputYAML();
-        break;
-      }
-
-      default: {
-        this.outputTable();
-      }
-    }
-  }
-
-  private filterColumnsFromHeaders(
-    filters: string[]
-  ): Array<Column<T> & { key: string; maxWidth?: number; width?: number }> {
-    const cols: Array<Column<T> & { key: string; maxWidth?: number; width?: number }> = [];
-    for (const f of [...new Set(filters)]) {
-      const c = this.columns.find((i) => i.header.toLowerCase() === f.toLowerCase());
-      if (c) cols.push(c);
-    }
-
-    return cols;
-  }
-
-  private findColumnFromHeader(
-    header: string
-  ): (Column<T> & { key: string; maxWidth?: number; width?: number }) | undefined {
-    return this.columns.find((c) => c.header.toLowerCase() === header.toLowerCase());
-  }
-
-  private getCSVRow(d: Record<string, unknown>): string[] {
-    const values = this.columns.map((col) => d[col.key] || '') as string[];
-    const lineToBeEscaped = values.find(
-      (e: string) => e.includes('"') || e.includes('\n') || e.includes('\r\n') || e.includes('\r') || e.includes(',')
-    );
-    return values.map((e) => (lineToBeEscaped ? `"${e.replaceAll('"', '""')}"` : e));
-  }
-
-  private outputCSV(): void {
-    const { columns, data, options } = this;
-
-    if (!options['no-header']) {
-      options.printLine(columns.map((c) => c.header).join(','));
-    }
-
-    for (const d of data) {
-      const row = this.getCSVRow(d);
-      options.printLine(row.join(','));
-    }
-  }
-
-  private outputJSON(): void {
-    this.options.printLine(JSON.stringify(this.resolveColumnsToObjectArray(), undefined, 2));
-  }
-
-  private outputTable(): void {
     const { data, options } = this;
     // column truncation
     //
@@ -280,7 +212,7 @@ class Table<T extends Record<string, unknown>> {
         headers += header.padEnd(col.width);
       }
 
-      options.printLine(chalk.bold(headers));
+      if (headers) options.printLine(ansis.bold(headers));
 
       // print header dividers
       let dividers = options.rowStart;
@@ -289,7 +221,7 @@ class Table<T extends Record<string, unknown>> {
         dividers += divider.padEnd(col.width);
       }
 
-      options.printLine(chalk.bold(dividers));
+      if (dividers) options.printLine(ansis.bold(dividers));
     }
 
     // print rows
@@ -335,13 +267,22 @@ class Table<T extends Record<string, unknown>> {
     }
   }
 
-  private outputYAML(): void {
-    this.options.printLine(jsyaml.dump(this.resolveColumnsToObjectArray()));
+  private filterColumnsFromHeaders(
+    filters: string[]
+  ): Array<Column<T> & { key: string; maxWidth?: number; width?: number }> {
+    const cols: Array<Column<T> & { key: string; maxWidth?: number; width?: number }> = [];
+    for (const f of [...new Set(filters)]) {
+      const c = this.columns.find((i) => i.header.toLowerCase() === f.toLowerCase());
+      if (c) cols.push(c);
+    }
+
+    return cols;
   }
 
-  private resolveColumnsToObjectArray(): Array<Record<string, unknown>> {
-    const { columns, data } = this;
-    return data.map((d) => Object.fromEntries(columns.map((col) => [col.key, d[col.key] ?? ''])));
+  private findColumnFromHeader(
+    header: string
+  ): (Column<T> & { key: string; maxWidth?: number; width?: number }) | undefined {
+    return this.columns.find((c) => c.header.toLowerCase() === header.toLowerCase());
   }
 }
 
@@ -359,13 +300,11 @@ export type Column<T extends Record<string, unknown>> = {
 export type Columns<T extends Record<string, unknown>> = { [key: string]: Partial<Column<T>> };
 
 export type Options = {
-  [key: string]: unknown;
   columns?: string;
   extended?: boolean;
   filter?: string;
   'no-header'?: boolean;
   'no-truncate'?: boolean;
-  output?: string;
   rowStart?: string;
   sort?: string;
   title?: string;

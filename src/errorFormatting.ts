@@ -6,7 +6,7 @@
  */
 
 import { Mode, Messages, envVars } from '@salesforce/core';
-import type { ChalkInstance } from 'chalk';
+import type { Ansis } from 'ansis';
 import { StandardColors } from './ux/standardColors.js';
 import { SfCommandError } from './types.js';
 
@@ -31,7 +31,7 @@ const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages'
  */
 export const formatActions = (
   actions: string[],
-  options: { actionColor: ChalkInstance } = { actionColor: StandardColors.info }
+  options: { actionColor: Ansis } = { actionColor: StandardColors.info }
 ): string[] =>
   actions.length
     ? [

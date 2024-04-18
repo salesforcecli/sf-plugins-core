@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { inspect } from 'node:util';
-import chalk from 'chalk';
+import ansis from 'ansis';
 import { AnyJson } from '@salesforce/ts-types';
 
 function prettyPrint(obj: AnyJson): string {
@@ -33,7 +33,7 @@ export default function styledObject(obj: AnyJson, keys?: string[]): string {
   const maxKeyLength = Math.max(...keyLengths) + 2;
 
   const logKeyValue = (key: string, value: AnyJson): string =>
-    `${chalk.blue(key)}:` + ' '.repeat(maxKeyLength - key.length - 1) + prettyPrint(value);
+    `${ansis.blue(key)}:` + ' '.repeat(maxKeyLength - key.length - 1) + prettyPrint(value);
 
   for (const [key, value] of Object.entries(obj)) {
     if (keys && !keys.includes(key)) continue;

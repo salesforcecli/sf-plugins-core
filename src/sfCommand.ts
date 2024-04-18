@@ -256,7 +256,7 @@ export abstract class SfCommand<T> extends Command {
    * @param obj The JSON to log.
    */
   public styledJSON(obj: AnyJson): void {
-    this.ux.styledJSON(obj);
+    this.ux.styledJSON(obj, this.config.theme?.json);
   }
 
   /**
@@ -283,7 +283,7 @@ export abstract class SfCommand<T> extends Command {
     // If `--json` is enabled, then the ux instance on the class will disable output, which
     // means that the logJson method will not output anything. So, we need to create a new
     // instance of the ux class that does not have output disabled in order to log the json.
-    new Ux().styledJSON(json as AnyJson);
+    new Ux().styledJSON(json as AnyJson, this.config.theme?.json);
   }
 
   /**

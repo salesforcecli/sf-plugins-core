@@ -5,11 +5,11 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import chalk from 'chalk';
+import ansis from 'ansis';
 
 export const StandardColors = {
-  error: chalk.bold.red,
-  warning: chalk.bold.yellow,
-  info: chalk.dim,
-  success: chalk.bold.green,
+  error: ansis.bold.red,
+  warning: ansis.bold.yellow,
+  info: ansis.dim,
+  success: ansis.bold.green,
 };

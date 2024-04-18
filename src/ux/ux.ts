@@ -5,14 +5,13 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import chalk from 'chalk';
+import ansis from 'ansis';
 import { ux } from '@oclif/core';
 import { AnyJson } from '@salesforce/ts-types';
 import terminalLink from 'terminal-link';
 import { UxBase } from './base.js';
 import { Spinner } from './spinner.js';
 import { table, Columns as TableColumns, Options as TableOptions } from './table.js';
-import styledJSON from './styledJSON.js';
 import styledObject from './styledObject.js';
 import write from './write.js';
 
@@ -98,8 +97,20 @@ export class Ux extends UxBase {
    *
    * @param obj JSON to display
    */
-  public styledJSON(obj: AnyJson): void {
-    this.maybeNoop(() => write.stdout(styledJSON(obj)));
+  public styledJSON(obj: AnyJson, theme?: Record<string, string>): void {
+    // Default theme if sf's theme.json does not have the json property set. This will allow us
+    // to ship sf-plugins-core before the theme.json is updated.
+    const defaultTheme = {
+      key: 'blueBright',
+      string: 'greenBright',
+      number: 'blue',
+      boolean: 'redBright',
+      null: 'blackBright',
+    };
+
+    const mergedTheme = { ...defaultTheme, ...theme };
+
+    this.maybeNoop(() => write.stdout(ux.colorizeJson(obj, { theme: mergedTheme })));
   }
 
   /**
@@ -118,7 +129,7 @@ export class Ux extends UxBase {
    * @param text header to display
    */
   public styledHeader(text: string): void {
-    this.maybeNoop(() => write.stdout(chalk.dim('=== ') + chalk.bold(text) + '\n'));
+    this.maybeNoop(() => write.stdout(ansis.dim('=== ') + ansis.bold(text) + '\n'));
   }
 }
 
