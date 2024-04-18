@@ -9,8 +9,7 @@ import ansis from 'ansis';
 import { orderBy } from 'natural-orderby';
 import sliceAnsi from 'slice-ansi';
 import sw from 'string-width';
-
-import write from './write.js';
+import { ux } from '@oclif/core';
 
 function sumBy<T>(arr: T[], fn: (i: T) => number): number {
   return arr.reduce((sum, i) => sum + fn(i), 0);
@@ -74,7 +73,7 @@ class Table<T extends Record<string, unknown>> {
       filter,
       'no-header': options['no-header'] ?? false,
       'no-truncate': options['no-truncate'] ?? false,
-      printLine: printLine ?? ((s: string): void => write.stdout(s)),
+      printLine: printLine ?? ((s: string): void => ux.stdout(s)),
       rowStart: ' ',
       sort,
       title,

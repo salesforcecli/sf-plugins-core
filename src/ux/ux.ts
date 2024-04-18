@@ -13,7 +13,6 @@ import { UxBase } from './base.js';
 import { Spinner } from './spinner.js';
 import { table, Columns as TableColumns, Options as TableOptions } from './table.js';
 import styledObject from './styledObject.js';
-import write from './write.js';
 
 /**
  * UX methods for plugins. Automatically suppress console output if outputEnabled is set to false.
@@ -48,7 +47,7 @@ export class Ux extends UxBase {
    * @param args Args to be used for formatting.
    */
   public log(message?: string, ...args: string[]): void {
-    this.maybeNoop(() => write.stdout(message, ...args));
+    this.maybeNoop(() => ux.stdout(message, ...args));
   }
 
   /**
@@ -58,7 +57,7 @@ export class Ux extends UxBase {
    * @param args Args to be used for formatting.
    */
   public logToStderr(message?: string, ...args: string[]): void {
-    this.maybeNoop(() => write.stderr(message, ...args));
+    this.maybeNoop(() => ux.stderr(message, ...args));
   }
 
   /**
@@ -89,7 +88,7 @@ export class Ux extends UxBase {
    * @param params
    */
   public url(text: string, uri: string, params = {}): void {
-    this.maybeNoop(() => write.stdout(terminalLink(text, uri, { fallback: () => uri, ...params })));
+    this.maybeNoop(() => ux.stdout(terminalLink(text, uri, { fallback: () => uri, ...params })));
   }
 
   /**
@@ -110,7 +109,7 @@ export class Ux extends UxBase {
 
     const mergedTheme = { ...defaultTheme, ...theme };
 
-    this.maybeNoop(() => write.stdout(ux.colorizeJson(obj, { theme: mergedTheme })));
+    this.maybeNoop(() => ux.stdout(ux.colorizeJson(obj, { theme: mergedTheme })));
   }
 
   /**
@@ -120,7 +119,7 @@ export class Ux extends UxBase {
    * @param keys Keys of object to display
    */
   public styledObject(obj: AnyJson, keys?: string[]): void {
-    this.maybeNoop(() => write.stdout(styledObject(obj, keys)));
+    this.maybeNoop(() => ux.stdout(styledObject(obj, keys)));
   }
 
   /**
@@ -129,7 +128,7 @@ export class Ux extends UxBase {
    * @param text header to display
    */
   public styledHeader(text: string): void {
-    this.maybeNoop(() => write.stdout(ansis.dim('=== ') + ansis.bold(text) + '\n'));
+    this.maybeNoop(() => ux.stdout(ansis.dim('=== ') + ansis.bold(text) + '\n'));
   }
 }
 

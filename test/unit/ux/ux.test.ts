@@ -7,8 +7,8 @@
 
 import { expect } from 'chai';
 import sinon from 'sinon';
+import { ux as coreUx } from '@oclif/core';
 import { Ux } from '../../../src/ux/ux.js';
-import write from '../../../src/ux/write.js';
 
 describe('Ux', () => {
   let sandbox: sinon.SinonSandbox;
@@ -16,7 +16,7 @@ describe('Ux', () => {
 
   beforeEach(() => {
     sandbox = sinon.createSandbox();
-    stdoutStub = sandbox.stub(write, 'stdout').callsFake(() => {});
+    stdoutStub = sandbox.stub(coreUx, 'stdout').callsFake(() => {});
   });
 
   afterEach(() => {
