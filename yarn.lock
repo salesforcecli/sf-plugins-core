@@ -584,10 +584,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4.0.0-beta.2":
-  version "4.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.0-beta.2.tgz#80f4470f09fe3438ca11ea67490a2daf9e162b33"
-  integrity sha512-BKK1WMe4hZ1TiCk2pVlYPaa1Deg05YtobG2iCkF1XZIxOSyjX9GySHZHrBZFp+pcI/TJTRM8sY3Ol0Q9AKGSKg==
+"@oclif/core@^4.0.0-beta.3":
+  version "4.0.0-beta.3"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.0-beta.3.tgz#37c79177d554532d4059450562725417b2093394"
+  integrity sha512-zl8gL2aC3QxuBJw+x6ji65wSvu4biaythyZ5laIJ2c0YbG+J9iIYUJEfokN8/xib9qRjg6b0/lPaLdF5UyeDyQ==
   dependencies:
     ansi-escapes "^4.3.2"
     ansis "^3.0.1"
@@ -601,6 +601,7 @@
     is-wsl "^2.2.0"
     minimatch "^9.0.4"
     string-width "^4.2.3"
+    supports-color "^9.4.0"
     widest-line "^3.1.0"
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
@@ -4840,6 +4841,11 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   integrity sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==
   dependencies:
     has-flag "^4.0.0"
+
+supports-color@^9.4.0:
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-9.4.0.tgz#17bfcf686288f531db3dea3215510621ccb55954"
+  integrity sha512-VL+lNrEoIXww1coLPOmiEmK/0sGigko5COxI09KzHc2VJXJsQ37UaQ+8quuxjDeA7+KnLGTWRyOXSLLR2Wb4jw==
 
 supports-hyperlinks@^2.2.0:
   version "2.3.0"
