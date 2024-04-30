@@ -1,3 +1,12 @@
+## [9.0.6](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.5...9.0.6) (2024-04-30)
+
+
+### Bug Fixes
+
+* bump core version ([5d5f921](https://github.com/salesforcecli/sf-plugins-core/commit/5d5f92166618c2b0fbacca63dcda70ad8323e2c8))
+
+
+
 ## [9.0.5](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.4...9.0.5) (2024-04-21)
 
 
