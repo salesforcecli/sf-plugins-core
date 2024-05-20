@@ -406,6 +406,9 @@ export abstract class SfCommand<T> extends Command {
       (error.actions as string[]) ?? [],
       process.exitCode
     );
+    if (sfCommandError.data) {
+      err.data = sfCommandError.data as AnyJson;
+    }
     err.context = sfCommandError.context;
     err.stack = sfCommandError.stack;
     // @ts-expect-error because code is not on SfError
