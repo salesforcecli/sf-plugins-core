@@ -584,15 +584,16 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@oclif/core@^4.0.0-beta.3":
-  version "4.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.0-beta.3.tgz#37c79177d554532d4059450562725417b2093394"
-  integrity sha512-zl8gL2aC3QxuBJw+x6ji65wSvu4biaythyZ5laIJ2c0YbG+J9iIYUJEfokN8/xib9qRjg6b0/lPaLdF5UyeDyQ==
+"@oclif/core@4.0.0-beta.9":
+  version "4.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/@oclif/core/-/core-4.0.0-beta.9.tgz#c502c67e92b809704e883670974de1d6acf6bfc2"
+  integrity sha512-OHPVfKzRQbNwFrVDA9T5LU6/751bmyPCbG5RaAuMpAzdCYq/6RKna4wMXq4tBfr6V4Nj9PU5NTwpf0Wz6/SWEQ==
   dependencies:
     ansi-escapes "^4.3.2"
     ansis "^3.0.1"
     clean-stack "^3.0.1"
     cli-spinners "^2.9.2"
+    cosmiconfig "^9.0.0"
     debug "^4.3.4"
     ejs "^3.1.10"
     get-package-type "^0.1.0"
@@ -1622,6 +1623,16 @@ cosmiconfig@^8.0.0, cosmiconfig@^8.3.6:
     parse-json "^5.2.0"
     path-type "^4.0.0"
 
+cosmiconfig@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-9.0.0.tgz#34c3fc58287b915f3ae905ab6dc3de258b55ad9d"
+  integrity sha512-itvL5h8RETACmOTFc4UfIyB2RfEHi71Ax6E/PivVxq9NseKbOWpeyHEOIbmAw1rs8Ak0VursQNww7lf7YtUwzg==
+  dependencies:
+    env-paths "^2.2.1"
+    import-fresh "^3.3.0"
+    js-yaml "^4.1.0"
+    parse-json "^5.2.0"
+
 create-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/create-require/-/create-require-1.1.1.tgz#c1d7e8f1e5f6cfc9ff65f9cd352d37348756c333"
@@ -1862,6 +1873,11 @@ entities@^4.2.0, entities@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/entities/-/entities-4.5.0.tgz#5d268ea5e7113ec74c4d033b79ea5a35a488fb48"
   integrity sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==
+
+env-paths@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/env-paths/-/env-paths-2.2.1.tgz#420399d416ce1fbe9bc0a07c62fa68d67fd0f8f2"
+  integrity sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==
 
 error-ex@^1.3.1:
   version "1.3.2"
