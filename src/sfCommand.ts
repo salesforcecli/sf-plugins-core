@@ -406,6 +406,9 @@ export abstract class SfCommand<T> extends Command {
       (error.actions as string[]) ?? [],
       process.exitCode
     );
+    if (sfCommandError.data) {
+      err.data = sfCommandError.data as AnyJson;
+    }
     err.context = sfCommandError.context;
     err.stack = sfCommandError.stack;
     // @ts-expect-error because code is not on SfError
@@ -422,7 +425,7 @@ export abstract class SfCommand<T> extends Command {
 
     // Emit an event for plugin-telemetry prerun hook to pick up.
     // @ts-expect-error because TS is strict about the events that can be emitted on process.
-    process.emit('sfCommandError', err);
+    process.emit('sfCommandError', err, this.id);
 
     throw err;
   }
