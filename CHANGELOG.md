@@ -1,3 +1,12 @@
+# [9.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.14...9.1.0) (2024-05-30)
+
+
+### Features
+
+* add a default summary for optional orgs ([#560](https://github.com/salesforcecli/sf-plugins-core/issues/560)) ([8793406](https://github.com/salesforcecli/sf-plugins-core/commit/8793406075e6d753dd5137a5c7d1cbe759572c54))
+
+
+
 ## [9.0.14](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.13...9.0.14) (2024-05-26)
 
 
