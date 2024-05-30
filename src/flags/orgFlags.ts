@@ -102,6 +102,7 @@ export const optionalOrgFlag = Flags.custom({
   char: 'o',
   noCacheDefault: true,
   parse: async (input: string | undefined) => maybeGetOrg(input),
+  summary: messages.getMessage('flags.optionalTargetOrg.summary'),
   default: async () => maybeGetOrg(),
   defaultHelp: async (context) => {
     if (context.options instanceof Org) {
@@ -211,7 +212,7 @@ export const requiredHubFlag = Flags.custom({
  */
 export const optionalHubFlag = Flags.custom({
   char: 'v',
-  summary: messages.getMessage('flags.targetDevHubOrg.summary'),
+  summary: messages.getMessage('flags.optionalTargetDevHubOrg.summary'),
   noCacheDefault: true,
   parse: async (input: string | undefined) => maybeGetHub(input),
   default: async () => maybeGetHub(),

@@ -42,9 +42,17 @@ The specified org %s is not a Dev Hub.
 
 Username or alias of the target org. Not required if the `target-org` configuration variable is already set.
 
+# flags.optionalTargetOrg.summary
+
+Username or alias of the target org.
+
 # flags.targetDevHubOrg.summary
 
 Username or alias of the Dev Hub org. Not required if the `target-dev-hub` configuration variable is already set.
+
+# flags.optionalTargetDevHubOrg.summary
+
+Username or alias of the Dev Hub org.
 
 # flags.apiVersion.description
 
