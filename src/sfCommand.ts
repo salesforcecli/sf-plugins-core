@@ -362,7 +362,7 @@ export abstract class SfCommand<T> extends Command {
    */
   protected toSuccessJson(result: T): SfCommand.Json<T> {
     return {
-      status: process.exitCode ?? 0,
+      status: typeof process.exitCode === 'number' ? process.exitCode : 0,
       result,
       warnings: this.warnings,
     };
