@@ -1,3 +1,12 @@
+## [9.1.1](https://github.com/salesforcecli/sf-plugins-core/compare/9.1.0...9.1.1) (2024-06-01)
+
+
+### Bug Fixes
+
+* **deps:** major-version-inquirers, exit-code typing ([#561](https://github.com/salesforcecli/sf-plugins-core/issues/561)) ([91333cb](https://github.com/salesforcecli/sf-plugins-core/commit/91333cb39ed0683fb3835acd069e92374cfde6cd))
+
+
+
 # [9.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.14...9.1.0) (2024-05-30)
 
 
