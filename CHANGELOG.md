@@ -1,3 +1,15 @@
+## [9.1.1](https://github.com/salesforcecli/sf-plugins-core/compare/9.1.0...9.1.1) (2024-06-01)
+
+### Bug Fixes
+
+- **deps:** major-version-inquirers, exit-code typing ([#561](https://github.com/salesforcecli/sf-plugins-core/issues/561)) ([91333cb](https://github.com/salesforcecli/sf-plugins-core/commit/91333cb39ed0683fb3835acd069e92374cfde6cd))
+
+# [9.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.14...9.1.0) (2024-05-30)
+
+### Features
+
+- add a default summary for optional orgs ([#560](https://github.com/salesforcecli/sf-plugins-core/issues/560)) ([8793406](https://github.com/salesforcecli/sf-plugins-core/commit/8793406075e6d753dd5137a5c7d1cbe759572c54))
+
 ## [9.0.14](https://github.com/salesforcecli/sf-plugins-core/compare/9.0.13...9.0.14) (2024-05-26)
 
 ### Bug Fixes

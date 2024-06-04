@@ -43,7 +43,7 @@ export const computeErrorCode = (e: Error | SfError | SfCommandError): number =>
     return typeof e.code !== 'number' ? 1 : e.code;
   }
 
-  return process.exitCode ?? 1;
+  return typeof process.exitCode === 'number' ? process.exitCode : 1;
 };
 
 /** identifies gacks via regex.  Searches the error message, stack, and recursively checks the cause chain */

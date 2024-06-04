@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "9.0.14-beta.1",
+  "version": "9.1.1-beta.0",
   "description": "Utils for writing Salesforce CLI plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
@@ -44,8 +44,8 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@inquirer/confirm": "^2.0.17",
-    "@inquirer/password": "^1.1.16",
+    "@inquirer/confirm": "^3.1.9",
+    "@inquirer/password": "^2.1.9",
     "@oclif/core": "^4",
     "@salesforce/core": "^7.3.9",
     "@salesforce/kit": "^3.1.2",
@@ -58,10 +58,10 @@
     "terminal-link": "^3.0.0"
   },
   "devDependencies": {
-    "@inquirer/type": "^1.3.1",
+    "@inquirer/type": "^1.3.3",
     "@types/cli-progress": "^3.11.5",
     "@salesforce/dev-scripts": "^9.1.2",
-    "eslint-plugin-sf-plugin": "^1.18.4",
+    "eslint-plugin-sf-plugin": "^1.18.5",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   },
