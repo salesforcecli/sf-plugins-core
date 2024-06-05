@@ -17,6 +17,27 @@ jobs:
     needs: linux-unit-tests
     uses: salesforcecli/github-workflows/.github/workflows/unitTestsWindows.yml@main
 
+  integration:
+    needs: linux-unit-tests
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node_version: [lts/*, latest]
+        exclude:
+          - os: windows-latest
+            node_version: lts/*
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node_version }}
+          cache: yarn
+      - uses: salesforcecli/github-workflows/.github/actions/yarnInstallWithRetries@main
+      - run: yarn build
+      - run: yarn test:integration
+
   external-nuts-deploy-retrieve:
     name: external-nuts-deploy-retrieve
     needs: linux-unit-tests
@@ -38,7 +59,7 @@ jobs:
     with:
       packageName: '@salesforce/sf-plugins-core'
       externalProjectGitUrl: 'https://github.com/salesforcecli/plugin-deploy-retrieve'
-      preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core; shx rm -rf node_modules/@salesforce/ts-types; shx rm -rf node_modules/@salesforce/cli-plugins-testkit'
+      preBuildCommands: 'shx rm -rf node_modules/@oclif/core node_modules/@salesforce/kit node_modules/@salesforce/core node_modules/@salesforce/ts-types node_modules/@salesforce/cli-plugins-testkit'
       command: ${{ matrix.command }}
       os: ${{ matrix.os }}
     secrets: inherit
@@ -67,7 +88,7 @@ jobs:
     with:
       packageName: '@salesforce/sf-plugins-core'
       externalProjectGitUrl: 'https://github.com/salesforcecli/${{matrix.repo}}'
-      preBuildCommands: 'shx rm -rf node_modules/@oclif/core; shx rm -rf node_modules/@salesforce/kit; shx rm -rf node_modules/@salesforce/core; shx rm -rf node_modules/@salesforce/ts-types'
+      preBuildCommands: 'shx rm -rf node_modules/@oclif/core node_modules/@salesforce/kit node_modules/@salesforce/core node_modules/@salesforce/ts-types'
       command: yarn test:nuts
       os: ${{ matrix.os }}
     secrets: inherit

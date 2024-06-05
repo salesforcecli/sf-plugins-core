@@ -5,9 +5,13 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import * as util from 'node:util';
-import { ux } from '@oclif/core';
+import util from 'node:util';
+import { Options, SingleBar } from 'cli-progress';
 import { UxBase } from './base.js';
+
+function progress(options: Options = {}): Progress.Bar {
+  return new SingleBar({ noTTYOutput: Boolean(process.env.TERM === 'dumb' || !process.stdin.isTTY), ...options });
+}
 
 /**
  * Class for display a progress bar to the console. Will automatically be suppressed if the --json flag is present.
@@ -50,10 +54,10 @@ export class Progress extends UxBase {
 
     this.maybeNoop(() => {
       const { title, ...rest } = { ...Progress.DEFAULT_OPTIONS, ...options };
-      this.bar = ux.progress({
+      this.bar = progress({
         ...rest,
         format: util.format(rest.format, title),
-      }) as Progress.Bar;
+      });
 
       this.bar.setTotal(total);
       this.bar.start(total, 0);

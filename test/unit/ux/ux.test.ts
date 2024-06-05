@@ -12,11 +12,11 @@ import { Ux } from '../../../src/ux/ux.js';
 
 describe('Ux', () => {
   let sandbox: sinon.SinonSandbox;
-  let infoStub: sinon.SinonStub;
+  let stdoutStub: sinon.SinonStub;
 
   beforeEach(() => {
     sandbox = sinon.createSandbox();
-    infoStub = sandbox.stub(coreUx, 'info').callsFake(() => {});
+    stdoutStub = sandbox.stub(coreUx, 'stdout').callsFake(() => {});
   });
 
   afterEach(() => {
@@ -26,8 +26,8 @@ describe('Ux', () => {
   describe('table', () => {
     it('should log a table', () => {
       const ux = new Ux();
-      ux.table([{ key: 'foo', value: 'bar' }], { key: {}, value: {} }, { printLine: coreUx.info });
-      expect(infoStub.args).to.deep.equal([
+      ux.table([{ key: 'foo', value: 'bar' }], { key: {}, value: {} });
+      expect(stdoutStub.args).to.deep.equal([
         ['\u001b[1m Key Value \u001b[22m'],
         ['\u001b[1m ─── ───── \u001b[22m'],
         [' foo bar   '],
@@ -37,7 +37,7 @@ describe('Ux', () => {
     it('should not log anything if output is not enabled', () => {
       const ux = new Ux({ jsonEnabled: true });
       ux.table([{ key: 'foo', value: 'bar' }], { key: {}, value: {} });
-      expect(infoStub.callCount).to.equal(0);
+      expect(stdoutStub.callCount).to.equal(0);
     });
   });
 
@@ -45,13 +45,13 @@ describe('Ux', () => {
     it('should log a url', () => {
       const ux = new Ux();
       ux.url('Salesforce', 'https://developer.salesforce.com/');
-      expect(infoStub.firstCall.args).to.deep.equal(['https://developer.salesforce.com/']);
+      expect(stdoutStub.firstCall.args).to.deep.equal(['https://developer.salesforce.com/']);
     });
 
     it('should not log anything if output is not enabled', () => {
       const ux = new Ux({ jsonEnabled: true });
       ux.url('Salesforce', 'https://developer.salesforce.com/');
-      expect(infoStub.callCount).to.equal(0);
+      expect(stdoutStub.callCount).to.equal(0);
     });
   });
 
@@ -59,15 +59,13 @@ describe('Ux', () => {
     it('should log stylized json', () => {
       const ux = new Ux();
       ux.styledJSON({ foo: 'bar' });
-      expect(infoStub.firstCall.args).to.deep.equal([
-        '\x1B[97m{\x1B[39m\n  \x1B[94m"foo"\x1B[39m\x1B[93m:\x1B[39m \x1B[92m"bar"\x1B[39m\n\x1B[97m}\x1B[39m',
-      ]);
+      expect(stdoutStub.firstCall.args).to.deep.equal(['{\n  \u001b[94m"foo"\u001b[39m: \u001b[92m"bar"\u001b[39m\n}']);
     });
 
     it('should not log anything if output is not enabled', () => {
       const ux = new Ux({ jsonEnabled: true });
       ux.styledJSON({ foo: 'bar' });
-      expect(infoStub.callCount).to.equal(0);
+      expect(stdoutStub.callCount).to.equal(0);
     });
   });
 
@@ -75,13 +73,13 @@ describe('Ux', () => {
     it('should log stylized object', () => {
       const ux = new Ux();
       ux.styledObject({ foo: 'bar' });
-      expect(infoStub.firstCall.args).to.deep.equal(['\u001b[34mfoo\u001b[39m: bar']);
+      expect(stdoutStub.firstCall.args).to.deep.equal(['\u001b[34mfoo\u001b[39m: bar']);
     });
 
     it('should not log anything if output is not enabled', () => {
       const ux = new Ux({ jsonEnabled: true });
       ux.styledObject({ foo: 'bar' });
-      expect(infoStub.callCount).to.equal(0);
+      expect(stdoutStub.callCount).to.equal(0);
     });
   });
 
@@ -89,13 +87,15 @@ describe('Ux', () => {
     it('should log stylized header', () => {
       const ux = new Ux();
       ux.styledHeader('A Stylized Header');
-      expect(infoStub.firstCall.args).to.deep.equal(['\u001b[2m=== \u001b[22m\u001b[1mA Stylized Header\u001b[22m\n']);
+      expect(stdoutStub.firstCall.args).to.deep.equal([
+        '\u001b[2m=== \u001b[22m\u001b[1mA Stylized Header\u001b[22m\n',
+      ]);
     });
 
     it('should not log anything if output is not enabled', () => {
       const ux = new Ux({ jsonEnabled: true });
       ux.styledHeader('A Stylized Header');
-      expect(infoStub.callCount).to.equal(0);
+      expect(stdoutStub.callCount).to.equal(0);
     });
   });
 });

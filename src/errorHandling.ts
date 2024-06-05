@@ -6,7 +6,7 @@
  */
 
 import { SfError } from '@salesforce/core';
-import { OclifError } from '@oclif/core/lib/interfaces/errors.js';
+import { CLIError } from '@oclif/core/errors';
 import { SfCommandError } from './types.js';
 import { removeEmpty } from './util.js';
 
@@ -89,5 +89,5 @@ export const errorToSfCommandError = (
 });
 
 /** custom typeGuard for handling the fact the SfCommand doesn't know about oclif error structure */
-const isOclifError = <T extends Error | SfError | SfCommandError>(e: T): e is T & OclifError =>
+const isOclifError = <T extends Error | SfError | SfCommandError>(e: T): e is T & CLIError =>
   'oclif' in e ? true : false;

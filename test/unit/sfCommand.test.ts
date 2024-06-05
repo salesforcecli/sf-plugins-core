@@ -9,7 +9,7 @@ import { Lifecycle } from '@salesforce/core';
 import { TestContext } from '@salesforce/core/testSetup';
 import { assert, expect } from 'chai';
 import { SfError } from '@salesforce/core';
-import { Config } from '@oclif/core/lib/interfaces';
+import { Config } from '@oclif/core/interfaces';
 import { SfCommand } from '../../src/sfCommand.js';
 import { StandardColors } from '../../src/ux/standardColors.js';
 import { stubSfCommandUx, stubSpinner } from '../../src/stubUx.js';
