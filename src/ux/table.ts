@@ -201,7 +201,7 @@ class Table<T extends Record<string, unknown>> {
           '='
         )
       );
-
+      // TODO: avoid mutating the passed in options to prevent sideeffects where this table changes the options to other tables
       options.rowStart = '| ';
     }
 
