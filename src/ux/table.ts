@@ -24,7 +24,7 @@ function termwidth(stream: NodeJS.WriteStream): number {
     return 80;
   }
 
-  const width = stream.getWindowSize()[0];
+  const [width] = stream.getWindowSize();
   if (width < 1) {
     return 80;
   }
@@ -36,7 +36,10 @@ function termwidth(stream: NodeJS.WriteStream): number {
   return width;
 }
 
-const stdtermwidth = Number.parseInt(process.env.OCLIF_COLUMNS!, 10) || termwidth(process.stdout);
+const stdtermwidth =
+  typeof process.env.OCLIF_COLUMNS === 'string'
+    ? Number.parseInt(process.env.OCLIF_COLUMNS, 10)
+    : termwidth(process.stdout);
 
 class Table<T extends Record<string, unknown>> {
   private columns: Array<Column<T> & { key: string; maxWidth?: number; width?: number }>;
@@ -47,8 +50,7 @@ class Table<T extends Record<string, unknown>> {
 
   public constructor(data: T[], columns: Columns<T>, options: Options = {}) {
     // assign columns
-    this.columns = Object.keys(columns).map((key: string) => {
-      const col = columns[key];
+    this.columns = Object.entries(columns).map(([key, col]) => {
       const extended = col.extended ?? false;
       // turn null and undefined into empty strings by default
       const get = col.get ?? ((row: Record<string, unknown>): unknown => row[key] ?? '');
@@ -148,7 +150,7 @@ class Table<T extends Record<string, unknown>> {
     // terminal width
     const maxWidth = stdtermwidth - 2;
     // truncation logic
-    const shouldShorten = (): void => {
+    const maybeShorten = (): void => {
       // don't shorten if full mode
       if (options['no-truncate'] ?? (!process.stdout.isTTY && !process.env.CLI_UX_SKIP_TTY_CHECK)) return;
 
@@ -187,7 +189,7 @@ class Table<T extends Record<string, unknown>> {
       }
     };
 
-    shouldShorten();
+    maybeShorten();
 
     // print table title
     if (options.title) {
