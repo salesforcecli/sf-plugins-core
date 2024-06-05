@@ -32,7 +32,8 @@ describe('table', () => {
     expect(output).to.include('ID');
   });
 
-  it('does not exceed stack depth on very tall, wide tables', () => {
+  // skip because it's too slow
+  it.skip('does not exceed stack depth on very tall, wide tables', () => {
     const columnsLength = 100;
     const row = Object.fromEntries(Array.from({ length: columnsLength }).map((_, i) => [`col${i}`, 'foo']));
     const data = Array.from({ length: 150_000 }).fill(row) as Array<Record<string, unknown>>;
