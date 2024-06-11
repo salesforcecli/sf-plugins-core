@@ -5,10 +5,11 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 
-import { Mode, Messages, envVars } from '@salesforce/core';
+import { inspect } from 'node:util';
 import type { Ansis } from 'ansis';
+import { Mode, Messages, envVars } from '@salesforce/core';
 import { StandardColors } from './ux/standardColors.js';
-import { SfCommandError } from './types.js';
+import { SfCommandError } from './SfCommandError.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -45,7 +46,7 @@ export const formatError = (error: SfCommandError): string =>
     `${formatErrorPrefix(error)} ${error.message}`,
     ...formatActions(error.actions ?? []),
     error.stack && envVars.getString('SF_ENV') === Mode.DEVELOPMENT
-      ? StandardColors.info(`\n*** Internal Diagnostic ***\n\n${error.stack}\n******\n`)
+      ? StandardColors.info(`\n*** Internal Diagnostic ***\n\n${inspect(error)}\n******\n`)
       : [],
   ].join('\n');
 

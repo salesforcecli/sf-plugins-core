@@ -20,11 +20,10 @@ import type { AnyJson } from '@salesforce/ts-types';
 import { Progress } from './ux/progress.js';
 import { Spinner } from './ux/spinner.js';
 import { Ux } from './ux/ux.js';
-import { SfCommandError } from './types.js';
+import { SfCommandError } from './SfCommandError.js';
 import { formatActions, formatError } from './errorFormatting.js';
 import { StandardColors } from './ux/standardColors.js';
 import { confirm, secretPrompt, PromptInputs } from './ux/prompts.js';
-import { computeErrorCode, errorToSfCommandError } from './errorHandling.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -201,7 +200,7 @@ export abstract class SfCommand<T> extends Command {
 
     const colorizedArgs = [
       `${StandardColors.warning(messages.getMessage('warning.prefix'))} ${message}`,
-      ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info }),
+      ...formatActions(typeof input === 'string' ? [] : input.actions ?? []),
     ];
 
     this.logToStderr(colorizedArgs.join(os.EOL));
@@ -216,10 +215,9 @@ export abstract class SfCommand<T> extends Command {
   public info(input: SfCommand.Info): void {
     const message = typeof input === 'string' ? input : input.message;
     this.log(
-      [
-        `${StandardColors.info(message)}`,
-        ...formatActions(typeof input === 'string' ? [] : input.actions ?? [], { actionColor: StandardColors.info }),
-      ].join(os.EOL)
+      [`${StandardColors.info(message)}`, ...formatActions(typeof input === 'string' ? [] : input.actions ?? [])].join(
+        os.EOL
+      )
     );
   }
 
@@ -368,66 +366,27 @@ export abstract class SfCommand<T> extends Command {
     };
   }
 
-  /**
-   * Wrap the command error into the standardized JSON structure.
-   */
-  protected toErrorJson(error: SfCommand.Error): SfCommand.Error {
-    return {
-      ...error,
-      warnings: this.warnings,
-    };
-  }
-
   // eslint-disable-next-line @typescript-eslint/require-await
   protected async catch(error: Error | SfError | SfCommand.Error): Promise<never> {
     // stop any spinners to prevent it from unintentionally swallowing output.
     // If there is an active spinner, it'll say "Error" instead of "Done"
     this.spinner.stop(StandardColors.error('Error'));
-    // transform an unknown error into one that conforms to the interface
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    // const codeFromError = (error.oclif?.exit as number | undefined) ?? (error.exitCode as number | undefined) ?? 1;
-    const codeFromError = computeErrorCode(error);
-    process.exitCode = codeFromError;
-
-    const sfCommandError = errorToSfCommandError(codeFromError, error, this.statics.name);
+    // transform an unknown error into a SfCommandError
+    const sfCommandError = SfCommandError.from(error, this.statics.name, this.warnings);
+    process.exitCode = sfCommandError.exitCode;
 
     if (this.jsonEnabled()) {
-      this.logJson(this.toErrorJson(sfCommandError));
+      this.logJson(sfCommandError.toJson());
     } else {
       this.logToStderr(formatError(sfCommandError));
     }
 
-    // Create SfError that can be thrown
-    const err = new SfError(
-      error.message,
-      error.name ?? 'Error',
-      // @ts-expect-error because actions is not on Error
-      (error.actions as string[]) ?? [],
-      process.exitCode
-    );
-    if (sfCommandError.data) {
-      err.data = sfCommandError.data as AnyJson;
-    }
-    err.context = sfCommandError.context;
-    err.stack = sfCommandError.stack;
-    // @ts-expect-error because code is not on SfError
-    err.code = codeFromError;
-    // @ts-expect-error because status is not on SfError
-    err.status = sfCommandError.status;
-
-    // @ts-expect-error because skipOclifErrorHandling is not on SfError
-    err.skipOclifErrorHandling = true;
-
-    // Add oclif exit code to the error so that oclif can use the exit code when exiting.
-    // @ts-expect-error because oclif is not on SfError
-    err.oclif = { exit: process.exitCode };
-
     // Emit an event for plugin-telemetry prerun hook to pick up.
     // @ts-expect-error because TS is strict about the events that can be emitted on process.
-    process.emit('sfCommandError', err, this.id);
+    process.emit('sfCommandError', sfCommandError, this.id);
 
-    throw err;
+    throw sfCommandError;
   }
 
   public abstract run(): Promise<T>;
