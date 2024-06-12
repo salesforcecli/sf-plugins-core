@@ -1,3 +1,12 @@
+## [10.0.1](https://github.com/salesforcecli/sf-plugins-core/compare/10.0.0...10.0.1) (2024-06-10)
+
+
+### Bug Fixes
+
+* **deps:** devScripts update ([#566](https://github.com/salesforcecli/sf-plugins-core/issues/566)) ([2b0e7a9](https://github.com/salesforcecli/sf-plugins-core/commit/2b0e7a98e43baf2b56eb286f877f28e50256ab84))
+
+
+
 # [10.0.0](https://github.com/salesforcecli/sf-plugins-core/compare/9.1.1...10.0.0) (2024-06-05)
 
 
