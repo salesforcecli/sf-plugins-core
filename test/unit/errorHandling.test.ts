@@ -6,7 +6,8 @@
  */
 import { expect } from 'chai';
 import { SfError } from '@salesforce/core';
-import { computeErrorCode, errorIsGack, errorIsTypeError, errorToSfCommandError } from '../../src/errorHandling.js';
+import { computeErrorCode, errorIsGack, errorIsTypeError } from '../../src/errorHandling.js';
+import { SfCommandError } from '../../src/SfCommandError.js';
 
 describe('typeErrors', () => {
   let typeError: Error;
@@ -123,11 +124,11 @@ describe('precedence', () => {
   });
 });
 
-describe('errorToSfCommandError', () => {
+describe('SfCommandError.toJson()', () => {
   it('basic', () => {
-    const result = errorToSfCommandError(1, new Error('foo'), 'the:cmd');
+    const result = SfCommandError.from(new Error('foo'), 'the:cmd').toJson();
     expect(result).to.deep.include({
-      code: 1,
+      code: '1',
       status: 1,
       exitCode: 1,
       commandName: 'the:cmd',
@@ -137,12 +138,33 @@ describe('errorToSfCommandError', () => {
     });
     expect(result.stack).to.be.a('string').and.include('Error: foo');
   });
+  it('with warnings', () => {
+    const warnings = ['your version of node is over 10 years old'];
+    const result = SfCommandError.from(new Error('foo'), 'the:cmd', warnings).toJson();
+    expect(result).to.deep.include({
+      code: '1',
+      status: 1,
+      exitCode: 1,
+      commandName: 'the:cmd',
+      context: 'the:cmd',
+      message: 'foo',
+      name: 'Error', // this is the default
+      warnings,
+    });
+    expect(result.stack).to.be.a('string').and.include('Error: foo');
+  });
   describe('context', () => {
     it('sfError with context', () => {
-      const sfError = SfError.create({ name: 'myError', message: 'foo', actions: ['bar'], context: 'myContext' });
-      const result = errorToSfCommandError(8, sfError, 'the:cmd');
+      const sfError = SfError.create({
+        name: 'myError',
+        message: 'foo',
+        actions: ['bar'],
+        context: 'myContext',
+        exitCode: 8,
+      });
+      const result = SfCommandError.from(sfError, 'the:cmd').toJson();
       expect(result).to.deep.include({
-        code: 8,
+        code: 'myError',
         status: 8,
         exitCode: 8,
         commandName: 'the:cmd',
@@ -153,10 +175,16 @@ describe('errorToSfCommandError', () => {
       expect(result.stack).to.be.a('string').and.include('myError: foo');
     });
     it('sfError with undefined context', () => {
-      const sfError = SfError.create({ name: 'myError', message: 'foo', actions: ['bar'], context: undefined });
-      const result = errorToSfCommandError(8, sfError, 'the:cmd');
+      const sfError = SfError.create({
+        name: 'myError',
+        message: 'foo',
+        actions: ['bar'],
+        context: undefined,
+        exitCode: 8,
+      });
+      const result = SfCommandError.from(sfError, 'the:cmd').toJson();
       expect(result).to.deep.include({
-        code: 8,
+        code: 'myError',
         status: 8,
         exitCode: 8,
         commandName: 'the:cmd',

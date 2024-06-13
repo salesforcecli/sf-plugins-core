@@ -5,14 +5,17 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
+import { Errors } from '@oclif/core';
 import { Lifecycle } from '@salesforce/core';
 import { TestContext } from '@salesforce/core/testSetup';
 import { assert, expect } from 'chai';
 import { SfError } from '@salesforce/core';
 import { Config } from '@oclif/core/interfaces';
 import { SfCommand } from '../../src/sfCommand.js';
+import { SfCommandError } from '../../src/SfCommandError.js';
 import { StandardColors } from '../../src/ux/standardColors.js';
 import { stubSfCommandUx, stubSpinner } from '../../src/stubUx.js';
+
 class TestCommand extends SfCommand<void> {
   public static readonly flags = {
     actions: Flags.boolean({ char: 'a', description: 'show actions' }),
@@ -43,15 +46,72 @@ class TestCommand extends SfCommand<void> {
   }
 }
 
+const errCause = new Error('the error cause');
+const errActions = ['action1', 'action2'];
+const errData = { prop1: 'foo', prop2: 'bar' };
+
+// A Command that will throw different kinds of errors to ensure
+// consistent error behavior.
+class TestCommandErrors extends SfCommand<void> {
+  public static buildFullError = () => {
+    const err = new Error('full Error message');
+    err.name = 'FullErrorName';
+    err.cause = errCause;
+    return err;
+  };
+
+  public static buildFullSfError = () =>
+    SfError.create({
+      message: 'full SfError message',
+      name: 'FullSfErrorName',
+      actions: errActions,
+      context: 'TestCmdError', // purposely different from the default
+      exitCode: 69,
+      cause: errCause,
+      data: errData,
+    });
+
+  public static buildOclifError = () => {
+    const err = new Errors.CLIError('Nonexistent flag: --INVALID\nSee more help with --help');
+    err.oclif = { exit: 2 };
+    err.code = undefined;
+    return err;
+  };
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  public static errors: { [x: string]: Error } = {
+    error: new Error('error message'),
+    sfError: new SfError('sfError message'),
+    fullError: TestCommandErrors.buildFullError(),
+    fullSfError: TestCommandErrors.buildFullSfError(),
+    oclifError: TestCommandErrors.buildOclifError(),
+  };
+
+  // eslint-disable-next-line @typescript-eslint/member-ordering
+  public static readonly flags = {
+    error: Flags.string({
+      char: 'e',
+      description: 'throw this error',
+      required: true,
+      options: Object.keys(TestCommandErrors.errors),
+    }),
+  };
+
+  public async run(): Promise<void> {
+    const { flags } = await this.parse(TestCommandErrors);
+    throw TestCommandErrors.errors[flags.error];
+  }
+}
+
 class NonJsonCommand extends SfCommand<void> {
   public static enableJsonFlag = false;
   public async run(): Promise<void> {
-    await this.parse(TestCommand);
+    await this.parse(NonJsonCommand);
   }
 }
 
 describe('jsonEnabled', () => {
-  beforeEach(() => {
+  afterEach(() => {
     delete process.env.SF_CONTENT_TYPE;
   });
 
@@ -170,6 +230,317 @@ describe('warning messages', () => {
       .and.to.include('this')
       .and.to.include('is an')
       .and.to.include('action');
+  });
+});
+
+describe('error standardization', () => {
+  const $$ = new TestContext();
+
+  let sfCommandErrorData: [Error?, string?];
+  const sfCommandErrorCb = (err: Error, cmdId: string) => {
+    sfCommandErrorData = [err, cmdId];
+  };
+
+  beforeEach(() => {
+    sfCommandErrorData = [];
+    process.on('sfCommandError', sfCommandErrorCb);
+  });
+
+  afterEach(() => {
+    process.removeListener('sfCommandError', sfCommandErrorCb);
+    process.exitCode = undefined;
+  });
+
+  it('should log correct error when command throws an oclif Error', async () => {
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
+    try {
+      await TestCommandErrors.run(['--error', 'oclifError']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logToStderrStub.callCount).to.equal(1);
+      expect(logToStderrStub.firstCall.firstArg).to.contain(err.message);
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('actions', undefined);
+      expect(err).to.have.property('exitCode', 2);
+      expect(err).to.have.property('context', 'TestCommandErrors');
+      expect(err).to.have.property('data', undefined);
+      expect(err).to.have.property('cause').and.be.ok;
+      expect(err).to.have.property('code', '2');
+      expect(err).to.have.property('status', 2);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 2 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  it('should log correct error when command throws an Error', async () => {
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
+    try {
+      await TestCommandErrors.run(['--error', 'error']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logToStderrStub.callCount).to.equal(1);
+      expect(logToStderrStub.firstCall.firstArg).to.contain(err.message);
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('actions', undefined);
+      expect(err).to.have.property('exitCode', 1);
+      expect(err).to.have.property('context', 'TestCommandErrors');
+      expect(err).to.have.property('data', undefined);
+      expect(err).to.have.property('cause').and.be.ok;
+      expect(err).to.have.property('code', '1');
+      expect(err).to.have.property('status', 1);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 1 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  it('should log correct error when command throws an Error --json', async () => {
+    const logJsonStub = $$.SANDBOX.stub(SfCommand.prototype, 'logJson');
+    try {
+      await TestCommandErrors.run(['--error', 'error', '--json']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logJsonStub.callCount).to.equal(1);
+      expect(logJsonStub.firstCall.firstArg).to.deep.equal(err.toJson());
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('actions', undefined);
+      expect(err).to.have.property('exitCode', 1);
+      expect(err).to.have.property('context', 'TestCommandErrors');
+      expect(err).to.have.property('data', undefined);
+      expect(err).to.have.property('cause').and.be.ok;
+      expect(err).to.have.property('code', '1');
+      expect(err).to.have.property('status', 1);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 1 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  it('should log correct error when command throws an SfError', async () => {
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
+    try {
+      await TestCommandErrors.run(['--error', 'sfError']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logToStderrStub.callCount).to.equal(1);
+      expect(logToStderrStub.firstCall.firstArg).to.contain(err.message);
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('actions', undefined);
+      expect(err).to.have.property('exitCode', 1);
+      expect(err).to.have.property('context', 'TestCommandErrors');
+      expect(err).to.have.property('data', undefined);
+      expect(err).to.have.property('cause', undefined);
+      expect(err).to.have.property('code', 'SfError');
+      expect(err).to.have.property('status', 1);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 1 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  it('should log correct error when command throws an SfError --json', async () => {
+    const logJsonStub = $$.SANDBOX.stub(SfCommand.prototype, 'logJson');
+    try {
+      await TestCommandErrors.run(['--error', 'sfError', '--json']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logJsonStub.callCount).to.equal(1);
+      expect(logJsonStub.firstCall.firstArg).to.deep.equal(err.toJson());
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('name', 'SfError');
+      expect(err).to.have.property('actions', undefined);
+      expect(err).to.have.property('exitCode', 1);
+      expect(err).to.have.property('context', 'TestCommandErrors');
+      expect(err).to.have.property('data', undefined);
+      expect(err).to.have.property('cause', undefined);
+      expect(err).to.have.property('code', 'SfError');
+      expect(err).to.have.property('status', 1);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 1 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  // A "full" Error has all props set allowed for an Error
+  it('should log correct error when command throws a "full" Error', async () => {
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
+    try {
+      await TestCommandErrors.run(['--error', 'fullError']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logToStderrStub.callCount).to.equal(1);
+      expect(logToStderrStub.firstCall.firstArg).to.contain(err.message);
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('name', 'FullErrorName');
+      expect(err).to.have.property('actions', undefined);
+      expect(err).to.have.property('exitCode', 1);
+      expect(err).to.have.property('context', 'TestCommandErrors');
+      expect(err).to.have.property('data', undefined);
+      // SfError.wrap() sets the original error as the cause
+      expect(err.cause).to.have.property('name', 'FullErrorName');
+      expect(err.cause).to.have.property('cause', errCause);
+      expect(err).to.have.property('code', '1');
+      expect(err).to.have.property('status', 1);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 1 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  // A "full" Error has all props set allowed for an Error
+  it('should log correct error when command throws a "full" Error --json', async () => {
+    const logJsonStub = $$.SANDBOX.stub(SfCommand.prototype, 'logJson');
+    try {
+      await TestCommandErrors.run(['--error', 'fullError', '--json']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logJsonStub.callCount).to.equal(1);
+      expect(logJsonStub.firstCall.firstArg).to.deep.equal(err.toJson());
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('name', 'FullErrorName');
+      expect(err).to.have.property('actions', undefined);
+      expect(err).to.have.property('exitCode', 1);
+      expect(err).to.have.property('context', 'TestCommandErrors');
+      expect(err).to.have.property('data', undefined);
+      // SfError.wrap() sets the original error as the cause
+      expect(err.cause).to.have.property('name', 'FullErrorName');
+      expect(err.cause).to.have.property('cause', errCause);
+      expect(err).to.have.property('code', '1');
+      expect(err).to.have.property('status', 1);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 1 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  // A "full" SfError has all props set allowed for an SfError
+  it('should log correct error when command throws a "full" SfError', async () => {
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
+    try {
+      await TestCommandErrors.run(['--error', 'fullSfError']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logToStderrStub.callCount).to.equal(1);
+      expect(logToStderrStub.firstCall.firstArg).to.contain(err.message);
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('name', 'FullSfErrorName');
+      expect(err).to.have.property('actions', errActions);
+      expect(err).to.have.property('exitCode', 69);
+      expect(err).to.have.property('context', 'TestCmdError');
+      expect(err).to.have.property('data', errData);
+      expect(err).to.have.property('cause', errCause);
+      expect(err).to.have.property('code', 'FullSfErrorName');
+      expect(err).to.have.property('status', 69);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 69 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  // A "full" SfError has all props set allowed for an SfError
+  it('should log correct error when command throws a "full" SfError --json', async () => {
+    const logJsonStub = $$.SANDBOX.stub(SfCommand.prototype, 'logJson');
+    try {
+      await TestCommandErrors.run(['--error', 'fullSfError', '--json']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logJsonStub.callCount).to.equal(1);
+      expect(logJsonStub.firstCall.firstArg).to.deep.equal(err.toJson());
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('name', 'FullSfErrorName');
+      expect(err).to.have.property('actions', errActions);
+      expect(err).to.have.property('exitCode', 69);
+      expect(err).to.have.property('context', 'TestCmdError');
+      expect(err).to.have.property('data', errData);
+      expect(err).to.have.property('cause', errCause);
+      expect(err).to.have.property('code', 'FullSfErrorName');
+      expect(err).to.have.property('status', 69);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 69 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
   });
 });
 

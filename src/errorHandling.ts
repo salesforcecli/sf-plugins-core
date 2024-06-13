@@ -6,9 +6,7 @@
  */
 
 import { SfError } from '@salesforce/core';
-import { CLIError } from '@oclif/core/errors';
-import { SfCommandError } from './types.js';
-import { removeEmpty } from './util.js';
+import { Errors } from '@oclif/core';
 
 /**
  *
@@ -21,7 +19,7 @@ import { removeEmpty } from './util.js';
  * - use the process exitCode
  * - default to 1
  */
-export const computeErrorCode = (e: Error | SfError | SfCommandError): number => {
+export const computeErrorCode = (e: Error | SfError | Errors.CLIError): number => {
   // regardless of the exitCode, we'll set gacks and TypeError to a specific exit code
   if (errorIsGack(e)) {
     return 20;
@@ -66,28 +64,6 @@ export const errorIsTypeError = (error: Error | SfError): boolean =>
   Boolean(error.stack?.includes('TypeError')) ||
   ('cause' in error && error.cause instanceof Error && errorIsTypeError(error.cause));
 
-export const errorToSfCommandError = (
-  codeFromError: number,
-  error: Error | SfError | SfCommandError,
-  commandName: string
-): SfCommandError => ({
-  ...removeEmpty({
-    code: codeFromError,
-    actions: 'actions' in error ? error.actions : null,
-    context: ('context' in error ? error.context : commandName) ?? commandName,
-    commandName: ('commandName' in error ? error.commandName : commandName) ?? commandName,
-    data: 'data' in error ? error.data : null,
-    result: 'result' in error ? error.result : null,
-  }),
-  ...{
-    message: error.message,
-    name: error.name ?? 'Error',
-    status: codeFromError,
-    stack: error.stack,
-    exitCode: codeFromError,
-  },
-});
-
 /** custom typeGuard for handling the fact the SfCommand doesn't know about oclif error structure */
-const isOclifError = <T extends Error | SfError | SfCommandError>(e: T): e is T & CLIError =>
+const isOclifError = <T extends Error | SfError | Errors.CLIError>(e: T): e is T & Errors.CLIError =>
   'oclif' in e ? true : false;
