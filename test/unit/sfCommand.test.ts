@@ -5,6 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { Flags } from '@oclif/core';
+import { Errors } from '@oclif/core';
 import { Lifecycle } from '@salesforce/core';
 import { TestContext } from '@salesforce/core/testSetup';
 import { assert, expect } from 'chai';
@@ -70,12 +71,20 @@ class TestCommandErrors extends SfCommand<void> {
       data: errData,
     });
 
+  public static buildOclifError = () => {
+    const err = new Errors.CLIError('Nonexistent flag: --INVALID\nSee more help with --help');
+    err.oclif = { exit: 2 };
+    err.code = undefined;
+    return err;
+  };
+
   // eslint-disable-next-line @typescript-eslint/member-ordering
   public static errors: { [x: string]: Error } = {
     error: new Error('error message'),
     sfError: new SfError('sfError message'),
     fullError: TestCommandErrors.buildFullError(),
     fullSfError: TestCommandErrors.buildFullSfError(),
+    oclifError: TestCommandErrors.buildOclifError(),
   };
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -239,6 +248,38 @@ describe('error standardization', () => {
 
   afterEach(() => {
     process.removeListener('sfCommandError', sfCommandErrorCb);
+    process.exitCode = undefined;
+  });
+
+  it('should log correct error when command throws an oclif Error', async () => {
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
+    try {
+      await TestCommandErrors.run(['--error', 'oclifError']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logToStderrStub.callCount).to.equal(1);
+      expect(logToStderrStub.firstCall.firstArg).to.contain(err.message);
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('actions', undefined);
+      expect(err).to.have.property('exitCode', 2);
+      expect(err).to.have.property('context', 'TestCommandErrors');
+      expect(err).to.have.property('data', undefined);
+      expect(err).to.have.property('cause').and.be.ok;
+      expect(err).to.have.property('code', '2');
+      expect(err).to.have.property('status', 2);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 2 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
   });
 
   it('should log correct error when command throws an Error', async () => {

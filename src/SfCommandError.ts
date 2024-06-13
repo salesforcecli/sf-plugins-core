@@ -75,14 +75,13 @@ export class SfCommandError extends SfError {
   ): SfCommandError {
     // SfError.wrap() does most of what we want so start with that.
     const sfError = SfError.wrap(err);
-    const exitCode = computeErrorCode(sfError);
-    sfError.code = 'code' in err ? err.code : exitCode.toString(10);
+    const exitCode = computeErrorCode(err);
     return new this({
       message: sfError.message,
       name: err.name ?? 'Error',
       actions: 'actions' in err ? err.actions : undefined,
       exitCode,
-      code: sfError.code,
+      code: 'code' in err && err.code ? err.code : exitCode.toString(10),
       cause: sfError.cause,
       commandName: 'commandName' in err ? err.commandName : commandName,
       data: 'data' in err ? err.data : undefined,

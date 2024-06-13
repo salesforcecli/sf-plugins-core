@@ -6,8 +6,7 @@
  */
 
 import { SfError } from '@salesforce/core';
-import { CLIError } from '@oclif/core/errors';
-import { SfCommandError } from './SfCommandError.js';
+import { Errors } from '@oclif/core';
 
 /**
  *
@@ -20,7 +19,7 @@ import { SfCommandError } from './SfCommandError.js';
  * - use the process exitCode
  * - default to 1
  */
-export const computeErrorCode = (e: Error | SfError | SfCommandError): number => {
+export const computeErrorCode = (e: Error | SfError | Errors.CLIError): number => {
   // regardless of the exitCode, we'll set gacks and TypeError to a specific exit code
   if (errorIsGack(e)) {
     return 20;
@@ -66,5 +65,5 @@ export const errorIsTypeError = (error: Error | SfError): boolean =>
   ('cause' in error && error.cause instanceof Error && errorIsTypeError(error.cause));
 
 /** custom typeGuard for handling the fact the SfCommand doesn't know about oclif error structure */
-const isOclifError = <T extends Error | SfError | SfCommandError>(e: T): e is T & CLIError =>
+const isOclifError = <T extends Error | SfError | Errors.CLIError>(e: T): e is T & Errors.CLIError =>
   'oclif' in e ? true : false;

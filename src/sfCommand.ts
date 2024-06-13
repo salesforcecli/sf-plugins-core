@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import os from 'node:os';
-import { Command, Config, HelpSection, Flags } from '@oclif/core';
+import { Errors, Command, Config, HelpSection, Flags } from '@oclif/core';
 import {
   envVars,
   Messages,
@@ -367,7 +367,7 @@ export abstract class SfCommand<T> extends Command {
   }
 
   // eslint-disable-next-line @typescript-eslint/require-await
-  protected async catch(error: Error | SfError | SfCommand.Error): Promise<never> {
+  protected async catch(error: Error | SfError | Errors.CLIError): Promise<never> {
     // stop any spinners to prevent it from unintentionally swallowing output.
     // If there is an active spinner, it'll say "Error" instead of "Done"
     this.spinner.stop(StandardColors.error('Error'));
