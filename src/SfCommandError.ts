@@ -4,10 +4,10 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
+import { inspect } from 'node:util';
 import { SfError, StructuredMessage } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
 import { computeErrorCode } from './errorHandling.js';
-import { removeEmpty } from './util.js';
 
 // These types are 90% the same as SfErrorOptions (but they aren't exported to extend)
 type ErrorDataProperties = AnyJson;
@@ -25,20 +25,11 @@ export type SfCommandErrorOptions<T extends ErrorDataProperties = ErrorDataPrope
   warnings?: Array<StructuredMessage | string>;
 };
 
-type SfCommandErrorJson = {
+type SfCommandErrorJson = SfCommandErrorOptions & {
   name: string;
-  message: string;
-  exitCode: number;
-  commandName: string;
-  context: string;
-  code: string;
-  status: string;
-  stack: string;
-  actions?: string;
-  data?: ErrorDataProperties;
+  status: number;
+  stack?: string;
   cause?: string;
-  warnings?: Array<StructuredMessage | string>;
-  result?: unknown;
 };
 
 export class SfCommandError extends SfError {
@@ -93,17 +84,15 @@ export class SfCommandError extends SfError {
 
   public toJson(): SfCommandErrorJson {
     return {
-      ...removeEmpty({
-        // toObject() returns name, message, exitCode, actions, context, data
-        ...this.toObject(),
-        stack: this.stack,
-        cause: this.cause,
-        warnings: this.warnings,
-        code: this.code,
-        status: this.status,
-        commandName: this.commandName,
-        result: this.result,
-      }),
-    } as SfCommandErrorJson;
+      // toObject() returns name, message, exitCode, actions, context, data
+      ...this.toObject(),
+      stack: this.stack,
+      cause: inspect(this.cause),
+      warnings: this.warnings,
+      code: this.code,
+      status: this.status,
+      commandName: this.commandName,
+      result: this.result,
+    };
   }
 }
