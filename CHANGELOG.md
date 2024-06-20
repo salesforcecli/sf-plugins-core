@@ -1,3 +1,7 @@
+## [11.1.1](https://github.com/salesforcecli/sf-plugins-core/compare/11.1.0...11.1.1) (2024-06-20)
+
+
+
 # [11.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/11.0.1...11.1.0) (2024-06-18)
 
 
