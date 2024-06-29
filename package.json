@@ -44,7 +44,7 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@inquirer/confirm": "^3.1.9",
+    "@inquirer/confirm": "^3.1.11",
     "@inquirer/password": "^2.1.9",
     "@oclif/core": "^4.0.6",
     "@salesforce/core": "^8.0.1",
