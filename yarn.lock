@@ -429,25 +429,6 @@
     "@inquirer/core" "^9.0.2"
     "@inquirer/type" "^1.4.0"
 
-"@inquirer/core@^8.2.2":
-  version "8.2.2"
-  resolved "https://registry.yarnpkg.com/@inquirer/core/-/core-8.2.2.tgz#797b1e71b920c9788b9d26d89c8b334149852d52"
-  integrity sha512-K8SuNX45jEFlX3EBJpu9B+S2TISzMPGXZIuJ9ME924SqbdW6Pt6fIkKvXg7mOEOKJ4WxpQsxj0UTfcL/A434Ww==
-  dependencies:
-    "@inquirer/figures" "^1.0.3"
-    "@inquirer/type" "^1.3.3"
-    "@types/mute-stream" "^0.0.4"
-    "@types/node" "^20.12.13"
-    "@types/wrap-ansi" "^3.0.0"
-    ansi-escapes "^4.3.2"
-    chalk "^4.1.2"
-    cli-spinners "^2.9.2"
-    cli-width "^4.1.0"
-    mute-stream "^1.0.0"
-    signal-exit "^4.1.0"
-    strip-ansi "^6.0.1"
-    wrap-ansi "^6.2.0"
-
 "@inquirer/core@^9.0.2":
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/@inquirer/core/-/core-9.0.2.tgz#8be8782266f00129acb5c804537d1231b2fe3ac6"
@@ -472,13 +453,13 @@
   resolved "https://registry.yarnpkg.com/@inquirer/figures/-/figures-1.0.3.tgz#1227cc980f88e6d6ab85abadbf164f5038041edd"
   integrity sha512-ErXXzENMH5pJt5/ssXV0DfWUZqly8nGzf0UcBV9xTnP+KyffE2mqyxIMBrZ8ijQck2nU0TQm40EQB53YreyWHw==
 
-"@inquirer/password@^2.1.9":
-  version "2.1.9"
-  resolved "https://registry.yarnpkg.com/@inquirer/password/-/password-2.1.9.tgz#8d464c17cb67beabb309a039229ff1b0a6337294"
-  integrity sha512-QPtVcT12Fkn0TyuZJelR7QOtc5l1d/6pB5EfkHOivTzC6QTFxRCHl+Gx7Q3E2U/kgJeCCmDov6itDFggk9nkgA==
+"@inquirer/password@^2.1.14":
+  version "2.1.14"
+  resolved "https://registry.yarnpkg.com/@inquirer/password/-/password-2.1.14.tgz#06621f547b0b05ad4303700f13892cabd3a366ee"
+  integrity sha512-sPzOkXLhWJQ96K6nPZFnF8XB8tsDrcCRobd1d3EDz81F+4hp8BbdmsnsQcqZ7oYDIOVM/mWJyIUtJ35TrssJxQ==
   dependencies:
-    "@inquirer/core" "^8.2.2"
-    "@inquirer/type" "^1.3.3"
+    "@inquirer/core" "^9.0.2"
+    "@inquirer/type" "^1.4.0"
     ansi-escapes "^4.3.2"
 
 "@inquirer/type@^1.3.3", "@inquirer/type@^1.4.0":
@@ -810,7 +791,7 @@
   dependencies:
     "@types/node" "*"
 
-"@types/node@*", "@types/node@^20.12.13":
+"@types/node@*":
   version "20.13.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-20.13.0.tgz#011a76bc1e71ae9a026dddcfd7039084f752c4b6"
   integrity sha512-FM6AOb3khNkNIXPnHFDYaHerSv8uN22C91z098AnGccVu+Pcdhi+pNUFDi0iLmPIsVE0JBD0KVS7mzUYt4nRzQ==
@@ -1396,7 +1377,7 @@ chalk@^2.0.0:
     escape-string-regexp "^1.0.5"
     supports-color "^5.3.0"
 
-chalk@^4.0.0, chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.2:
+chalk@^4.0.0, chalk@^4.0.2, chalk@^4.1.0:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
   integrity sha512-oKnbhFyRIXpUuez8iBMmyEa4nbj4IOQyuhc/wy9kY7/WVPcwIO9VA668Pu8RkO7+0G76SLROeyw9CpQ061i4mA==
