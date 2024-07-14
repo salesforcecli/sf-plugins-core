@@ -1,3 +1,12 @@
+## [11.1.7](https://github.com/salesforcecli/sf-plugins-core/compare/11.1.6...11.1.7) (2024-07-14)
+
+
+### Bug Fixes
+
+* **deps:** bump string-width from 7.1.0 to 7.2.0 ([7157212](https://github.com/salesforcecli/sf-plugins-core/commit/715721279849e07b70d71433226436cfeb5eae9d))
+
+
+
 ## [11.1.6](https://github.com/salesforcecli/sf-plugins-core/compare/11.1.5...11.1.6) (2024-07-07)
 
 
