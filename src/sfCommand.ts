@@ -382,9 +382,9 @@ export abstract class SfCommand<T> extends Command {
       sfCommandError.exitCode === 2 &&
       error.message.includes('Unexpected argument')
     ) {
-      // @ts-expect-error error's causes aren't typed, this is what's returned from flag parsing errors
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       const output =
+        // @ts-expect-error error's causes aren't typed, this is what's returned from flag parsing errors
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         (sfCommandError.cause?.parse?.output?.raw as Array<{ flag: string; input: string; type: 'flag' | 'arg' }>) ??
         [];
 
