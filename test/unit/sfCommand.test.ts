@@ -110,6 +110,23 @@ class NonJsonCommand extends SfCommand<void> {
   }
 }
 
+class SuggestionCommand extends SfCommand<void> {
+  public static enableJsonFlag = false;
+  public static readonly flags = {
+    first: Flags.string({
+      default: 'My first flag',
+      required: true,
+    }),
+    second: Flags.string({
+      default: 'My second',
+      required: true,
+    }),
+  };
+  public async run(): Promise<void> {
+    await this.parse(SuggestionCommand);
+  }
+}
+
 describe('jsonEnabled', () => {
   afterEach(() => {
     delete process.env.SF_CONTENT_TYPE;
@@ -372,6 +389,69 @@ describe('error standardization', () => {
       // Ensure a sfCommandError event was emitted with the expected data
       expect(sfCommandErrorData[0]).to.equal(err);
       expect(sfCommandErrorData[1]).to.equal('testcommanderrors');
+    }
+  });
+
+  it('should log correct suggestion when user doesnt wrap with quotes', async () => {
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
+    try {
+      await SuggestionCommand.run(['--first', 'my', 'alias', 'with', 'spaces', '--second', 'my second value']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logToStderrStub.callCount).to.equal(1);
+      expect(logToStderrStub.firstCall.firstArg).to.contain(err.message);
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('actions');
+      expect(err.actions).to.deep.equal(['--first "my alias with spaces"']);
+      expect(err).to.have.property('exitCode', 2);
+      expect(err).to.have.property('context', 'SuggestionCommand');
+      expect(err).to.have.property('data', undefined);
+      expect(err).to.have.property('cause');
+      expect(err).to.have.property('code', '2');
+      expect(err).to.have.property('status', 2);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 2 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('suggestioncommand');
+    }
+  });
+  it('should log correct suggestion when user doesnt wrap with quotes without flag order', async () => {
+    const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
+    try {
+      await SuggestionCommand.run(['--second', 'my second value', '--first', 'my', 'alias', 'with', 'spaces']);
+      expect(false, 'error should have been thrown').to.be.true;
+    } catch (e: unknown) {
+      expect(e).to.be.instanceOf(SfCommandError);
+      const err = e as SfCommand.Error;
+
+      // Ensure the error was logged to the console
+      expect(logToStderrStub.callCount).to.equal(1);
+      expect(logToStderrStub.firstCall.firstArg).to.contain(err.message);
+
+      // Ensure the error has expected properties
+      expect(err).to.have.property('actions');
+      expect(err.actions).to.deep.equal(['--first "my alias with spaces"']);
+      expect(err).to.have.property('exitCode', 2);
+      expect(err).to.have.property('context', 'SuggestionCommand');
+      expect(err).to.have.property('data', undefined);
+      expect(err).to.have.property('cause');
+      expect(err).to.have.property('code', '2');
+      expect(err).to.have.property('status', 2);
+      expect(err).to.have.property('stack').and.be.ok;
+      expect(err).to.have.property('skipOclifErrorHandling', true);
+      expect(err).to.have.deep.property('oclif', { exit: 2 });
+
+      // Ensure a sfCommandError event was emitted with the expected data
+      expect(sfCommandErrorData[0]).to.equal(err);
+      expect(sfCommandErrorData[1]).to.equal('suggestioncommand');
     }
   });
 
