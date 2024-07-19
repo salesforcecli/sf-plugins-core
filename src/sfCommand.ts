@@ -376,6 +376,15 @@ export abstract class SfCommand<T> extends Command {
     const sfCommandError = SfCommandError.from(error, this.statics.name, this.warnings);
     process.exitCode = sfCommandError.exitCode;
 
+    // no var args (strict = true || undefined), and unexpected arguments when parsing
+    if (
+      this.statics.strict !== false &&
+      sfCommandError.exitCode === 2 &&
+      error.message.includes('Unexpected argument')
+    ) {
+      sfCommandError.appendErrorSuggestions();
+    }
+
     if (this.jsonEnabled()) {
       this.logJson(sfCommandError.toJson());
     } else {
