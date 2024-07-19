@@ -1,3 +1,12 @@
+# [11.2.0](https://github.com/salesforcecli/sf-plugins-core/compare/11.1.9...11.2.0) (2024-07-19)
+
+
+### Features
+
+* parse error messages to suggest correct flag value usage ([05c25ba](https://github.com/salesforcecli/sf-plugins-core/commit/05c25ba9fe3d8eff16207fc36a94e6e5d996b9d1))
+
+
+
 ## [11.1.9](https://github.com/salesforcecli/sf-plugins-core/compare/11.1.8...11.1.9) (2024-07-14)
 
 
