@@ -110,25 +110,20 @@ export class SfCommandError extends SfError {
      --second "my second"
     */
 
-    // find the flag before the 'args' block that's valid, to append the args with its value as a suggestion
-    // const target = output.find((flag, index) => flag.type === 'flag' && output[index + 1]?.type === 'arg');
-
-    const catcher: Array<{ flag: string; args: string[] }> = [];
+    const aggregator: Array<{ flag: string; args: string[] }> = [];
     output.forEach((k, i) => {
       let argCounter = i + 1;
       if (k.type === 'flag' && output[argCounter].type === 'arg') {
         const args: string[] = [];
-        // add the flag name, and first correctly parsed value to the suggestion
-
         while (output[argCounter]?.type === 'arg') {
           args.push(output[argCounter].input);
           argCounter++;
         }
-        catcher.push({ flag: k.flag, args: [k.input, ...args] });
+        aggregator.push({ flag: k.flag, args: [k.input, ...args] });
       }
     });
 
     this.actions ??= [];
-    this.actions.push(...catcher.map((cause) => `--${cause.flag} "${cause.args.join(' ')}"`));
+    this.actions.push(...aggregator.map((cause) => `--${cause.flag} "${cause.args.join(' ')}"`));
   }
 }
