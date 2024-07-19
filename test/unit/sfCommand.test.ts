@@ -395,7 +395,7 @@ describe('error standardization', () => {
   it('should log correct suggestion when user doesnt wrap with quotes', async () => {
     const logToStderrStub = $$.SANDBOX.stub(SfCommand.prototype, 'logToStderr');
     try {
-      await SuggestionCommand.run(['--first', 'my', 'alias', 'with', 'spaces', '--second', 'my second value']);
+      await SuggestionCommand.run(['--first', 'my', 'alias', 'with', 'spaces', '--second', 'my second', 'value']);
       expect(false, 'error should have been thrown').to.be.true;
     } catch (e: unknown) {
       expect(e).to.be.instanceOf(SfCommandError);
@@ -407,7 +407,7 @@ describe('error standardization', () => {
 
       // Ensure the error has expected properties
       expect(err).to.have.property('actions');
-      expect(err.actions).to.deep.equal(['--first "my alias with spaces"']);
+      expect(err.actions).to.deep.equal(['--first "my alias with spaces"', '--second "my second value"']);
       expect(err).to.have.property('exitCode', 2);
       expect(err).to.have.property('context', 'SuggestionCommand');
       expect(err).to.have.property('data', undefined);

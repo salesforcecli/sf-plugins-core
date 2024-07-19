@@ -95,4 +95,40 @@ export class SfCommandError extends SfError {
       result: this.result,
     };
   }
+
+  public appendErrorSuggestions(): void {
+    const output =
+      // @ts-expect-error error's causes aren't typed, this is what's returned from flag parsing errors
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      (this.cause?.parse?.output?.raw as Array<{ flag: string; input: string; type: 'flag' | 'arg' }>) ?? [];
+
+    /*
+     if there's a group of args, and additional args separated, we could have multiple suggestions
+     --first my first --second my second =>
+     try this:
+     --first "my first"
+     --second "my second"
+    */
+
+    // find the flag before the 'args' block that's valid, to append the args with its value as a suggestion
+    // const target = output.find((flag, index) => flag.type === 'flag' && output[index + 1]?.type === 'arg');
+
+    const catcher: Array<{ flag: string; args: string[] }> = [];
+    output.forEach((k, i) => {
+      let argCounter = i + 1;
+      if (k.type === 'flag' && output[argCounter].type === 'arg') {
+        const args: string[] = [];
+        // add the flag name, and first correctly parsed value to the suggestion
+
+        while (output[argCounter]?.type === 'arg') {
+          args.push(output[argCounter].input);
+          argCounter++;
+        }
+        catcher.push({ flag: k.flag, args: [k.input, ...args] });
+      }
+    });
+
+    this.actions ??= [];
+    this.actions.push(...catcher.map((cause) => `--${cause.flag} "${cause.args.join(' ')}"`));
+  }
 }

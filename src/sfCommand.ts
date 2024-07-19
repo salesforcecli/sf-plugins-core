@@ -382,22 +382,7 @@ export abstract class SfCommand<T> extends Command {
       sfCommandError.exitCode === 2 &&
       error.message.includes('Unexpected argument')
     ) {
-      const output =
-        // @ts-expect-error error's causes aren't typed, this is what's returned from flag parsing errors
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        (sfCommandError.cause?.parse?.output?.raw as Array<{ flag: string; input: string; type: 'flag' | 'arg' }>) ??
-        [];
-
-      // find the extra arguments causing issues
-      const extras = output
-        .filter((f) => f.type === 'arg')
-        .flatMap((f) => f.input)
-        .join(' ');
-      // find the flag before the 'args' block that's valid, to append the args with its value as a suggestion
-      const target = output.find((flag, index) => flag.type === 'flag' && output[index + 1]?.type === 'arg');
-
-      sfCommandError.actions ??= [];
-      sfCommandError.actions.push(`--${target?.flag} "${target?.input} ${extras}"`);
+      sfCommandError.appendErrorSuggestions();
     }
 
     if (this.jsonEnabled()) {
