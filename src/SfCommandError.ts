@@ -113,7 +113,7 @@ export class SfCommandError extends SfError {
     const aggregator: Array<{ flag: string; args: string[] }> = [];
     output.forEach((k, i) => {
       let argCounter = i + 1;
-      if (k.type === 'flag' && output[argCounter].type === 'arg') {
+      if (k.type === 'flag' && output[argCounter]?.type === 'arg') {
         const args: string[] = [];
         while (output[argCounter]?.type === 'arg') {
           args.push(output[argCounter].input);
