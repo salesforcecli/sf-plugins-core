@@ -1,3 +1,12 @@
+## [11.2.1](https://github.com/salesforcecli/sf-plugins-core/compare/11.2.0...11.2.1) (2024-07-21)
+
+
+### Bug Fixes
+
+* **deps:** bump @inquirer/confirm from 3.1.14 to 3.1.16 ([7bcb372](https://github.com/salesforcecli/sf-plugins-core/commit/7bcb3724b0f4301dec8f9e53156ebaec27f9938b))
+
+
+
 # [11.2.0](https://github.com/salesforcecli/sf-plugins-core/compare/11.1.9...11.2.0) (2024-07-19)
 
 
