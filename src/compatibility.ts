@@ -6,7 +6,7 @@
  */
 
 import { Flags } from '@oclif/core';
-import { Messages } from '@salesforce/core';
+import { Messages } from '@salesforce/core/messages';
 import { orgApiVersionFlag } from './flags/orgApiVersion.js';
 import { optionalHubFlag, optionalOrgFlag, requiredHubFlag, requiredOrgFlag } from './flags/orgFlags.js';
 

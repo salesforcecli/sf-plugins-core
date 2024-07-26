@@ -6,10 +6,10 @@
  */
 import { Flags } from '@oclif/core';
 import { Errors } from '@oclif/core';
-import { Lifecycle } from '@salesforce/core';
+import { Lifecycle } from '@salesforce/core/lifecycle';
 import { TestContext } from '@salesforce/core/testSetup';
 import { assert, expect } from 'chai';
-import { SfError } from '@salesforce/core';
+import { SfError } from '@salesforce/core/sfError';
 import { Config } from '@oclif/core/interfaces';
 import { SfCommand } from '../../src/sfCommand.js';
 import { SfCommandError } from '../../src/SfCommandError.js';

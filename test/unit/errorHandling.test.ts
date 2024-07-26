@@ -5,7 +5,7 @@
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
 import { expect } from 'chai';
-import { SfError } from '@salesforce/core';
+import { SfError } from '@salesforce/core/sfError';
 import { computeErrorCode, errorIsGack, errorIsTypeError } from '../../src/errorHandling.js';
 import { SfCommandError } from '../../src/SfCommandError.js';
 
