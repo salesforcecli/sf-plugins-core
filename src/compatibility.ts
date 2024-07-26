@@ -6,7 +6,7 @@
  */
 
 import { Flags } from '@oclif/core';
-import { Lifecycle, Messages } from '@salesforce/core';
+import { Messages } from '@salesforce/core';
 import { orgApiVersionFlag } from './flags/orgApiVersion.js';
 import { optionalHubFlag, optionalOrgFlag, requiredHubFlag, requiredOrgFlag } from './flags/orgFlags.js';
 
@@ -98,17 +98,4 @@ export type ArrayWithDeprecationOptions = {
 export const arrayWithDeprecation = Flags.custom<string[], ArrayWithDeprecationOptions>({
   multiple: true,
   delimiter: ',',
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error parse expects to return string[] but we need to return string.
-  // This is a weird consequence of implementing an array flag. The oclif parser splits the input (e.g. "thing1,thing2")
-  // on the delimiter and passes each value individually to the parse function. However, the return type needs to be
-  // string[] so that upstream consumers have the correct flag typings.
-  parse: async (input, ctx) => {
-    const inputParts = ctx.token.input.split(',').map((i) => i.trim());
-    if (inputParts.length > 1) {
-      await Lifecycle.getInstance().emitWarning(messages.getMessage('warning.arrayInputFormat'));
-    }
-
-    return input;
-  },
 });
