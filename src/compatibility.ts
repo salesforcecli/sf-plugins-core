@@ -93,7 +93,7 @@ export type ArrayWithDeprecationOptions = {
   parse?: undefined;
 };
 /**
- * @deprecated
+ * @deprecated.  Use `multiple: true` with `delimiter: ','` instead
  */
 export const arrayWithDeprecation = Flags.custom<string[], ArrayWithDeprecationOptions>({
   multiple: true,
