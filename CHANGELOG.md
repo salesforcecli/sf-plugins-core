@@ -1,3 +1,12 @@
+## [11.2.2](https://github.com/salesforcecli/sf-plugins-core/compare/11.2.1...11.2.2) (2024-07-28)
+
+
+### Bug Fixes
+
+* **deps:** bump ansis from 3.2.1 to 3.3.2 ([e1cec43](https://github.com/salesforcecli/sf-plugins-core/commit/e1cec43d9b7b421fa057021987313f011137bfa2))
+
+
+
 ## [11.2.1](https://github.com/salesforcecli/sf-plugins-core/compare/11.2.0...11.2.1) (2024-07-21)
 
 
