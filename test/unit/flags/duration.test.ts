@@ -6,7 +6,7 @@
  */
 
 import { Parser } from '@oclif/core';
-import { Messages } from '@salesforce/core';
+import { Messages } from '@salesforce/core/messages';
 import { expect } from 'chai';
 import { Duration } from '@salesforce/kit';
 import { durationFlag } from '../../../src/flags/duration.js';

@@ -6,7 +6,7 @@
  */
 import { expect } from 'chai';
 import { Parser } from '@oclif/core';
-import { Messages } from '@salesforce/core';
+import { Messages } from '@salesforce/core/messages';
 import { salesforceIdFlag } from '../../../src/flags/salesforceId.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
