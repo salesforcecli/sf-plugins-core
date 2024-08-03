@@ -49,7 +49,7 @@
     "@oclif/core": "^4.0.15",
     "@salesforce/core": "^8.2.7",
     "@salesforce/kit": "^3.1.6",
-    "@salesforce/ts-types": "^2.0.11",
+    "@salesforce/ts-types": "^2.0.12",
     "ansis": "^3.3.2",
     "cli-progress": "^3.12.0",
     "natural-orderby": "^3.0.2",
