@@ -1,3 +1,12 @@
+## [11.2.6](https://github.com/salesforcecli/sf-plugins-core/compare/11.2.5...11.2.6) (2024-08-04)
+
+
+### Bug Fixes
+
+* **deps:** bump @salesforce/ts-types from 2.0.11 to 2.0.12 ([c378319](https://github.com/salesforcecli/sf-plugins-core/commit/c378319b5d98cf466fec91e995b7d2aa0f269cb8))
+
+
+
 ## [11.2.5](https://github.com/salesforcecli/sf-plugins-core/compare/11.2.4...11.2.5) (2024-08-04)
 
 
