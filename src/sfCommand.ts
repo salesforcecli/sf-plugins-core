@@ -399,12 +399,14 @@ export abstract class SfCommand<T> extends Command {
     throw sfCommandError;
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
-  protected async finally(): Promise<void> {
+  // eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any
+  protected async finally(_: Error | undefined): Promise<any> {
     // flush warnings
     this.warningsToFlush.forEach((warning) => {
       this.warn(warning);
     });
+
+    return super.finally(_);
   }
 
   public abstract run(): Promise<T>;
