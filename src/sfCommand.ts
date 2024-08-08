@@ -153,6 +153,7 @@ export abstract class SfCommand<T> extends Command {
   public configAggregator!: ConfigAggregator;
 
   private warnings: SfCommand.Warning[] = [];
+  private warningsToFlush: SfCommand.Warning[] = [];
   private ux: Ux;
   private lifecycle: Lifecycle;
 
@@ -330,7 +331,7 @@ export abstract class SfCommand<T> extends Command {
     }
     // eslint-disable-next-line @typescript-eslint/require-await
     this.lifecycle.onWarning(async (warning: string) => {
-      this.warn(warning);
+      this.warningsToFlush.push(warning);
     });
     const options = {
       Command: this.ctor,
@@ -396,6 +397,14 @@ export abstract class SfCommand<T> extends Command {
     process.emit('sfCommandError', sfCommandError, this.id);
 
     throw sfCommandError;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/require-await
+  protected async finally(): Promise<void> {
+    // flush warnings
+    this.warningsToFlush.forEach((warning) => {
+      this.warn(warning);
+    });
   }
 
   public abstract run(): Promise<T>;
