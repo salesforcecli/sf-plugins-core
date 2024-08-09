@@ -1,3 +1,17 @@
+# [11.3.0](https://github.com/salesforcecli/sf-plugins-core/compare/11.2.8...11.3.0) (2024-08-09)
+
+
+### Bug Fixes
+
+* correct method signature ([df4b2b7](https://github.com/salesforcecli/sf-plugins-core/commit/df4b2b73bb1a110377cd71ac4a6e017fc707991a))
+
+
+### Features
+
+* flush intra-command warnings at the end ([68cafb3](https://github.com/salesforcecli/sf-plugins-core/commit/68cafb3d953ab4c58e50c43e7b84533a341dec6f))
+
+
+
 ## [11.2.8](https://github.com/salesforcecli/sf-plugins-core/compare/11.2.7...11.2.8) (2024-08-05)
 
 
