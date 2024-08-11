@@ -511,10 +511,10 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
-"@jsforce/jsforce-node@^3.3.2":
-  version "3.3.3"
-  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.3.3.tgz#cef75219f467233b8e0c537e2026bd5860dc6fcb"
-  integrity sha512-oIheBN4vB9xvSaAjJXi1lcXe3KLShZKGITebD6X5ssoGZ+FPqoaXbI1I2yVWeWg8aWHh8VqhFRdz3duc7Rq8/w==
+"@jsforce/jsforce-node@^3.4.0":
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/@jsforce/jsforce-node/-/jsforce-node-3.4.1.tgz#36f5cba775b395eeedba676a78eafe447c3f4b28"
+  integrity sha512-PsBKfglH0/8W/Srr4LsxEFsVmjmZjEj/T4XLGpbBoK8yVObwbiMk4VqwA6XwiA6SHqnEqqQbHZxk2rr7dZC+4A==
   dependencies:
     "@sindresorhus/is" "^4"
     abort-controller "^3.0.0"
@@ -578,12 +578,12 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@salesforce/core@^8.2.3", "@salesforce/core@^8.2.7":
-  version "8.2.7"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.2.7.tgz#ea9f7c5b4255ed71c4ae68dd1eb6e495a8476c5a"
-  integrity sha512-vrD2ArIaYS+6XNbW/FekgdwzhD3Pe5IpUwe2vtLKjw2QIWMD/4zkGuPGd8QIgw5VHbEZeXQSKPSVhD41+VJHRg==
+"@salesforce/core@^8.2.7", "@salesforce/core@^8.3.0":
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.3.0.tgz#b61fb6c0c0dec5664ce12ba62ebe35136ae33878"
+  integrity sha512-HZchC42oGJ5RQsG9HpAb1bT7ohjB31ATDz46ryMvLngMmrfHnyzv2mlIi6UdYkJ/2meH2BJkibHi8paPrtF+/A==
   dependencies:
-    "@jsforce/jsforce-node" "^3.3.2"
+    "@jsforce/jsforce-node" "^3.4.0"
     "@salesforce/kit" "^3.1.6"
     "@salesforce/schemas" "^1.9.0"
     "@salesforce/ts-types" "^2.0.10"
@@ -918,7 +918,7 @@
     "@typescript-eslint/typescript-estree" "6.21.0"
     semver "^7.5.4"
 
-"@typescript-eslint/utils@^7.17.0":
+"@typescript-eslint/utils@^7.18.0":
   version "7.18.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-7.18.0.tgz#bca01cde77f95fc6a8d5b0dbcbfb3d6ca4be451f"
   integrity sha512-kK0/rNa2j74XuHVcoCZxdFBMF+aq/vH83CXAOHieC+2Gis4mF8jJXT5eAfyD3K0sAxtPuwxaIOIOvhwzVDt/kw==
@@ -2089,13 +2089,13 @@ eslint-plugin-jsdoc@^46.10.1:
     semver "^7.5.4"
     spdx-expression-parse "^4.0.0"
 
-eslint-plugin-sf-plugin@^1.20.1:
-  version "1.20.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.20.1.tgz#bdde7cd6b62df1f707770273768a4fecdf901cfa"
-  integrity sha512-Mf4gC4I87h+coOpwh2uIRbhCzTGDGX7QskLGzst7fktzXkCwsIXMVic6NHPWSWIA6U8IU4g5MwMiZjuXqJTwdA==
+eslint-plugin-sf-plugin@^1.20.4:
+  version "1.20.4"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.20.4.tgz#9d99f76cd316939222231f74bb65fc76ddd7fee4"
+  integrity sha512-lpuF4XGVenrQotd0cUZhgZ4rLDubytWPJBzmMCIovZdqyGYzgD68MGofDSLFzmbhKfa2fX1Pndljru6/GjVyGQ==
   dependencies:
-    "@salesforce/core" "^8.2.3"
-    "@typescript-eslint/utils" "^7.17.0"
+    "@salesforce/core" "^8.3.0"
+    "@typescript-eslint/utils" "^7.18.0"
 
 eslint-plugin-unicorn@^50.0.1:
   version "50.0.1"
