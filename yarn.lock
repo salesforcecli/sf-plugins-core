@@ -604,12 +604,13 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/multi-stage-output@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@oclif/multi-stage-output/-/multi-stage-output-0.2.1.tgz#2f03992de174304c2a11ee48e864fef1396a0003"
-  integrity sha512-r5IbEcJ+ZDpMsaaTHqE1FAz4oXOMo3MLSKvRst0ye6CoEkv++UpYWBMGX0KBsvbfEpdrtHBvIhKcmYXTkFQ2Bw==
+"@oclif/multi-stage-output@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@oclif/multi-stage-output/-/multi-stage-output-0.2.2.tgz#c54c65072fe7bf2421799ab25a1208706a4e50af"
+  integrity sha512-LvVautQ1zh2kuenrLrgVO4ckYfoWDJgQyLbVCAORAYLHg5nw+IprTL8Ty1JHzf/D42l9YdQDCjkdYIoSmrwfuQ==
   dependencies:
     "@oclif/core" "^4"
+    "@types/react" "^18.3.3"
     change-case "^5.4.4"
     cli-spinners "^2"
     figures "^6.1.0"
@@ -835,6 +836,19 @@
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@types/normalize-package-data/-/normalize-package-data-2.4.1.tgz#d3357479a0fdfdd5907fe67e17e0a85c906e1301"
   integrity sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==
+
+"@types/prop-types@*":
+  version "15.7.12"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.12.tgz#12bb1e2be27293c1406acb6af1c3f3a1481d98c6"
+  integrity sha512-5zvhXYtRNRluoE/jAp4GVsSduVUzNWKkOZrCDBWYtE7biZywwdC2AcEzg+cSMLFRfVgeAFqpfNabiPjxFddV1Q==
+
+"@types/react@^18.3.3":
+  version "18.3.3"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.3.tgz#9679020895318b0915d7a3ab004d92d33375c45f"
+  integrity sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^3.0.2"
 
 "@types/semver@^7.5.0":
   version "7.5.8"
@@ -1775,6 +1789,11 @@ csprng@*:
   integrity sha512-D3WAbvvgUVIqSxUfdvLeGjuotsB32bvfVPd+AaaTWMtyUeC9zgCnw5xs94no89yFLVsafvY9dMZEhTwsY/ZecA==
   dependencies:
     sequin "*"
+
+csstype@^3.0.2:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
+  integrity sha512-M1uQkMl8rQK/szD0LNhtqxIPLpimGm8sOBwU7lLnCpSbTyY3yeU1Vc7l4KT5zT4s/yOxHH5O7tIuuLOCnLADRw==
 
 csv-parse@^5.5.2:
   version "5.5.6"
