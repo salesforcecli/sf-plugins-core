@@ -7,12 +7,12 @@
 
 import { MultiStageOutput as OclifMultiStageOutput, MultiStageOutputOptions } from '@oclif/multi-stage-output';
 
-/**
- * This class is a light wrapper around MultiStageOutput that allows us to
- * automatically suppress any actions if `--json` flag is present.
- */
 export class MultiStageOutput<T extends Record<string, unknown>> extends OclifMultiStageOutput<T> {
   public constructor(opts: MultiStageOutputOptions<T> & { outputEnabled: boolean }) {
-    if (opts.outputEnabled) super(opts);
+    const { outputEnabled, ...rest } = opts;
+    super(rest);
+    if (!outputEnabled) {
+      this.stop();
+    }
   }
 }
