@@ -17,6 +17,7 @@ import {
   StructuredMessage,
 } from '@salesforce/core';
 import type { AnyJson } from '@salesforce/ts-types';
+import { MultiStageOutput, MultiStageOutputOptions } from '@oclif/multi-stage-output';
 import { Progress } from './ux/progress.js';
 import { Spinner } from './ux/spinner.js';
 import { Ux } from './ux/ux.js';
@@ -312,6 +313,15 @@ export abstract class SfCommand<T> extends Command {
   // eslint-disable-next-line class-methods-use-this
   public async confirm({ message, ms = 10_000, defaultAnswer = false }: PromptInputs<boolean>): Promise<boolean> {
     return confirm({ message, ms, defaultAnswer });
+  }
+
+  public initStager<O extends Record<string, unknown>>(options: MultiStageOutputOptions<O>): MultiStageOutput<O> {
+    const ms = new MultiStageOutput<O>(options);
+    if (this.jsonEnabled()) {
+      ms.stop();
+    }
+
+    return ms;
   }
 
   public async _run<R>(): Promise<R> {
