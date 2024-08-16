@@ -8,6 +8,7 @@
 export { toHelpSection, parseVarArgs } from './util.js';
 export { Progress } from './ux/progress.js';
 export { Spinner } from './ux/spinner.js';
+export { MultiStageOutput } from './ux/multiStageOutput.js';
 export { Ux } from './ux/ux.js';
 export { StandardColors } from './ux/standardColors.js';
 

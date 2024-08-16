@@ -6,7 +6,7 @@
  */
 
 import ansis from 'ansis';
-import { ux } from '@oclif/core';
+import { ux } from '@oclif/core/ux';
 import { AnyJson } from '@salesforce/ts-types';
 import terminalLink from 'terminal-link';
 import { UxBase } from './base.js';
