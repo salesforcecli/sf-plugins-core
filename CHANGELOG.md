@@ -1,3 +1,12 @@
+## [11.3.6](https://github.com/salesforcecli/sf-plugins-core/compare/11.3.5...11.3.6) (2024-08-25)
+
+
+### Bug Fixes
+
+* **deps:** bump micromatch from 4.0.5 to 4.0.8 ([7ddcc48](https://github.com/salesforcecli/sf-plugins-core/commit/7ddcc480f956a7a8b5ef5884f1784127c741bfd7))
+
+
+
 ## [11.3.5](https://github.com/salesforcecli/sf-plugins-core/compare/11.3.4...11.3.5) (2024-08-25)
 
 
