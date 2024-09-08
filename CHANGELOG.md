@@ -1,3 +1,12 @@
+## [11.3.8](https://github.com/salesforcecli/sf-plugins-core/compare/11.3.7...11.3.8) (2024-09-08)
+
+
+### Bug Fixes
+
+* **deps:** bump @inquirer/password from 2.1.22 to 2.2.0 ([3f5c38e](https://github.com/salesforcecli/sf-plugins-core/commit/3f5c38ebed98c220bf3e2e440ccdca02834b74dc))
+
+
+
 ## [11.3.7](https://github.com/salesforcecli/sf-plugins-core/compare/11.3.6...11.3.7) (2024-09-01)
 
 
