@@ -1,3 +1,12 @@
+## [11.3.10](https://github.com/salesforcecli/sf-plugins-core/compare/11.3.9...11.3.10) (2024-09-12)
+
+
+### Bug Fixes
+
+* **deps:** bump path-to-regexp from 1.8.0 to 1.9.0 ([9b404b6](https://github.com/salesforcecli/sf-plugins-core/commit/9b404b6c2b529bf24445a44a3c7828a5edada3dc))
+
+
+
 ## [11.3.9](https://github.com/salesforcecli/sf-plugins-core/compare/11.3.8...11.3.9) (2024-09-08)
 
 
