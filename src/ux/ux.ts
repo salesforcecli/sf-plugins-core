@@ -9,9 +9,10 @@ import ansis from 'ansis';
 import { ux } from '@oclif/core';
 import { AnyJson } from '@salesforce/ts-types';
 import terminalLink from 'terminal-link';
+import { printTable, TableOptions } from '@oclif/table';
+import { env } from '@salesforce/kit';
 import { UxBase } from './base.js';
 import { Spinner } from './spinner.js';
-import { table, Columns as TableColumns, Options as TableOptions } from './table.js';
 import styledObject from './styledObject.js';
 
 /**
@@ -72,12 +73,21 @@ export class Ux extends UxBase {
   /**
    * Display a table to the console. This will be automatically suppressed if output is disabled.
    *
-   * @param data Data to be displayed
-   * @param columns Columns to display the data in
-   * @param options Options for how the table should be displayed
+   * @param options Table properties
    */
-  public table<T extends Ux.Table.Data>(data: T[], columns: Ux.Table.Columns<T>, options?: Ux.Table.Options): void {
-    this.maybeNoop(() => table(data, columns, { 'no-truncate': true, ...options }));
+  public table<T extends Record<string, unknown>>(options: TableOptions<T>): void {
+    this.maybeNoop(() =>
+      printTable({
+        ...options,
+        // Don't allow anyone to override these properties
+        borderStyle: 'headers-only-with-underline',
+        noStyle: env.getBoolean('SF_NO_TABLE_STYLE', false),
+        headerOptions: {
+          ...options.headerOptions,
+          formatter: 'capitalCase',
+        },
+      })
+    );
   }
 
   /**
@@ -129,13 +139,5 @@ export class Ux extends UxBase {
    */
   public styledHeader(text: string): void {
     this.maybeNoop(() => ux.stdout(ansis.dim('=== ') + ansis.bold(text) + '\n'));
-  }
-}
-
-export namespace Ux {
-  export namespace Table {
-    export type Data = Record<string, unknown>;
-    export type Columns<T extends Data> = TableColumns<T>;
-    export type Options = TableOptions;
   }
 }
