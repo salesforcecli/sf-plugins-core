@@ -1,6 +1,6 @@
 {
   "name": "@salesforce/sf-plugins-core",
-  "version": "11.3.10",
+  "version": "11.3.12",
   "description": "Utils for writing Salesforce CLI plugins",
   "main": "lib/exported",
   "types": "lib/exported.d.ts",
@@ -45,10 +45,10 @@
   "dependencies": {
     "@inquirer/confirm": "^3.1.22",
     "@inquirer/password": "^2.2.0",
-    "@oclif/core": "^4.0.19",
-    "@oclif/table": "^0.1.2",
+    "@oclif/table": "^0.1.17",
+    "@oclif/core": "^4.0.27",
     "@salesforce/core": "^8.5.1",
-    "@salesforce/kit": "^3.2.2",
+    "@salesforce/kit": "^3.2.3",
     "@salesforce/ts-types": "^2.0.12",
     "ansis": "^3.3.2",
     "cli-progress": "^3.12.0",
