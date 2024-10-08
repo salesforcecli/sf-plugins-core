@@ -35,6 +35,7 @@ describe('Ux', () => {
   Key   Value
  ─────────────
   foo   bar
+
 `);
     });
 
@@ -58,6 +59,7 @@ describe('Ux', () => {
   Key   Value
  ─────────────
   foo   bar
+
 `);
     });
 
