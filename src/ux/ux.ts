@@ -76,11 +76,32 @@ export class Ux extends UxBase {
    * @param options Table properties
    */
   public table<T extends Record<string, unknown>>(options: TableOptions<T>): void {
+    const borderStyles = [
+      'all',
+      'headers-only-with-outline',
+      'headers-only-with-underline',
+      'headers-only',
+      'horizontal-with-outline',
+      'horizontal',
+      'none',
+      'outline',
+      'vertical-with-outline',
+      'vertical',
+    ];
+    const determineBorderStyle = (): TableOptions<T>['borderStyle'] => {
+      const envVar = env.getString('SF_TABLE_BORDER_STYLE', 'headers-only-with-underline');
+      if (borderStyles.includes(envVar)) {
+        return envVar as TableOptions<T>['borderStyle'];
+      }
+
+      return 'headers-only-with-underline';
+    };
+
     this.maybeNoop(() =>
       printTable({
         ...options,
         // Don't allow anyone to override these properties
-        borderStyle: 'headers-only-with-underline',
+        borderStyle: determineBorderStyle(),
         noStyle: env.getBoolean('SF_NO_TABLE_STYLE', false),
         headerOptions: {
           ...options.headerOptions,
