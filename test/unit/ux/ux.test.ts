@@ -32,9 +32,11 @@ describe('Ux', () => {
         ux.table({ data: [{ key: 'foo', value: 'bar' }], title: 'Title' });
       });
       expect(stdout.replaceAll(' \n', '\n').trimEnd()).to.equal(`Title
-  Key   Value
- ─────────────
-  foo   bar`);
+┌─────┬───────┐
+│ Key │ Value │
+├─────┼───────┤
+│ foo │ bar   │
+└─────┴───────┘`);
     });
 
     it('should not log anything if output is not enabled', async () => {
@@ -54,9 +56,11 @@ describe('Ux', () => {
         ux.table(opts);
       });
       expect(stdout.replaceAll(' \n', '\n').trimEnd()).to.equal(`Title
-  Key   Value
- ─────────────
-  foo   bar`);
+┌─────┬───────┐
+│ Key │ Value │
+├─────┼───────┤
+│ foo │ bar   │
+└─────┴───────┘`);
     });
 
     it('should not log anything if output is not enabled', async () => {

@@ -88,13 +88,15 @@ export class Ux extends UxBase {
       'vertical-with-outline',
       'vertical',
     ];
+
+    const defaultStyle = 'vertical-with-outline';
     const determineBorderStyle = (): TableOptions<T>['borderStyle'] => {
-      const envVar = env.getString('SF_TABLE_BORDER_STYLE', 'headers-only-with-underline');
+      const envVar = env.getString('SF_TABLE_BORDER_STYLE', defaultStyle);
       if (borderStyles.includes(envVar)) {
         return envVar as TableOptions<T>['borderStyle'];
       }
 
-      return 'headers-only-with-underline';
+      return defaultStyle;
     };
 
     this.maybeNoop(() =>
