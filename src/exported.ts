@@ -9,6 +9,7 @@ export { toHelpSection, parseVarArgs } from './util.js';
 export { Progress } from './ux/progress.js';
 export { Spinner } from './ux/spinner.js';
 export { Ux } from './ux/ux.js';
+export { convertToNewTableAPI } from './ux/table.js';
 export { StandardColors } from './ux/standardColors.js';
 
 export { SfCommand, SfCommandInterface } from './sfCommand.js';

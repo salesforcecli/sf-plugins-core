@@ -13,11 +13,6 @@ import { stubUx, stubSfCommandUx, SfCommand, Ux, stubSpinner, Flags } from '../.
 const TABLE_DATA = Array.from({ length: 10 }).fill({ id: '123', name: 'foo', value: 'bar' }) as Array<
   Record<string, unknown>
 >;
-const TABLE_COLUMNS = {
-  id: { header: 'ID' },
-  name: {},
-  value: { header: 'TEST' },
-};
 
 class Cmd extends SfCommand<void> {
   public static flags = {
@@ -138,10 +133,10 @@ class Cmd extends SfCommand<void> {
   private runTable(): void {
     switch (this.flags.method) {
       case 'SfCommand':
-        this.table(TABLE_DATA, TABLE_COLUMNS);
+        this.table({ data: TABLE_DATA });
         break;
       case 'Ux':
-        new Ux().table(TABLE_DATA, TABLE_COLUMNS);
+        new Ux().table({ data: TABLE_DATA });
         break;
       default:
         throw new Error(`Invalid method: ${this.flags.method}`);
@@ -263,7 +258,7 @@ describe('Ux Stubs', () => {
 
     it('should stub table', async () => {
       await Cmd.run(['--table', '--method=SfCommand']);
-      expect(sfCommandUxStubs.table.firstCall.args).to.deep.equal([TABLE_DATA, TABLE_COLUMNS]);
+      expect(sfCommandUxStubs.table.firstCall.args).to.deep.equal([{ data: TABLE_DATA }]);
     });
 
     it('should stub url', async () => {
@@ -307,7 +302,7 @@ describe('Ux Stubs', () => {
 
     it('should stub table', async () => {
       await Cmd.run(['--table', '--method=Ux']);
-      expect(uxStubs.table.firstCall.args).to.deep.equal([TABLE_DATA, TABLE_COLUMNS]);
+      expect(uxStubs.table.firstCall.args).to.deep.equal([{ data: TABLE_DATA }]);
     });
 
     it('should stub url', async () => {
