@@ -61,7 +61,7 @@
     "@inquirer/type": "^1.5.2",
     "@salesforce/dev-scripts": "^10.2.10",
     "@types/cli-progress": "^3.11.6",
-    "eslint-plugin-sf-plugin": "^1.20.7",
+    "eslint-plugin-sf-plugin": "^1.20.8",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },
