@@ -8,7 +8,9 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import { ux as coreUx } from '@oclif/core';
+import { captureOutput } from '@oclif/test';
 import { Ux } from '../../../src/ux/ux.js';
+import { convertToNewTableAPI } from '../../../src/ux/table.js';
 
 describe('Ux', () => {
   let sandbox: sinon.SinonSandbox;
@@ -24,20 +26,49 @@ describe('Ux', () => {
   });
 
   describe('table', () => {
-    it('should log a table', () => {
-      const ux = new Ux();
-      ux.table([{ key: 'foo', value: 'bar' }], { key: {}, value: {} });
-      expect(stdoutStub.args).to.deep.equal([
-        ['\u001b[1m Key Value \u001b[22m'],
-        ['\u001b[1m ─── ───── \u001b[22m'],
-        [' foo bar   '],
-      ]);
+    it('should log a table', async () => {
+      const { stdout } = await captureOutput(async () => {
+        const ux = new Ux();
+        ux.table({ data: [{ key: 'foo', value: 'bar' }], title: 'Title' });
+      });
+      expect(stdout.replaceAll(' \n', '\n').trimEnd()).to.equal(`Title
+┌─────┬───────┐
+│ Key │ Value │
+├─────┼───────┤
+│ foo │ bar   │
+└─────┴───────┘`);
     });
 
-    it('should not log anything if output is not enabled', () => {
-      const ux = new Ux({ jsonEnabled: true });
-      ux.table([{ key: 'foo', value: 'bar' }], { key: {}, value: {} });
-      expect(stdoutStub.callCount).to.equal(0);
+    it('should not log anything if output is not enabled', async () => {
+      const { stdout } = await captureOutput(async () => {
+        const ux = new Ux({ jsonEnabled: true });
+        ux.table({ data: [{ key: 'foo', value: 'bar' }], title: 'Title' });
+      });
+      expect(stdout).to.equal('');
+    });
+  });
+
+  describe('table (with convertToNewTableAPI)', () => {
+    it('should log a table', async () => {
+      const { stdout } = await captureOutput(async () => {
+        const ux = new Ux();
+        const opts = convertToNewTableAPI([{ key: 'foo', value: 'bar' }], { key: {}, value: {} }, { title: 'Title' });
+        ux.table(opts);
+      });
+      expect(stdout.replaceAll(' \n', '\n').trimEnd()).to.equal(`Title
+┌─────┬───────┐
+│ Key │ Value │
+├─────┼───────┤
+│ foo │ bar   │
+└─────┴───────┘`);
+    });
+
+    it('should not log anything if output is not enabled', async () => {
+      const { stdout } = await captureOutput(async () => {
+        const ux = new Ux({ jsonEnabled: true });
+        ux.table(convertToNewTableAPI([{ key: 'foo', value: 'bar' }], { key: {}, value: {} }));
+      });
+      expect(stdout).to.equal('');
     });
   });
 

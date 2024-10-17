@@ -17,6 +17,7 @@ import {
   StructuredMessage,
 } from '@salesforce/core';
 import type { AnyJson } from '@salesforce/ts-types';
+import { TableOptions } from '@oclif/table';
 import { Progress } from './ux/progress.js';
 import { Spinner } from './ux/spinner.js';
 import { Ux } from './ux/ux.js';
@@ -235,8 +236,8 @@ export abstract class SfCommand<T> extends Command {
   /**
    * Display a table on the console. Will automatically be suppressed when --json flag is present.
    */
-  public table<R extends Ux.Table.Data>(data: R[], columns: Ux.Table.Columns<R>, options?: Ux.Table.Options): void {
-    this.ux.table(data, columns, options);
+  public table<R extends Record<string, unknown>>(options: TableOptions<R>): void {
+    this.ux.table(options);
   }
 
   /**

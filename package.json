@@ -20,7 +20,6 @@
     "prepack": "sf-prepack",
     "prepare": "sf-install",
     "test": "wireit",
-    "test:integration": "mocha test/**/*.integration.ts --timeout 30000",
     "test:only": "wireit"
   },
   "exports": {
@@ -46,6 +45,7 @@
   "dependencies": {
     "@inquirer/confirm": "^3.1.22",
     "@inquirer/password": "^2.2.0",
+    "@oclif/table": "^0.1.19",
     "@oclif/core": "^4.0.27",
     "@salesforce/core": "^8.5.1",
     "@salesforce/kit": "^3.2.3",
@@ -59,6 +59,7 @@
   },
   "devDependencies": {
     "@inquirer/type": "^1.5.2",
+    "@oclif/test": "^4.0.9",
     "@salesforce/dev-scripts": "^10.2.10",
     "@types/cli-progress": "^3.11.6",
     "eslint-plugin-sf-plugin": "^1.20.7",
