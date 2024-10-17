@@ -1,3 +1,12 @@
+## [12.0.1](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.0...12.0.1) (2024-10-17)
+
+
+### Bug Fixes
+
+* upgrade oclif/table ([20ccfcf](https://github.com/salesforcecli/sf-plugins-core/commit/20ccfcf2e5fe31c41bd01b582b482541b9d2b6cc))
+
+
+
 # [12.0.0](https://github.com/salesforcecli/sf-plugins-core/compare/11.3.12...12.0.0) (2024-10-17)
 
 
