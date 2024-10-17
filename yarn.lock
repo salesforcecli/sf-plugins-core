@@ -605,10 +605,10 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/table@^0.1.17":
-  version "0.1.17"
-  resolved "https://registry.yarnpkg.com/@oclif/table/-/table-0.1.17.tgz#8877663f7354ac96a6fc167448934572440c7634"
-  integrity sha512-x7ffsCMeqTM6oECg2cd3MDTGTWx19oOxIMEVOVk0qvsfrQfsecB4m7dQh9W6+VLvGg/bkxJKHB14Ytf8ieiqmw==
+"@oclif/table@^0.1.19":
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/@oclif/table/-/table-0.1.19.tgz#cf279e0d6ec2f3df4cdd2f8e55d7f6c4069f43d5"
+  integrity sha512-a659MZzfWcRa0IvrxJWkEhh3bU3JV1QQzExrj98A4SLZJ1NVuWsnkyMFc9IZ8iQsz1j3sLdiQ365xxrl1eJi8A==
   dependencies:
     "@oclif/core" "^4"
     "@types/react" "^18.3.11"
