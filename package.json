@@ -62,7 +62,7 @@
     "@oclif/test": "^4.0.9",
     "@salesforce/dev-scripts": "^10.2.10",
     "@types/cli-progress": "^3.11.6",
-    "eslint-plugin-sf-plugin": "^1.20.7",
+    "eslint-plugin-sf-plugin": "^1.20.9",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   },
