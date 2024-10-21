@@ -1,3 +1,12 @@
+## [12.0.2](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.1...12.0.2) (2024-10-21)
+
+
+### Bug Fixes
+
+* bump @oclif/table [skip-validate-pr] ([#641](https://github.com/salesforcecli/sf-plugins-core/issues/641)) ([1a2a5b4](https://github.com/salesforcecli/sf-plugins-core/commit/1a2a5b424458be5c2e240809c59eb594f2b0597c))
+
+
+
 ## [12.0.1](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.0...12.0.1) (2024-10-17)
 
 
