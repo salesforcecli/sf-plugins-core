@@ -1,3 +1,12 @@
+## [12.0.6](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.5...12.0.6) (2024-10-22)
+
+
+### Bug Fixes
+
+* export makeTable ([5fb127e](https://github.com/salesforcecli/sf-plugins-core/commit/5fb127e0a061d6127fcad7e005fc1b6679afa73d))
+
+
+
 ## [12.0.5](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.4...12.0.5) (2024-10-22)
 
 
