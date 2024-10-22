@@ -1,3 +1,12 @@
+## [12.0.7](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.6...12.0.7) (2024-10-22)
+
+
+### Reverts
+
+* Revert "fix: export makeTable" ([897e2ae](https://github.com/salesforcecli/sf-plugins-core/commit/897e2aefb0c04d48914a224626b45d1f4ebb15e0))
+
+
+
 ## [12.0.6](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.5...12.0.6) (2024-10-22)
 
 
