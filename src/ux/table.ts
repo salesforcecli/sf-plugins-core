@@ -4,7 +4,8 @@
  * Licensed under the BSD 3-Clause license.
  * For full license text, see LICENSE.txt file in the repo root or https://opensource.org/licenses/BSD-3-Clause
  */
-import { TableOptions } from '@oclif/table';
+import { makeTable as oclifMakeTable, TableOptions } from '@oclif/table';
+import { env } from '@salesforce/kit';
 
 type Column<T extends Record<string, unknown>> = {
   extended: boolean;
@@ -55,4 +56,58 @@ export function convertToNewTableAPI<T extends Record<string, unknown>>(
   ) as Array<Record<string, unknown>>;
 
   return { data: d, title: options?.title, borderStyle: 'headers-only-with-underline', columns: cols };
+}
+
+export function getTableDefaults<T extends Record<string, unknown>>(
+  options: TableOptions<T>
+): Pick<TableOptions<T>, 'borderStyle' | 'noStyle' | 'headerOptions'> {
+  const borderStyles = [
+    'all',
+    'headers-only-with-outline',
+    'headers-only-with-underline',
+    'headers-only',
+    'horizontal-with-outline',
+    'horizontal',
+    'none',
+    'outline',
+    'vertical-with-outline',
+    'vertical',
+  ];
+
+  const defaultStyle = 'vertical-with-outline';
+  const determineBorderStyle = (): TableOptions<T>['borderStyle'] => {
+    const envVar = env.getString('SF_TABLE_BORDER_STYLE', defaultStyle);
+    if (borderStyles.includes(envVar)) {
+      return envVar as TableOptions<T>['borderStyle'];
+    }
+
+    return defaultStyle;
+  };
+
+  return {
+    borderStyle: determineBorderStyle(),
+    noStyle: env.getBoolean('SF_NO_TABLE_STYLE', false),
+    headerOptions: {
+      ...options.headerOptions,
+      formatter: 'capitalCase',
+    },
+  };
+}
+
+/**
+ * Generates a string representation of a table from the given options.
+ *
+ * Consumers should prefer to use the `table` method on the `Ux` class since that will
+ * respond appropriately to the presence of the `--json` flag.
+ *
+ * @template T - The type of the records in the table.
+ * @param {TableOptions<T>} options - The options to configure the table.
+ * @returns {string} The string representation of the table.
+ */
+export function makeTable<T extends Record<string, unknown>>(options: TableOptions<T>): string {
+  return oclifMakeTable({
+    ...options,
+    // Don't allow anyone to override these properties
+    ...getTableDefaults(options),
+  });
 }
