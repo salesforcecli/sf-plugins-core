@@ -99,6 +99,16 @@ export class Ux extends UxBase {
       return defaultStyle;
     };
 
+    const overflowOptions = ['wrap', 'truncate', 'truncate-middle', 'truncate-start', 'truncate-end'];
+    const determineOverflow = (): TableOptions<T>['overflow'] => {
+      const envVar = env.getString('SF_TABLE_OVERFLOW');
+      if (envVar && overflowOptions.includes(envVar)) {
+        return envVar as TableOptions<T>['overflow'];
+      }
+
+      return options.overflow;
+    };
+
     this.maybeNoop(() =>
       printTable({
         ...options,
@@ -109,6 +119,7 @@ export class Ux extends UxBase {
           ...options.headerOptions,
           formatter: 'capitalCase',
         },
+        overflow: determineOverflow(),
       })
     );
   }
