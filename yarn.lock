@@ -582,10 +582,10 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/table@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@oclif/table/-/table-0.3.0.tgz#b87ba5d20e7e84a1d4744e68c64093dbc8bd8de9"
-  integrity sha512-HzUUyNcoEzfyvzzXL1evLZmiMBZ2SnH41lNHpoKJZJR4uCdiMkOzlkLf9M326qLmRJTDpKnUHgIZD778T647gg==
+"@oclif/table@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@oclif/table/-/table-0.3.2.tgz#192a310488af67a7341ba203a0e3a0d67f1d8693"
+  integrity sha512-H8B41sRuXByT4E3ROSICbiQBbZDD3Kw30vYkJlPvKbE5QGEd11hPo+P9ahdGLA3AY0SkTflfTily8fFhHT0WDA==
   dependencies:
     "@oclif/core" "^4"
     "@types/react" "^18.3.12"
