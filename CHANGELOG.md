@@ -1,3 +1,12 @@
+## [12.0.13](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.12...12.0.13) (2024-11-17)
+
+
+### Bug Fixes
+
+* **deps:** bump cross-spawn from 7.0.3 to 7.0.5 ([f26bcd0](https://github.com/salesforcecli/sf-plugins-core/commit/f26bcd09c55d456c01848b95b5f294fcbbd28633))
+
+
+
 ## [12.0.12](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.11...12.0.12) (2024-11-17)
 
 
