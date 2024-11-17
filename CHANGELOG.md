@@ -1,3 +1,12 @@
+## [12.0.12](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.11...12.0.12) (2024-11-17)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/core from 4.0.27 to 4.0.32 ([38e68fb](https://github.com/salesforcecli/sf-plugins-core/commit/38e68fbcd21be95ffa4c818cc63089c3f963329b))
+
+
+
 ## [12.0.11](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.10...12.0.11) (2024-10-30)
 
 
