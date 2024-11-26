@@ -1,3 +1,12 @@
+# [12.1.0](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.13...12.1.0) (2024-11-26)
+
+
+### Features
+
+* add makeTable method ([90e4de7](https://github.com/salesforcecli/sf-plugins-core/commit/90e4de770365a579719b1cb83188f8f2fa70d4f9))
+
+
+
 ## [12.0.13](https://github.com/salesforcecli/sf-plugins-core/compare/12.0.12...12.0.13) (2024-11-17)
 
 
