@@ -9,11 +9,11 @@ import ansis from 'ansis';
 import { ux } from '@oclif/core';
 import { AnyJson } from '@salesforce/ts-types';
 import terminalLink from 'terminal-link';
-import { printTable, TableOptions } from '@oclif/table';
-import { env } from '@salesforce/kit';
+import { makeTable, printTable, TableOptions } from '@oclif/table';
 import { UxBase } from './base.js';
 import { Spinner } from './spinner.js';
 import styledObject from './styledObject.js';
+import { getDefaults } from './table.js';
 
 /**
  * UX methods for plugins. Automatically suppress console output if outputEnabled is set to false.
@@ -76,52 +76,26 @@ export class Ux extends UxBase {
    * @param options Table properties
    */
   public table<T extends Record<string, unknown>>(options: TableOptions<T>): void {
-    const borderStyles = [
-      'all',
-      'headers-only-with-outline',
-      'headers-only-with-underline',
-      'headers-only',
-      'horizontal-with-outline',
-      'horizontal',
-      'none',
-      'outline',
-      'vertical-with-outline',
-      'vertical',
-    ];
-
-    const defaultStyle = 'vertical-with-outline';
-    const determineBorderStyle = (): TableOptions<T>['borderStyle'] => {
-      const envVar = env.getString('SF_TABLE_BORDER_STYLE', defaultStyle);
-      if (borderStyles.includes(envVar)) {
-        return envVar as TableOptions<T>['borderStyle'];
-      }
-
-      return defaultStyle;
-    };
-
-    const overflowOptions = ['wrap', 'truncate', 'truncate-middle', 'truncate-start', 'truncate-end'];
-    const determineOverflow = (): TableOptions<T>['overflow'] => {
-      const envVar = env.getString('SF_TABLE_OVERFLOW');
-      if (envVar && overflowOptions.includes(envVar)) {
-        return envVar as TableOptions<T>['overflow'];
-      }
-
-      return options.overflow;
-    };
-
     this.maybeNoop(() =>
       printTable({
         ...options,
-        // Don't allow anyone to override these properties
-        borderStyle: determineBorderStyle(),
-        noStyle: env.getBoolean('SF_NO_TABLE_STYLE', false),
-        headerOptions: {
-          ...options.headerOptions,
-          formatter: 'capitalCase',
-        },
-        overflow: determineOverflow(),
+        ...getDefaults<T>(options),
       })
     );
+  }
+
+  /**
+   * Return a string rendering of a table.
+   *
+   * @param options Table properties
+   * @returns string rendering of a table
+   */
+  // eslint-disable-next-line class-methods-use-this
+  public makeTable<T extends Record<string, unknown>>(options: TableOptions<T>): string {
+    return makeTable({
+      ...options,
+      ...getDefaults<T>(options),
+    });
   }
 
   /**

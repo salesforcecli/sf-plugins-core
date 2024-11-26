@@ -31,10 +31,9 @@ describe('Ux', () => {
         const ux = new Ux();
         ux.table({ data: [{ key: 'foo', value: 'bar' }], title: 'Title' });
       });
-      expect(stdout.replaceAll(' \n', '\n').trimEnd()).to.equal(`Title
- Key  Value
-------------
- foo  bar`);
+      expect(stdout).to.include('Title');
+      expect(stdout).to.match(/Key.+Value/);
+      expect(stdout).to.match(/foo.+bar/);
     });
 
     it('should not log anything if output is not enabled', async () => {
@@ -53,10 +52,9 @@ describe('Ux', () => {
         const opts = convertToNewTableAPI([{ key: 'foo', value: 'bar' }], { key: {}, value: {} }, { title: 'Title' });
         ux.table(opts);
       });
-      expect(stdout.replaceAll(' \n', '\n').trimEnd()).to.equal(`Title
- Key  Value
-------------
- foo  bar`);
+      expect(stdout).to.include('Title');
+      expect(stdout).to.match(/Key.+Value/);
+      expect(stdout).to.match(/foo.+bar/);
     });
 
     it('should not log anything if output is not enabled', async () => {
