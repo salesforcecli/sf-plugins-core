@@ -609,10 +609,10 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@salesforce/core@^8.5.1", "@salesforce/core@^8.6.4":
-  version "8.6.4"
-  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.6.4.tgz#39a8234c816ff644e11bcef9517411495ec6039a"
-  integrity sha512-ubksHYBjjv1zfU8Xv3ylzCVftIftBrh682r6PNMzH/LgRcSo8+u4Tgib0d14d85kcIb2ElonV2wPpnbpS+2Aww==
+"@salesforce/core@^8.5.1", "@salesforce/core@^8.8.0":
+  version "8.8.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/core/-/core-8.8.0.tgz#849c07ea3a2548ca201fc0fe8baef9b36a462194"
+  integrity sha512-HWGdRiy/MPCJ2KHz+W+cnqx0O9xhx9+QYvwP8bn9PE27wj0A/NjTi4xrqIWk1M+fE4dXHycE+8qPf4b540euvg==
   dependencies:
     "@jsforce/jsforce-node" "^3.6.1"
     "@salesforce/kit" "^3.2.2"
@@ -2197,12 +2197,12 @@ eslint-plugin-jsdoc@^46.10.1:
     semver "^7.5.4"
     spdx-expression-parse "^4.0.0"
 
-eslint-plugin-sf-plugin@^1.20.11:
-  version "1.20.11"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.20.11.tgz#a242763c6707bb4584f13f9cce75166fd22ab5a4"
-  integrity sha512-+0CVUtSZebF3klmiiGXuJtX8iozJq460V7k4eUnIYMdJtI13NdOubpY5JVMqq+a67arhkdklMR9QpcsUIp1zGg==
+eslint-plugin-sf-plugin@^1.20.13:
+  version "1.20.13"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-sf-plugin/-/eslint-plugin-sf-plugin-1.20.13.tgz#cebe116f1c8c44595ae67e0e1c9dc61f86f69652"
+  integrity sha512-jGiQn55k7TDPgpz9Wr2heNbyjGkFvpy+rgBMj7zDWSSJPLLePsLYF2CI4twF9lufQDzLxnO+BNUr+ZkChy+/TQ==
   dependencies:
-    "@salesforce/core" "^8.6.4"
+    "@salesforce/core" "^8.8.0"
     "@typescript-eslint/utils" "^7.18.0"
 
 eslint-plugin-unicorn@^50.0.1:
