@@ -1,3 +1,12 @@
+## [12.1.2](https://github.com/salesforcecli/sf-plugins-core/compare/12.1.1...12.1.2) (2025-01-06)
+
+
+### Bug Fixes
+
+* bump oclif table ([c42c7d8](https://github.com/salesforcecli/sf-plugins-core/commit/c42c7d8eb71453a6528972c0c305c0039bd74c4b))
+
+
+
 ## [12.1.1](https://github.com/salesforcecli/sf-plugins-core/compare/12.1.0...12.1.1) (2024-12-08)
 
 
