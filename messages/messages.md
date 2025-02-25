@@ -107,6 +107,10 @@ Try this:
 
 This command is currently in beta. Any aspect of this command can change without advanced notice. Don't use beta commands in your scripts.
 
+# warning.CommandInPreview
+
+This command is currently in developer preview. Developer preview commands will likely change before shipping, use at your own risk. Don't use developer preview commands in your scripts.
+
 # error.InvalidArgumentFormat
 
 Error in the following argument

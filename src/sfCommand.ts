@@ -327,9 +327,17 @@ export abstract class SfCommand<T> extends Command {
       ...(this.statics.requiresProject ? [assignProject()] : []),
     ]);
 
-    if (this.statics.state === 'beta') {
-      this.warn(messages.getMessage('warning.CommandInBeta'));
+    switch (this.statics.state) {
+      case 'beta':
+        this.warn(messages.getMessage('warning.CommandInBeta'));
+        break;
+      case 'preview':
+        this.warn(messages.getMessage('warning.CommandInPreview'));
+        break;
+      default:
+        break;
     }
+
     // eslint-disable-next-line @typescript-eslint/require-await
     this.lifecycle.onWarning(async (warning: string) => {
       this.warningsToFlush.push(warning);
