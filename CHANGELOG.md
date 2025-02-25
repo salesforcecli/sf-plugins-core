@@ -1,3 +1,12 @@
+# [12.2.0](https://github.com/salesforcecli/sf-plugins-core/compare/12.1.4...12.2.0) (2025-02-25)
+
+
+### Features
+
+* add a preview state for commands ([00d2d8a](https://github.com/salesforcecli/sf-plugins-core/commit/00d2d8a7a94a2a9a194c9173702a35f1423d0776))
+
+
+
 ## [12.1.4](https://github.com/salesforcecli/sf-plugins-core/compare/12.1.3...12.1.4) (2025-02-05)
 
 
