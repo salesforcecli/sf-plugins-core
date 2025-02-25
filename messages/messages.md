@@ -109,7 +109,7 @@ This command is currently in beta. Any aspect of this command can change without
 
 # warning.CommandInPreview
 
-This command is currently in preview. Preview commands will likely change before shipping, use at your own risk. Don't use preview commands in your scripts.
+This command is currently in developer preview. Developer preview commands will likely change before shipping, use at your own risk. Don't use developer preview commands in your scripts.
 
 # error.InvalidArgumentFormat
 
