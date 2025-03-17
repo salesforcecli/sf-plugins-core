@@ -1,3 +1,12 @@
+## [12.2.1](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.0...12.2.1) (2025-03-17)
+
+
+### Bug Fixes
+
+* update libs ([174d277](https://github.com/salesforcecli/sf-plugins-core/commit/174d277f422561d6d089809e8439fb18f6e86707))
+
+
+
 # [12.2.0](https://github.com/salesforcecli/sf-plugins-core/compare/12.1.4...12.2.0) (2025-02-25)
 
 
