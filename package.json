@@ -61,7 +61,7 @@
     "@types/cli-progress": "^3.11.6",
     "eslint-plugin-sf-plugin": "^1.20.15",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.8.3"
   },
   "publishConfig": {
     "access": "public"
