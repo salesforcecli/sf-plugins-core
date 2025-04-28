@@ -79,4 +79,23 @@ describe('errorFormatting.formatError()', () => {
     expect(errorOutput).to.contain('warnings: undefined');
     expect(errorOutput).to.contain('result: undefined');
   });
+
+  it('should have correct output for multiple errors in table format ', () => {
+    const sfError = SfError.create({
+      name: 'myError',
+      message: 'foo',
+      actions: ['bar'],
+      context: 'myContext',
+      exitCode: 8,
+      data: [
+        { errorCode: 'ERROR_1', message: 'error 1' },
+        { errorCode: 'ERROR_2', message: 'error 2' },
+      ],
+    });
+    const err = SfCommandError.from(sfError, 'thecommand');
+    const errorOutput = formatError(err);
+    expect(errorOutput).to.match(/Error Code.+Message/);
+    expect(errorOutput).to.match(/ERROR_1.+error 1/);
+    expect(errorOutput).to.match(/ERROR_2.+error 2/);
+  });
 });

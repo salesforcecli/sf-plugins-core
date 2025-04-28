@@ -10,6 +10,7 @@ import type { Ansis } from 'ansis';
 import { Mode, Messages, envVars } from '@salesforce/core';
 import { StandardColors } from './ux/standardColors.js';
 import { SfCommandError } from './SfCommandError.js';
+import { Ux } from './ux/ux.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -44,6 +45,7 @@ export const formatActions = (
 export const formatError = (error: SfCommandError): string =>
   [
     `${formatErrorPrefix(error)} ${error.message}`,
+    ...formatMultipleErrorMessages(error),
     ...formatActions(error.actions ?? []),
     error.stack && envVars.getString('SF_ENV') === Mode.DEVELOPMENT
       ? StandardColors.info(`\n*** Internal Diagnostic ***\n\n${inspect(error)}\n******\n`)
@@ -55,3 +57,25 @@ const formatErrorPrefix = (error: SfCommandError): string =>
 
 const formatErrorCode = (error: SfCommandError): string =>
   typeof error.code === 'string' || typeof error.code === 'number' ? ` (${error.code})` : '';
+
+const formatMultipleErrorMessages = (error: SfCommandError): string[] => {
+  if (!error.data || !Array.isArray(error.data) || error.data.length === 0) {
+    return [];
+  }
+
+  const errorData = error.data.map((d) => ({
+    errorCode: (d as { errorCode: string }).errorCode || '',
+    message: (d as { message: string }).message || '',
+  }));
+
+  const ux = new Ux();
+  return [
+    ux.makeTable({
+      data: errorData,
+      columns: [
+        { key: 'errorCode', name: 'Error Code' },
+        { key: 'message', name: 'Message' },
+      ],
+    }),
+  ];
+};

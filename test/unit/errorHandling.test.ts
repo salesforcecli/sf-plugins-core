@@ -6,7 +6,9 @@
  */
 import { expect } from 'chai';
 import { SfError } from '@salesforce/core/sfError';
-import { computeErrorCode, errorIsGack, errorIsTypeError } from '../../src/errorHandling.js';
+import { AnyJson } from '@salesforce/ts-types';
+import { Errors } from '@oclif/core';
+import { computeErrorCode, computeErrorData, errorIsGack, errorIsTypeError } from '../../src/errorHandling.js';
 import { SfCommandError } from '../../src/SfCommandError.js';
 
 describe('typeErrors', () => {
@@ -195,5 +197,54 @@ describe('SfCommandError.toJson()', () => {
       });
       expect(result.stack).to.be.a('string').and.include('myError: foo');
     });
+  });
+});
+
+describe('computeErrorData', () => {
+  interface ErrorWithData extends Error {
+    data?: AnyJson;
+  }
+
+  it('should return data from error.data when present', () => {
+    const sfError = SfError.create({
+      name: 'myError',
+      message: 'foo',
+      actions: ['bar'],
+      context: 'myContext',
+      exitCode: 8,
+      data: { foo: 'bar' },
+    });
+    expect(computeErrorData(sfError)).to.deep.equal({ foo: 'bar' });
+  });
+
+  it('should return cause.data when error.data is not present but cause.data is', () => {
+    const sfError = SfError.create({
+      name: 'myError',
+      message: 'foo',
+      actions: ['bar'],
+      context: 'myContext',
+      exitCode: 8,
+    });
+    const err: ErrorWithData = { name: 'testError', message: 'baz', data: { foo: 'baz' } };
+    sfError.cause = err;
+    expect(computeErrorData(sfError)).to.deep.equal({ foo: 'baz' });
+  });
+
+  it('should return undefined when no data or cause is present', () => {
+    const error = new Error('test error') as ErrorWithData;
+    expect(computeErrorData(error)).to.be.undefined;
+  });
+
+  it('should handle SfError with data', () => {
+    const error = new SfError('test error', 'TestError', [], 1, undefined);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    (error as any).data = { foo: 'bar' };
+    expect(computeErrorData(error)).to.deep.equal({ foo: 'bar' });
+  });
+
+  it('should handle CLIError with data', () => {
+    const err = new Errors.CLIError('Nonexistent flag: --INVALID\nSee more help with --help') as ErrorWithData;
+    err.data = { foo: 'bar' };
+    expect(computeErrorData(err)).to.deep.equal({ foo: 'bar' });
   });
 });
