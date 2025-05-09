@@ -7,7 +7,7 @@
 import { inspect } from 'node:util';
 import { SfError, StructuredMessage } from '@salesforce/core';
 import { AnyJson } from '@salesforce/ts-types';
-import { computeErrorCode, computeErrorData } from './errorHandling.js';
+import { computeErrorCode } from './errorHandling.js';
 
 // These types are 90% the same as SfErrorOptions (but they aren't exported to extend)
 type ErrorDataProperties = AnyJson;
@@ -75,7 +75,7 @@ export class SfCommandError extends SfError {
       code: 'code' in err && err.code ? err.code : exitCode.toString(10),
       cause: sfError.cause,
       commandName: 'commandName' in err ? err.commandName : commandName,
-      data: computeErrorData(err),
+      data: 'data' in err ? err.data : undefined,
       result: 'result' in err ? err.result : undefined,
       context: 'context' in err ? err.context : commandName,
       warnings,

@@ -7,8 +7,6 @@
 
 import { SfError } from '@salesforce/core/sfError';
 import { Errors } from '@oclif/core';
-import { AnyJson } from '@salesforce/ts-types';
-
 /**
  *
  * Takes an error and returns an exit code.
@@ -44,27 +42,6 @@ export const computeErrorCode = (e: Error | SfError | Errors.CLIError): number =
 
   return typeof process.exitCode === 'number' ? process.exitCode : 1;
 };
-
-/**
- * Computes and extracts error data from different error types.
- *
- * 1. If the error has a 'data' property with a value, returns that data
- * 2. If the error has a 'cause' property with a value:
- *    - If the cause has a 'data' property, returns cause.data
- *    - If not, returns undefined
- * 3. If none of the above conditions are met, returns undefined
- *
- * @param e - The error object to extract data from. Can be a standard Error, SfError, or CLIError
- * @returns The extracted data as AnyJson or undefined if no data is found
- */
-export const computeErrorData = (e: Error | SfError | Errors.CLIError): AnyJson | undefined =>
-  'data' in e && e.data
-    ? e.data
-    : 'cause' in e && e.cause
-    ? 'data' in (e.cause as { data: AnyJson | undefined })
-      ? (e.cause as { data: AnyJson | undefined }).data
-      : undefined
-    : undefined;
 
 /** identifies gacks via regex.  Searches the error message, stack, and recursively checks the cause chain */
 export const errorIsGack = (error: Error | SfError): boolean => {

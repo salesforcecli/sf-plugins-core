@@ -7,7 +7,8 @@
 
 import { inspect } from 'node:util';
 import type { Ansis } from 'ansis';
-import { Mode, Messages, envVars } from '@salesforce/core';
+import { Mode, Messages, envVars, SfError } from '@salesforce/core';
+import { AnyJson } from '@salesforce/ts-types';
 import { StandardColors } from './ux/standardColors.js';
 import { SfCommandError } from './SfCommandError.js';
 import { Ux } from './ux/ux.js';
@@ -45,7 +46,7 @@ export const formatActions = (
 export const formatError = (error: SfCommandError): string =>
   [
     `${formatErrorPrefix(error)} ${error.message}`,
-    ...formatMultipleErrorMessages(error),
+    formatMultipleErrorMessages(error),
     ...formatActions(error.actions ?? []),
     error.stack && envVars.getString('SF_ENV') === Mode.DEVELOPMENT
       ? StandardColors.info(`\n*** Internal Diagnostic ***\n\n${inspect(error)}\n******\n`)
@@ -58,24 +59,27 @@ const formatErrorPrefix = (error: SfCommandError): string =>
 const formatErrorCode = (error: SfCommandError): string =>
   typeof error.code === 'string' || typeof error.code === 'number' ? ` (${error.code})` : '';
 
-const formatMultipleErrorMessages = (error: SfCommandError): string[] => {
-  if (!error.data || !Array.isArray(error.data) || error.data.length === 0) {
-    return [];
+const formatMultipleErrorMessages = (error: SfCommandError): string => {
+  if (error.code === 'MULTIPLE_API_ERRORS' && error.cause) {
+    const errorData = getErrorData(error.cause as SfError);
+    if (errorData && Array.isArray(errorData) && errorData.length > 0) {
+      const errors = errorData.map((d) => ({
+        errorCode: (d as { errorCode: string }).errorCode || '',
+        message: (d as { message: string }).message || '',
+      }));
+
+      const ux = new Ux();
+      return ux.makeTable({
+        data: errors,
+        columns: [
+          { key: 'errorCode', name: 'Error Code' },
+          { key: 'message', name: 'Message' },
+        ],
+      });
+    }
   }
-
-  const errorData = error.data.map((d) => ({
-    errorCode: (d as { errorCode: string }).errorCode || '',
-    message: (d as { message: string }).message || '',
-  }));
-
-  const ux = new Ux();
-  return [
-    ux.makeTable({
-      data: errorData,
-      columns: [
-        { key: 'errorCode', name: 'Error Code' },
-        { key: 'message', name: 'Message' },
-      ],
-    }),
-  ];
+  return '';
 };
+
+const getErrorData = (error: SfError): AnyJson | undefined =>
+  'data' in error && error.data ? error.data : error.cause ? getErrorData(error.cause as SfError) : undefined;
