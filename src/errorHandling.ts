@@ -7,6 +7,7 @@
 
 import { SfError } from '@salesforce/core/sfError';
 import { Errors } from '@oclif/core';
+
 /**
  *
  * Takes an error and returns an exit code.
