@@ -8,7 +8,7 @@
 import { inspect } from 'node:util';
 import type { Ansis } from 'ansis';
 import { Mode, Messages, envVars, SfError } from '@salesforce/core';
-import { AnyJson } from '@salesforce/ts-types';
+import { AnyJson, ensureString, isAnyJson } from '@salesforce/ts-types';
 import { StandardColors } from './ux/standardColors.js';
 import { SfCommandError } from './SfCommandError.js';
 import { Ux } from './ux/ux.js';
@@ -59,13 +59,21 @@ const formatErrorPrefix = (error: SfCommandError): string =>
 const formatErrorCode = (error: SfCommandError): string =>
   typeof error.code === 'string' || typeof error.code === 'number' ? ` (${error.code})` : '';
 
+type JsforceApiError = {
+  errorCode: string;
+  message?: AnyJson;
+};
+
+const isJsforceApiError = (item: AnyJson): item is JsforceApiError =>
+  typeof item === 'object' && item !== null && !Array.isArray(item) && ('errorCode' in item || 'message' in item);
+
 const formatMultipleErrorMessages = (error: SfCommandError): string => {
   if (error.code === 'MULTIPLE_API_ERRORS' && error.cause) {
-    const errorData = getErrorData(error.cause as SfError);
+    const errorData = getErrorData(error.cause);
     if (errorData && Array.isArray(errorData) && errorData.length > 0) {
-      const errors = errorData.map((d) => ({
-        errorCode: (d as { errorCode: string }).errorCode || '',
-        message: (d as { message: string }).message || '',
+      const errors = errorData.filter(isJsforceApiError).map((d) => ({
+        errorCode: d.errorCode,
+        message: ensureString(d.message ?? ''),
       }));
 
       const ux = new Ux();
@@ -81,5 +89,24 @@ const formatMultipleErrorMessages = (error: SfCommandError): string => {
   return '';
 };
 
-const getErrorData = (error: SfError): AnyJson | undefined =>
-  'data' in error && error.data ? error.data : error.cause ? getErrorData(error.cause as SfError) : undefined;
+/**
+ * Utility function to extract error data from an error object.
+ * Recursively traverses the error chain to find the first error that contains data.
+ * Returns undefined if no error in the chain contains data or if the input is not an Error/SfError.
+ *
+ * This is used in the top-level catch in sfCommand for deeply-nested error data.
+ *
+ * @param error - The error object to extract data from
+ * @returns The error data if found, undefined otherwise
+ */
+const getErrorData = (error: unknown): AnyJson | undefined => {
+  if (!(error instanceof Error || error instanceof SfError)) return undefined;
+
+  if ('data' in error && error.data && isAnyJson(error.data)) {
+    return error.data;
+  } else if (error.cause) {
+    return getErrorData(error.cause);
+  } else {
+    return undefined;
+  }
+};
