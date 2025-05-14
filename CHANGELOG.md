@@ -1,3 +1,12 @@
+## [12.2.2](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.1...12.2.2) (2025-05-14)
+
+
+### Bug Fixes
+
+* pretty-print `MULTIPLE_API_ERROR` data ([#677](https://github.com/salesforcecli/sf-plugins-core/issues/677)) ([5d193cf](https://github.com/salesforcecli/sf-plugins-core/commit/5d193cf4a7aa59dac2506ea81f3d11dd9f93b6b4)), closes [#680](https://github.com/salesforcecli/sf-plugins-core/issues/680)
+
+
+
 ## [12.2.1](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.0...12.2.1) (2025-03-17)
 
 
