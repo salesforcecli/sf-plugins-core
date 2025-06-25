@@ -48,7 +48,7 @@
     "@inquirer/password": "^2.2.0",
     "@oclif/core": "^4.3.0",
     "@oclif/table": "^0.4.6",
-    "@salesforce/core": "^8.10.0",
+    "@salesforce/core": "^8.15.0",
     "@salesforce/kit": "^3.2.3",
     "@salesforce/ts-types": "^2.0.12",
     "ansis": "^3.3.2",
