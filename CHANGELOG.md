@@ -1,3 +1,12 @@
+## [12.2.3](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.2...12.2.3) (2025-06-25)
+
+
+### Bug Fixes
+
+* update to latest sfdx-core ([cacc018](https://github.com/salesforcecli/sf-plugins-core/commit/cacc018ac5a9bc1a372096d4fa5f2caad715409e))
+
+
+
 ## [12.2.2](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.1...12.2.2) (2025-05-14)
 
 
