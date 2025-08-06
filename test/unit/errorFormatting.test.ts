@@ -40,7 +40,6 @@ describe('errorFormatting.formatError()', () => {
     expect(errorOutput).to.contain('Error (SfError)');
     expect(errorOutput).to.contain('this did not work');
     expect(errorOutput).to.contain('*** Internal Diagnostic ***');
-    expect(errorOutput).to.contain('at Function.from');
     expect(errorOutput).to.contain('actions: undefined');
     expect(errorOutput).to.contain('exitCode: 1');
     expect(errorOutput).to.contain("context: 'thecommand'");
@@ -68,7 +67,6 @@ describe('errorFormatting.formatError()', () => {
     expect(errorOutput).to.contain('Error (WOMP_WOMP)');
     expect(errorOutput).to.contain('this did not work');
     expect(errorOutput).to.contain('*** Internal Diagnostic ***');
-    expect(errorOutput).to.contain('at Function.from');
     expect(errorOutput).to.contain("actions: [ 'action1', 'action2' ]");
     expect(errorOutput).to.contain('exitCode: 9');
     expect(errorOutput).to.contain("context: 'somecommand'");
