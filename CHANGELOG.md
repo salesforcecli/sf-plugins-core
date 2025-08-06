@@ -1,3 +1,12 @@
+## [12.2.4](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.3...12.2.4) (2025-08-06)
+
+
+### Bug Fixes
+
+* bump deps ([22387c3](https://github.com/salesforcecli/sf-plugins-core/commit/22387c3cdb67f39afe279caf790cd1ae489660cc))
+
+
+
 ## [12.2.3](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.2...12.2.3) (2025-06-25)
 
 
