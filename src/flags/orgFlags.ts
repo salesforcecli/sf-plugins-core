@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import { Flags } from '@oclif/core';
-import { ConfigAggregator, Messages, Org, OrgConfigProperties } from '@salesforce/core';
+import { ConfigAggregator, Messages, Org, OrgConfigProperties, StateAggregator } from '@salesforce/core';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('@salesforce/sf-plugins-core', 'messages');
@@ -110,6 +110,14 @@ export const getHubOrThrow = async (aliasOrUsername?: string): Promise<Org> => {
 export const optionalOrgFlag = Flags.custom({
   char: 'o',
   noCacheDefault: true,
+  completion: {
+    options: async () => {
+      const stateAggregator = await StateAggregator.getInstance();
+      const orgs = (await stateAggregator.orgs.list()).map((o) => o.replace('.json', ''));
+      const aliases = Object.keys(stateAggregator.aliases.getAll());
+      return [...orgs, ...aliases];
+    },
+  },
   parse: async (input: string | undefined) => maybeGetOrg(input),
   summary: messages.getMessage('flags.optionalTargetOrg.summary'),
   default: async () => maybeGetOrg(),
@@ -148,6 +156,14 @@ export const requiredOrgFlag = Flags.custom({
   char: 'o',
   summary: messages.getMessage('flags.targetOrg.summary'),
   noCacheDefault: true,
+  completion: {
+    options: async () => {
+      const stateAggregator = await StateAggregator.getInstance();
+      const orgs = (await stateAggregator.orgs.list()).map((o) => o.replace('.json', ''));
+      const aliases = Object.keys(stateAggregator.aliases.getAll());
+      return [...orgs, ...aliases];
+    },
+  },
   parse: async (input: string | undefined) => getOrgOrThrow(input),
   default: async () => getOrgOrThrow(),
   defaultHelp: async (context) => {
@@ -188,6 +204,17 @@ export const requiredHubFlag = Flags.custom({
   noCacheDefault: true,
   parse: async (input: string | undefined) => getHubOrThrow(input),
   default: async () => getHubOrThrow(),
+  completion: {
+    options: async () => {
+      const sa = await StateAggregator.getInstance();
+      const devHubs = (await sa.orgs.readAll()).filter((o) => o.isDevHub).map((o) => o.username ?? '');
+      const devHubAliases = Object.entries(sa.aliases.getAll())
+        .filter(([, username]) => devHubs.includes(username ?? ''))
+        .map(([alias]) => alias);
+
+      return [...devHubs, ...devHubAliases];
+    },
+  },
   defaultHelp: async (context) => {
     if (context.options instanceof Org) {
       const org = context.options as Org;
@@ -225,6 +252,17 @@ export const optionalHubFlag = Flags.custom({
   noCacheDefault: true,
   parse: async (input: string | undefined) => maybeGetHub(input),
   default: async () => maybeGetHub(),
+  completion: {
+    options: async () => {
+      const sa = await StateAggregator.getInstance();
+      const devHubs = (await sa.orgs.readAll()).filter((o) => o.isDevHub).map((o) => o.username ?? '');
+      const devHubAliases = Object.entries(sa.aliases.getAll())
+        .filter(([, username]) => devHubs.includes(username ?? ''))
+        .map(([alias]) => alias);
+
+      return [...devHubs, ...devHubAliases];
+    },
+  },
   defaultHelp: async (context) => {
     if (context.options instanceof Org) {
       const org = context.options as Org;
