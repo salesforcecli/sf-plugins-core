@@ -1,3 +1,12 @@
+## [12.2.9](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.8...12.2.9) (2026-04-28)
+
+
+### Bug Fixes
+
+* updated to new @oclif/table @W-22163225@ ([f4facb5](https://github.com/salesforcecli/sf-plugins-core/commit/f4facb555369166312ca3f96da0305ba89cdcca5))
+
+
+
 ## [12.2.8](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.7...12.2.8) (2026-04-28)
 
 
