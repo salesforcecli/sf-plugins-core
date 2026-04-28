@@ -1,5 +1,5 @@
 /*
- * Copyright 2025, Salesforce, Inc.
+ * Copyright 2026, Salesforce, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 import { setTimeout } from 'node:timers/promises';
 import { SfError } from '@salesforce/core/sfError';
-import type { CancelablePromise } from '@inquirer/type';
 
 export type PromptInputs<T> = {
   /** text to display.  Do not include a question mark */
@@ -45,9 +44,8 @@ export const secretPrompt = async ({ message, ms = 60_000 }: PromptInputs<string
   return Promise.race([answer, handleTimeout(answer, ms)]);
 };
 
-const handleTimeout = async <T>(answer: CancelablePromise<T>, ms: number, defaultAnswer?: T): Promise<T> =>
+const handleTimeout = async <T>(answer: Promise<T>, ms: number, defaultAnswer?: T): Promise<T> =>
   setTimeout(ms, undefined, { ref: false }).then(() => {
-    answer.cancel();
     if (typeof defaultAnswer !== 'undefined') return defaultAnswer;
     throw new SfError('Prompt timed out.');
   });
