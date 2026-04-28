@@ -1,3 +1,14 @@
+## [12.2.7](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.6...12.2.7) (2026-04-28)
+
+
+### Bug Fixes
+
+* unblocked compilation failures for @W-22163225@ ([1a2a8a7](https://github.com/salesforcecli/sf-plugins-core/commit/1a2a8a75ad5f8cf0624a190d92b4866f2a340848))
+* updated [@inquirer](https://github.com/inquirer) dependencies to resolve failing XNUTs @W-22163225@ ([9753fbe](https://github.com/salesforcecli/sf-plugins-core/commit/9753fbe338bfc6e2c2098f2e1d3e8a9eb34d6efc))
+* updated internal deps @W-22163225@ ([40219de](https://github.com/salesforcecli/sf-plugins-core/commit/40219de40bcec73bb87ebd94e9a092b7f78a2ea7))
+
+
+
 ## [12.2.6](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.5...12.2.6) (2025-11-26)
 
 
