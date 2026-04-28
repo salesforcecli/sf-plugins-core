@@ -1,3 +1,12 @@
+## [12.2.10](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.9...12.2.10) (2026-04-28)
+
+
+### Bug Fixes
+
+* **deps:** bump flatted from 3.2.7 to 3.4.2 ([29264cc](https://github.com/salesforcecli/sf-plugins-core/commit/29264cc42fa247974fb5c211fa38751ae8e34f14))
+
+
+
 ## [12.2.9](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.8...12.2.9) (2026-04-28)
 
 
