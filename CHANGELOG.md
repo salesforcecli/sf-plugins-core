@@ -1,3 +1,12 @@
+## [12.2.8](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.7...12.2.8) (2026-04-28)
+
+
+### Bug Fixes
+
+* **deps:** bump lodash from 4.17.21 to 4.18.1 ([b52543d](https://github.com/salesforcecli/sf-plugins-core/commit/b52543d7b0a1dd6eb3f342bd3d339e42bfe62403))
+
+
+
 ## [12.2.7](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.6...12.2.7) (2026-04-28)
 
 
