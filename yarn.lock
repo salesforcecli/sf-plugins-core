@@ -629,10 +629,10 @@
     wordwrap "^1.0.0"
     wrap-ansi "^7.0.0"
 
-"@oclif/table@^0.5.5":
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/@oclif/table/-/table-0.5.5.tgz#bbe455aa636d95ae99723efac9ede1884adb891f"
-  integrity sha512-ppjPNFf5bL28KiiMIxyDwXhGJ3ke7MFg532k8bkaInavv84zRgoLhc+5ocZMX1EPToqgSsZAn8bQhaZz07enww==
+"@oclif/table@^0.5.6":
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/@oclif/table/-/table-0.5.6.tgz#cc22cc3f620c9f23bdb734b0dd6f97cdda4a0f28"
+  integrity sha512-W0SlIIkcqYxRSbZVw+VnFPT6hStjm5OoMduli35569OXezBPS92yNsoIA9jAuAt3lVIGlnUIetnAUUjs+yLHKg==
   dependencies:
     "@types/react" "^18.3.12"
     change-case "^5.4.4"
@@ -641,7 +641,7 @@
     natural-orderby "^3.0.2"
     object-hash "^3.0.0"
     react "^18.3.1"
-    string-width "^8.2.0"
+    string-width "^8.2.1"
     strip-ansi "^7.1.2"
     wrap-ansi "^9.0.2"
 
@@ -5171,7 +5171,7 @@ string-width@^7.0.0:
     get-east-asian-width "^1.0.0"
     strip-ansi "^7.1.0"
 
-string-width@^8.2.0:
+string-width@^8.2.1:
   version "8.2.1"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-8.2.1.tgz#165089cfa527cc88fbc23dd73313f5e334af1ea1"
   integrity sha512-IIaP0g3iy9Cyy18w3M9YcaDudujEAVHKt3a3QJg1+sr/oX96TbaGUubG0hJyCjCBThFH+tFpcIyoUHUn1ogaLA==
@@ -5234,14 +5234,7 @@ strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   dependencies:
     ansi-regex "^5.0.1"
 
-strip-ansi@^7.0.1, strip-ansi@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-7.1.0.tgz#d5b6568ca689d8561370b0707685d22434faff45"
-  integrity sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==
-  dependencies:
-    ansi-regex "^6.0.1"
-
-strip-ansi@^7.1.2:
+strip-ansi@^7.0.1, strip-ansi@^7.1.0, strip-ansi@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-7.1.2.tgz#132875abde678c7ea8d691533f2e7e22bb744dba"
   integrity sha512-gmBGslpoQJtgnMAvOVqGZpEz9dyoKTCzy2nfz/n8aIFhN/jCE/rCmcxabB6jOOHV+0WNnylOxaxBQPSvcWklhA==
