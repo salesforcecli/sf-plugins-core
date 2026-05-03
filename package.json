@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@inquirer/type": "^4.0.5",
-    "@oclif/test": "^4.1.9",
+    "@oclif/test": "^4.1.18",
     "@salesforce/dev-scripts": "^11.0.4",
     "@types/cli-progress": "^3.11.6",
     "eslint-plugin-sf-plugin": "^1.20.15",
