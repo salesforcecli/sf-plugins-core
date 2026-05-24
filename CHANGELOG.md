@@ -1,3 +1,12 @@
+## [12.2.20](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.19...12.2.20) (2026-05-24)
+
+
+### Bug Fixes
+
+* **deps:** bump ws from 8.18.0 to 8.21.0 ([8047804](https://github.com/salesforcecli/sf-plugins-core/commit/8047804982c2bf3bacd0d2dcd952131cc131c20e))
+
+
+
 ## [12.2.19](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.18...12.2.19) (2026-05-24)
 
 
