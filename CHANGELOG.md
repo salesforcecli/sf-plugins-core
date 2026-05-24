@@ -1,3 +1,12 @@
+## [12.2.18](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.17...12.2.18) (2026-05-24)
+
+
+### Bug Fixes
+
+* **deps:** bump @inquirer/password from 5.0.12 to 5.0.13 ([7f3b849](https://github.com/salesforcecli/sf-plugins-core/commit/7f3b8494f9d31fb26a034f92875e76fdf066c773))
+
+
+
 ## [12.2.17](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.16...12.2.17) (2026-05-15)
 
 
