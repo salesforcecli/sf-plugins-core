@@ -1,3 +1,12 @@
+## [12.2.19](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.18...12.2.19) (2026-05-24)
+
+
+### Bug Fixes
+
+* **deps:** bump @oclif/table from 0.5.7 to 0.5.9 ([1074b5f](https://github.com/salesforcecli/sf-plugins-core/commit/1074b5f7583d09a2a922d20bb021c5ad0380ced8))
+
+
+
 ## [12.2.18](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.17...12.2.18) (2026-05-24)
 
 
