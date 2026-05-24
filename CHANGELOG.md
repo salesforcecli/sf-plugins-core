@@ -1,3 +1,12 @@
+## [12.2.21](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.20...12.2.21) (2026-05-24)
+
+
+### Bug Fixes
+
+* **deps:** bump @salesforce/core from 8.30.0 to 8.31.0 ([7f518e4](https://github.com/salesforcecli/sf-plugins-core/commit/7f518e4cb74906980c96d09b2e0424b0c2885d1f))
+
+
+
 ## [12.2.20](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.19...12.2.20) (2026-05-24)
 
 
