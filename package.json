@@ -56,7 +56,7 @@
     "terminal-link": "^3.0.0"
   },
   "devDependencies": {
-    "@inquirer/type": "^4.0.5",
+    "@inquirer/type": "^4.0.7",
     "@oclif/test": "^4.1.18",
     "@salesforce/dev-scripts": "^11.0.4",
     "@types/cli-progress": "^3.11.6",
