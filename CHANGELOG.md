@@ -1,3 +1,12 @@
+## [12.2.23](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.22...12.2.23) (2026-05-31)
+
+
+### Bug Fixes
+
+* **deps:** bump @inquirer/confirm from 6.0.12 to 6.1.1 ([79a033c](https://github.com/salesforcecli/sf-plugins-core/commit/79a033cb003a202358e252b7e3fbae063d6e101e))
+
+
+
 ## [12.2.22](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.21...12.2.22) (2026-05-25)
 
 
