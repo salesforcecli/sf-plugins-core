@@ -1,3 +1,12 @@
+## [12.2.25](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.24...12.2.25) (2026-06-26)
+
+
+### Bug Fixes
+
+* bumping sfdx-core version @W-23121570@ ([#723](https://github.com/salesforcecli/sf-plugins-core/issues/723)) ([c93d0c9](https://github.com/salesforcecli/sf-plugins-core/commit/c93d0c9ce69725933ba555a8dfbffe95fe0a5bba))
+
+
+
 ## [12.2.24](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.23...12.2.24) (2026-05-31)
 
 
