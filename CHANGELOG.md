@@ -1,3 +1,12 @@
+## [12.2.26](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.25...12.2.26) (2026-07-08)
+
+
+### Bug Fixes
+
+* use SF env var in loglevel msg ([15de11b](https://github.com/salesforcecli/sf-plugins-core/commit/15de11bf4ff6d3c9f33ec48900e6e9024680b52d))
+
+
+
 ## [12.2.25](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.24...12.2.25) (2026-06-26)
 
 
