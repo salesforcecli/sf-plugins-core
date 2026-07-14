@@ -41,7 +41,7 @@
     "/messages"
   ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "dependencies": {
     "@inquirer/confirm": "^6.1.1",
