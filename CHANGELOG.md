@@ -1,3 +1,12 @@
+## [12.2.27](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.26...12.2.27) (2026-07-24)
+
+
+### Bug Fixes
+
+* **deps:** bump linkify-it from 5.0.0 to 5.0.2 ([b7464d2](https://github.com/salesforcecli/sf-plugins-core/commit/b7464d20d76d9d7f7ae0eb6670d4a47e7e953ef9))
+
+
+
 ## [12.2.26](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.25...12.2.26) (2026-07-08)
 
 
