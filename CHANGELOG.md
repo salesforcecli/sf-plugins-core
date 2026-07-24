@@ -1,3 +1,12 @@
+## [12.2.28](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.27...12.2.28) (2026-07-24)
+
+
+### Bug Fixes
+
+* **deps:** bump fast-uri from 3.1.2 to 3.1.4 ([a0ae60f](https://github.com/salesforcecli/sf-plugins-core/commit/a0ae60f029be258c1638701808d9565876623263))
+
+
+
 ## [12.2.27](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.26...12.2.27) (2026-07-24)
 
 
