@@ -1,3 +1,20 @@
+# [13.0.0](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.28...13.0.0) (2026-07-29)
+
+
+* feat!: require Node >=22, drop EOL Node versions @W-23480655@ ([2712d29](https://github.com/salesforcecli/sf-plugins-core/commit/2712d294958698b03675905b656b42a646d47c38))
+
+
+### BREAKING CHANGES
+
+* engines.node raised to >=22.0.0, dropping support for Node 18 and 20
+
+- engines.node bumped to >=22.0.0
+- @salesforce/kit bumped to ^4.0.0
+- @salesforce/ts-types bumped to ^3.0.0
+- @salesforce/core bumped to ^9.0.0
+
+
+
 ## [12.2.28](https://github.com/salesforcecli/sf-plugins-core/compare/12.2.27...12.2.28) (2026-07-24)
 
 
