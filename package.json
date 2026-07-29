@@ -46,7 +46,7 @@
   "dependencies": {
     "@inquirer/confirm": "^6.1.1",
     "@inquirer/password": "^5.1.1",
-    "@oclif/core": "^4.11.4",
+    "@oclif/core": "^4.11.11",
     "@oclif/table": "^0.5.9",
     "@salesforce/core": "^9.0.0",
     "@salesforce/kit": "^4.0.0",
