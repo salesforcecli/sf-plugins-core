@@ -343,6 +343,7 @@ export abstract class SfCommand<T> extends Command {
       case 'preview':
         this.warn(messages.getMessage('warning.CommandInPreview'));
         break;
+      case undefined:
       default:
         break;
     }

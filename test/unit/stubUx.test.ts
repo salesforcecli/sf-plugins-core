@@ -71,8 +71,6 @@ class Cmd extends SfCommand<void> {
         break;
       case 'Ux':
         throw new Error('Ux.info is not implemented');
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
     this.info('hello');
   }
@@ -85,8 +83,6 @@ class Cmd extends SfCommand<void> {
       case 'Ux':
         new Ux().log('hello');
         break;
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -97,8 +93,6 @@ class Cmd extends SfCommand<void> {
         break;
       case 'Ux':
         throw new Error('Ux.logSuccess is not implemented');
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -109,8 +103,6 @@ class Cmd extends SfCommand<void> {
         break;
       case 'Ux':
         throw new Error('Ux.logSensitive is not implemented');
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -121,8 +113,6 @@ class Cmd extends SfCommand<void> {
         break;
       case 'Ux':
         throw new Error('Ux.logToStderr is not implemented');
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -134,8 +124,6 @@ class Cmd extends SfCommand<void> {
       case 'Ux':
         new Ux().warn('hello');
         break;
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -147,8 +135,6 @@ class Cmd extends SfCommand<void> {
       case 'Ux':
         new Ux().table({ data: TABLE_DATA });
         break;
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -160,8 +146,6 @@ class Cmd extends SfCommand<void> {
       case 'Ux':
         new Ux().url('oclif', 'https://oclif.io');
         break;
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -173,8 +157,6 @@ class Cmd extends SfCommand<void> {
       case 'Ux':
         new Ux().styledHeader('hello');
         break;
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -186,8 +168,6 @@ class Cmd extends SfCommand<void> {
       case 'Ux':
         new Ux().styledObject({ foo: 'bar' });
         break;
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -199,8 +179,6 @@ class Cmd extends SfCommand<void> {
       case 'Ux':
         new Ux().styledJSON({ foo: 'bar' });
         break;
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 
@@ -214,8 +192,6 @@ class Cmd extends SfCommand<void> {
         new Ux().spinner.start('starting spinner');
         new Ux().spinner.stop('done');
         break;
-      default:
-        throw new Error(`Invalid method: ${this.flags.method}`);
     }
   }
 }

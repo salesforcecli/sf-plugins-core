@@ -73,7 +73,7 @@ const validate = (input: string, config: DurationFlagConfig): Duration => {
     if (typeof parsedInput !== 'number' || isNaN(parsedInput)) {
       throw messages.createError('errors.InvalidDuration');
     }
-  } catch (e) {
+  } catch {
     throw messages.createError('errors.InvalidDuration');
   }
 
