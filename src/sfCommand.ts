@@ -287,7 +287,7 @@ export abstract class SfCommand<T> extends Command {
   }
 
   // leaving AnyJson and unknown to maintain the public API.
-  // eslint-disable-next-line class-methods-use-this, @typescript-eslint/no-redundant-type-constituents
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   public logJson(json: AnyJson | unknown): void {
     // If `--json` is enabled, then the ux instance on the class will disable output, which
     // means that the logJson method will not output anything. So, we need to create a new
@@ -343,6 +343,7 @@ export abstract class SfCommand<T> extends Command {
       case 'preview':
         this.warn(messages.getMessage('warning.CommandInPreview'));
         break;
+      case undefined:
       default:
         break;
     }
@@ -417,7 +418,7 @@ export abstract class SfCommand<T> extends Command {
     throw sfCommandError;
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async finally(_: Error | undefined): Promise<any> {
     // flush warnings
     this.warningsToFlush.forEach((warning) => {
