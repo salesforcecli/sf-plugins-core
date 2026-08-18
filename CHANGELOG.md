@@ -1,3 +1,12 @@
+## [13.0.2](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.1...13.0.2) (2026-08-18)
+
+
+### Bug Fixes
+
+* bump core lib:latest ([4492a1a](https://github.com/salesforcecli/sf-plugins-core/commit/4492a1a4eeb3da0283f109c3bb96eb0c23a3a140))
+
+
+
 ## [13.0.1](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.0...13.0.1) (2026-08-18)
 
 
