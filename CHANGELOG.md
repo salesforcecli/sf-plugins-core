@@ -1,3 +1,12 @@
+## [13.0.3](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.2...13.0.3) (2026-08-18)
+
+
+### Bug Fixes
+
+* bump @salesforce/core to v9.1.4 ([f3d918f](https://github.com/salesforcecli/sf-plugins-core/commit/f3d918fc788971426643cd1ac866b882ba0a0a72))
+
+
+
 ## [13.0.2](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.1...13.0.2) (2026-08-18)
 
 
