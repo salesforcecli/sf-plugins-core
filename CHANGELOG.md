@@ -1,3 +1,12 @@
+## [13.0.4](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.3...13.0.4) (2026-08-31)
+
+
+### Bug Fixes
+
+* upgrade @oclif/core to v5 @W-23512455@ ([9543d10](https://github.com/salesforcecli/sf-plugins-core/commit/9543d100bed21919ae7eab2b81c75167d30874b8))
+
+
+
 ## [13.0.3](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.2...13.0.3) (2026-08-18)
 
 
