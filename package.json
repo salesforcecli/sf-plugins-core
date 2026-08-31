@@ -46,8 +46,8 @@
   "dependencies": {
     "@inquirer/confirm": "^6.1.1",
     "@inquirer/password": "^5.1.1",
-    "@oclif/core": "^4.11.4",
-    "@oclif/table": "^0.5.9",
+    "@oclif/core": "^5.0.0",
+    "@oclif/table": "^1.0.0",
     "@salesforce/core": "^9.1.4",
     "@salesforce/kit": "^4.0.0",
     "@salesforce/ts-types": "^3.0.0",
@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@inquirer/type": "^4.0.5",
-    "@oclif/test": "^4.1.18",
+    "@oclif/test": "^5.0.0",
     "@salesforce/dev-scripts": "^13.0.2",
     "@types/chai": "^4.3.17",
     "@types/cli-progress": "^3.11.6",
