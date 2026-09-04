@@ -3,7 +3,9 @@
   "compilerOptions": {
     "outDir": "./lib",
     "declarationMap": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "rootDir": "src",
+    "types": ["node", "mocha"]
   },
   "include": ["src/**/*.ts"]
 }
