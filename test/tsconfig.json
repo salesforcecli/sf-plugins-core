@@ -3,6 +3,7 @@
   "include": ["unit/**/*.ts", "../node_modules/@types/**/*.d.ts", "integration/**/*.ts"],
   "compilerOptions": {
     "noEmit": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "rootDir": "../"
   }
 }
