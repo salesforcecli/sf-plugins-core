@@ -1,3 +1,12 @@
+## [13.0.5](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.4...13.0.5) (2026-10-02)
+
+
+### Bug Fixes
+
+* **deps:** bump undici from 8.5.0 to 8.11.2 ([cc9e31c](https://github.com/salesforcecli/sf-plugins-core/commit/cc9e31cd0721762a6a28b6b8f990bcc22f6ed627))
+
+
+
 ## [13.0.4](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.3...13.0.4) (2026-08-31)
 
 
