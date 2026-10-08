@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@inquirer/type": "^4.0.5",
-    "@oclif/test": "^5.0.0",
+    "@oclif/test": "^5.0.1",
     "@salesforce/dev-scripts": "^14.0.0",
     "@types/chai": "^4.3.17",
     "@types/cli-progress": "^3.11.6",
