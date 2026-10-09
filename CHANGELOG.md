@@ -1,3 +1,12 @@
+## [13.0.6](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.5...13.0.6) (2026-10-09)
+
+
+### Bug Fixes
+
+* **deps:** bump fast-copy from 3.0.2 to 3.1.0 ([d83ac98](https://github.com/salesforcecli/sf-plugins-core/commit/d83ac98f0b9958e4300f897cd184014d28583cb6))
+
+
+
 ## [13.0.5](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.4...13.0.5) (2026-10-02)
 
 
