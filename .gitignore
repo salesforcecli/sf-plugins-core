@@ -24,6 +24,10 @@ coverage
 # generated docs
 docs
 
+
+npm-shrinkwrap.json
+oclif.lock
+
 # -- CLEAN ALL
 *.tsbuildinfo
 .eslintcache
