@@ -1,3 +1,12 @@
+## [13.0.8](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.7...13.0.8) (2026-10-24)
+
+
+### Bug Fixes
+
+* **deps:** bump markdown-it from 14.3.1 to 14.3.3 ([99e691b](https://github.com/salesforcecli/sf-plugins-core/commit/99e691b861360bf2184f9a87fad0367964abac49))
+
+
+
 ## [13.0.7](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.6...13.0.7) (2026-10-09)
 
 
