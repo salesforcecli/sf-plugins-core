@@ -1,3 +1,12 @@
+## [13.0.9](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.8...13.0.9) (2026-11-07)
+
+
+### Bug Fixes
+
+* **deps:** bump form-data from 4.0.5 to 4.0.6 ([6cf008d](https://github.com/salesforcecli/sf-plugins-core/commit/6cf008df3a95fa977478563f2b47bcda8bf3edca))
+
+
+
 ## [13.0.8](https://github.com/salesforcecli/sf-plugins-core/compare/13.0.7...13.0.8) (2026-10-24)
 
 
